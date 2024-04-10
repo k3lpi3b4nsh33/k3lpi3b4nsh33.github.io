@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="What’s Application Layer? Web and HTTP Internet-Email What’s DNS? What’s CDN? Socket Programing (Python)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Computer Networking (Application Layer)">
+<meta property="og:url" content="http://kelpie.top/post/Computer%20Networking%20Application%20Layer.html">
+<meta property="og:site_name" content="Kelpie Blog">
+<meta property="og:description" content="What’s Application Layer? Web and HTTP Internet-Email What’s DNS? What’s CDN? Socket Programing (Python)">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fj_QDAH5PwhITwnw79jEE35JR3pW.jpeg">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FgGisMtZV8O313E7qb0e5Jd_fsux.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FmAZ5vaKqDGBCe1hR6NJshAROPZ2.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FijufyocGN-NPTzOC5n-gkm2SkMo.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FmD826gMY-7C87ix6XRxSIWtKRMB.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FoH54mYJAip3c7A01Kgx9FKDh_Mh.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FlRLFCxGIALTkaUTT1D3TFnJ2f6n.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FuYu_8VcH11XAVcVuUIaRbf2xiEP.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FivQy0a1tisnRGQryRAdoCbx5FhT.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FhEXIKQdV3X8j-bV4C4E6_Bxx8G0.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fux74p6ijQgJfhZE984scwYZR5wo.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FuPI2vFO91TUajU_cpgQ0KwcsCvF.png">
+<meta property="article:published_time" content="2022-09-14T19:39:33.000Z">
+<meta property="article:modified_time" content="2024-04-10T09:43:13.042Z">
+<meta property="article:author" content="l3vi4th4n">
+<meta property="article:tag" content="Computer Networking A Top-Down Approach">
+<meta property="article:tag" content="Books">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fj_QDAH5PwhITwnw79jEE35JR3pW.jpeg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Computer Networking (Application Layer)</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/post/%5BBUUCTF%5D%20PWN3.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/%5BPWN%20PLAN%5D%20STL%20Learning%201.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/Computer%20Networking%20Application%20Layer.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/Computer%20Networking%20Application%20Layer.html&text=Computer Networking (Application Layer)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/Computer%20Networking%20Application%20Layer.html&title=Computer Networking (Application Layer)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/Computer%20Networking%20Application%20Layer.html&is_video=false&description=Computer Networking (Application Layer)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Computer Networking (Application Layer)&body=Check out this article: http://kelpie.top/post/Computer%20Networking%20Application%20Layer.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/Computer%20Networking%20Application%20Layer.html&title=Computer Networking (Application Layer)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/Computer%20Networking%20Application%20Layer.html&title=Computer Networking (Application Layer)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/Computer%20Networking%20Application%20Layer.html&title=Computer Networking (Application Layer)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/Computer%20Networking%20Application%20Layer.html&title=Computer Networking (Application Layer)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/Computer%20Networking%20Application%20Layer.html&name=Computer Networking (Application Layer)&description=&lt;ol&gt;
+&lt;li&gt;What’s Application Layer?&lt;/li&gt;
+&lt;li&gt;Web and HTTP&lt;/li&gt;
+&lt;li&gt;Internet-Email&lt;/li&gt;
+&lt;li&gt;What’s DNS?&lt;/li&gt;
+&lt;li&gt;What’s CDN?&lt;/li&gt;
+&lt;li&gt;Socket Programing (Python)&lt;/li&gt;
+&lt;/ol&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/Computer%20Networking%20Application%20Layer.html&t=Computer Networking (Application Layer)"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#What%E2%80%99s-Application-Layer"><span class="toc-number">1.</span> <span class="toc-text">What’s Application Layer?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Network-Application-Architectures"><span class="toc-number">1.1.</span> <span class="toc-text">Network Application Architectures</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-interface-Between-the-Process-and-the-Computer-Network"><span class="toc-number">1.2.</span> <span class="toc-text">The interface Between the Process and the Computer Network</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Transport-Services-Provided-by-the-Internet"><span class="toc-number">1.2.1.</span> <span class="toc-text">Transport Services Provided by the Internet</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-Service"><span class="toc-number">1.3.</span> <span class="toc-text">TCP Service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UDP-Service"><span class="toc-number">1.4.</span> <span class="toc-text">UDP Service</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-and-HTTP"><span class="toc-number">2.</span> <span class="toc-text">Web and HTTP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP-Non-Persistent-and-Persistent-Connection"><span class="toc-number">2.1.</span> <span class="toc-text">HTTP Non-Persistent and Persistent Connection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#User-Server-Interaction-Cookies"><span class="toc-number">2.2.</span> <span class="toc-text">User-Server Interaction: Cookies</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Electronic-Mail-in-the-Internet"><span class="toc-number">3.</span> <span class="toc-text">Electronic Mail in the Internet</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#How-we-send-and-read-the-E-mail"><span class="toc-number">3.1.</span> <span class="toc-text">How we send and read the E-mail?</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DNS-The-Internet%E2%80%99s-Directory-Service"><span class="toc-number">4.</span> <span class="toc-text">DNS- The Internet’s Directory Service</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#How-it-works"><span class="toc-number">4.1.</span> <span class="toc-text">How it works?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS-Caching"><span class="toc-number">4.2.</span> <span class="toc-text">DNS Caching</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#What%E2%80%99s-CDN"><span class="toc-number">5.</span> <span class="toc-text">What’s CDN?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#How-CDN-works"><span class="toc-number">5.1.</span> <span class="toc-text">How CDN works?</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Python-UDP-amp-amp-TCP-program"><span class="toc-number">6.</span> <span class="toc-text">Python UDP &amp;&amp; TCP program</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Computer Networking (Application Layer)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">l3vi4th4n</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-09-14T19:39:33.000Z" class="dt-published" itemprop="datePublished">2022-09-14</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Books/">Books</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Books/" rel="tag">Books</a>, <a class="p-category" href="/tags/Computer-Networking-A-Top-Down-Approach/" rel="tag">Computer Networking A Top-Down Approach</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <ol>
+<li>What’s Application Layer?</li>
+<li>Web and HTTP</li>
+<li>Internet-Email</li>
+<li>What’s DNS?</li>
+<li>What’s CDN?</li>
+<li>Socket Programing (Python)</li>
+</ol>
+<span id="more"></span>
+
+<h1 id="What’s-Application-Layer"><a href="#What’s-Application-Layer" class="headerlink" title="What’s Application Layer?"></a>What’s Application Layer?</h1><blockquote>
+<p>Being the topmost layer in OSI model, performs several kinds of functions which are requirement in any kind of application or commuication process.</p>
+</blockquote>
+<p>The application layer of the OSI model is the layer that you will be most familiar with. This familiarity is because the application layer is the layer in which protocols and rules are in place to determine how the user should interact with data sent or received.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fj_QDAH5PwhITwnw79jEE35JR3pW.jpeg"></p>
+<h2 id="Network-Application-Architectures"><a href="#Network-Application-Architectures" class="headerlink" title="Network Application Architectures"></a>Network Application Architectures</h2><ol>
+<li>client-server architecture (CS) [Need data center as server]</li>
+<li>peer-to-peer (P2P) [Everyone in the internet is server and client]</li>
+</ol>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FgGisMtZV8O313E7qb0e5Jd_fsux.png"></p>
+<p>In a <strong>client-server architecture</strong>, there is an always-on host, called the <em>server</em>, which services requests from many other hosts, called <em>clients</em>. Web application needs to run in web server for servicing requests from clients hosts.</p>
+<p>In a <strong>P2P architecture</strong>, there is minimal (or no) reliance on dedicated servers in data centers. Instead the application exploits direct communication between pairs of intermittently connected hosts, called <em>peers</em>.</p>
+<h2 id="The-interface-Between-the-Process-and-the-Computer-Network"><a href="#The-interface-Between-the-Process-and-the-Computer-Network" class="headerlink" title="The interface Between the Process and the Computer Network"></a>The interface Between the Process and the Computer Network</h2><p>We should send messages to server through a software interface called a <strong>socket</strong>.<br>It also refered to as the <strong>Application Programming Interface(API)</strong> between the application and the network.</p>
+<h3 id="Transport-Services-Provided-by-the-Internet"><a href="#Transport-Services-Provided-by-the-Internet" class="headerlink" title="Transport Services Provided by the Internet"></a>Transport Services Provided by the Internet</h3><p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FmAZ5vaKqDGBCe1hR6NJshAROPZ2.png"></p>
+<p>[Key Point]</p>
+<ol>
+<li>TCP Service</li>
+<li>UDP Service</li>
+</ol>
+<h2 id="TCP-Service"><a href="#TCP-Service" class="headerlink" title="TCP Service"></a>TCP Service</h2><ul>
+<li>Stream Delivery Service</li>
+<li>Sending and Receiving Buffers</li>
+<li>Bytes and Segments</li>
+<li>Full Duplex Service</li>
+<li>Connection Oriented Service</li>
+<li>Reliable Service</li>
+</ul>
+<p>We can image a tube which TCP deliver the bytes in it.<br>(We will talk TCP later in Chapter3)</p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FijufyocGN-NPTzOC5n-gkm2SkMo.png"></p>
+<h2 id="UDP-Service"><a href="#UDP-Service" class="headerlink" title="UDP Service"></a>UDP Service</h2><p>UDP is a communication protocol used across the internet for especially time-sensitive transmissions such as video playback or DNS lookups. It speeds up communication by not formally establishing a connection before data is transferred.<br>This allows data to be transferred very quickly, but it can also cause packets to become lost in transit - and create opportunities for exploitation in the form of DDos attacks.</p>
+<h1 id="Web-and-HTTP"><a href="#Web-and-HTTP" class="headerlink" title="Web and HTTP"></a>Web and HTTP</h1><p>The <strong>HyperText Transfer Protocol (HTTP)</strong>, the Web’s application-layer protocol, is at the heart of the Web.</p>
+<p>A <strong>Web page</strong> (also called a document) consists of objects. An <strong>object</strong> is simply a file—such as an HTML file, a JPEG image, a Javascrpt file, a CCS style sheet file, or a video clip—that is addressable by a single URL.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FmD826gMY-7C87ix6XRxSIWtKRMB.png"></p>
+<p>HTTP defines how Web clients request Web pages from Web servers and how servers transfer Web pages to clients.</p>
+<p>HTTP uses TCP as its underlying transport protocol (rather than running on top of UDP). The HTTP client first initiates a TCP connection with the server.</p>
+<h2 id="HTTP-Non-Persistent-and-Persistent-Connection"><a href="#HTTP-Non-Persistent-and-Persistent-Connection" class="headerlink" title="HTTP Non-Persistent and Persistent Connection"></a>HTTP Non-Persistent and Persistent Connection</h2><p><strong>Non-persistent</strong> connections have some shortcomings. First, a brand-new connection must be established and maintained for <em>each requested object</em>. For each of these connections, TCP buffers must be allocated and TCP variables must be kept in both the client and server</p>
+<p><strong>With HTTP&#x2F;1.1 persistent connections</strong>, the server leaves the TCP connection open after sending a response. Subsequent requests and responses between the same client and server can be sent over the same connection.</p>
+<h2 id="User-Server-Interaction-Cookies"><a href="#User-Server-Interaction-Cookies" class="headerlink" title="User-Server Interaction: Cookies"></a>User-Server Interaction: Cookies</h2><blockquote>
+<p>Cookie is often desirable for a Web site to identify users.</p>
+</blockquote>
+<p>Keeping user state with cookies<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FoH54mYJAip3c7A01Kgx9FKDh_Mh.png"></p>
+<h1 id="Electronic-Mail-in-the-Internet"><a href="#Electronic-Mail-in-the-Internet" class="headerlink" title="Electronic Mail in the Internet"></a>Electronic Mail in the Internet</h1><p>We need 3 major components in E-mail : **user-agent, mail-server, **and the <strong>SMTP (Simple Mail Transfer Protocol)</strong><br>**Mail Servers **form the core of the e-mail infrastructure. Each recipient has a mailbox located in one of mail servers.</p>
+<h2 id="How-we-send-and-read-the-E-mail"><a href="#How-we-send-and-read-the-E-mail" class="headerlink" title="How we send and read the E-mail?"></a>How we send and read the E-mail?</h2><ol>
+<li>As a user agent, after we write the email, when we click the send(if we have written the recipient address), the email will be sent to the local Mail server.</li>
+<li>The Mail server will sent ours email with SMTP to recipient  Mail Server.</li>
+<li>The recipient can read our email in his Mail server.</li>
+</ol>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FlRLFCxGIALTkaUTT1D3TFnJ2f6n.png"></p>
+<p>The procedure of sending email.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FuYu_8VcH11XAVcVuUIaRbf2xiEP.png"></p>
+<p>We send the email to mail server by SMTP or HTTP services, and the mail server deliver the email by SMTP service.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FivQy0a1tisnRGQryRAdoCbx5FhT.png"></p>
+<h1 id="DNS-The-Internet’s-Directory-Service"><a href="#DNS-The-Internet’s-Directory-Service" class="headerlink" title="DNS- The Internet’s Directory Service"></a>DNS- The Internet’s Directory Service</h1><p>We human beings tend to be identified name rather than a bunch of number. That’s the reason why DNS here. We should thank to DNS which let us visit the website with the website hostname instead of a bunch of number.</p>
+<h2 id="How-it-works"><a href="#How-it-works" class="headerlink" title="How it works?"></a>How it works?</h2><p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FhEXIKQdV3X8j-bV4C4E6_Bxx8G0.png"></p>
+<p>When we input the hostname in the browser (<a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a>), the router will send the hostname to the local DNS server to seek the ‘Baidu’. If the local DNS server does not find it, it will be sent to higher DNS servers until the Root DNS servers. The root servers will resent the messages to local servers and tell it should find the com servers.<br>The details of seeking hostname procedures are below.</p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fux74p6ijQgJfhZE984scwYZR5wo.png"><br>Above Figure, the host cse.nyu.edu first sends a DNS query message to its local DNS server, dns.nyu.edu. The query message contains the hostname to be translated, namely, gaia.cs.umass.edu. The local DNS server forwards the query message to a root DNS server. The root DNS server takes note of the edu suffix and returns to the local DNS server a list of IP addresses for TLD servers responsible for edu. The local DNS server then resends the query message to one of these TLD servers. The TLD server takes note of the umass.edu suffix and responds with the IP address of the authoritative DNS server for the University of Massachusetts, namely, dns.umass.edu. Finally, the local DNS server resends the query message directly to dns.umass.edu, which responds with the IP address of gaia.cs.umass.edu. Note that in this example, in order to obtain the mapping for one hostname, eight DNS messages were sent: four query messages and four reply messages! We’ll soon see how DNS caching reduces this query traffic.</p>
+<h2 id="DNS-Caching"><a href="#DNS-Caching" class="headerlink" title="DNS Caching"></a>DNS Caching</h2><p>If we search each hostname above, it will waste time and consume the network resource. So we introduce the concept of DNS Caching. If we dig a hostname that does not save in the local server before, the local servers will save its IP and traits to save time and resources when we want to revisit the website.</p>
+<h1 id="What’s-CDN"><a href="#What’s-CDN" class="headerlink" title="What’s CDN?"></a>What’s CDN?</h1><blockquote>
+<p>Have you ever thought about the question, if we watch a youtube video, how can YouTube react quickly? And how can YouTube sustains millions of users visiting its website every day?</p>
+</blockquote>
+<p>Today, many Internet video companies are distributing on-demand multi-Mbps streams to millions of users daily to meet the challenge of distributing massive amounts of video data to users worldwide.<br>Almost all major video-streaming companies make use of <strong>Content Distribution Networks</strong>(CDNS). A CDN manages servers in multiple geographically distributed locations, stores copies of the videos (and other types of Web content, including documents, images, and audio etc.) in its servers, and attempts to direct each user request to a CDN location that <strong>will provide the best user experience</strong>.</p>
+<h2 id="How-CDN-works"><a href="#How-CDN-works" class="headerlink" title="How CDN works?"></a>How CDN works?</h2><ol>
+<li>The user visits the <strong>Web page at NetCinema</strong>.</li>
+<li>When the user clicks on the link [<a target="_blank" rel="noopener" href="http://video.netcinema.com/6Y7B23V]">http://video.netcinema.com/6Y7B23V]</a>, the user’s host <strong>sends a DNS query for video.netcinema.com.</strong></li>
+<li>The user’s Local DNS Server (LDNS) relays the DNS query to an authoritative DNS server for NetCinema, which observes the string “video” in the hostname video.netcinema.com. To “hand over” the DNS query to KingCDN, instead of returning an IP address, the NetCinema authoritative DNS server returns to the LDNS a hostname in the KingCDN’s domain, for example, a1105.kingcdn.com.</li>
+<li>From this point on, the DNS query enters into KingCDN’s private DNS infrastructure. The user’s LDNS then sends a second query, now for a1105.kingcdn.com, and KingCDN’s DNS system eventually returns the IP addresses of a KingCDN content server to the LDNS. It is thus here, within the KingCDN’s DNS system, that the CDN server from which the client will receive its content is specified.</li>
+<li>The LDNS forwards the IP address of the content-serving CDN node to the user’s host.</li>
+<li>Once the client receives the IP address for a KingCDN content server, it establishes a direct TCP connection with the server at that IP address and issues an HTTP GET request for the video. If DASH is used, the server will first send to the client a manifest file with a list of URLs, one for each version of the video, and the client will dynamically select chunks from the different versions.</li>
+</ol>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FuPI2vFO91TUajU_cpgQ0KwcsCvF.png"></p>
+<h1 id="Python-UDP-amp-amp-TCP-program"><a href="#Python-UDP-amp-amp-TCP-program" class="headerlink" title="Python UDP &amp;&amp; TCP program"></a>Python UDP &amp;&amp; TCP program</h1>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#What%E2%80%99s-Application-Layer"><span class="toc-number">1.</span> <span class="toc-text">What’s Application Layer?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Network-Application-Architectures"><span class="toc-number">1.1.</span> <span class="toc-text">Network Application Architectures</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-interface-Between-the-Process-and-the-Computer-Network"><span class="toc-number">1.2.</span> <span class="toc-text">The interface Between the Process and the Computer Network</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Transport-Services-Provided-by-the-Internet"><span class="toc-number">1.2.1.</span> <span class="toc-text">Transport Services Provided by the Internet</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-Service"><span class="toc-number">1.3.</span> <span class="toc-text">TCP Service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UDP-Service"><span class="toc-number">1.4.</span> <span class="toc-text">UDP Service</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-and-HTTP"><span class="toc-number">2.</span> <span class="toc-text">Web and HTTP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP-Non-Persistent-and-Persistent-Connection"><span class="toc-number">2.1.</span> <span class="toc-text">HTTP Non-Persistent and Persistent Connection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#User-Server-Interaction-Cookies"><span class="toc-number">2.2.</span> <span class="toc-text">User-Server Interaction: Cookies</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Electronic-Mail-in-the-Internet"><span class="toc-number">3.</span> <span class="toc-text">Electronic Mail in the Internet</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#How-we-send-and-read-the-E-mail"><span class="toc-number">3.1.</span> <span class="toc-text">How we send and read the E-mail?</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DNS-The-Internet%E2%80%99s-Directory-Service"><span class="toc-number">4.</span> <span class="toc-text">DNS- The Internet’s Directory Service</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#How-it-works"><span class="toc-number">4.1.</span> <span class="toc-text">How it works?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS-Caching"><span class="toc-number">4.2.</span> <span class="toc-text">DNS Caching</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#What%E2%80%99s-CDN"><span class="toc-number">5.</span> <span class="toc-text">What’s CDN?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#How-CDN-works"><span class="toc-number">5.1.</span> <span class="toc-text">How CDN works?</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Python-UDP-amp-amp-TCP-program"><span class="toc-number">6.</span> <span class="toc-text">Python UDP &amp;&amp; TCP program</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/Computer%20Networking%20Application%20Layer.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/Computer%20Networking%20Application%20Layer.html&text=Computer Networking (Application Layer)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/Computer%20Networking%20Application%20Layer.html&title=Computer Networking (Application Layer)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/Computer%20Networking%20Application%20Layer.html&is_video=false&description=Computer Networking (Application Layer)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Computer Networking (Application Layer)&body=Check out this article: http://kelpie.top/post/Computer%20Networking%20Application%20Layer.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/Computer%20Networking%20Application%20Layer.html&title=Computer Networking (Application Layer)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/Computer%20Networking%20Application%20Layer.html&title=Computer Networking (Application Layer)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/Computer%20Networking%20Application%20Layer.html&title=Computer Networking (Application Layer)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/Computer%20Networking%20Application%20Layer.html&title=Computer Networking (Application Layer)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/Computer%20Networking%20Application%20Layer.html&name=Computer Networking (Application Layer)&description=&lt;ol&gt;
+&lt;li&gt;What’s Application Layer?&lt;/li&gt;
+&lt;li&gt;Web and HTTP&lt;/li&gt;
+&lt;li&gt;Internet-Email&lt;/li&gt;
+&lt;li&gt;What’s DNS?&lt;/li&gt;
+&lt;li&gt;What’s CDN?&lt;/li&gt;
+&lt;li&gt;Socket Programing (Python)&lt;/li&gt;
+&lt;/ol&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/Computer%20Networking%20Application%20Layer.html&t=Computer Networking (Application Layer)"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2024
+    l3vi4th4n
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

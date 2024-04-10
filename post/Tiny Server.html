@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="IntroductionAfter 3 days of study and code, today I will explain to you the source code TinyServer .In my opion, TinyServer functions like modifying some files with file descriptors.We have to make th">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tiny Server ">
+<meta property="og:url" content="http://kelpie.top/post/Tiny%20Server.html">
+<meta property="og:site_name" content="Kelpie Blog">
+<meta property="og:description" content="IntroductionAfter 3 days of study and code, today I will explain to you the source code TinyServer .In my opion, TinyServer functions like modifying some files with file descriptors.We have to make th">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fq8RPElbay-hsTx49GuUxPcMcyQX.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FgF4AaGOCG3VG3O5UfUL8FTZOF15.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtsTidHv-1Wg7ZKHpR45Tt2_uiaO.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FlcQsJTlZxsQxyb4YN1yWOQd86TS.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpI9Jz98VCTOhuYu2GkM_baSfDBU.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FoKJUbQZ4C3Q5rJKSs6l3BKT1EKD.png">
+<meta property="article:published_time" content="2023-02-08T14:18:00.000Z">
+<meta property="article:modified_time" content="2024-04-10T09:43:12.182Z">
+<meta property="article:author" content="l3vi4th4n">
+<meta property="article:tag" content="EZ-projects">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="TinMan">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fq8RPElbay-hsTx49GuUxPcMcyQX.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Tiny Server </title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/post/%5BCSAPP-Lab%5D%20BombLab.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/Virtual%20Attack%5B21%5D.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/Tiny%20Server.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/Tiny%20Server.html&text=Tiny Server "><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/Tiny%20Server.html&title=Tiny Server "><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/Tiny%20Server.html&is_video=false&description=Tiny Server "><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Tiny Server &body=Check out this article: http://kelpie.top/post/Tiny%20Server.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/Tiny%20Server.html&title=Tiny Server "><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/Tiny%20Server.html&title=Tiny Server "><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/Tiny%20Server.html&title=Tiny Server "><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/Tiny%20Server.html&title=Tiny Server "><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/Tiny%20Server.html&name=Tiny Server &description=&lt;h1 id=&#34;Introduction&#34;&gt;&lt;a href=&#34;#Introduction&#34; class=&#34;headerlink&#34; title=&#34;Introduction&#34;&gt;&lt;/a&gt;Introduction&lt;/h1&gt;&lt;p&gt;After 3 days of study and code, today I will explain to you the source code &lt;code&gt;TinyServer&lt;/code&gt; .&lt;br&gt;In my opion, TinyServer functions like modifying some files with file descriptors.&lt;br&gt;We have to make the thread pool for this program, and have a knowledge about thread lock.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/Tiny%20Server.html&t=Tiny Server "><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Basic-knowledge"><span class="toc-number">2.</span> <span class="toc-text">Basic knowledge</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#File-descriptor"><span class="toc-number">2.1.</span> <span class="toc-text">File descriptor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Epoll"><span class="toc-number">2.2.</span> <span class="toc-text">Epoll</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thread-lock"><span class="toc-number">2.3.</span> <span class="toc-text">Thread lock</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Producer-x2F-Consumer"><span class="toc-number">2.3.1.</span> <span class="toc-text">Producer &#x2F; Consumer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Version-1"><span class="toc-number">2.3.2.</span> <span class="toc-text">Version 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Version2-handle-full-and-empty-situations"><span class="toc-number">2.3.3.</span> <span class="toc-text">Version2 handle full and empty situations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Version3-with-condition-variables"><span class="toc-number">2.3.4.</span> <span class="toc-text">Version3 with condition variables</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thread-pool-C-11"><span class="toc-number">2.4.</span> <span class="toc-text">Thread pool(C++11)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.4.1.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-startup"><span class="toc-number">2.4.2.</span> <span class="toc-text">1. startup</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-ThreadLoop"><span class="toc-number">2.4.3.</span> <span class="toc-text">2. ThreadLoop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-QueueJob"><span class="toc-number">2.4.4.</span> <span class="toc-text">3. QueueJob</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-busy"><span class="toc-number">2.4.5.</span> <span class="toc-text">4. busy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-stop"><span class="toc-number">2.4.6.</span> <span class="toc-text">5. stop</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Analysis-source-code"><span class="toc-number">3.</span> <span class="toc-text">Analysis source code</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#MutexLock"><span class="toc-number">3.1.</span> <span class="toc-text">MutexLock</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Epoll-1"><span class="toc-number">3.2.</span> <span class="toc-text">Epoll</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Utils"><span class="toc-number">3.3.</span> <span class="toc-text">Utils</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-1"><span class="toc-number">3.4.</span> <span class="toc-text"></span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Tiny Server 
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">l3vi4th4n</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-02-08T14:18:00.000Z" class="dt-published" itemprop="datePublished">2023-02-08</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Personal-projects/">Personal projects</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/C/" rel="tag">C++</a>, <a class="p-category" href="/tags/EZ-projects/" rel="tag">EZ-projects</a>, <a class="p-category" href="/tags/TinMan/" rel="tag">TinMan</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>After 3 days of study and code, today I will explain to you the source code <code>TinyServer</code> .<br>In my opion, TinyServer functions like modifying some files with file descriptors.<br>We have to make the thread pool for this program, and have a knowledge about thread lock.</p>
+<span id="more"></span>
+
+<h1 id="Basic-knowledge"><a href="#Basic-knowledge" class="headerlink" title="Basic knowledge"></a>Basic knowledge</h1><h2 id="File-descriptor"><a href="#File-descriptor" class="headerlink" title="File descriptor"></a>File descriptor</h2><p><a target="_blank" rel="noopener" href="https://www.dztcy.com/19053.html">what exactly is FD in Linux? 1 </a><br><a target="_blank" rel="noopener" href="https://blog.51cto.com/u_15127661/2784600">what exactly is FD in Linux? 2</a><br>A file descriptor (<strong>file descriptor</strong>) is an index created by the kernel to <code>**efficiently manage**</code> these open files. It is a <strong>non-negative integer</strong> (usually a small integer) used to represent open files. All system calls to perform I&#x2F;O operations are implemented through a file descriptor.</p>
+<h2 id="Epoll"><a href="#Epoll" class="headerlink" title="Epoll"></a>Epoll</h2><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU0OTE4MzYzMw==%E2%88%A3=2247515011&idx=2&sn=3812f80dd80bb27340d5849df8d1cec0&chksm=fbb1327dccc6bb6bfd5ab7f9da23220ade44e88e2f8d2506b7e0868bb84665a95f026eddb82d&scene=27">Epoll reference article 1</a><br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Epoll">Wikipedia Epoll</a><br>The full name of epoll is <strong>eventpoll</strong>, which is an implementation of Linux kernel to implement IO <strong>multiplexing (IO multiplexing)</strong>. IO multiplexing means listening to multiple input and output sources at the same time in one operation, returning when one or more of the input and output sources are available, and then performing read and write operations on them.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fq8RPElbay-hsTx49GuUxPcMcyQX.png"></p>
+<h2 id="Thread-lock"><a href="#Thread-lock" class="headerlink" title="Thread lock"></a>Thread lock</h2><p><em>Lock</em>: an object that can only be owned by a single thread at any given time (C++ class std::mutex). Operations on a lock:</p>
+<ul>
+<li>lock: mark the lock as owned by the current thread; if some other thread already owns the lock then first wait until the lock is free. Lock typically includes a queue to keep track of waiting threads.</li>
+<li>unlock: mark the lock as free (it must currently be owned by the calling thread).</li>
+</ul>
+<p>Too much milk solution with locks (using C++ library APIs):</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">std<span class="token double-colon punctuation">::</span>mutex mutex<span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+mutex<span class="token punctuation">.</span><span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>milk <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">buy_milk</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+mutex<span class="token punctuation">.</span><span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Producer-x2F-Consumer"><a href="#Producer-x2F-Consumer" class="headerlink" title="Producer &#x2F; Consumer"></a>Producer &#x2F; Consumer</h3><ul>
+<li>Producers add characters to a buffer</li>
+<li>Consumers remove characters from the buffer</li>
+<li>Characters will be removed in the same order added</li>
+</ul>
+<h3 id="Version-1"><a href="#Version-1" class="headerlink" title="Version 1"></a>Version 1</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Pipe</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">Pipe</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+    <span class="token keyword">void</span> <span class="token function">put</span><span class="token punctuation">(</span><span class="token keyword">char</span> c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span> <span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    std<span class="token double-colon punctuation">::</span>mutex mutex<span class="token punctuation">;</span>
+    <span class="token keyword">char</span> buffer<span class="token punctuation">[</span>SIZE<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> nextPut <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> nextGet <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token class-name">Pipe</span><span class="token double-colon punctuation">::</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token keyword">char</span> c<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    mutex<span class="token punctuation">.</span><span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    count<span class="token operator">++</span><span class="token punctuation">;</span>
+    buffer<span class="token punctuation">[</span>nextPut<span class="token punctuation">]</span> <span class="token operator">=</span> c<span class="token punctuation">;</span>
+    nextPut<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>nextPut <span class="token operator">==</span> SIZE<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        nextPut <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    mutex<span class="token punctuation">.</span><span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">char</span> <span class="token class-name">Pipe</span><span class="token double-colon punctuation">::</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">char</span> c<span class="token punctuation">;</span>
+    mutex<span class="token punctuation">.</span><span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    count<span class="token operator">--</span><span class="token punctuation">;</span>
+    c <span class="token operator">=</span> buffer<span class="token punctuation">[</span>nextGet<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    nextGet<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>nextGet <span class="token operator">==</span> SIZE<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        nextGet <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    mutex<span class="token punctuation">.</span><span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> c<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Version2-handle-full-and-empty-situations"><a href="#Version2-handle-full-and-empty-situations" class="headerlink" title="Version2 handle full and empty situations"></a>Version2 handle full and empty situations</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Pipe</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">Pipe</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+    <span class="token keyword">void</span> <span class="token function">put</span><span class="token punctuation">(</span><span class="token keyword">char</span> c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span> <span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    std<span class="token double-colon punctuation">::</span>mutex mutex<span class="token punctuation">;</span>
+    <span class="token keyword">char</span> buffer<span class="token punctuation">[</span>SIZE<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> nextPut <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> nextGet <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token class-name">Pipe</span><span class="token double-colon punctuation">::</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token keyword">char</span> c<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    mutex<span class="token punctuation">.</span><span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>count <span class="token operator">==</span> SIZE<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        mutex<span class="token punctuation">.</span><span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        mutex<span class="token punctuation">.</span><span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    count<span class="token operator">++</span><span class="token punctuation">;</span>
+    buffer<span class="token punctuation">[</span>nextPut<span class="token punctuation">]</span> <span class="token operator">=</span> c<span class="token punctuation">;</span>
+    nextPut<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>nextPut <span class="token operator">==</span> SIZE<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        nextPut <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    mutex<span class="token punctuation">.</span><span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">char</span> <span class="token class-name">Pipe</span><span class="token double-colon punctuation">::</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">char</span> c<span class="token punctuation">;</span>
+    mutex<span class="token punctuation">.</span><span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>count <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        mutex<span class="token punctuation">.</span><span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        mutex<span class="token punctuation">.</span><span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    count<span class="token operator">--</span><span class="token punctuation">;</span>
+    c <span class="token operator">=</span> buffer<span class="token punctuation">[</span>nextGet<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    nextGet<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>nextGet <span class="token operator">==</span> SIZE<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        nextGet <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    mutex<span class="token punctuation">.</span><span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> c<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Version3-with-condition-variables"><a href="#Version3-with-condition-variables" class="headerlink" title="Version3 with condition variables"></a>Version3 with condition variables</h3><ul>
+<li>notify_one(): if any threads are waiting on condition, wake up one of them.</li>
+<li>notify_all(): same as notify, except wake up all waiting threads.</li>
+</ul>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Pipe</span> <span class="token punctuation">&#123;</span>
+     <span class="token function">Pipe</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+     <span class="token keyword">void</span> <span class="token function">put</span><span class="token punctuation">(</span><span class="token keyword">char</span> c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token keyword">char</span> <span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+     std<span class="token double-colon punctuation">::</span>mutex mutex<span class="token punctuation">;</span>
+     std<span class="token double-colon punctuation">::</span>condition_variable charAdded<span class="token punctuation">,</span> charRemoved<span class="token punctuation">;</span>
+     <span class="token keyword">char</span> buffer<span class="token punctuation">[</span>SIZE<span class="token punctuation">]</span><span class="token punctuation">;</span>
+     <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+     <span class="token keyword">int</span> nextPut <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+     <span class="token keyword">int</span> nextGet <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+ <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+ <span class="token keyword">void</span> <span class="token class-name">Pipe</span><span class="token double-colon punctuation">::</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token keyword">char</span> c<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+     mutex<span class="token punctuation">.</span><span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token keyword">while</span> <span class="token punctuation">(</span>count <span class="token operator">==</span> SIZE<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+         charRemoved<span class="token punctuation">.</span><span class="token function">wait</span><span class="token punctuation">(</span>mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token punctuation">&#125;</span>
+     count<span class="token operator">++</span><span class="token punctuation">;</span>
+     buffer<span class="token punctuation">[</span>nextPut<span class="token punctuation">]</span> <span class="token operator">=</span> c<span class="token punctuation">;</span>
+     nextPut<span class="token operator">++</span><span class="token punctuation">;</span>
+     <span class="token keyword">if</span> <span class="token punctuation">(</span>nextPut <span class="token operator">==</span> SIZE<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+         nextPut <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+     <span class="token punctuation">&#125;</span>
+     charAdded<span class="token punctuation">.</span><span class="token function">notify_one</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     mutex<span class="token punctuation">.</span><span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">&#125;</span>
+
+ <span class="token keyword">char</span> <span class="token class-name">Pipe</span><span class="token double-colon punctuation">::</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+     <span class="token keyword">char</span> c<span class="token punctuation">;</span>
+     mutex<span class="token punctuation">.</span><span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token keyword">while</span> <span class="token punctuation">(</span>count <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+         charAdded<span class="token punctuation">.</span><span class="token function">wait</span><span class="token punctuation">(</span>mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token punctuation">&#125;</span>
+     count<span class="token operator">--</span><span class="token punctuation">;</span>
+     c <span class="token operator">=</span> buffer<span class="token punctuation">[</span>nextGet<span class="token punctuation">]</span><span class="token punctuation">;</span>
+     nextGet<span class="token operator">++</span><span class="token punctuation">;</span>
+     <span class="token keyword">if</span> <span class="token punctuation">(</span>nextGet <span class="token operator">==</span> SIZE<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+         nextGet <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+     <span class="token punctuation">&#125;</span>
+     charRemoved<span class="token punctuation">.</span><span class="token function">notify_one</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     mutex<span class="token punctuation">.</span><span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token keyword">return</span> c<span class="token punctuation">;</span>
+ <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Thread-pool-C-11"><a href="#Thread-pool-C-11" class="headerlink" title="Thread pool(C++11)"></a>Thread pool(C++11)</h2><p>The easy thread pool main function are as follows:</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;queue></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">ThreadPool</span><span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+	<span class="token keyword">void</span> <span class="token function">startup</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">void</span> <span class="token function">QueueJob</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token double-colon punctuation">::</span>function<span class="token operator">&lt;</span><span class="token keyword">void</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span> job<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">void</span> <span class="token function">stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">void</span> <span class="token function">busy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">private</span><span class="token operator">:</span>
+	<span class="token keyword">void</span> <span class="token function">ThreadLoop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">bool</span> terminate <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+	mutex queue_mutex<span class="token punctuation">;</span>
+	vector<span class="token operator">&lt;</span>thread<span class="token operator">></span> threads<span class="token punctuation">;</span>
+	queue<span class="token operator">&lt;</span>function<span class="token operator">&lt;</span><span class="token keyword">void</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">>></span> jobs<span class="token punctuation">;</span>
+
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h3 id="1-startup"><a href="#1-startup" class="headerlink" title="1. startup"></a>1. startup</h3><p>Each thread should be running its own infinite loop, constantly waiting for new tasks to grab and run.</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token class-name">ThreadPool</span><span class="token double-colon punctuation">::</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token comment">// Max # of threads the system supports</span>
+    <span class="token keyword">const</span> <span class="token keyword">uint32_t</span> num_threads <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span>thread<span class="token double-colon punctuation">::</span><span class="token function">hardware_concurrency</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    threads<span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span>num_threads<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">uint32_t</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> num_threads<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        threads<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span><span class="token function">thread</span><span class="token punctuation">(</span>ThreadLoop<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="2-ThreadLoop"><a href="#2-ThreadLoop" class="headerlink" title="2. ThreadLoop"></a>2. ThreadLoop</h3><p>The infinite loop function. This is a <code>while(true)</code> loop waiting for the task queue to open up.</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token class-name">ThreadPool</span><span class="token double-colon punctuation">::</span><span class="token function">ThreadLoop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        std<span class="token double-colon punctuation">::</span>function<span class="token operator">&lt;</span><span class="token keyword">void</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">></span> job<span class="token punctuation">;</span>
+        <span class="token punctuation">&#123;</span>
+            std<span class="token double-colon punctuation">::</span>unique_lock<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>mutex<span class="token operator">></span> <span class="token function">lock</span><span class="token punctuation">(</span>queue_mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            mutex_condition<span class="token punctuation">.</span><span class="token function">wait</span><span class="token punctuation">(</span>lock<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token keyword">this</span><span class="token punctuation">]</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">return</span> <span class="token operator">!</span>jobs<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">||</span> should_terminate<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>should_terminate<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">return</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            job <span class="token operator">=</span> jobs<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            jobs<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token function">job</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="3-QueueJob"><a href="#3-QueueJob" class="headerlink" title="3. QueueJob"></a>3. QueueJob</h3><p>Add a new job to the pool; use a lock so that there isn’t a data race.</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token class-name">ThreadPool</span><span class="token double-colon punctuation">::</span><span class="token function">QueueJob</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token double-colon punctuation">::</span>function<span class="token operator">&lt;</span><span class="token keyword">void</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">></span><span class="token operator">&amp;</span> job<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token punctuation">&#123;</span>
+        std<span class="token double-colon punctuation">::</span>unique_lock<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>mutex<span class="token operator">></span> <span class="token function">lock</span><span class="token punctuation">(</span>queue_mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        jobs<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>job<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    mutex_condition<span class="token punctuation">.</span><span class="token function">notify_one</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="4-busy"><a href="#4-busy" class="headerlink" title="4. busy"></a>4. busy</h3><p>The <code>busy()</code>function can be used in a while loop, such that the main thread can wait the threadpool to complete all the tasks before calling the threadpool destructor.</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token class-name">ThreadPool</span><span class="token double-colon punctuation">::</span><span class="token function">busy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">bool</span> poolbusy<span class="token punctuation">;</span>
+    <span class="token punctuation">&#123;</span>
+        std<span class="token double-colon punctuation">::</span>unique_lock<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>mutex<span class="token operator">></span> <span class="token function">lock</span><span class="token punctuation">(</span>queue_mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        poolbusy <span class="token operator">=</span> jobs<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> poolbusy<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="5-stop"><a href="#5-stop" class="headerlink" title="5. stop"></a>5. stop</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token class-name">ThreadPool</span><span class="token double-colon punctuation">::</span><span class="token function">Stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token punctuation">&#123;</span>
+        std<span class="token double-colon punctuation">::</span>unique_lock<span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>mutex<span class="token operator">></span> <span class="token function">lock</span><span class="token punctuation">(</span>queue_mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        should_terminate <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    mutex_condition<span class="token punctuation">.</span><span class="token function">notify_all</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>thread<span class="token operator">&amp;</span> active_thread <span class="token operator">:</span> threads<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        active_thread<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    threads<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="Analysis-source-code"><a href="#Analysis-source-code" class="headerlink" title="Analysis source code"></a>Analysis source code</h1><p>suggested reading order:<br><strong>Basic function code</strong><br><code>MutexLock.h</code> encapsulates from <code>pthread_mutex</code><br><code>epoll.h/epoll.cpp</code> encapsulates from <code>sys/epoll.h</code><br><code>Utils.h/Utils.cpp</code> the basic server functions in these files.<br><code>Timer.h/Timer.cpp</code><br><code>Log.h/Log.cpp</code>Output the data to Terminal with colors.</p>
+<p>**Advanced **<br><code>**ThreadPool.h/ThreadPool.cpp**</code>** **The threadpool from server<br><code>HttpHandler.h/HttpHandler.cpp</code> The core of the server.<br><code>Main.cpp</code> Server Start</p>
+<h2 id="MutexLock"><a href="#MutexLock" class="headerlink" title="MutexLock"></a>MutexLock</h2><p>simplify, encapsulate, and use<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FgF4AaGOCG3VG3O5UfUL8FTZOF15.png"></p>
+<h2 id="Epoll-1"><a href="#Epoll-1" class="headerlink" title="Epoll"></a>Epoll</h2><p>Epoll operation: <strong>isValid, create, add, modify, del, wait</strong><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtsTidHv-1Wg7ZKHpR45Tt2_uiaO.png"></p>
+<p><code>isVaild</code> determine whether <code>epoll fd</code> is normal</p>
+<p><code>create</code> function is encapsulated from <code>epoll_create1</code><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FlcQsJTlZxsQxyb4YN1yWOQd86TS.png"></p>
+<p><code>add, modify, del</code> functions are the same, the root is <code>epoll_ctl</code>.<br>Only diffierent by arguments:</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">EPOLL_CTL_ADD</span> <span class="token expression"><span class="token number">1</span></span></span>
+<span class="token comment">// Valid opcodes ( "op" parameter ) to issue to epoll_ctl().</span>
+<span class="token comment">// Add a file descriptor to the interface.</span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">EPOLL_CTL_DEL</span> <span class="token expression"><span class="token number">2</span></span></span>
+<span class="token comment">// Remove a file descriptor from the interface.</span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">EPOLL_CTL_MOD</span> <span class="token expression"><span class="token number">3</span></span></span>
+<span class="token comment">// Change file descriptor epoll_event structure.</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Utils"><a href="#Utils" class="headerlink" title="Utils"></a>Utils</h2><p><code>socket bind &amp;&amp; listen</code></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">socket_bind_and_listen</span><span class="token punctuation">(</span><span class="token keyword">int</span> port<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> listen_fd <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token comment">// AF_INET      : IPv4 Internet protocols</span>
+    <span class="token comment">// SOCK_STREAM  : TCP socket</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">(</span>listen_fd <span class="token operator">=</span> <span class="token function">socket</span><span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_STREAM <span class="token operator">|</span> SOCK_NONBLOCK <span class="token operator">|</span> SOCK_CLOEXEC<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+
+    sockaddr_in server_addr<span class="token punctuation">;</span>
+    <span class="token function">memset</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>server_addr<span class="token punctuation">,</span> <span class="token char">'\0'</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>server_addr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    server_addr<span class="token punctuation">.</span>sin_family <span class="token operator">=</span> AF_INET<span class="token punctuation">;</span>
+    server_addr<span class="token punctuation">.</span>sin_port <span class="token operator">=</span> <span class="token function">htons</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">short</span><span class="token punctuation">)</span>port<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    server_addr<span class="token punctuation">.</span>sin_addr<span class="token punctuation">.</span>s_addr <span class="token operator">=</span> <span class="token function">htonl</span><span class="token punctuation">(</span>INADDR_ANY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+    <span class="token keyword">int</span> opt <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">setsockopt</span><span class="token punctuation">(</span>listen_fd<span class="token punctuation">,</span> SOL_SOCKET<span class="token punctuation">,</span> SO_REUSEADDR<span class="token punctuation">,</span> <span class="token operator">&amp;</span>opt<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>opt<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">bind</span><span class="token punctuation">(</span>listen_fd<span class="token punctuation">,</span> <span class="token punctuation">(</span>sockaddr<span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>server_addr<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>server_addr<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">listen</span><span class="token punctuation">(</span>listen_fd<span class="token punctuation">,</span> <span class="token number">1024</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> listen_fd<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>Readn</code> read the data</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">ssize_t <span class="token function">readn</span><span class="token punctuation">(</span><span class="token keyword">int</span> fd<span class="token punctuation">,</span> <span class="token keyword">void</span><span class="token operator">*</span> buf<span class="token punctuation">,</span> size_t len<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span>pos <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span><span class="token punctuation">)</span>buf<span class="token punctuation">;</span>
+    size_t leftNum <span class="token operator">=</span> len<span class="token punctuation">;</span>
+    ssize_t readNum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>leftNum <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        ssize_t tmpRead <span class="token operator">=</span> <span class="token function">read</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> pos<span class="token punctuation">,</span> leftNum<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>tmpRead <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>errno <span class="token operator">==</span> EINTR<span class="token punctuation">)</span>
+                tmpRead <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>errno <span class="token operator">==</span> EAGAIN<span class="token punctuation">)</span>
+                <span class="token keyword">return</span> readNum<span class="token punctuation">;</span>
+            <span class="token keyword">else</span>
+                <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token comment">// tmpread == 0 ,the connection is close</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>tmpRead <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        readNum <span class="token operator">+=</span> tmpRead<span class="token punctuation">;</span>
+        pos <span class="token operator">+=</span> tmpRead<span class="token punctuation">;</span>
+
+        leftNum <span class="token operator">-=</span> tmpRead<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> readNum<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>writen</code></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">ssize_t <span class="token function">writen</span><span class="token punctuation">(</span><span class="token keyword">int</span> fd<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">void</span><span class="token operator">*</span> buf<span class="token punctuation">,</span> size_t len<span class="token punctuation">,</span> <span class="token keyword">bool</span> isWrite<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span>pos <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span><span class="token punctuation">)</span>buf<span class="token punctuation">;</span>
+    size_t leftNum <span class="token operator">=</span> len<span class="token punctuation">;</span>
+    ssize_t writtenNum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>leftNum <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        ssize_t tmpWrite <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span><span class="token punctuation">(</span>isWrite<span class="token punctuation">)</span>
+            tmpWrite <span class="token operator">=</span> <span class="token function">write</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> pos<span class="token punctuation">,</span> leftNum<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">else</span>
+            tmpWrite <span class="token operator">=</span> <span class="token function">send</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> pos<span class="token punctuation">,</span> leftNum<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span><span class="token punctuation">(</span>tmpWrite <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>errno <span class="token operator">==</span> EINTR <span class="token operator">||</span> errno <span class="token operator">==</span> EAGAIN<span class="token punctuation">)</span>
+                tmpWrite <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token keyword">else</span>
+                <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>tmpWrite <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        writtenNum <span class="token operator">+=</span> tmpWrite<span class="token punctuation">;</span>
+        pos <span class="token operator">+=</span> tmpWrite<span class="token punctuation">;</span>
+        leftNum <span class="token operator">-=</span> tmpWrite<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> writtenNum<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>escapeStr</code> Traversal the string, and replace the char which is unprintable.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpI9Jz98VCTOhuYu2GkM_baSfDBU.png"></p>
+<p><code>is_path_parent</code> Determine whether there is a directory traversal vulnerability<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FoKJUbQZ4C3Q5rJKSs6l3BKT1EKD.png"></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">if</span><span class="token punctuation">(</span>child_p <span class="token operator">==</span> <span class="token function">strstr</span><span class="token punctuation">(</span>child_p<span class="token punctuation">,</span> parent_p<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// The parent is in the child, so the child [parent.len] will not cross the boundary</span>
+        separator <span class="token operator">=</span> child_p<span class="token punctuation">[</span><span class="token function">strlen</span><span class="token punctuation">(</span>parent_p<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>separator <span class="token operator">==</span> <span class="token char">'\0'</span> <span class="token operator">||</span> separator <span class="token operator">==</span> <span class="token char">'/'</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2><p>Advanced functions have comments in the source code, you can find them from<br><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33/SKR-WebServer">https://github.com/k3lpi3b4nsh33/SKR-WebServer</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Basic-knowledge"><span class="toc-number">2.</span> <span class="toc-text">Basic knowledge</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#File-descriptor"><span class="toc-number">2.1.</span> <span class="toc-text">File descriptor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Epoll"><span class="toc-number">2.2.</span> <span class="toc-text">Epoll</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thread-lock"><span class="toc-number">2.3.</span> <span class="toc-text">Thread lock</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Producer-x2F-Consumer"><span class="toc-number">2.3.1.</span> <span class="toc-text">Producer &#x2F; Consumer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Version-1"><span class="toc-number">2.3.2.</span> <span class="toc-text">Version 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Version2-handle-full-and-empty-situations"><span class="toc-number">2.3.3.</span> <span class="toc-text">Version2 handle full and empty situations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Version3-with-condition-variables"><span class="toc-number">2.3.4.</span> <span class="toc-text">Version3 with condition variables</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thread-pool-C-11"><span class="toc-number">2.4.</span> <span class="toc-text">Thread pool(C++11)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.4.1.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-startup"><span class="toc-number">2.4.2.</span> <span class="toc-text">1. startup</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-ThreadLoop"><span class="toc-number">2.4.3.</span> <span class="toc-text">2. ThreadLoop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-QueueJob"><span class="toc-number">2.4.4.</span> <span class="toc-text">3. QueueJob</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-busy"><span class="toc-number">2.4.5.</span> <span class="toc-text">4. busy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-stop"><span class="toc-number">2.4.6.</span> <span class="toc-text">5. stop</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Analysis-source-code"><span class="toc-number">3.</span> <span class="toc-text">Analysis source code</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#MutexLock"><span class="toc-number">3.1.</span> <span class="toc-text">MutexLock</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Epoll-1"><span class="toc-number">3.2.</span> <span class="toc-text">Epoll</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Utils"><span class="toc-number">3.3.</span> <span class="toc-text">Utils</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-1"><span class="toc-number">3.4.</span> <span class="toc-text"></span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/Tiny%20Server.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/Tiny%20Server.html&text=Tiny Server "><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/Tiny%20Server.html&title=Tiny Server "><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/Tiny%20Server.html&is_video=false&description=Tiny Server "><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Tiny Server &body=Check out this article: http://kelpie.top/post/Tiny%20Server.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/Tiny%20Server.html&title=Tiny Server "><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/Tiny%20Server.html&title=Tiny Server "><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/Tiny%20Server.html&title=Tiny Server "><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/Tiny%20Server.html&title=Tiny Server "><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/Tiny%20Server.html&name=Tiny Server &description=&lt;h1 id=&#34;Introduction&#34;&gt;&lt;a href=&#34;#Introduction&#34; class=&#34;headerlink&#34; title=&#34;Introduction&#34;&gt;&lt;/a&gt;Introduction&lt;/h1&gt;&lt;p&gt;After 3 days of study and code, today I will explain to you the source code &lt;code&gt;TinyServer&lt;/code&gt; .&lt;br&gt;In my opion, TinyServer functions like modifying some files with file descriptors.&lt;br&gt;We have to make the thread pool for this program, and have a knowledge about thread lock.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/Tiny%20Server.html&t=Tiny Server "><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2024
+    l3vi4th4n
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

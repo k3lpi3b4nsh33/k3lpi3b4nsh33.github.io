@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="bitXorWe only can use the operations ~ and &amp; realize the xor operation function.We have to know what’s function of the xor is. When the number is not the same, return 1 or 0.If x is equal y, (x&amp;am">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DataLab">
+<meta property="og:url" content="http://kelpie.top/post/[CSAPP-Lab]%20DataLab.html">
+<meta property="og:site_name" content="Kelpie Blog">
+<meta property="og:description" content="bitXorWe only can use the operations ~ and &amp; realize the xor operation function.We have to know what’s function of the xor is. When the number is not the same, return 1 or 0.If x is equal y, (x&amp;am">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Ft1YxfRp5BWM1GUBKfRG0dhdw_UN.svg">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FnHZ_ejzK34_qN9QFV7H4KyxeyTu.svg">
+<meta property="article:published_time" content="2022-10-27T16:08:00.000Z">
+<meta property="article:modified_time" content="2024-04-10T09:43:12.810Z">
+<meta property="article:author" content="l3vi4th4n">
+<meta property="article:tag" content="CSAPP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Ft1YxfRp5BWM1GUBKfRG0dhdw_UN.svg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>DataLab</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/post/%5BRed%20Team%20Development%5D%20Phishing.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/NEW_STAR%20Week2.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/[CSAPP-Lab]%20DataLab.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/[CSAPP-Lab]%20DataLab.html&text=DataLab"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/[CSAPP-Lab]%20DataLab.html&title=DataLab"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/[CSAPP-Lab]%20DataLab.html&is_video=false&description=DataLab"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=DataLab&body=Check out this article: http://kelpie.top/post/[CSAPP-Lab]%20DataLab.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/[CSAPP-Lab]%20DataLab.html&title=DataLab"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/[CSAPP-Lab]%20DataLab.html&title=DataLab"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/[CSAPP-Lab]%20DataLab.html&title=DataLab"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/[CSAPP-Lab]%20DataLab.html&title=DataLab"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/[CSAPP-Lab]%20DataLab.html&name=DataLab&description=&lt;h2 id=&#34;bitXor&#34;&gt;&lt;a href=&#34;#bitXor&#34; class=&#34;headerlink&#34; title=&#34;bitXor&#34;&gt;&lt;/a&gt;bitXor&lt;/h2&gt;&lt;p&gt;We only can use the operations ~ and &amp;amp; realize the xor operation function.&lt;br&gt;We have to know what’s function of the xor is. When the number is not the same, return 1 or 0.&lt;br&gt;If x is equal y, &lt;del&gt;(&lt;/del&gt;x&amp;amp;~y) &amp;#x3D; ~(x&amp;amp;y). According to the formula, we can get the answer to this challenge.&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-cpp&#34; data-language=&#34;cpp&#34;&gt;&lt;code class=&#34;language-cpp&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;//1&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;/*
+ * bitXor - x^y using only ~ and &amp;amp;
+ *   Example: bitXor(4, 5) = 1
+ *   Legal ops: ~ &amp;amp;
+ *   Max ops: 14
+ *   Rating: 1
+ */&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;bitXor&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; x&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; y&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;
+  &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;~&lt;/span&gt;x&lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;~&lt;/span&gt;y&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;x&lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;y&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;/*
+ * if x = y
+ * x &amp;amp; ~x = 0
+ *
+ */&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/[CSAPP-Lab]%20DataLab.html&t=DataLab"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#bitXor"><span class="toc-number">1.</span> <span class="toc-text">bitXor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tmin"><span class="toc-number">2.</span> <span class="toc-text">tmin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#isTmax"><span class="toc-number">3.</span> <span class="toc-text">isTmax</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#allOddbits"><span class="toc-number">4.</span> <span class="toc-text">allOddbits</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#negate"><span class="toc-number">5.</span> <span class="toc-text">negate</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#isAsciiDigit"><span class="toc-number">6.</span> <span class="toc-text">isAsciiDigit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#conditional"><span class="toc-number">7.</span> <span class="toc-text">conditional</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#howManyBits"><span class="toc-number">8.</span> <span class="toc-text">howManyBits</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#floatScale2"><span class="toc-number">9.</span> <span class="toc-text">floatScale2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Float2Int"><span class="toc-number">10.</span> <span class="toc-text">Float2Int</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#floatPower2"><span class="toc-number">11.</span> <span class="toc-text">floatPower2</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        DataLab
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">l3vi4th4n</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-10-27T16:08:00.000Z" class="dt-published" itemprop="datePublished">2022-10-27</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/CSAPP/">CSAPP</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/CSAPP/" rel="tag">CSAPP</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="bitXor"><a href="#bitXor" class="headerlink" title="bitXor"></a>bitXor</h2><p>We only can use the operations ~ and &amp; realize the xor operation function.<br>We have to know what’s function of the xor is. When the number is not the same, return 1 or 0.<br>If x is equal y, <del>(</del>x&amp;~y) &#x3D; ~(x&amp;y). According to the formula, we can get the answer to this challenge.</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//1</span>
+<span class="token comment">/*
+ * bitXor - x^y using only ~ and &amp;
+ *   Example: bitXor(4, 5) = 1
+ *   Legal ops: ~ &amp;
+ *   Max ops: 14
+ *   Rating: 1
+ */</span>
+<span class="token keyword">int</span> <span class="token function">bitXor</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token operator">~</span><span class="token punctuation">(</span><span class="token operator">~</span>x<span class="token operator">&amp;</span><span class="token operator">~</span>y<span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token operator">~</span><span class="token punctuation">(</span>x<span class="token operator">&amp;</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">/*
+ * if x = y
+ * x &amp; ~x = 0
+ *
+ */</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<span id="more"></span>
+
+<h2 id="tmin"><a href="#tmin" class="headerlink" title="tmin"></a>tmin</h2><p>What’s the minimum number in integer? How to represent the minimum number in binary?<br>As we know integer is 32bit: (the first is sign bit)<br>so the minimum number is : 1000 0000 0000 0000 0000 0000 0000 0000</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
+ * tmin - return minimum two's complement integer
+ *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; >>
+ *   Max ops: 4
+ *   Rating: 1
+ */</span>
+<span class="token keyword">int</span> <span class="token function">tmin</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token number">0x1</span><span class="token operator">&lt;&lt;</span><span class="token number">31</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">//2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="isTmax"><a href="#isTmax" class="headerlink" title="isTmax"></a>isTmax</h2><p>When the variable pass to the function, we should decide whether it is the max in integer. If it is the max number return 1 or 0.</p>
+<p><strong>How to figure it?</strong></p>
+<blockquote>
+<p>Tmax in integer: 0111 1111 1111 1111 1111 1111 1111 1111<br>The complement is: 1000 0000 0000 0000 0000 0000 0000 0000<br>-1: 1111 1111 1111 1111 1111 1111 1111 1111<br><del>-1: 0000 0000 0000 0000 0000 0000 0000 0000<br>!(</del>-1) -&gt; 1 that’s what we want to return the value when the variable is Tmax :-)</p>
+</blockquote>
+<p>But if the x is negative 1, we can also get the same value, so we have to exclude the particular variable.</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
+ * isTmax - returns 1 if x is the maximum, two's complement number,
+ *     and 0 otherwise
+ *   Legal ops: ! ~ &amp; ^ | +
+ *   Max ops: 10
+ *   Rating: 1
+ */</span>
+<span class="token keyword">int</span> <span class="token function">isTmax</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> i <span class="token operator">=</span> x<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// negative 1</span>
+  x <span class="token operator">=</span> x <span class="token operator">+</span> i<span class="token punctuation">;</span>
+  x<span class="token operator">=</span><span class="token operator">~</span>x<span class="token punctuation">;</span>
+
+  i<span class="token operator">=</span><span class="token operator">!</span>i<span class="token punctuation">;</span> <span class="token comment">// if the x is -1, i is zero -> !i is 1, x is zero</span>
+  x<span class="token operator">=</span>x<span class="token operator">+</span>i<span class="token punctuation">;</span> <span class="token comment">// if x+i = 1 -> !x = 0</span>
+  <span class="token keyword">return</span> <span class="token operator">!</span>x<span class="token punctuation">;</span>
+
+  <span class="token comment">//</span>
+  <span class="token comment">// TMAX 0111 1111 1111 1111 1111</span>
+  <span class="token comment">// TMIN 1000 0000 0000 0000 0000</span>
+  <span class="token comment">// -1   1111 1111 1111 1111 1111</span>
+  <span class="token comment">// TMAX = ~TMIN</span>
+  <span class="token comment">// ~-1 = 0</span>
+  <span class="token comment">//</span>
+  <span class="token comment">// TMAX return 1, other return 0;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="allOddbits"><a href="#allOddbits" class="headerlink" title="allOddbits"></a>allOddbits</h2><p>I think it is the most accessible stuff of all challenges.<br>0xAA: 1010 1010<br>0xAA &lt;&lt; 8 : 1010 1010 0000 0000<br>mask -&gt; 0xAA &lt;&lt; 8 + 0xAA: 1010 1010 1010 1010<br>mask -&gt; mask + mask &lt;&lt; 16: 1010 1010 1010 1010 1010 1010 1010 1010<br>That’s how we get the all0ddBits number in shift way.</p>
+<p>If x is all odd-numbered bits in the word set to 1, x&amp;mask value is equal to the mask, and xor the mask to decide whether it is the same value.</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
+ * allOddBits - return 1 if all odd-numbered bits in word set to 1
+ *   where bits are numbered from 0 (least significant) to 31 (most significant)
+ *   Examples allOddBits(0xFFFFFFFD) = 0, allOddBits(0xAAAAAAAA) = 1
+ *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; >>
+ *   Max ops: 12
+ *   Rating: 2
+ */</span>
+<span class="token keyword">int</span> <span class="token function">allOddBits</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> mask <span class="token operator">=</span> <span class="token number">0xAA</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">0xAA</span><span class="token operator">&lt;&lt;</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  mask <span class="token operator">=</span> mask <span class="token operator">+</span> <span class="token punctuation">(</span>mask <span class="token operator">&lt;&lt;</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> <span class="token operator">!</span><span class="token punctuation">(</span><span class="token punctuation">(</span>mask<span class="token operator">&amp;</span>x<span class="token punctuation">)</span><span class="token operator">^</span>mask<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="negate"><a href="#negate" class="headerlink" title="negate"></a>negate</h2><p>Too easy to explain….</p>
+<blockquote>
+<p>x+(~x)&#x3D;-1</p>
+</blockquote>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
+ * negate - return -x
+ *   Example: negate(1) = -1.
+ *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; >>
+ *   Max ops: 5
+ *   Rating: 2
+ */</span>
+<span class="token keyword">int</span> <span class="token function">negate</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token operator">~</span>x<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="isAsciiDigit"><a href="#isAsciiDigit" class="headerlink" title="isAsciiDigit"></a>isAsciiDigit</h2><p>We can set the bound to ensure the x whether is between 0x30 and 0x39.<br>If the x is bigger than 0x39, upperBound plus x will change the sign bit, which lets’s know x is exceed.<br>Conversely, if the x is smaller than 0x30, lowerBound plus x will also change the sign bit.</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//3</span>
+<span class="token comment">/*
+ * isAsciiDigit - return 1 if 0x30 &lt;= x &lt;= 0x39 (ASCII codes for characters '0' to '9')
+ *   Example: isAsciiDigit(0x35) = 1.
+ *            isAsciiDigit(0x3a) = 0.
+ *            isAsciiDigit(0x05) = 0.
+ *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; >>
+ *   Max ops: 15
+ *   Rating: 3
+ */</span>
+<span class="token keyword">int</span> <span class="token function">isAsciiDigit</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> sign <span class="token operator">=</span> <span class="token number">0x1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">31</span><span class="token punctuation">;</span> <span class="token comment">// get the sign bit</span>
+  <span class="token keyword">int</span> upperBound <span class="token operator">=</span> <span class="token operator">~</span><span class="token punctuation">(</span>sign <span class="token operator">|</span> <span class="token number">0x39</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> lowerBound <span class="token operator">=</span> <span class="token operator">~</span><span class="token number">0x30</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>
+
+  upperBound <span class="token operator">=</span> sign<span class="token operator">&amp;</span><span class="token punctuation">(</span>upperBound<span class="token operator">+</span>x<span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">31</span><span class="token punctuation">;</span>
+  lowerBound <span class="token operator">=</span> sign<span class="token operator">&amp;</span><span class="token punctuation">(</span>lowerBound<span class="token operator">+</span>x<span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">31</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token operator">!</span><span class="token punctuation">(</span>upperBound<span class="token operator">|</span>lowerBound<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="conditional"><a href="#conditional" class="headerlink" title="conditional"></a>conditional</h2><p>Let x only two values, 0 or 1. That’s why we set the flag variable.</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
+ * conditional - same as x ? y : z
+ *   Example: conditional(2,4,5) = 4
+ *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; >>
+ *   Max ops: 16
+ *   Rating: 3
+ */</span>
+<span class="token keyword">int</span> <span class="token function">conditional</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">,</span> <span class="token keyword">int</span> z<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> flag  <span class="token operator">=</span> <span class="token operator">!</span><span class="token operator">!</span>x<span class="token punctuation">;</span>
+  flag <span class="token operator">=</span> <span class="token operator">~</span>flag<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// ---> if x is 1 --> -1; if x is zero ----> 0</span>
+  <span class="token comment">// -1 &amp; any values is itself.</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>flag<span class="token operator">&amp;</span>y<span class="token punctuation">)</span><span class="token operator">|</span><span class="token punctuation">(</span><span class="token operator">~</span>flag<span class="token operator">&amp;</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
+ * isLessOrEqual - if x &lt;= y  then return 1, else return 0
+ *   Example: isLessOrEqual(4,5) = 1.
+ *   Legal ops: ! ~ &amp; ^ | + &lt;&lt; >>
+ *   Max ops: 24
+ *   Rating: 3
+ */</span>
+<span class="token keyword">int</span> <span class="token function">isLessOrEqual</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> negx <span class="token operator">=</span> <span class="token operator">~</span>x<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> sign <span class="token operator">=</span> <span class="token punctuation">(</span>negx<span class="token operator">+</span>y<span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">31</span><span class="token operator">&amp;</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// x,y > 0</span>
+
+  <span class="token comment">// x,y at most one is greater than 0</span>
+  <span class="token comment">// check x &amp;&amp; y sign bit</span>
+  <span class="token keyword">int</span> xsign <span class="token operator">=</span> x<span class="token operator">>></span><span class="token number">31</span><span class="token operator">&amp;</span><span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> ysign <span class="token operator">=</span> y<span class="token operator">>></span><span class="token number">31</span><span class="token operator">&amp;</span><span class="token number">1</span><span class="token punctuation">;</span>
+
+  <span class="token comment">// whether x and y is same sign</span>
+  <span class="token keyword">int</span> bitXor <span class="token operator">=</span> xsign<span class="token operator">^</span>ysign<span class="token punctuation">;</span>
+  <span class="token keyword">return</span><span class="token punctuation">(</span> <span class="token punctuation">(</span><span class="token operator">!</span>bitXor<span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token punctuation">(</span><span class="token operator">!</span>sign<span class="token punctuation">)</span> <span class="token operator">|</span> bitXor<span class="token operator">&amp;</span>xsign<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
+ * logicalNeg - implement the ! operator, using all of
+ *              the legal operators except !
+ *   Examples: logicalNeg(3) = 0, logicalNeg(0) = 1
+ *   Legal ops: ~ &amp; ^ | + &lt;&lt; >>
+ *   Max ops: 12
+ *   Rating: 4
+ */</span>
+<span class="token keyword">int</span> <span class="token function">logicalNeg</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+   <span class="token keyword">return</span><span class="token punctuation">(</span><span class="token punctuation">(</span>x<span class="token operator">|</span><span class="token punctuation">(</span><span class="token operator">~</span>x<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">31</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>
+   <span class="token comment">// (x|~x+1)>>31 == -1 if x!=0</span>
+   <span class="token comment">// (x|~x+1)>>31 ==  0 if x =0</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">/* howManyBits - return the minimum number of bits required to represent x in
+ *             two's complement
+ *  Examples: howManyBits(12) = 5
+ *            howManyBits(298) = 10
+ *            howManyBits(-5) = 4
+ *            howManyBits(0)  = 1
+ *            howManyBits(-1) = 1
+ *            howManyBits(0x80000000) = 32
+ *  Legal ops: ! ~ &amp; ^ | + &lt;&lt; >>
+ *  Max ops: 90
+ *  Rating: 4
+ */</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="howManyBits"><a href="#howManyBits" class="headerlink" title="howManyBits"></a>howManyBits</h2><p>To be honestly, it’s must be the most interesting challenge in all stuffs.<br>We must know that the binary digits of a number are the same as its complement number. So if the number is negative, we can get its complement number.</p>
+<p>And we can use the dichotomy to check the bits.</p>
+<p>example:</p>
+<blockquote>
+<p>0000 1000 0000 1100 0000 0000 1111 0000<br>b16 &#x3D; !!(x&gt;&gt;16)&lt;&lt;4 -&gt; 16<br>x &#x3D; x&gt;&gt;b16 —–&gt; 0000 1000 0000 1100</p>
+</blockquote>
+<p>We should know the index of the first 1 bit. (postive number)<br>We can add all variables and sign bit to get the sum of bits.</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">howManyBits</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> sign <span class="token operator">=</span> x<span class="token operator">>></span><span class="token number">31</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> b0<span class="token punctuation">,</span>b1<span class="token punctuation">,</span>b2<span class="token punctuation">,</span>b4<span class="token punctuation">,</span>b8<span class="token punctuation">,</span>b16<span class="token punctuation">;</span>
+    <span class="token comment">// if x is negative -> make it positive</span>
+    x <span class="token operator">=</span> <span class="token punctuation">(</span>sign<span class="token operator">&amp;</span><span class="token operator">~</span>x<span class="token punctuation">)</span><span class="token operator">|</span><span class="token punctuation">(</span><span class="token operator">~</span>sign<span class="token operator">&amp;</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+    b16 <span class="token operator">=</span> <span class="token operator">!</span><span class="token operator">!</span><span class="token punctuation">(</span>x<span class="token operator">>></span><span class="token number">16</span><span class="token punctuation">)</span><span class="token operator">&lt;&lt;</span><span class="token number">4</span><span class="token punctuation">;</span>
+    x <span class="token operator">=</span> x<span class="token operator">>></span>b16<span class="token punctuation">;</span>
+
+    b8 <span class="token operator">=</span> <span class="token operator">!</span><span class="token operator">!</span><span class="token punctuation">(</span>x<span class="token operator">>></span><span class="token number">8</span><span class="token punctuation">)</span><span class="token operator">&lt;&lt;</span><span class="token number">3</span><span class="token punctuation">;</span>
+    x <span class="token operator">=</span> x<span class="token operator">>></span>b8<span class="token punctuation">;</span>
+
+    b4 <span class="token operator">=</span> <span class="token operator">!</span><span class="token operator">!</span><span class="token punctuation">(</span>x<span class="token operator">>></span><span class="token number">4</span><span class="token punctuation">)</span><span class="token operator">&lt;&lt;</span><span class="token number">2</span><span class="token punctuation">;</span>
+    x <span class="token operator">=</span> x<span class="token operator">>></span>b4<span class="token punctuation">;</span>
+
+    b2 <span class="token operator">=</span> <span class="token operator">!</span><span class="token operator">!</span><span class="token punctuation">(</span>x<span class="token operator">>></span><span class="token number">2</span><span class="token punctuation">)</span><span class="token operator">&lt;&lt;</span><span class="token number">1</span><span class="token punctuation">;</span>
+    x <span class="token operator">=</span> x<span class="token operator">>></span>b2<span class="token punctuation">;</span>
+
+    b1 <span class="token operator">=</span> <span class="token operator">!</span><span class="token operator">!</span><span class="token punctuation">(</span>x<span class="token operator">>></span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    x <span class="token operator">=</span> x<span class="token operator">>></span>b1<span class="token punctuation">;</span>
+
+    b0 <span class="token operator">=</span> x<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> b16<span class="token operator">+</span>b8<span class="token operator">+</span>b4<span class="token operator">+</span>b2<span class="token operator">+</span>b1<span class="token operator">+</span>b0<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="floatScale2"><a href="#floatScale2" class="headerlink" title="floatScale2"></a>floatScale2</h2><p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Ft1YxfRp5BWM1GUBKfRG0dhdw_UN.svg"></p>
+<ol>
+<li>We have to get 3 parts in float number, sign, expr and frac.</li>
+</ol>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//float</span>
+<span class="token comment">/*
+ * floatScale2 - Return bit-level equivalent of expression 2*f for
+ *   floating point argument f.
+ *   Both the argument and result are passed as unsigned int's, but
+ *   they are to be interpreted as the bit-level representation of
+ *   single-precision floating point values.
+ *   When argument is NaN, return argument
+ *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. also if, while
+ *   Max ops: 30
+ *   Rating: 4
+ */</span>
+<span class="token keyword">unsigned</span> <span class="token function">floatScale2</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> uf<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// float = (sign &lt;&lt; 31)| (expr &lt;&lt; 23) | frac</span>
+    <span class="token keyword">int</span> sign<span class="token punctuation">,</span>expr<span class="token punctuation">,</span>frac<span class="token punctuation">;</span>
+    sign <span class="token operator">=</span> uf<span class="token operator">>></span><span class="token number">31</span> <span class="token operator">&amp;</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    expr <span class="token operator">=</span> uf<span class="token operator">>></span><span class="token number">23</span> <span class="token operator">&amp;</span> <span class="token number">0xFF</span><span class="token punctuation">;</span>
+    frac <span class="token operator">=</span> uf <span class="token operator">&amp;</span> <span class="token punctuation">(</span><span class="token number">0x7FFFFF</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 0</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>expr <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> frac <span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> uf<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// inifity or NAN</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>expr <span class="token operator">==</span> <span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> uf<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// denormalize</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>expr <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> frac <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        frac <span class="token operator">&lt;&lt;=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>sign<span class="token operator">&lt;&lt;</span><span class="token number">31</span><span class="token punctuation">)</span><span class="token operator">|</span><span class="token punctuation">(</span>frac<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// normalize</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>expr <span class="token operator">></span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> expr <span class="token operator">&lt;</span> <span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        expr<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>sign<span class="token operator">&lt;&lt;</span><span class="token number">31</span><span class="token punctuation">)</span><span class="token operator">|</span><span class="token punctuation">(</span>expr<span class="token operator">&lt;&lt;</span><span class="token number">23</span><span class="token punctuation">)</span><span class="token operator">|</span><span class="token punctuation">(</span>frac<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Float2Int"><a href="#Float2Int" class="headerlink" title="Float2Int"></a>Float2Int</h2><p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FnHZ_ejzK34_qN9QFV7H4KyxeyTu.svg"></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
+ * floatFloat2Int - Return bit-level equivalent of expression (int) f
+ *   for floating point argument f.
+ *   Argument is passed as unsigned int, but
+ *   it is to be interpreted as the bit-level representation of a
+ *   single-precision floating point value.
+ *   Anything out of range (including NaN and infinity) should return
+ *   0x80000000u.
+ *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. also if, while
+ *   Max ops: 30
+ *   Rating: 4
+ */</span>
+<span class="token keyword">int</span> <span class="token function">floatFloat2Int</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> uf<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> sign<span class="token punctuation">,</span>expr<span class="token punctuation">,</span>frac<span class="token punctuation">;</span>
+    sign <span class="token operator">=</span> uf<span class="token operator">>></span><span class="token number">31</span> <span class="token operator">&amp;</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    expr <span class="token operator">=</span> uf<span class="token operator">>></span><span class="token number">23</span> <span class="token operator">&amp;</span> <span class="token number">0xff</span><span class="token punctuation">;</span>
+    frac <span class="token operator">=</span> uf <span class="token operator">&amp;</span> <span class="token number">0x7fffff</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 0</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>expr <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> frac <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// inifity or NAN</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>expr <span class="token operator">==</span> <span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token number">1</span><span class="token operator">&lt;&lt;</span><span class="token number">31</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// denormalize</span>
+    <span class="token comment">// 0.xxxxxxx</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>expr <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> frac <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// normalize</span>
+    <span class="token comment">// M 1.xxxxxxx</span>
+    <span class="token comment">//</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>expr <span class="token operator">></span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> expr <span class="token operator">&lt;</span> <span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+       <span class="token keyword">int</span> E <span class="token operator">=</span> expr <span class="token operator">-</span> <span class="token number">127</span><span class="token punctuation">;</span>
+
+       frac <span class="token operator">=</span> frac <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span><span class="token number">23</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token keyword">if</span><span class="token punctuation">(</span>E <span class="token operator">></span> <span class="token number">31</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+           <span class="token keyword">return</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">31</span><span class="token punctuation">;</span>
+       <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>E <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+           <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+       <span class="token punctuation">&#125;</span>
+
+       <span class="token keyword">if</span><span class="token punctuation">(</span>E <span class="token operator">>=</span> <span class="token number">23</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+           frac <span class="token operator">&lt;&lt;=</span> <span class="token punctuation">(</span>E<span class="token operator">-</span><span class="token number">23</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+           frac <span class="token operator">>>=</span> <span class="token punctuation">(</span><span class="token number">23</span><span class="token operator">-</span>E<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">&#125;</span>
+
+       <span class="token keyword">if</span><span class="token punctuation">(</span>sign<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+           <span class="token keyword">return</span> <span class="token operator">~</span>frac <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+       <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+           <span class="token keyword">return</span> frac<span class="token punctuation">;</span>
+       <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="floatPower2"><a href="#floatPower2" class="headerlink" title="floatPower2"></a>floatPower2</h2><p>If y is too tiny, return 0; conversely, if y is too big, return INF.</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
+ * floatPower2 - Return bit-level equivalent of the expression 2.0^x
+ *   (2.0 raised to the power x) for any 32-bit integer x.
+ *
+ *   The unsigned value that is returned should have the identical bit
+ *   representation as the single-precision floating-point number 2.0^x.
+ *   If the result is too small to be represented as a denorm, return
+ *   0. If too large, return +INF.
+ *
+ *   Legal ops: Any integer/unsigned operations incl. ||, &amp;&amp;. Also if, while
+ *   Max ops: 30
+ *   Rating: 4
+ */</span>
+<span class="token keyword">unsigned</span> <span class="token function">floatPower2</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> INF <span class="token operator">=</span> <span class="token number">0xff</span><span class="token operator">&lt;&lt;</span><span class="token number">23</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> exp <span class="token operator">=</span> x <span class="token operator">+</span> <span class="token number">127</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>x<span class="token operator">&lt;</span><span class="token operator">-</span><span class="token number">23</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>exp<span class="token operator">&lt;=</span><span class="token number">0</span> <span class="token operator">&amp;&amp;</span> x<span class="token operator">></span><span class="token operator">-</span><span class="token number">23</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0x1</span> <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span>x<span class="token operator">+</span><span class="token number">149</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>exp<span class="token operator">>=</span><span class="token number">255</span><span class="token punctuation">)</span> <span class="token keyword">return</span> INF<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> exp <span class="token operator">&lt;&lt;</span><span class="token number">23</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#bitXor"><span class="toc-number">1.</span> <span class="toc-text">bitXor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tmin"><span class="toc-number">2.</span> <span class="toc-text">tmin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#isTmax"><span class="toc-number">3.</span> <span class="toc-text">isTmax</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#allOddbits"><span class="toc-number">4.</span> <span class="toc-text">allOddbits</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#negate"><span class="toc-number">5.</span> <span class="toc-text">negate</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#isAsciiDigit"><span class="toc-number">6.</span> <span class="toc-text">isAsciiDigit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#conditional"><span class="toc-number">7.</span> <span class="toc-text">conditional</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#howManyBits"><span class="toc-number">8.</span> <span class="toc-text">howManyBits</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#floatScale2"><span class="toc-number">9.</span> <span class="toc-text">floatScale2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Float2Int"><span class="toc-number">10.</span> <span class="toc-text">Float2Int</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#floatPower2"><span class="toc-number">11.</span> <span class="toc-text">floatPower2</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/[CSAPP-Lab]%20DataLab.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/[CSAPP-Lab]%20DataLab.html&text=DataLab"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/[CSAPP-Lab]%20DataLab.html&title=DataLab"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/[CSAPP-Lab]%20DataLab.html&is_video=false&description=DataLab"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=DataLab&body=Check out this article: http://kelpie.top/post/[CSAPP-Lab]%20DataLab.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/[CSAPP-Lab]%20DataLab.html&title=DataLab"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/[CSAPP-Lab]%20DataLab.html&title=DataLab"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/[CSAPP-Lab]%20DataLab.html&title=DataLab"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/[CSAPP-Lab]%20DataLab.html&title=DataLab"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/[CSAPP-Lab]%20DataLab.html&name=DataLab&description=&lt;h2 id=&#34;bitXor&#34;&gt;&lt;a href=&#34;#bitXor&#34; class=&#34;headerlink&#34; title=&#34;bitXor&#34;&gt;&lt;/a&gt;bitXor&lt;/h2&gt;&lt;p&gt;We only can use the operations ~ and &amp;amp; realize the xor operation function.&lt;br&gt;We have to know what’s function of the xor is. When the number is not the same, return 1 or 0.&lt;br&gt;If x is equal y, &lt;del&gt;(&lt;/del&gt;x&amp;amp;~y) &amp;#x3D; ~(x&amp;amp;y). According to the formula, we can get the answer to this challenge.&lt;/p&gt;
+&lt;pre class=&#34;line-numbers language-cpp&#34; data-language=&#34;cpp&#34;&gt;&lt;code class=&#34;language-cpp&#34;&gt;&lt;span class=&#34;token comment&#34;&gt;//1&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;/*
+ * bitXor - x^y using only ~ and &amp;amp;
+ *   Example: bitXor(4, 5) = 1
+ *   Legal ops: ~ &amp;amp;
+ *   Max ops: 14
+ *   Rating: 1
+ */&lt;/span&gt;
+&lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;bitXor&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; x&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; y&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;
+  &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;~&lt;/span&gt;x&lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;~&lt;/span&gt;y&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;x&lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;y&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;/*
+ * if x = y
+ * x &amp;amp; ~x = 0
+ *
+ */&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/[CSAPP-Lab]%20DataLab.html&t=DataLab"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2024
+    l3vi4th4n
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

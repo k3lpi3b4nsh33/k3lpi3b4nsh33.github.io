@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="phase_1 We can see the memory with x&#x2F;s">
+<meta property="og:type" content="article">
+<meta property="og:title" content=" Bomb Lab">
+<meta property="og:url" content="http://kelpie.top/post/[CSAPP-Lab]%20BombLab.html">
+<meta property="og:site_name" content="Kelpie Blog">
+<meta property="og:description" content="phase_1 We can see the memory with x&#x2F;s">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpAkU0pdxzpMxMQXox-IyjbwX9hn.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtPjG_R91-tgvRcQ8JrDfstAfCZe.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fk1RnW_q3vM1Yzz4YZoJ9vF7n9FB.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpdG6Iv3-5hDno6Ph_2bGwbb5-aP.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtXQ5Wnf-W8Joxpg8t3-HdHEJXQT.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FudEKgyZ6-0uoC3FolGD7x462Hd9.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FmeYtarZvan6kVJK5I2FH681bBl9.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FlJfyp9gj7FvnTpernj_APPcajJD.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FvgclGkNYUT2pUe9rGS6nrH1__bU.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FitFQ2I5T_WMVoBPUUmMRAOApeuD.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fqk2NaoWQHsq1WvHrWyhaB-YQc1d.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fon3zHmV5vE5Dit9C-MUUNJVe7fD.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FkgWRaMvI1IVkk8JjI-sAWmZr9aC.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FoqWqKpXgZVenHfoI4Ucm4dOBbmq.png">
+<meta property="article:published_time" content="2023-02-27T14:18:00.000Z">
+<meta property="article:modified_time" content="2024-04-10T09:43:12.510Z">
+<meta property="article:author" content="l3vi4th4n">
+<meta property="article:tag" content="CSAPP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpAkU0pdxzpMxMQXox-IyjbwX9hn.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title> Bomb Lab</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/post/%5BCSAPP-Lab%5D%20Cache%20Lab.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/Tiny%20Server.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/[CSAPP-Lab]%20BombLab.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/[CSAPP-Lab]%20BombLab.html&text= Bomb Lab"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/[CSAPP-Lab]%20BombLab.html&title= Bomb Lab"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/[CSAPP-Lab]%20BombLab.html&is_video=false&description= Bomb Lab"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject= Bomb Lab&body=Check out this article: http://kelpie.top/post/[CSAPP-Lab]%20BombLab.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/[CSAPP-Lab]%20BombLab.html&title= Bomb Lab"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/[CSAPP-Lab]%20BombLab.html&title= Bomb Lab"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/[CSAPP-Lab]%20BombLab.html&title= Bomb Lab"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/[CSAPP-Lab]%20BombLab.html&title= Bomb Lab"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/[CSAPP-Lab]%20BombLab.html&name= Bomb Lab&description=&lt;h2 id=&#34;phase-1&#34;&gt;&lt;a href=&#34;#phase-1&#34; class=&#34;headerlink&#34; title=&#34;phase_1&#34;&gt;&lt;/a&gt;phase_1&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpAkU0pdxzpMxMQXox-IyjbwX9hn.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;We can see the memory with x&amp;#x2F;s&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/[CSAPP-Lab]%20BombLab.html&t= Bomb Lab"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#phase-1"><span class="toc-number">1.</span> <span class="toc-text">phase_1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phase-2"><span class="toc-number">2.</span> <span class="toc-text">phase_2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Read-six-numbers-function-description"><span class="toc-number">2.1.</span> <span class="toc-text">Read_six_numbers function description</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#phase-2-function-description"><span class="toc-number">2.2.</span> <span class="toc-text">phase_2 function description</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phase-3"><span class="toc-number">3.</span> <span class="toc-text">phase_3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phase-4"><span class="toc-number">4.</span> <span class="toc-text">phase_4</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#func-4-description"><span class="toc-number">4.1.</span> <span class="toc-text">func_4 description</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#phase-4-descirption"><span class="toc-number">4.2.</span> <span class="toc-text">phase_4 descirption</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phase-5"><span class="toc-number">5.</span> <span class="toc-text">phase_5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phase-6"><span class="toc-number">6.</span> <span class="toc-text">phase_6</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+         Bomb Lab
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">l3vi4th4n</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-02-27T14:18:00.000Z" class="dt-published" itemprop="datePublished">2023-02-27</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/CSAPP/">CSAPP</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/CSAPP/" rel="tag">CSAPP</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="phase-1"><a href="#phase-1" class="headerlink" title="phase_1"></a>phase_1</h2><p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpAkU0pdxzpMxMQXox-IyjbwX9hn.png"></p>
+<p>We can see the memory with x&#x2F;s</p>
+<span id="more"></span>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">x/s 0x402400<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtPjG_R91-tgvRcQ8JrDfstAfCZe.png"></p>
+<p>So the first phase we input is:</p>
+<pre class="line-numbers language-none"><code class="language-none">Border relations with Canada have never been better.<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="phase-2"><a href="#phase-2" class="headerlink" title="phase_2"></a>phase_2</h2><h3 id="Read-six-numbers-function-description"><a href="#Read-six-numbers-function-description" class="headerlink" title="Read_six_numbers function description"></a>Read_six_numbers function description</h3><p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fk1RnW_q3vM1Yzz4YZoJ9vF7n9FB.png"></p>
+<p>In the phase_2, we will input 6 numbers first. The first number will be stored in <strong>rdx</strong> , second will be stored in <strong>rcx</strong>，third will be stored <strong>r8</strong>, the fourth will be stored in <strong>r9</strong> ,the fifth will be stored in <strong>rsp</strong>, the sixth will be stored in <strong>rsp+0x8</strong>. When the program run to 0x40148f, it will compare the eax with 5, which means whether we have inputed the 6 numbers, if not it will jump to explode_bomb.</p>
+<h3 id="phase-2-function-description"><a href="#phase-2-function-description" class="headerlink" title="phase_2 function description"></a>phase_2 function description</h3><p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpdG6Iv3-5hDno6Ph_2bGwbb5-aP.png"></p>
+<p>First of all, the program will check the first number whether is 1 which means the first number we input must be 1 or it will trigger the explode_bomb. After the comparsion, we get into the loop, the process of checking the right number.</p>
+<p>The loop asm code description:</p>
+<pre class="line-numbers language-none"><code class="language-none">add rbx,0x4 # the cur will be the next
+cmp rbx,rbp # determine the end of the loop
+
+mov eax, DWORD PTR [rbx-0x4] # the before value moves to eax
+add eax, eax # double eax
+cmp DWORD PTR [rbx],eax # the next number must be twice previous number<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>So the answer is</p>
+<pre class="line-numbers language-none"><code class="language-none">1 2 4 8 16 32<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="phase-3"><a href="#phase-3" class="headerlink" title="phase_3"></a>phase_3</h2><p>When we get into the phase_3, the code of swich function in asm which make me stuck for a while.</p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtXQ5Wnf-W8Joxpg8t3-HdHEJXQT.png"></p>
+<p>The first number must be lower than 7, or it will trigger the explode_bomb. The second number is variable because of the switch statement. The second number will be stored in rsp+0xc, when the program run to 0x400fc2, the eax will compare with your second input.</p>
+<p>My answer is:</p>
+<pre class="line-numbers language-none"><code class="language-none">1 313<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="phase-4"><a href="#phase-4" class="headerlink" title="phase_4"></a>phase_4</h2><h3 id="func-4-description"><a href="#func-4-description" class="headerlink" title="func_4 description"></a>func_4 description</h3><p>edx &#x3D; a<br>esi &#x3D; b<br>eax &#x3D; a, eax &#x3D; a - b<br>ecx &#x3D; a - b<br>ecx &#x3D; ecx &gt;&gt; 31<br>eax &#x3D; ecx + eax &#x3D; (a-b) &gt;&gt; 31 + (a-b)<br>eax &#x3D; ((a-b)&gt;&gt;31+(a-b))&gt;&gt;1</p>
+<p>We don’t have to know the func_4 code meaning. The argument we can’t control, it always sets as 0xe automatically. Obviously, the function is recursive function. When ecx is bigger than edi, the function will return.</p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FudEKgyZ6-0uoC3FolGD7x462Hd9.png"></p>
+<h3 id="phase-4-descirption"><a href="#phase-4-descirption" class="headerlink" title="phase_4 descirption"></a>phase_4 descirption</h3><p>Obviously, the first number will be stored in rsp+0x8, the second one will be stored in rsp+0xc.</p>
+<p>If we the first number bigger than 0xe, it will jump to explode_bomb. So we have to choose the one which lower than 0xe.</p>
+<p>Whatever the first number we input, it will be changed to 0xe finally and get into the func4 with 0xe</p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FmeYtarZvan6kVJK5I2FH681bBl9.png"></p>
+<h2 id="phase-5"><a href="#phase-5" class="headerlink" title="phase_5"></a>phase_5</h2><p>To the better understanding, I divided the phase_5 into three parts.</p>
+<p>First part, the length of string must be equal to six.</p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FlJfyp9gj7FvnTpernj_APPcajJD.png"></p>
+<p>The second part, also is the most difficult and important.</p>
+<pre class="line-numbers language-none"><code class="language-none">mov rdx, QWORD PTR [rsp] # move the first character of the string to rsp from rdx
+and edx,0xf
+# get the lower 4 digits.
+# For example 1100 1111 -&gt; 1111, 1001 1101 -&gt; 1101
+# 1100 1111 &amp; 0000 1111 -&gt; 1111
+movzx edx, BYTE PTR[rdx + 0x4024b0]
+# 0x4024b0 is the array address, maduiersnfotvbyl
+# we should take the index to get the character of string.
+# for example
+# 1111 -&gt; 15+0x4024b0 -&gt; l
+# 1001 -&gt; 9+0x4024b0 -&gt; f
+mov BYTE PTR [rsp+rax*1+0x10], dl # store the modified character in new address of stack
+add rax, 0x1 # move the cur
+cmp rax, 0x6 # the end of the loop<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FvgclGkNYUT2pUe9rGS6nrH1__bU.png"></p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FitFQ2I5T_WMVoBPUUmMRAOApeuD.png"></p>
+<p>After we get the new string in rsp+0x10, we have to be equal to the value in 0x40245e which means the new stirng have to be equal to “flyers”</p>
+<pre class="line-numbers language-none"><code class="language-none">gdb-peda$ x&#x2F;s 0x40245e
+0x40245e:       &quot;flyers&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fqk2NaoWQHsq1WvHrWyhaB-YQc1d.png"></p>
+<p>The enumerate available character python script as follows:</p>
+<p>flyers</p>
+<p>f &#x3D; 9 &#x3D; 1001 , l &#x3D; 15 &#x3D; 1111, y &#x3D; 14 &#x3D; 1110 , e &#x3D; 5 &#x3D; 0100, r &#x3D; 6 &#x3D; 0101, s &#x3D; 7 &#x3D; 0110</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># CSAPP Bomb Lab Phase5</span>
+<span class="token comment"># Enumerate available characters</span>
+<span class="token comment"># Author: Kelpie</span>
+<span class="token comment"># Date: 2023-2-27</span>
+
+char_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">15</span><span class="token punctuation">,</span><span class="token number">14</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">]</span>
+
+cur1 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+cur2 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+cur3 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+cur4 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+cur5 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+cur6 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+
+<span class="token comment"># what is upper?</span>
+<span class="token comment"># 1 &lt;&lt; 4 = 0001 0000</span>
+<span class="token comment"># 2 &lt;&lt; 4 = 0010 0000</span>
+
+<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    upper <span class="token operator">=</span> i <span class="token operator">&lt;&lt;</span> <span class="token number">4</span>
+    <span class="token keyword">for</span> j <span class="token keyword">in</span> char_list<span class="token punctuation">:</span>
+        char <span class="token operator">=</span> upper <span class="token operator">|</span> j
+        <span class="token builtin">str</span> <span class="token operator">=</span> <span class="token builtin">chr</span><span class="token punctuation">(</span>char<span class="token punctuation">)</span>
+        <span class="token comment"># The python switch statement is not available until 3.10 :-(</span>
+        <span class="token keyword">if</span> j <span class="token operator">==</span> <span class="token number">9</span> <span class="token punctuation">:</span>
+            cur1<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">)</span>
+        <span class="token keyword">elif</span> j <span class="token operator">==</span> <span class="token number">15</span> <span class="token punctuation">:</span>
+            cur2<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">)</span>
+        <span class="token keyword">elif</span> j <span class="token operator">==</span> <span class="token number">14</span> <span class="token punctuation">:</span>
+            cur3<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">)</span>
+        <span class="token keyword">elif</span> j <span class="token operator">==</span> <span class="token number">5</span> <span class="token punctuation">:</span>
+            cur4<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">)</span>
+        <span class="token keyword">elif</span> j <span class="token operator">==</span> <span class="token number">6</span> <span class="token punctuation">:</span>
+            cur5<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">)</span>
+        <span class="token keyword">elif</span> j <span class="token operator">==</span> <span class="token number">7</span> <span class="token punctuation">:</span>
+            cur6<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token builtin">str</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"cur1: "</span> <span class="token punctuation">,</span> cur1<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"cur2: "</span> <span class="token punctuation">,</span> cur2<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"cur3: "</span> <span class="token punctuation">,</span> cur3<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"cur4: "</span> <span class="token punctuation">,</span> cur4<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"cur5: "</span> <span class="token punctuation">,</span> cur5<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"cur6: "</span> <span class="token punctuation">,</span> cur6<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">cur1:  [&#39;)&#39;, &#39;9&#39;, &#39;I&#39;, &#39;Y&#39;, &#39;i&#39;, &#39;y&#39;]
+cur2:  [&#39;&#x2F;&#39;, &#39;?&#39;, &#39;O&#39;, &#39;_&#39;, &#39;o&#39;]
+cur3:  [&#39;.&#39;, &#39;&gt;&#39;, &#39;N&#39;, &#39;^&#39;, &#39;n&#39;, &#39;~&#39;]
+cur4:  [&#39;%&#39;, &#39;5&#39;, &#39;E&#39;, &#39;U&#39;, &#39;e&#39;, &#39;u&#39;]
+cur5:  [&#39;&amp;&#39;, &#39;6&#39;, &#39;F&#39;, &#39;V&#39;, &#39;f&#39;, &#39;v&#39;]
+cur6:  [&quot;&#39;&quot;, &#39;7&#39;, &#39;G&#39;, &#39;W&#39;, &#39;g&#39;, &#39;w&#39;]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="phase-6"><a href="#phase-6" class="headerlink" title="phase_6"></a>phase_6</h2><p>The most challenging phase is undoubtedly at the end. But when you finish this part, when you review it. I will find this phase is not so difficult.<br>I sorted out the idea of doing the problem and write the comment in the asm code.<br>For the better understanding, I divided asm code into 6 part, each part is the different function in this phase.<br>The most puzzling part is Part 4. When you get what is ecx, 0x6032d0 meaning and know this part is the double loop, you will get clearer understanding.</p>
+<pre class="line-numbers language-none"><code class="language-none">0x00000000004010f4 &lt;+0&gt;:     push   r14
+0x00000000004010f6 &lt;+2&gt;:     push   r13
+0x00000000004010f8 &lt;+4&gt;:     push   r12
+0x00000000004010fa &lt;+6&gt;:     push   rbp
+0x00000000004010fb &lt;+7&gt;:     push   rbx
+0x00000000004010fc &lt;+8&gt;:     sub    rsp,0x50
+0x0000000000401100 &lt;+12&gt;:    mov    r13,rsp
+0x0000000000401103 &lt;+15&gt;:    mov    rsi,rsp
+0x0000000000401106 &lt;+18&gt;:    call   0x40145c &lt;read_six_numbers&gt;
+0x000000000040110b &lt;+23&gt;:    mov    r14,rsp
+0x000000000040110e &lt;+26&gt;:    mov    r12d,0x0
+0x0000000000401114 &lt;+32&gt;:    mov    rbp,r13
+0x0000000000401117 &lt;+35&gt;:    mov    eax,DWORD PTR [r13+0x0]
+0x000000000040111b &lt;+39&gt;:    sub    eax,0x1
+0x000000000040111e &lt;+42&gt;:    cmp    eax,0x5
+0x0000000000401121 &lt;+45&gt;:    jbe    0x401128 &lt;phase_6+52&gt;
+0x0000000000401123 &lt;+47&gt;:    call   0x40143a &lt;explode_bomb&gt;
+
+# if the numbers of input is enough to 6, it will trigger the explode_bomb
+
+------------ ------------ ---------- part 1 ---------- ------------ ------------
+
+0x0000000000401128 &lt;+52&gt;:    add    r12d,0x1
+0x000000000040112c &lt;+56&gt;:    cmp    r12d,0x6
+0x0000000000401130 &lt;+60&gt;:    je     0x401153 &lt;phase_6+95&gt;
+0x0000000000401132 &lt;+62&gt;:    mov    ebx,r12d
+0x0000000000401135 &lt;+65&gt;:    movsxd rax,ebx
+0x0000000000401138 &lt;+68&gt;:    mov    eax,DWORD PTR [rsp+rax*4]
+# We input the number will be stored in RSP
+# rsp+rax*4
+0x000000000040113b &lt;+71&gt;:    cmp    DWORD PTR [rbp+0x0],eax
+0x000000000040113e &lt;+74&gt;:    jne    0x401145 &lt;phase_6+81&gt;
+0x0000000000401140 &lt;+76&gt;:    call   0x40143a &lt;explode_bomb&gt;
+
+# check if exist the same number in we input or trigger the bomb
+
+------------ ------------ ---------- part 2 ---------- ------------ ------------
+
+0x0000000000401145 &lt;+81&gt;:    add    ebx,0x1
+0x0000000000401148 &lt;+84&gt;:    cmp    ebx,0x5
+0x000000000040114b &lt;+87&gt;:    jle    0x401135 &lt;phase_6+65&gt;
+0x000000000040114d &lt;+89&gt;:    add    r13,0x4
+0x0000000000401151 &lt;+93&gt;:    jmp    0x401114 &lt;phase_6+32&gt;
+0x0000000000401153 &lt;+95&gt;:    lea    rsi,[rsp+0x18]
+-----------
+0x0000000000401158 &lt;+100&gt;:   mov    rax,r14
+0x000000000040115b &lt;+103&gt;:   mov    ecx,0x7
+0x0000000000401160 &lt;+108&gt;:   mov    edx,ecx
+0x0000000000401162 &lt;+110&gt;:   sub    edx,DWORD PTR [rax]
+0x0000000000401164 &lt;+112&gt;:   mov    DWORD PTR [rax],edx
+0x0000000000401166 &lt;+114&gt;:   add    rax,0x4
+0x000000000040116a &lt;+118&gt;:   cmp    rax,rsi
+0x000000000040116d &lt;+121&gt;:   jne    0x401160 &lt;phase_6+108&gt;
+
+# each number will be sub by 7
+------------ ------------ ---------- part 3 ---------- ------------ ------------
+
+----------------------------------------------------------------------------------------
+# double loop in this section
+# This section get the index from rsp+rsi*1 and stored the node[index] to rsp+rsi*2+0x20
+----------------------------------------------------------------------------------------
+0x000000000040116f &lt;+123&gt;:   mov    esi,0x0
+0x000000000040116f &lt;+123&gt;:   mov    esi,0x0
+0x0000000000401174 &lt;+128&gt;:   jmp    0x401197 &lt;phase_6+163&gt;
+0x0000000000401176 &lt;+130&gt;:   mov    rdx,QWORD PTR [rdx+0x8]  # rdx &#x3D; node.next
+0x000000000040117a &lt;+134&gt;:   add    eax,0x1
+0x000000000040117d &lt;+137&gt;:   cmp    eax,ecx
+0x000000000040117f &lt;+139&gt;:   jne    0x401176 &lt;phase_6+130&gt;
+0x0000000000401181 &lt;+141&gt;:   jmp    0x401188 &lt;phase_6+148&gt;
+0x0000000000401183 &lt;+143&gt;:   mov    edx,0x6032d0
+0x0000000000401188 &lt;+148&gt;:   mov    QWORD PTR [rsp+rsi*2+0x20],rdx
+0x000000000040118d &lt;+153&gt;:   add    rsi,0x4
+0x0000000000401191 &lt;+157&gt;:   cmp    rsi,0x18
+0x0000000000401195 &lt;+161&gt;:   je     0x4011ab &lt;phase_6+183&gt;
+0x0000000000401197 &lt;+163&gt;:   mov    ecx,DWORD PTR [rsp+rsi*1]
+0x000000000040119a &lt;+166&gt;:   cmp    ecx,0x1
+0x000000000040119d &lt;+169&gt;:   jle    0x401183 &lt;phase_6+143&gt;
+0x000000000040119f &lt;+171&gt;:   mov    eax,0x1
+0x00000000004011a4 &lt;+176&gt;:   mov    edx,0x6032d0
+0x00000000004011a9 &lt;+181&gt;:   jmp    0x401176 &lt;phase_6+130&gt;
+
+------------ ------------ ---------- part 4 ---------- ------------ ------------
+
+0x00000000004011ab &lt;+183&gt;:   mov    rbx,QWORD PTR [rsp+0x20]
+0x00000000004011b0 &lt;+188&gt;:   lea    rax,[rsp+0x28]
+0x00000000004011b5 &lt;+193&gt;:   lea    rsi,[rsp+0x50]
+0x00000000004011ba &lt;+198&gt;:   mov    rcx,rbx
+0x00000000004011bd &lt;+201&gt;:   mov    rdx,QWORD PTR [rax]
+0x00000000004011c0 &lt;+204&gt;:   mov    QWORD PTR [rcx+0x8],rdx
+0x00000000004011c4 &lt;+208&gt;:   add    rax,0x8
+0x00000000004011c8 &lt;+212&gt;:   cmp    rax,rsi
+0x00000000004011cb &lt;+215&gt;:   je     0x4011d2 &lt;phase_6+222&gt;
+0x00000000004011cd &lt;+217&gt;:   mov    rcx,rdx
+0x00000000004011d0 &lt;+220&gt;:   jmp    0x4011bd &lt;phase_6+201&gt;
+# connect the node
+------------ ------------ ---------- part 5 ---------- ------------ ------------
+
+0x00000000004011d2 &lt;+222&gt;:   mov    QWORD PTR [rdx+0x8],0x0
+0x00000000004011da &lt;+230&gt;:   mov    ebp,0x5
+0x00000000004011df &lt;+235&gt;:   mov    rax,QWORD PTR [rbx+0x8]
+0x00000000004011e3 &lt;+239&gt;:   mov    eax,DWORD PTR [rax]
+0x00000000004011e5 &lt;+241&gt;:   cmp    DWORD PTR [rbx],eax
+# compare the node value
+0x00000000004011e7 &lt;+243&gt;:   jge    0x4011ee &lt;phase_6+250&gt;
+0x00000000004011e9 &lt;+245&gt;:   call   0x40143a &lt;explode_bomb&gt;
+0x00000000004011ee &lt;+250&gt;:   mov    rbx,QWORD PTR [rbx+0x8]
+0x00000000004011f2 &lt;+254&gt;:   sub    ebp,0x1
+0x00000000004011f5 &lt;+257&gt;:   jne    0x4011df &lt;phase_6+235&gt;
+0x00000000004011f7 &lt;+259&gt;:   add    rsp,0x50
+0x00000000004011fb &lt;+263&gt;:   pop    rbx
+0x00000000004011fc &lt;+264&gt;:   pop    rbp
+0x00000000004011fd &lt;+265&gt;:   pop    r12
+0x00000000004011ff &lt;+267&gt;:   pop    r13
+0x0000000000401201 &lt;+269&gt;:   pop    r14
+0x0000000000401203 &lt;+271&gt;:   ret
+------------ ------------ ---------- part 6 ---------- ------------ ------------<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>The all modified input by Part 3 will be stored in $rsp.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fon3zHmV5vE5Dit9C-MUUNJVe7fD.png"></p>
+<p>The 0x6032d0 is the node.</p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FkgWRaMvI1IVkk8JjI-sAWmZr9aC.png"></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">struct</span> <span class="token class-name">node</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">int</span> nodeVal<span class="token punctuation">;</span> <span class="token comment">// 4 bytes</span>
+	<span class="token keyword">int</span> Weinput<span class="token punctuation">;</span> <span class="token comment">// 4 bytes</span>
+	node<span class="token operator">*</span> next<span class="token punctuation">;</span>  <span class="token comment">// 8 bytes</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">sizeof</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">16</span> bytes<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>The answer is:</p>
+<pre class="line-numbers language-none"><code class="language-none">4 3 2 1 6 5<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>All phases had been finished :-)<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FoqWqKpXgZVenHfoI4Ucm4dOBbmq.png"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#phase-1"><span class="toc-number">1.</span> <span class="toc-text">phase_1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phase-2"><span class="toc-number">2.</span> <span class="toc-text">phase_2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Read-six-numbers-function-description"><span class="toc-number">2.1.</span> <span class="toc-text">Read_six_numbers function description</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#phase-2-function-description"><span class="toc-number">2.2.</span> <span class="toc-text">phase_2 function description</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phase-3"><span class="toc-number">3.</span> <span class="toc-text">phase_3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phase-4"><span class="toc-number">4.</span> <span class="toc-text">phase_4</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#func-4-description"><span class="toc-number">4.1.</span> <span class="toc-text">func_4 description</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#phase-4-descirption"><span class="toc-number">4.2.</span> <span class="toc-text">phase_4 descirption</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phase-5"><span class="toc-number">5.</span> <span class="toc-text">phase_5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phase-6"><span class="toc-number">6.</span> <span class="toc-text">phase_6</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/[CSAPP-Lab]%20BombLab.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/[CSAPP-Lab]%20BombLab.html&text= Bomb Lab"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/[CSAPP-Lab]%20BombLab.html&title= Bomb Lab"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/[CSAPP-Lab]%20BombLab.html&is_video=false&description= Bomb Lab"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject= Bomb Lab&body=Check out this article: http://kelpie.top/post/[CSAPP-Lab]%20BombLab.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/[CSAPP-Lab]%20BombLab.html&title= Bomb Lab"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/[CSAPP-Lab]%20BombLab.html&title= Bomb Lab"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/[CSAPP-Lab]%20BombLab.html&title= Bomb Lab"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/[CSAPP-Lab]%20BombLab.html&title= Bomb Lab"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/[CSAPP-Lab]%20BombLab.html&name= Bomb Lab&description=&lt;h2 id=&#34;phase-1&#34;&gt;&lt;a href=&#34;#phase-1&#34; class=&#34;headerlink&#34; title=&#34;phase_1&#34;&gt;&lt;/a&gt;phase_1&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpAkU0pdxzpMxMQXox-IyjbwX9hn.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;We can see the memory with x&amp;#x2F;s&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/[CSAPP-Lab]%20BombLab.html&t= Bomb Lab"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2024
+    l3vi4th4n
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

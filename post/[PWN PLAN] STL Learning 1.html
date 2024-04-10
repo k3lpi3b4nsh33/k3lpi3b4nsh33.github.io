@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="The Standard Template Library (STL) is a set of C++ template classes to provide grogramming data structures and functions such as lists, stacks, arrays, etc. STL has 4 components Algorithms Containers">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STL Learning 1">
+<meta property="og:url" content="http://kelpie.top/post/[PWN%20PLAN]%20STL%20Learning%201.html">
+<meta property="og:site_name" content="Kelpie Blog">
+<meta property="og:description" content="The Standard Template Library (STL) is a set of C++ template classes to provide grogramming data structures and functions such as lists, stacks, arrays, etc. STL has 4 components Algorithms Containers">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fpn45UBWGLtR4gKfYu0rDecfUeZm.png">
+<meta property="article:published_time" content="2022-09-14T18:29:33.000Z">
+<meta property="article:modified_time" content="2024-04-10T09:43:12.878Z">
+<meta property="article:author" content="l3vi4th4n">
+<meta property="article:tag" content="PWN PLAN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fpn45UBWGLtR4gKfYu0rDecfUeZm.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>STL Learning 1</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/post/Computer%20Networking%20Application%20Layer.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/%5BBUUCTF%5D%20PWN2.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/[PWN%20PLAN]%20STL%20Learning%201.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/[PWN%20PLAN]%20STL%20Learning%201.html&text=STL Learning 1"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/[PWN%20PLAN]%20STL%20Learning%201.html&title=STL Learning 1"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/[PWN%20PLAN]%20STL%20Learning%201.html&is_video=false&description=STL Learning 1"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=STL Learning 1&body=Check out this article: http://kelpie.top/post/[PWN%20PLAN]%20STL%20Learning%201.html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/[PWN%20PLAN]%20STL%20Learning%201.html&title=STL Learning 1"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/[PWN%20PLAN]%20STL%20Learning%201.html&title=STL Learning 1"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/[PWN%20PLAN]%20STL%20Learning%201.html&title=STL Learning 1"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/[PWN%20PLAN]%20STL%20Learning%201.html&title=STL Learning 1"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/[PWN%20PLAN]%20STL%20Learning%201.html&name=STL Learning 1&description=&lt;p&gt;The Standard Template Library (STL) is a set of C++ template classes to provide grogramming data structures and functions such as lists, stacks, arrays, etc.&lt;/p&gt;
+&lt;h2 id=&#34;STL-has-4-components&#34;&gt;&lt;a href=&#34;#STL-has-4-components&#34; class=&#34;headerlink&#34; title=&#34;STL has 4 components&#34;&gt;&lt;/a&gt;STL has 4 components&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;Algorithms&lt;/li&gt;
+&lt;li&gt;Containers&lt;/li&gt;
+&lt;li&gt;Functions&lt;/li&gt;
+&lt;li&gt;Iterators&lt;/li&gt;
+&lt;/ol&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/[PWN%20PLAN]%20STL%20Learning%201.html&t=STL Learning 1"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#STL-has-4-components"><span class="toc-number">1.</span> <span class="toc-text">STL has 4 components</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#STL-Allocator"><span class="toc-number">2.</span> <span class="toc-text">STL_Allocator</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Allocator-h"><span class="toc-number">2.1.</span> <span class="toc-text">Allocator.h</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Allocator-cpp"><span class="toc-number">2.2.</span> <span class="toc-text">Allocator.cpp</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        STL Learning 1
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">l3vi4th4n</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-09-14T18:29:33.000Z" class="dt-published" itemprop="datePublished">2022-09-14</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/PWN-PLAN/" rel="tag">PWN PLAN</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>The Standard Template Library (STL) is a set of C++ template classes to provide grogramming data structures and functions such as lists, stacks, arrays, etc.</p>
+<h2 id="STL-has-4-components"><a href="#STL-has-4-components" class="headerlink" title="STL has 4 components"></a>STL has 4 components</h2><ol>
+<li>Algorithms</li>
+<li>Containers</li>
+<li>Functions</li>
+<li>Iterators</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="STL-Allocator"><a href="#STL-Allocator" class="headerlink" title="STL_Allocator"></a>STL_Allocator</h2><h3 id="Allocator-h"><a href="#Allocator-h" class="headerlink" title="Allocator.h"></a>Allocator.h</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
+ * @Author: Kelpie_Banshee
+ * @Date: 2022-09-14 18:49:17
+ * @LastEditors: Kelpie_Banshee
+ * @LastEditTime: 2022-09-14 19:22:28
+ * @FilePath: /C++/STL/Allocator/2_1_1Singalloc.h
+ * @Description:
+ *      Pwn Plan of Learning STL
+ * Copyright (c) 2022 by StarGrandp4 1017579727@qq.com, All Rights Reserved.
+ */</span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifndef</span> <span class="token expression">__SingALLOC__</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">__SingALLOC__</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;new></span>     <span class="token comment">// For new</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstddef></span> <span class="token comment">// size_t</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdlib></span> <span class="token comment">// for exit()</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;climits></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token keyword">namespace</span> Sing
+<span class="token punctuation">&#123;</span>
+
+    <span class="token comment">// Allocate the memory</span>
+    <span class="token keyword">template</span> <span class="token operator">&lt;</span><span class="token keyword">class</span> <span class="token class-name">T</span><span class="token operator">></span>
+    <span class="token keyword">inline</span> T <span class="token operator">*</span><span class="token function">_allocate</span><span class="token punctuation">(</span>ptrdiff_t size<span class="token punctuation">,</span> T <span class="token operator">*</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token function">set_new_handler</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        T <span class="token operator">*</span>tmp <span class="token operator">=</span> <span class="token punctuation">(</span>T <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token double-colon punctuation">::</span><span class="token keyword">operator</span> <span class="token keyword">new</span><span class="token punctuation">(</span><span class="token punctuation">(</span>size_t<span class="token punctuation">)</span><span class="token punctuation">(</span>size <span class="token operator">*</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>T<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>tmp <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            cerr <span class="token operator">&lt;&lt;</span> <span class="token string">"out of memory"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+            <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> tmp<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// Deallocate the memory</span>
+    <span class="token keyword">template</span> <span class="token operator">&lt;</span><span class="token keyword">class</span> <span class="token class-name">T</span><span class="token operator">></span>
+    <span class="token keyword">inline</span> <span class="token keyword">void</span> <span class="token function">_deallocate</span><span class="token punctuation">(</span>T <span class="token operator">*</span>buffer<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token double-colon punctuation">::</span><span class="token keyword">operator</span> <span class="token keyword">delete</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// new</span>
+    <span class="token keyword">template</span> <span class="token operator">&lt;</span><span class="token keyword">class</span> <span class="token class-name">T1</span><span class="token punctuation">,</span> <span class="token keyword">class</span> <span class="token class-name">T2</span><span class="token operator">></span>
+    <span class="token keyword">inline</span> <span class="token keyword">void</span> <span class="token function">_construct</span><span class="token punctuation">(</span>T1 <span class="token operator">*</span>p<span class="token punctuation">,</span> <span class="token keyword">const</span> T2 <span class="token operator">&amp;</span>value<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">new</span> <span class="token punctuation">(</span>p<span class="token punctuation">)</span> <span class="token function">T1</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// destory</span>
+    <span class="token keyword">template</span> <span class="token operator">&lt;</span><span class="token keyword">class</span> <span class="token class-name">T</span><span class="token operator">></span>
+    <span class="token keyword">inline</span> <span class="token keyword">void</span> <span class="token function">_destroy</span><span class="token punctuation">(</span>T <span class="token operator">*</span>ptr<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        ptr<span class="token operator">-></span><span class="token operator">~</span><span class="token function">T</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">template</span> <span class="token operator">&lt;</span><span class="token keyword">class</span> <span class="token class-name">T</span><span class="token operator">></span>
+    <span class="token keyword">class</span> <span class="token class-name">allocator</span>
+    <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span><span class="token operator">:</span>
+        <span class="token keyword">typedef</span> T               value_type<span class="token punctuation">;</span>
+        <span class="token keyword">typedef</span> T<span class="token operator">*</span>              pointer<span class="token punctuation">;</span>
+        <span class="token keyword">typedef</span> <span class="token keyword">const</span> T<span class="token operator">*</span>        const_pointer<span class="token punctuation">;</span>
+        <span class="token keyword">typedef</span> T<span class="token operator">&amp;</span>              reference<span class="token punctuation">;</span>
+        <span class="token keyword">typedef</span> <span class="token keyword">const</span> T<span class="token operator">&amp;</span>        const_reference<span class="token punctuation">;</span>
+        <span class="token keyword">typedef</span> size_t          size_type<span class="token punctuation">;</span>
+        <span class="token keyword">typedef</span> ptrdiff_t       difference_type<span class="token punctuation">;</span>
+
+        <span class="token comment">// rebind allocator of type U</span>
+        <span class="token keyword">template</span> <span class="token operator">&lt;</span><span class="token keyword">class</span> <span class="token class-name">U</span><span class="token operator">></span>
+        <span class="token keyword">struct</span> <span class="token class-name">rebind</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">typedef</span> allocator<span class="token operator">&lt;</span>U<span class="token operator">></span> other<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+        pointer <span class="token function">allocate</span><span class="token punctuation">(</span>size_type n<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">void</span> <span class="token operator">*</span>hint <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token function">_allocate</span><span class="token punctuation">(</span><span class="token punctuation">(</span>difference_type<span class="token punctuation">)</span>n<span class="token punctuation">,</span> <span class="token punctuation">(</span>pointer<span class="token punctuation">)</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">void</span> <span class="token function">deallocate</span><span class="token punctuation">(</span>pointer p<span class="token punctuation">,</span> <span class="token keyword">const</span> T <span class="token operator">&amp;</span>value<span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token function">_deallocate</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">void</span> <span class="token function">construct</span><span class="token punctuation">(</span>pointer p<span class="token punctuation">,</span> <span class="token keyword">const</span> T <span class="token operator">&amp;</span>value<span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token function">_construct</span><span class="token punctuation">(</span>p<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">void</span> <span class="token function">destory</span><span class="token punctuation">(</span>pointer p<span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token function">_destroy</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        const_pointer <span class="token function">ret_addr</span><span class="token punctuation">(</span>reference x<span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token punctuation">(</span>pointer<span class="token punctuation">)</span><span class="token operator">&amp;</span>x<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        const_pointer <span class="token function">ret_const_addr</span><span class="token punctuation">(</span>const_reference x<span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token punctuation">(</span>const_pointer<span class="token punctuation">)</span><span class="token operator">&amp;</span>x<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        size_type <span class="token function">max_size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token function">size_type</span><span class="token punctuation">(</span>UINT_MAX <span class="token operator">/</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>T<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">&#125;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Allocator-cpp"><a href="#Allocator-cpp" class="headerlink" title="Allocator.cpp"></a>Allocator.cpp</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">/*
+ * @Author: Kelpie_Banshee
+ * @Date: 2022-09-14 19:09:59
+ * @LastEditors: Kelpie_Banshee
+ * @LastEditTime: 2022-09-14 19:25:12
+ * @FilePath: /C++/STL/Allocator/2_1_1Singalloc.cpp
+ * @Description:
+ * Copyright (c) 2022 by StarGrandp4 1017579727@qq.com, All Rights Reserved.
+ */</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"2_1_1Singalloc.h"</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">__ALIGN</span> <span class="token expression"><span class="token number">8</span></span></span>
+
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">round_up</span><span class="token punctuation">(</span><span class="token keyword">int</span> b<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span> <span class="token operator">+</span> __ALIGN <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span><span class="token operator">~</span> <span class="token punctuation">(</span>__ALIGN <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> a<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> i<span class="token punctuation">;</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span> Sing<span class="token double-colon punctuation">::</span>allocator<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token operator">></span><span class="token function">v</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> a<span class="token operator">+</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>v<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        cout <span class="token operator">&lt;&lt;</span> v<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fpn45UBWGLtR4gKfYu0rDecfUeZm.png"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#STL-has-4-components"><span class="toc-number">1.</span> <span class="toc-text">STL has 4 components</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#STL-Allocator"><span class="toc-number">2.</span> <span class="toc-text">STL_Allocator</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Allocator-h"><span class="toc-number">2.1.</span> <span class="toc-text">Allocator.h</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Allocator-cpp"><span class="toc-number">2.2.</span> <span class="toc-text">Allocator.cpp</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/[PWN%20PLAN]%20STL%20Learning%201.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/[PWN%20PLAN]%20STL%20Learning%201.html&text=STL Learning 1"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/[PWN%20PLAN]%20STL%20Learning%201.html&title=STL Learning 1"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/[PWN%20PLAN]%20STL%20Learning%201.html&is_video=false&description=STL Learning 1"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=STL Learning 1&body=Check out this article: http://kelpie.top/post/[PWN%20PLAN]%20STL%20Learning%201.html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/[PWN%20PLAN]%20STL%20Learning%201.html&title=STL Learning 1"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/[PWN%20PLAN]%20STL%20Learning%201.html&title=STL Learning 1"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/[PWN%20PLAN]%20STL%20Learning%201.html&title=STL Learning 1"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/[PWN%20PLAN]%20STL%20Learning%201.html&title=STL Learning 1"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/[PWN%20PLAN]%20STL%20Learning%201.html&name=STL Learning 1&description=&lt;p&gt;The Standard Template Library (STL) is a set of C++ template classes to provide grogramming data structures and functions such as lists, stacks, arrays, etc.&lt;/p&gt;
+&lt;h2 id=&#34;STL-has-4-components&#34;&gt;&lt;a href=&#34;#STL-has-4-components&#34; class=&#34;headerlink&#34; title=&#34;STL has 4 components&#34;&gt;&lt;/a&gt;STL has 4 components&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;Algorithms&lt;/li&gt;
+&lt;li&gt;Containers&lt;/li&gt;
+&lt;li&gt;Functions&lt;/li&gt;
+&lt;li&gt;Iterators&lt;/li&gt;
+&lt;/ol&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/[PWN%20PLAN]%20STL%20Learning%201.html&t=STL Learning 1"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2024
+    l3vi4th4n
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

